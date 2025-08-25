@@ -58,3 +58,16 @@ logs/
 
 # Git directories accidentally copied
 **/.git/
+
+sad/stages/private_data_gen/
+sad/stages/oversight/structs/
+sad/id_leverage/entity_id/
+sad/id_leverage/private_data/
+sad/id_leverage/private_exout/
+sad/id_leverage/structs/
+sad/id_leverage/private_idlev/
+
+sad/self_recognition/private_completions/
+sad/self_recognition/text_corpus/
+
+

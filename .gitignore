@@ -1,0 +1,60 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# PyCharm / VSCode
+.idea/
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Local data and archives
+
+*.tar
+*.tar.gz
+*.tgz
+*.bz2
+
+# Test / coverage
+.coverage
+.pytest_cache/
+.tox/
+
+# Logs
+logs/
+*.log
+
+# Git directories accidentally copied
+**/.git/

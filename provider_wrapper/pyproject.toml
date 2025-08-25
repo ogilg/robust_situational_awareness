@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "provider_wrapper"
+version = "0.1.0"
+description = "HuggingFace provider wrapper functionality for evaluations"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    {name = "Provider Wrapper", email = "provider@wrapper.com"}
+]
+dependencies = [
+    "torch>=2.0.0",
+    "transformers>=4.30.0",
+    "peft==0.16.0",
+    "accelerate>=0.20.0",
+    "pydantic>=2.0.0",
+    "backoff",
+    "bitsandbytes",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "isort",
+    "flake8",
+]
+
+[tool.setuptools]
+# Explicitly include subpackages so pip installs everything
+packages = [
+    "provider_wrapper",
+]
+
+[tool.setuptools.package-data]
+provider_wrapper = ["*.json"] 

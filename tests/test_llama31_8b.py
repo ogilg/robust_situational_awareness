@@ -27,6 +27,8 @@ from sad.id_leverage.entity_id.task_generic import make_task as make_idlev_gener
 
 # HuggingFace provider for activation extraction
 from provider_wrapper import get_provider_for_model, GetTextRequest, Prompt, Message
+import numpy as _np
+import torch as _torch
 
 
 def test_basic_functionality():
@@ -141,6 +143,36 @@ def test_basic_functionality():
         print(f"✗ ID leverage (generic) failed: {e}")
 
 
+# ---- Shared sanity checks for activation vectors ----
+def _assert_residuals_sane(residuals: dict, *, title: str = "Residuals"):
+    """Basic sanity checks: non-empty, correct shapes, finite values, sane norms, CPU tensors."""
+    assert isinstance(residuals, dict), f"{title}: expected dict, got {type(residuals)}"
+    assert len(residuals) > 0, f"{title}: empty residuals"
+
+    d_model: int | None = None
+    for layer_idx, value in residuals.items():
+        assert isinstance(layer_idx, int) and layer_idx >= 0, f"{title}: bad layer index {layer_idx}"
+
+        # Normalize to numpy array on CPU
+        if hasattr(value, "detach") and hasattr(value, "cpu"):
+            # torch.Tensor
+            assert getattr(value, "device", None) is None or value.device.type == "cpu", f"{title}: tensor not on CPU"
+            arr = value.detach().cpu().numpy()
+        else:
+            arr = _np.asarray(value)
+
+        assert arr.ndim == 2 and arr.shape[0] == 1 and arr.shape[1] > 0, f"{title}: expected [1, d_model], got {arr.shape}"
+        if d_model is None:
+            d_model = int(arr.shape[1])
+        else:
+            assert int(arr.shape[1]) == d_model, f"{title}: inconsistent d_model across layers"
+
+        assert _np.isfinite(arr).all(), f"{title}: found NaN/Inf values"
+        norm = float(_np.linalg.norm(arr))
+        assert 0.0 < norm < 1e6, f"{title}: unreasonable norm {norm}"
+
+    print(f"✓ {title}: {len(residuals)} layers, d_model={d_model}")
+
 def test_activation_extraction():
     """Test activation extraction functionality with Llama3.1 8b instruct."""
     model = "llama-3.1-8b-instruct"
@@ -166,8 +198,7 @@ def test_activation_extraction():
         
         print(f"✓ Activation extraction successful")
         print(f"  Generated text: '{response.txt[:50]}{'...' if len(response.txt) > 50 else ''}'")
-        print(f"  Captured residuals for {len(residuals)} layers")
-        print(f"  Sample layer shapes: {[(k, v.shape) for k, v in list(residuals.items())[:3]]}")
+        _assert_residuals_sane(residuals, title="Activation extraction residuals")
         
         # Verify residuals have expected properties
         if residuals:
@@ -198,7 +229,8 @@ def test_tasks_with_vector_extraction():
         )
         total = res["correct"] + res["incorrect"] + res["invalid"]
         acc = (res["correct"] / total) if total else 0.0
-        print(f"✓ Output control with vectors: acc={acc:.3f} ({res})")
+        res_short = {k: v for k, v in res.items() if k != "vectors"}
+        print(f"✓ Output control with vectors: acc={acc:.3f} ({res_short})")
         
         # Check if vectors directory was created (even though save=False, it should create structure)
         vectors_dir = os.path.join(oc_task.path, "vectors")
@@ -207,6 +239,11 @@ def test_tasks_with_vector_extraction():
         else:
             print(f"  Note: Vector directory not created (save=False)")
             
+        # Use vectors returned by task API
+        oc_vectors = res.get("vectors", [])
+        if oc_vectors:
+            _assert_residuals_sane(oc_vectors[0]["residuals"], title="Output control residuals")
+
     except Exception as e:
         print(f"✗ Output control with vectors failed: {e}")
         import traceback
@@ -225,7 +262,13 @@ def test_tasks_with_vector_extraction():
             )
             total = res["correct"] + res["incorrect"] + res["invalid"] 
             acc = (res["correct"] / total) if total else 0.0
-            print(f"✓ Self-recognition with vectors: acc={acc:.3f} ({res})")
+            res_short = {k: v for k, v in res.items() if k != "vectors"}
+            print(f"✓ Self-recognition with vectors: acc={acc:.3f} ({res_short})")
+
+            # Use vectors returned by task API
+            who_vectors = res.get("vectors", [])
+            if who_vectors:
+                _assert_residuals_sane(who_vectors[0]["residuals"], title="Self-recognition residuals")
         else:
             print(f"⚠ Self-recognition: run_with_collected_residuals not available")
             
@@ -243,7 +286,12 @@ def test_tasks_with_vector_extraction():
         )
         total = res["correct"] + res["incorrect"] + res["invalid"]
         acc = (res["correct"] / total) if total else 0.0
-        print(f"✓ ID leverage with vectors: acc={acc:.3f} ({res})")
+        res_short = {k: v for k, v in res.items() if k != "vectors"}
+        print(f"✓ ID leverage with vectors: acc={acc:.3f} ({res_short})")
+        # Use vectors returned by task API
+        idlev_vectors = res.get("vectors", [])
+        if idlev_vectors:
+            _assert_residuals_sane(idlev_vectors[0]["residuals"], title="ID leverage residuals")
     except Exception as e:
         print(f"✗ ID leverage with vectors failed: {e}")
 
@@ -262,7 +310,13 @@ def test_tasks_with_vector_extraction():
         )
         total = res["correct"] + res["incorrect"] + res["invalid"]
         acc = (res["correct"] / total) if total else 0.0
-        print(f"✓ Stages with vectors: acc={acc:.3f} ({res})")
+        res_short = {k: v for k, v in res.items() if k != "vectors"}
+        print(f"✓ Stages with vectors: acc={acc:.3f} ({res_short})")
+
+        # Use vectors returned by task API
+        stages_vectors = res.get("vectors", [])
+        if stages_vectors:
+            _assert_residuals_sane(stages_vectors[0]["residuals"], title="Stages residuals")
         
     except Exception as e:
         print(f"✗ Stages with vectors failed: {e}")

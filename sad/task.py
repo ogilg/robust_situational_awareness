@@ -211,6 +211,7 @@ class Task(ABC):
         incorrect = 0
         invalid = 0
         with change_dir(self.path):
+            vectors: list[dict] = []
             for i, sample in enumerate(self.iter_samples(model=model, variant=variant_str, n=n)):
                 result, residuals, aux_meta = self.evaluate_and_capture_sample(model=model, sample=sample, variant=variant_str)
                 correct += int(result.get("correct", 0))
@@ -226,9 +227,15 @@ class Task(ABC):
                         classification=bucket,
                         aux_meta=aux_meta,
                     )
+                    vectors.append({
+                        "sample_index": i,
+                        "classification": bucket,
+                        "residuals": residuals,
+                        "aux": aux_meta or {},
+                    })
         if save:
             self.save_results_csv(model=model, variant=variant_str, correct=correct, incorrect=incorrect, invalid=invalid)
-        return {"correct": correct, "incorrect": incorrect, "invalid": invalid}
+        return {"correct": correct, "incorrect": incorrect, "invalid": invalid, "vectors": vectors}
 
     # Results helpers (CSV aggregation). Subclasses may call these.
     def save_results_csv(

@@ -299,6 +299,19 @@ class SelfRecognition(Task):
             json.dump(evaluator.results, f, indent=2)
         print(f"Saved {len(evaluator.results)} results to {evaluator.results_file_name}")
     
+    # --- Required by Task.run_with_collected_residuals ---
+    def iter_samples(self, model: str, variant: str, n: int | None = None):
+        """Yield samples compatible with evaluate_and_capture_sample.
+
+        Mirrors _get_samples but exposes an iterator as expected by the Task base class.
+        """
+        object_level_model = strip_solver_wrappers(model)
+        # Task API uses None for "no limit"; our internal API uses -1
+        internal_n = -1 if n is None else n
+        samples = self._get_samples(object_level_model, variant, internal_n)
+        for sample in samples:
+            yield sample
+
     def _run(
         self,
         model,

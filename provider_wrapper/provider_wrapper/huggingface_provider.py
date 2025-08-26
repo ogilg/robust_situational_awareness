@@ -39,6 +39,12 @@ from openai_harmony import (
 
 from transformer_lens import HookedTransformer
 
+# Ensure Transformers logs with INFO verbosity for clearer warning messages
+os.environ.setdefault("TRANSFORMERS_VERBOSITY", "info")
+
+# Global cache for TransformerLens models to avoid repeated shard reloads
+_tl_models: Dict[str, HookedTransformer] = {}
+
 def on_backoff(details):
     print(f"Repeating failed request (attempt {details['tries']}). Reason: {details['exception']}")
     
@@ -204,7 +210,9 @@ class HuggingFaceProvider:
                 gen_kwargs["do_sample"] = False
             else:
                 gen_kwargs["do_sample"] = True
-                gen_kwargs["temperature"] = request.temperature
+                # Only add temperature if we're sampling and temperature is valid
+                if request.temperature is not None and request.temperature > 0.0:
+                    gen_kwargs["temperature"] = request.temperature
 
 
             # For DefaultHFProvider, do not use Harmony stop tokens; rely on model defaults
@@ -307,12 +315,19 @@ class DefaultHFProvider(HuggingFaceProvider):
     # ---------------- First-token residuals during generation (TransformerLens) -----------------
     def _get_tl_model(self, tl_name: str):
         device = next(self.model.parameters()).device
-        if not hasattr(self, "_tl_cache"):
-            self._tl_cache = {}
-        tl_model = self._tl_cache.get(tl_name)
+        # Use module-level cache so repeated provider instances don't reload shards
+        global _tl_models
+        tl_model = _tl_models.get(tl_name)
         if tl_model is None:
-            tl_model = HookedTransformer.from_pretrained(tl_name, device=str(device))
-            self._tl_cache[tl_name] = tl_model
+            clear_gpu_memory()
+            # Load TransformerLens model with center_writing_weights=False to avoid LayerNorm warning
+            # This is for Llama3.1-8b which uses RMSNorm rather than LayerNorm but needs to be changed for some other models.
+            tl_model = HookedTransformer.from_pretrained(
+                tl_name,
+                device=str(device),
+                center_writing_weights=False,
+            )
+            _tl_models[tl_name] = tl_model
         return tl_model
 
     def generate_text_with_first_token_residuals(self, request: GetTextRequest):
@@ -324,7 +339,7 @@ class DefaultHFProvider(HuggingFaceProvider):
         """
         # Map provider id to TL model id (extend as needed)
         TL_COMPATIBLE: dict[str, str] = {
-            "llama-3.1-8b-instruct": "llama-3.1-8b",
+            "llama-3.1-8b-instruct": "meta-llama/Llama-3.1-8B",
         }
         name = self.model_id
         if name not in TL_COMPATIBLE:
@@ -333,8 +348,13 @@ class DefaultHFProvider(HuggingFaceProvider):
             )
         tl_name = TL_COMPATIBLE[name]
 
-        # Render prompt text like generate_text
-        _, text = self.format_prompt(request.prompt)
+        # Render a TL-friendly prompt: avoid chat templates; use the last user message content
+        try:
+            user_messages = [getattr(m, "content", "") for m in request.prompt if getattr(m, "role", "user") == "user"]
+            text = user_messages[-1] if user_messages else "\n\n".join([getattr(m, "content", "") for m in request.prompt])
+        except Exception:
+            # Fallback to simple join
+            text = "\n\n".join([getattr(m, "content", "") for m in request.prompt])
         tl_model = self._get_tl_model(tl_name)
         toks = tl_model.to_tokens(text)
         prompt_len = toks.shape[1]
@@ -343,11 +363,10 @@ class DefaultHFProvider(HuggingFaceProvider):
 
         def make_hook(layer_idx: int, p_len: int):
             def hook_fn(activation, hook):
-                # Capture only on first generation step (seq length just exceeded prompt)
+                # Capture first time this layer runs during generation
                 if layer_idx not in cached:
-                    # activation shape: [batch, seq, d_model]
-                    if activation.shape[1] > p_len:
-                        cached[layer_idx] = activation[:, -1, :].detach().cpu()
+                    # activation shape: [batch, seq, d_model] (may be seq==1 with KV cache)
+                    cached[layer_idx] = activation[:, -1, :].detach().cpu()
                 return activation
             return hook_fn
 

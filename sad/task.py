@@ -4,6 +4,8 @@ from datetime import datetime
 import os
 from typing import Callable, Iterable, Optional
 import pandas as pd
+import json as _json
+import numpy as _np
 
 from .utils import bootstrap_error, change_dir
 
@@ -140,6 +142,93 @@ class Task(ABC):
             res = self.evaluate_sample(model=model, sample=sample)
             results.append(res)
         return results
+
+    # -------- Residual collection (to be implemented per-task) --------
+    def evaluate_and_capture_sample(self, model: str, sample: dict, variant: str) -> tuple[dict, dict | None, dict | None]:
+        """
+        Per-task hook for residual collection.
+
+        Should perform a single generation call that also captures resid_pre at the first
+        generated token across all layers (via provider), compute correctness for the sample,
+        and return a tuple:
+          (result_dict, residuals_by_layer or None, aux_meta or None)
+
+        - result_dict must include integer keys 'correct', 'incorrect', 'invalid'.
+        - residuals_by_layer maps layer_index -> vector (numpy or tensor on CPU)
+        - aux_meta may include 'txt' (generated text) or any extra metadata.
+        """
+        raise NotImplementedError("evaluate_and_capture_sample not implemented for this task")
+
+    def save_residuals_bundle(
+        self,
+        model: str,
+        variant: str,
+        sample_index: int,
+        residuals_by_layer: dict,
+        classification: str,
+        aux_meta: dict | None = None,
+    ) -> None:
+        """
+        Save residuals under vectors/<model>/<variant>/<classification>/sample_<idx>.npz (+ meta.json).
+        classification should be 'correct' or 'incorrect'.
+        """
+        safe_model = str(model).replace("/", "_")
+        out_dir = os.path.join(self.path, "vectors", safe_model, variant, classification)
+        os.makedirs(out_dir, exist_ok=True)
+        npz_path = os.path.join(out_dir, f"sample_{sample_index}.npz")
+        meta_path = os.path.join(out_dir, f"sample_{sample_index}.meta.json")
+        # Convert values to numpy
+        payload = {}
+        for k, v in residuals_by_layer.items():
+            key = f"layer_{k}"
+            if hasattr(v, "numpy"):
+                payload[key] = v.numpy()
+            else:
+                payload[key] = _np.array(v)
+        _np.savez(npz_path, **payload)
+        with open(meta_path, "w") as f:
+            _json.dump(aux_meta or {}, f)
+
+    def run_with_collected_residuals(
+        self,
+        model: str,
+        variant: Optional[Variant] = None,
+        n: int | None = None,
+        save: bool = True,
+        random_order_seed=None,
+        comment=None,
+    ) -> dict:
+        """
+        Unified runner that collects residuals per sample (first generated token, all layers)
+        via the per-task hook 'evaluate_and_capture_sample'. Residuals are saved bucketed by
+        correctness using 'save_residuals_bundle'.
+        """
+        if variant is None:
+            variant = self.default_variant
+        self._validate_variant(variant)
+        variant_str = variant.name
+        correct = 0
+        incorrect = 0
+        invalid = 0
+        with change_dir(self.path):
+            for i, sample in enumerate(self.iter_samples(model=model, variant=variant_str, n=n)):
+                result, residuals, aux_meta = self.evaluate_and_capture_sample(model=model, sample=sample, variant=variant_str)
+                correct += int(result.get("correct", 0))
+                incorrect += int(result.get("incorrect", 0))
+                invalid += int(result.get("invalid", 0))
+                if residuals is not None:
+                    bucket = "correct" if int(result.get("correct", 0)) == 1 else "incorrect"
+                    self.save_residuals_bundle(
+                        model=model,
+                        variant=variant_str,
+                        sample_index=i,
+                        residuals_by_layer=residuals,
+                        classification=bucket,
+                        aux_meta=aux_meta,
+                    )
+        if save:
+            self.save_results_csv(model=model, variant=variant_str, correct=correct, incorrect=incorrect, invalid=invalid)
+        return {"correct": correct, "incorrect": incorrect, "invalid": invalid}
 
     # Results helpers (CSV aggregation). Subclasses may call these.
     def save_results_csv(

@@ -304,56 +304,83 @@ class DefaultHFProvider(HuggingFaceProvider):
             "torch_dtype": torch.bfloat16,
         }
 
-
-    def generate_text_with_residuals(self, request: GetTextRequest):
-        """
-        Generate text (standard HF path) and also return resid_pre at the final token
-        across all layers using TransformerLens.
-
-        - Input: GetTextRequest (no extra params)
-        - Output: (GetTextResponse, {layer_index: tensor[1, d_model] on CPU})
-        """
-        # 1) Generate text normally
-        text_resp = self.generate_text(request)
-        prompt_text = text_resp.context.get("prompt_text", "")
-        generated_text = text_resp.txt or ""
-        combined_text = f"{prompt_text}{generated_text}"
-
-        # 2) Capture resid_pre at final token via TransformerLens
-        # Minimal compatibility map (extend as needed)
-        TL_COMPATIBLE: dict[str, str] = {
-            "llama-3.1-8b-instruct": "llama-3.1-8b",
-        }
-        name = self.model_id
-        if name not in TL_COMPATIBLE:
-            raise NotImplementedError(
-                f"Residual stream capture via TransformerLens not implemented for model '{name}'."
-            )
-        tl_name = TL_COMPATIBLE[name]
-
+    # ---------------- First-token residuals during generation (TransformerLens) -----------------
+    def _get_tl_model(self, tl_name: str):
         device = next(self.model.parameters()).device
-        # Cache TL model per provider instance for performance
         if not hasattr(self, "_tl_cache"):
             self._tl_cache = {}
         tl_model = self._tl_cache.get(tl_name)
         if tl_model is None:
             tl_model = HookedTransformer.from_pretrained(tl_name, device=str(device))
             self._tl_cache[tl_name] = tl_model
-        toks = tl_model.to_tokens(combined_text)
+        return tl_model
+
+    def generate_text_with_first_token_residuals(self, request: GetTextRequest):
+        """
+        Generate text and capture resid_pre for the FIRST generated token across all layers
+        in a single TransformerLens generation pass.
+
+        Returns: (GetTextResponse, {layer_idx: tensor[1, d_model] on CPU})
+        """
+        # Map provider id to TL model id (extend as needed)
+        TL_COMPATIBLE: dict[str, str] = {
+            "llama-3.1-8b-instruct": "llama-3.1-8b",
+        }
+        name = self.model_id
+        if name not in TL_COMPATIBLE:
+            raise NotImplementedError(
+                f"First-token residuals via TransformerLens not implemented for model '{name}'."
+            )
+        tl_name = TL_COMPATIBLE[name]
+
+        # Render prompt text like generate_text
+        _, text = self.format_prompt(request.prompt)
+        tl_model = self._get_tl_model(tl_name)
+        toks = tl_model.to_tokens(text)
+        prompt_len = toks.shape[1]
 
         cached: dict[int, torch.Tensor] = {}
 
-        def make_hook(layer_idx: int):
+        def make_hook(layer_idx: int, p_len: int):
             def hook_fn(activation, hook):
-                cached[layer_idx] = activation[:, -1, :].detach().cpu()
+                # Capture only on first generation step (seq length just exceeded prompt)
+                if layer_idx not in cached:
+                    # activation shape: [batch, seq, d_model]
+                    if activation.shape[1] > p_len:
+                        cached[layer_idx] = activation[:, -1, :].detach().cpu()
                 return activation
             return hook_fn
 
-        fwd_hooks = [(f"blocks.{i}.hook_resid_pre", make_hook(i)) for i in range(tl_model.cfg.n_layers)]
+        fwd_hooks = [
+            (f"blocks.{i}.hook_resid_pre", make_hook(i, prompt_len))
+            for i in range(tl_model.cfg.n_layers)
+        ]
+
         tl_model.reset_hooks()
         with tl_model.hooks(fwd_hooks=fwd_hooks):
             with torch.no_grad():
-                _ = tl_model(toks)
+                out_toks = tl_model.generate(
+                    toks,
+                    max_new_tokens=int(getattr(request, "max_tokens", 16) or 16),
+                    temperature=float(getattr(request, "temperature", 0.0) or 0.0),
+                )
+
+        # Decode only generated tail
+        gen_only = out_toks[:, prompt_len:]
+        txt = tl_model.to_string(gen_only[0]) if gen_only.shape[1] > 0 else ""
+
+        text_resp = GetTextResponse(
+            model_id=self.model_id,
+            request=request,
+            txt=txt,
+            raw_responses=[{"final": txt}],
+            context={
+                "method": "tl_generate_with_first_token_resid",
+                "prompt_text": text,
+                "prompt_len": prompt_len,
+                "generated_tokens": gen_only[0].detach().cpu().tolist(),
+            },
+        )
 
         return text_resp, cached
 

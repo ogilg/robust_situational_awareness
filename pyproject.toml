@@ -23,9 +23,9 @@ dependencies = [
     "tqdm",
     "openai-harmony",
     "transformer-lens",
-    "provider_wrapper @ /workspace/robust_situational_awareness/provider_wrapper"
+    provider_wrapper @ file:///workspace/robust_situational_awareness/provider_wrapper
 ]
 
 [tool.setuptools]
-packages = []
+packages = ["sad"]
 

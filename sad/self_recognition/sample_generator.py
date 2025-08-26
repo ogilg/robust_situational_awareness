@@ -4,6 +4,7 @@ from typing import List, Dict, Any
 import numpy as np
 
 from sad.self_recognition.get_completions import GetCompletions, CompletionData
+import os
 
 
 DEFAULT_N_TOKENS = 128
@@ -86,7 +87,9 @@ class SampleGenerator:
 
     def _get_completions(self):
         completions_creator = GetCompletions(self.model, self.model_type, seed=self.seed)
-        fname = f"text_corpus/raw_data/{self.text_source}.jsonl"
+        # Build an absolute path relative to this file to avoid CWD dependency
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        fname = os.path.join(base_dir, "text_corpus", "raw_data", f"{self.text_source}.jsonl")
         n_completions = max(2, self.num_samples)
         completions_creator.prepare_completions(
             n_completions, fname, DEFAULT_N_TOKENS, DEFAULT_PROMPT_TOKENS,

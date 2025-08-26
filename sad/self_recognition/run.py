@@ -8,8 +8,8 @@ from sad.templates import sa_prefix
 from sad.task import Task, get_id, PLAIN_VARIANT, SP_VARIANT
 
 from .sample_generator import SampleGenerator
-from provider_wrapper.huggingface_provider import get_provider_for_model
-from provider_wrapper.data_models import GetTextRequest, Message as ProviderMessage
+from provider_wrapper import get_provider_for_model
+from provider_wrapper import GetTextRequest, Message as ProviderMessage
 
 # Model categorization for Llama3 and similar models
 def strip_solver_wrappers(model: str) -> str:
@@ -129,6 +129,7 @@ class SelfRecognition(Task):
         
         # Make request to provider
         request = GetTextRequest(
+            context=None,
             prompt=messages,
             temperature=0.0,
             max_tokens=5

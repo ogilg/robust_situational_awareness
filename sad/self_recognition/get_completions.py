@@ -7,8 +7,8 @@ from typing import List, Dict, Any
 
 import numpy as np
 
-from provider_wrapper.huggingface_provider import get_provider_for_model
-from provider_wrapper.data_models import GetTextRequest, Message as ProviderMessage
+from provider_wrapper import get_provider_for_model
+from provider_wrapper import GetTextRequest, Message as ProviderMessage
 
 from sad.utils import run
 
@@ -210,6 +210,7 @@ class GetCompletions:
                 ]
             
             request = GetTextRequest(
+                context=None,
                 prompt=messages,
                 max_tokens=max_tokens,
                 temperature=1.0
@@ -218,12 +219,13 @@ class GetCompletions:
             # For base models, use single message
             messages = [ProviderMessage(role="user", content=prompt_txt)]
             request = GetTextRequest(
+                context=None,
                 prompt=messages,
                 max_tokens=max_tokens,
                 temperature=1.0
             )
         
-        response = self.provider.get_text(request)
-        txt = response.text
+        response = self.provider.generate_text(request)
+        txt = response.txt
 
         return prompt_txt, orig, txt

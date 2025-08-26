@@ -61,7 +61,9 @@ logs/
 
 sad/stages/private_data_gen/
 sad/stages/oversight/structs/
-sad/id_leverage/entity_id/
+sad/id_leverage/entity_id/*
+!sad/id_leverage/entity_id/task_generic.py
+!sad/id_leverage/entity_id/task_generic_names.py
 sad/id_leverage/private_data/
 sad/id_leverage/private_exout/
 sad/id_leverage/structs/

@@ -13,10 +13,14 @@ from typing import Any, Dict, List, Optional
 HUGGINGFACE_MODEL_MAPPING = {
     # OpenAI GPT-OSS
     "gpt-oss-20b": "openai/gpt-oss-20b",
+    # Meta Llama Instruct (extend/edit as needed)
+    "llama-3.1-8b-instruct": "meta-llama/Llama-3.1-8B-Instruct",
 }
 
 # Models that support chat format (instruct/chat models)
 CHAT_MODELS = {
+    # Treat instruct models as chat-capable
+    "llama-3.1-8b-instruct": True,
 }
 
 

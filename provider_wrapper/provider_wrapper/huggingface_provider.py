@@ -24,6 +24,7 @@ from .data_models import (
     HUGGINGFACE_MODEL_MAPPING,
     CHAT_MODELS,
 )
+from .mock_provider import MockProvider
 
 from openai_harmony import (
     load_harmony_encoding,
@@ -36,6 +37,7 @@ from openai_harmony import (
     StreamableParser,
 )
 
+from transformer_lens import HookedTransformer
 
 def on_backoff(details):
     print(f"Repeating failed request (attempt {details['tries']}). Reason: {details['exception']}")
@@ -205,9 +207,7 @@ class HuggingFaceProvider:
                 gen_kwargs["temperature"] = request.temperature
 
 
-            enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
-            stop_token_ids = enc.stop_tokens_for_assistant_actions()
-            gen_kwargs["eos_token_id"] = stop_token_ids
+            # For DefaultHFProvider, do not use Harmony stop tokens; rely on model defaults
 
             outputs = self.model.generate(input_ids=input_ids, **gen_kwargs)
 
@@ -303,6 +303,59 @@ class DefaultHFProvider(HuggingFaceProvider):
             ),
             "torch_dtype": torch.bfloat16,
         }
+
+
+    def generate_text_with_residuals(self, request: GetTextRequest):
+        """
+        Generate text (standard HF path) and also return resid_pre at the final token
+        across all layers using TransformerLens.
+
+        - Input: GetTextRequest (no extra params)
+        - Output: (GetTextResponse, {layer_index: tensor[1, d_model] on CPU})
+        """
+        # 1) Generate text normally
+        text_resp = self.generate_text(request)
+        prompt_text = text_resp.context.get("prompt_text", "")
+        generated_text = text_resp.txt or ""
+        combined_text = f"{prompt_text}{generated_text}"
+
+        # 2) Capture resid_pre at final token via TransformerLens
+        # Minimal compatibility map (extend as needed)
+        TL_COMPATIBLE: dict[str, str] = {
+            "llama-3.1-8b-instruct": "llama-3.1-8b",
+        }
+        name = self.model_id
+        if name not in TL_COMPATIBLE:
+            raise NotImplementedError(
+                f"Residual stream capture via TransformerLens not implemented for model '{name}'."
+            )
+        tl_name = TL_COMPATIBLE[name]
+
+        device = next(self.model.parameters()).device
+        # Cache TL model per provider instance for performance
+        if not hasattr(self, "_tl_cache"):
+            self._tl_cache = {}
+        tl_model = self._tl_cache.get(tl_name)
+        if tl_model is None:
+            tl_model = HookedTransformer.from_pretrained(tl_name, device=str(device))
+            self._tl_cache[tl_name] = tl_model
+        toks = tl_model.to_tokens(combined_text)
+
+        cached: dict[int, torch.Tensor] = {}
+
+        def make_hook(layer_idx: int):
+            def hook_fn(activation, hook):
+                cached[layer_idx] = activation[:, -1, :].detach().cpu()
+                return activation
+            return hook_fn
+
+        fwd_hooks = [(f"blocks.{i}.hook_resid_pre", make_hook(i)) for i in range(tl_model.cfg.n_layers)]
+        tl_model.reset_hooks()
+        with tl_model.hooks(fwd_hooks=fwd_hooks):
+            with torch.no_grad():
+                _ = tl_model(toks)
+
+        return text_resp, cached
 
 
 class GPTOSSProvider(HuggingFaceProvider):
@@ -449,6 +502,11 @@ def get_provider_for_model(
     Optional args allow configuring GPT-OSS-specific behavior from callers.
     """
     name = extract_model_name(model_id)
+
+    # Provide a mock provider for tests
+    if name in {"mock-llm", "mock"}:
+        # Return a small shim exposing the same methods as HF providers
+        return MockProvider(name)  # type: ignore
     # Prefer explicit args; fall back to request context for lora
     if lora_adapter_path is None and request is not None:
         lora_adapter_path = getattr(request, "lora_adapter_path", None)

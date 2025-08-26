@@ -14,7 +14,7 @@ from provider_wrapper import (
 )
 
 # Import the few shot examples
-from few_shot_examples import (few_shot_random_examples,
+from .few_shot_examples import (few_shot_random_examples,
                                 in_context_examples)
 
 def load_single_token_words(file_path):

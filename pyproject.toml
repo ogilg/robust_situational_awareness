@@ -3,7 +3,7 @@ requires = ["setuptools>=68.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "logit_control"
+name = "robust_situational_awareness"
 version = "0.1"
 requires-python = ">=3.12"
 dependencies = [
@@ -23,7 +23,7 @@ dependencies = [
     "tqdm",
     "openai-harmony",
     "transformer-lens",
-    "provider_wrapper @ file:///Users/oscargilg/Dev/robust_situational_awareness/provider_wrapper"
+    "provider_wrapper @ /workspace/robust_situational_awareness/provider_wrapper"
 ]
 
 [tool.setuptools]

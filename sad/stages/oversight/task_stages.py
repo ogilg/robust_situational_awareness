@@ -2,6 +2,7 @@ import json
 import os
 import random
 import yaml
+import hashlib
 from typing import Iterable, Optional
 import re
 
@@ -87,12 +88,30 @@ class StagesOversightTask(Task):
             raise FileNotFoundError(
                 f"StagesOversightTask: data_path not found: {self.data_path}. Provide binary oversight JSONL."
             )
+        # Split controls via environment
+        split = os.environ.get("SA_SPLIT", "").strip().lower()
+        split_seed = 1337
+        split_frac = 0.5
+
+        def in_split(idx: int) -> bool:
+            if split not in ("train", "test"):
+                return True
+            key = f"stages:{idx}"
+            h = hashlib.sha256(f"{split_seed}|{key}".encode()).digest()
+            # Map to [0,1)
+            val = int.from_bytes(h[:8], "big") / float(1 << 64)
+            is_train = val < split_frac
+            return is_train if split == "train" else (not is_train)
+
         count = 0
-        for sample in _load_jsonl(self.data_path):
+        for idx, sample in enumerate(_load_jsonl(self.data_path)):
             # Validate expected format
             if "body" not in sample or "choices_right" not in sample or "choices_wrong" not in sample:
                 raise ValueError(f"Invalid sample format. Expected 'body', 'choices_right', 'choices_wrong'. Got: {list(sample.keys())}")
             
+            if not in_split(idx):
+                continue
+
             yield sample
             count += 1
             if n is not None and count >= n:

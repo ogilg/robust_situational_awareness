@@ -3,7 +3,7 @@ from typing import Iterable
 
 from sad.task import Task, PLAIN_VARIANT
 
-from .utils import get_combined_samples, get_model_probabilities
+from .utils import get_given_words_samples, get_model_probabilities
 from .parsers import tvd_parser
 from provider_wrapper import get_provider_for_model, GetTextRequest
 
@@ -23,9 +23,29 @@ class OutputControlTask(Task):
 
     def iter_samples(self, model: str, variant: str, n: int | None = None) -> Iterable[dict]:
         num_examples = n if n is not None and n > 0 else 10
-        # get_combined_samples returns a list of provider_wrapper.Sample objects
-        for sample in get_combined_samples(num_examples=num_examples, shuffle=False):
-            yield sample
+        # Split controls via environment on (word1, word2) to ensure non-overlap and same distribution
+        import os, hashlib
+        split = os.environ.get("SA_SPLIT", "").strip().lower()
+        split_seed = 1337
+        split_frac = 0.5
+
+        def in_split(word1: str, word2: str) -> bool:
+            if split not in ("train", "test"):
+                return True
+            key = f"outctl:{word1}|{word2}"
+            h = hashlib.sha256(f"{split_seed}|{key}".encode()).digest()
+            val = int.from_bytes(h[:8], "big") / float(1 << 64)
+            is_train = val < split_frac
+            return is_train if split == "train" else (not is_train)
+
+        yielded = 0
+        # Only use "given words" cases
+        for sample in get_given_words_samples(num_examples=max(num_examples * 2, 10), include_examples=True):
+            if in_split(getattr(sample, "word1", ""), getattr(sample, "word2", "")):
+                yield sample
+                yielded += 1
+                if yielded >= num_examples:
+                    break
 
     def evaluate_sample(self, model: str, sample) -> dict:
         probs = get_model_probabilities(model_id=model, prompt=sample.prompt)

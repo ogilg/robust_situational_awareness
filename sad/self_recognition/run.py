@@ -338,6 +338,26 @@ class SelfRecognition(Task):
             for source in text_sources[:remaining]:
                 num_samples_per_source[source] += 1
 
+        # Split controls via environment
+        import os, hashlib
+        split = os.environ.get("SA_SPLIT", "").strip().lower()
+        split_seed = 1337
+        split_frac = 0.5
+
+        def in_split_from_sample(sample) -> bool:
+            if split not in ("train", "test"):
+                return True
+            # Build a stable key from sample content
+            tv = sample.get("template_vars", {}) if isinstance(sample, dict) else {}
+            t1 = str(tv.get("train_text_1", ""))
+            t2 = str(tv.get("train_text_2", ""))
+            src = str(sample.get("text_source", "")) if isinstance(sample, dict) else ""
+            key = f"selfrec:{src}|{t1}|{t2}"
+            h = hashlib.sha256(f"{split_seed}|{key}".encode()).digest()
+            val = int.from_bytes(h[:8], "big") / float(1 << 64)
+            is_train = val < split_frac
+            return is_train if split == "train" else (not is_train)
+
         samples = []
         for text_source, num_samples in num_samples_per_source.items():
             if num_samples == 0:
@@ -348,10 +368,15 @@ class SelfRecognition(Task):
                 model_type=self.model_type(model),
                 variant=variant,
                 text_source=text_source,
-                num_samples=num_samples,
+                num_samples=max(num_samples * 3, num_samples + 5),  # oversample to allow split filtering
                 seed=DEFAULT_SEED,
             )
-            samples += sample_generator.generate_samples()
+            gen = sample_generator.generate_samples()
+            for s in gen:
+                if in_split_from_sample(s):
+                    samples.append(s)
+                    if len([x for x in samples if (isinstance(x, dict) and x.get('text_source') == text_source)]) >= num_samples:
+                        break
 
         return samples
 

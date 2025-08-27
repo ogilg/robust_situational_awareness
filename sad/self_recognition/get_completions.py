@@ -137,9 +137,12 @@ class GetCompletions:
                 texts.append(t)
 
         
-        assert (
-            len(texts) >= n_completions
-        ), f"Can't create {n_completions} completions from {len(texts)} texts"
+        # If there aren't enough long-enough texts, cap n_completions to what's available
+        if len(texts) < n_completions:
+            print(
+                f"Requested {n_completions} completions but only {len(texts)} long-enough texts available; capping."
+            )
+            n_completions = len(texts)
         print(
             f"Loaded {len(all_texts)} texts, out of which {len(texts)} are long enough"
         )
@@ -203,10 +206,12 @@ class GetCompletions:
                     ProviderMessage(role="user", content=OPENAI_CHAT_USER_MESSAGE.format(txt=prompt_txt)),
                 ]
             else:
+                # Remove "Answer:" from the user prompt since add_generation_prompt=True
+                # will handle adding the assistant trigger appropriately
+                user_content = prompt_txt.rstrip("Answer:").rstrip()
                 messages = [
                     ProviderMessage(role="system", content=CHAT_SYSTEM_MESSAGE),
-                    ProviderMessage(role="user", content=prompt_txt),
-                    ProviderMessage(role="assistant", content=prompt_txt),
+                    ProviderMessage(role="user", content=user_content),
                 ]
             
             request = GetTextRequest(

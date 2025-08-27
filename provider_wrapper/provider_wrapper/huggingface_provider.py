@@ -192,6 +192,11 @@ class HuggingFaceProvider:
     # ----- Core ops -----
     def generate_text(self, request: GetTextRequest) -> GetTextResponse:
         tokens, text = self.format_prompt(request.prompt)
+        if os.environ.get("SA_DEBUG_PROMPT") == "1":
+            try:
+                print(f"[DEBUG PROMPT HF:{self.model_id}]\n{text}\n[END DEBUG PROMPT]\n")
+            except Exception:
+                pass
 
         # Build input tensor from tokens directly for full control
         input_ids = torch.tensor([tokens], dtype=torch.long)
@@ -320,12 +325,12 @@ class DefaultHFProvider(HuggingFaceProvider):
         tl_model = _tl_models.get(tl_name)
         if tl_model is None:
             clear_gpu_memory()
-            # Load TransformerLens model with center_writing_weights=False to avoid LayerNorm warning
-            # This is for Llama3.1-8b which uses RMSNorm rather than LayerNorm but needs to be changed for some other models.
+            # Align TL behavior with HF chat formatting; avoid auto-BOS
             tl_model = HookedTransformer.from_pretrained(
                 tl_name,
                 device=str(device),
                 center_writing_weights=False,
+                default_prepend_bos=False,
             )
             _tl_models[tl_name] = tl_model
         return tl_model
@@ -348,24 +353,23 @@ class DefaultHFProvider(HuggingFaceProvider):
             )
         tl_name = TL_COMPATIBLE[name]
 
-        # Render a TL-friendly prompt: avoid chat templates; use the last user message content
-        try:
-            user_messages = [getattr(m, "content", "") for m in request.prompt if getattr(m, "role", "user") == "user"]
-            text = user_messages[-1] if user_messages else "\n\n".join([getattr(m, "content", "") for m in request.prompt])
-        except Exception:
-            # Fallback to simple join
-            text = "\n\n".join([getattr(m, "content", "") for m in request.prompt])
+        # Format the prompt exactly like HF generate_text (chat template + generation prompt)
+        _, text = self.format_prompt(request.prompt)
         tl_model = self._get_tl_model(tl_name)
-        toks = tl_model.to_tokens(text)
+        if os.environ.get("SA_DEBUG_PROMPT") == "1":
+            try:
+                print(f"[DEBUG PROMPT TL:{self.model_id}]\n{text}\n[END DEBUG PROMPT]\n")
+            except Exception:
+                pass
+        toks = tl_model.to_tokens(text, prepend_bos=False)
         prompt_len = toks.shape[1]
 
         cached: dict[int, torch.Tensor] = {}
 
         def make_hook(layer_idx: int, p_len: int):
             def hook_fn(activation, hook):
-                # Capture first time this layer runs during generation
-                if layer_idx not in cached:
-                    # activation shape: [batch, seq, d_model] (may be seq==1 with KV cache)
+                # Capture on first generation step only (when sequence length exceeds prompt)
+                if layer_idx not in cached and activation.shape[1] > p_len:
                     cached[layer_idx] = activation[:, -1, :].detach().cpu()
                 return activation
             return hook_fn

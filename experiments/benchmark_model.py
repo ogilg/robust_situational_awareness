@@ -75,30 +75,25 @@ def _write_csv_row(csv_path: str, row: dict) -> None:
         writer.writerow({k: row.get(k, "") for k in fieldnames})
 
 
-def run_benchmark(
+def run_stages_oversight(
     *,
     model: str,
-    out_dir: str,
+    csv_out: str,
     n_per_task: int,
     examples_per_task: int,
-    comment: str | None = None,
-) -> None:
-    _ensure_dir(out_dir)
-    ts = int(time.time())
-    examples_out = os.path.join(out_dir, f"examples_{model}_{ts}.json")
-    csv_out = os.path.join(out_dir, f"scores_{model}.csv")
-
-    all_examples: list[dict[str, Any]] = []
-
-    # ----- Stages oversight -----
-    stages_data_path = os.path.join(ROOT, "tests", "stages_llama_test.jsonl")
+    comment: str | None = None
+) -> list[dict[str, Any]]:
+    # Prefer YAML batches under sad/stages/oversight/structs/batch/*.yaml
+    stages_data_path = os.path.join(ROOT, "sad", "stages", "oversight", "structs", "batch", "test_oversight.yaml")
     stages_task = make_stages_task(data_path=stages_data_path)
     stages_variant = stages_task.default_variant
+    print(f"[Stages] data_path={stages_data_path}, variant={getattr(stages_variant, 'name', stages_variant)}, n={n_per_task}")
     t0 = time.time()
     stages_res = stages_task.run(model=model, variant=stages_variant, n=n_per_task, save=False)
     t1 = time.time()
     stages_total = int(stages_res["correct"]) + int(stages_res["incorrect"]) + int(stages_res["invalid"])
     stages_acc = (stages_res["correct"] / stages_total) if stages_total else 0.0
+    print(f"[Stages] summary correct={stages_res['correct']} incorrect={stages_res['incorrect']} invalid={stages_res['invalid']} total={stages_total} time={t1 - t0:.3f}s")
     _write_csv_row(
         csv_out,
         {
@@ -113,16 +108,28 @@ def run_benchmark(
         },
     )
     # Collect examples
+    examples = []
     count = 0
     for sample in stages_task.iter_samples(model=model, variant=stages_variant, n=examples_per_task):
-        messages = stages_task._build_messages(sample["body"], stages_variant)  # noqa: SLF001
+        messages = stages_task._build_messages(sample, stages_variant)  # noqa: SLF001
         ex = _generate_example(model, messages, max_tokens=5, temperature=0.0)
-        all_examples.append({"task": "stages_oversight", **ex})
+        examples.append({"task": "stages_oversight", **ex})
         count += 1
         if count >= examples_per_task:
             break
+    print(f"[Stages] examples_collected={count}")
+    return examples
 
-    # ----- Self-recognition (WHO) -----
+
+def run_self_recognition(
+    *,
+    model: str,
+    csv_out: str,
+    n_per_task: int,
+    examples_per_task: int,
+    comment: str | None = None
+) -> list[dict[str, Any]]:
+    examples = []
     sr_variant = "plain"
     t0 = time.time()
     sr_results = self_recognition_who.run_evaluation(model=model, variant=sr_variant, n=n_per_task, save=False)
@@ -149,9 +156,19 @@ def run_benchmark(
     for sample in samples[:examples_per_task]:
         messages = self_recognition_who._build_messages(sample, model, sr_variant)  # noqa: SLF001
         ex = _generate_example(model, messages, max_tokens=5, temperature=0.0)
-        all_examples.append({"task": "self_recognition_who", **ex})
+        examples.append({"task": "self_recognition_who", **ex})
+    return examples
 
-    # ----- Output control -----
+
+def run_output_control(
+    *,
+    model: str,
+    csv_out: str,
+    n_per_task: int,
+    examples_per_task: int,
+    comment: str | None = None
+) -> list[dict[str, Any]]:
+    examples = []
     oc_task = make_output_control_task()
     oc_variant = oc_task.default_variant
     t0 = time.time()
@@ -176,12 +193,22 @@ def run_benchmark(
     count = 0
     for sample in oc_task.iter_samples(model=model, variant=oc_variant, n=examples_per_task):
         ex = _generate_example(model, sample.prompt, max_tokens=5, temperature=0.0)
-        all_examples.append({"task": "output_control", **ex})
+        examples.append({"task": "output_control", **ex})
         count += 1
         if count >= examples_per_task:
             break
+    return examples
 
-    # ----- ID leverage (generic) -----
+
+def run_id_leverage(
+    *,
+    model: str,
+    csv_out: str,
+    n_per_task: int,
+    examples_per_task: int,
+    comment: str | None = None
+) -> list[dict[str, Any]]:
+    examples = []
     idlev_task = make_idlev_generic_task()
     id_variant = idlev_task.default_variant
     t0 = time.time()
@@ -208,10 +235,57 @@ def run_benchmark(
         messages = sample["messages"]
         fallback = sample.get("request_text", "")
         ex = _generate_example(model, messages, max_tokens=30, temperature=0.0, fallback_text=fallback)
-        all_examples.append({"task": "id_leverage_generic", **ex})
+        examples.append({"task": "id_leverage_generic", **ex})
         count += 1
         if count >= examples_per_task:
             break
+    return examples
+
+
+def run_benchmark(
+    *,
+    model: str,
+    out_dir: str,
+    n_per_task: int,
+    examples_per_task: int,
+    comment: str | None = None,
+) -> None:
+    _ensure_dir(out_dir)
+    ts = int(time.time())
+    examples_out = os.path.join(out_dir, f"examples_{model}_{ts}.json")
+    csv_out = os.path.join(out_dir, f"scores_{model}.csv")
+
+    all_examples: list[dict[str, Any]] = []
+
+    # Run each task (comment out to skip)
+    all_examples.extend(run_stages_oversight(
+        model=model,
+        csv_out=csv_out,
+        n_per_task=n_per_task,
+        examples_per_task=examples_per_task,
+        comment=comment,
+    ))
+    # all_examples.extend(run_self_recognition(
+    #     model=model,
+    #     csv_out=csv_out,
+    #     n_per_task=n_per_task,
+    #     examples_per_task=examples_per_task,
+    #     comment=comment,
+    # ))
+    # all_examples.extend(run_output_control(
+    #     model=model,
+    #     csv_out=csv_out,
+    #     n_per_task=n_per_task,
+    #     examples_per_task=examples_per_task,
+    #     comment=comment,
+    # ))
+    # all_examples.extend(run_id_leverage(
+    #     model=model,
+    #     csv_out=csv_out,
+    #     n_per_task=n_per_task,
+    #     examples_per_task=examples_per_task,
+    #     comment=comment,
+    # ))
 
     # ----- Write examples JSON -----
     with open(examples_out, "w") as f:
@@ -234,7 +308,7 @@ def parse_args():
     parser.add_argument("--model", required=True, help="Model id (as expected by provider_wrapper)")
     parser.add_argument("--n", type=int, default=10, help="Number of samples per task")
     parser.add_argument("--examples", type=int, default=5, help="Number of examples per task to save to JSON")
-    parser.add_argument("--out-dir", default=os.path.join(ROOT, "experiments", "outputs"), help="Output directory")
+    parser.add_argument("--out-dir", default=os.path.join(ROOT, "experiments", "results"), help="Output directory")
     parser.add_argument("--comment", default=None, help="Optional comment to include in CSV rows")
     return parser.parse_args()
 

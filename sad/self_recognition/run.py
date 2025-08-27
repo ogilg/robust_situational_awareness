@@ -286,9 +286,8 @@ class SelfRecognition(Task):
             messages.append(ProviderMessage(role="user", content=content))
         elif model_type == "chat":
             messages.append(ProviderMessage(role="user", content=content))
-            messages.append(ProviderMessage(role="assistant", content="Answer: ("))
         else:  # completion
-            final_content = f"Question: {content}\\nAnswer: ("
+            final_content = f"Question: {content}\\n "
             messages.append(ProviderMessage(role="user", content=final_content))
         
         return messages

@@ -92,14 +92,14 @@ sa_prefix_small = TemplateExtension(
 )
 
 
-answer_suffix = TemplateExtension(
-    id="answer_prompt",
-    location="suffix",
-    template="\n\nAnswer: (",
-)
+# answer_suffix = TemplateExtension(
+#     id="answer_prompt",
+#     location="suffix",
+#     template="\n\nAnswer: (",
+# )
 
-answer_message = TemplateExtension(
-    id="answer_prompt",
-    location="suffix",
-    template=[Message(role="assistant", content="Answer: (")],
-)
+# answer_message = TemplateExtension(
+#     id="answer_prompt",
+#     location="suffix",
+#     template=[Message(role="assistant", content="Answer: (")],
+# )

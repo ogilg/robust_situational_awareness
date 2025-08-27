@@ -57,7 +57,7 @@ def _build_prompt_preview(task, sample, *, model: str, variant_str: str) -> str:
     # Stages: has body
     if hasattr(task, "_build_messages") and isinstance(sample, dict) and "body" in sample:
         try:
-            msgs = task._build_messages(sample["body"], variant_str)  # noqa: SLF001
+            msgs = task._build_messages(sample, variant_str)  # noqa: SLF001
             return _last_user_content(msgs)
         except Exception:
             return sample.get("body", "")
@@ -137,7 +137,7 @@ def run_benchmark_with_vectors(
     examples: list[dict[str, str]] = []
 
     # ----- Stages oversight -----
-    stages_data_path = os.path.join(ROOT, "tests", "stages_llama_test.jsonl")
+    stages_data_path = os.path.join(ROOT, "sad", "stages", "oversight", "structs", "batch", "test_oversight.yaml")
     stages_task = make_stages_task(data_path=stages_data_path)
     stages_variant = stages_task.default_variant
     t0 = time.time()

@@ -39,12 +39,17 @@ def _to_numpy_cpu(x):
 
 def _last_user_content(messages) -> str:
     try:
+        fallback = None
         for msg in reversed(messages):
-            if getattr(msg, "role", "user") == "user":
-                return getattr(msg, "content", "")
+            role = getattr(msg, "role", "user")
+            content = getattr(msg, "content", "")
+            if role == "user":
+                return content
+            if fallback is None and content:
+                fallback = content
+        return fallback or ""
     except Exception:
-        pass
-    return ""
+        return ""
 
 
 def _build_prompt_preview(task, sample, *, model: str, variant_str: str) -> str:
@@ -132,7 +137,9 @@ def run_benchmark_with_vectors(
     os.makedirs(out_dir, exist_ok=True)
 
     csv_out = os.path.join(out_dir, f"scores_{model}.csv")
-    vectors_dir = os.path.join(out_dir, "vectors")
+    # Place vectors under the parent experiments directory, not inside results
+    parent_experiments_dir = os.path.dirname(out_dir)
+    vectors_dir = os.path.join(parent_experiments_dir, "vectors")
     os.makedirs(vectors_dir, exist_ok=True)
     ts = int(time.time())
     examples_out = os.path.join(out_dir, f"examples_{model}_{ts}.json")
@@ -310,7 +317,8 @@ def main():
         n_per_task=args.n,
         comment=args.comment,
     )
-    print(f"Wrote results to {args.out_dir}. Vectors saved under each task's vectors/ directory.")
+    # Note: vectors are aggregated to experiments/vectors
+    print(f"Wrote results to {args.out_dir}. Aggregated vectors saved under {os.path.join(os.path.dirname(args.out_dir), 'vectors')}.")
 
 
 if __name__ == "__main__":

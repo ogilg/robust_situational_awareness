@@ -27,7 +27,8 @@ def main():
 
     in_dir = args.in_dir
     model = args.model
-    vectors_dir = os.path.join(in_dir, "vectors")
+    # Vectors now live under the parent experiments directory (sibling of results)
+    vectors_dir = os.path.join(os.path.dirname(in_dir), "vectors")
     agg_npz_path = os.path.join(vectors_dir, f"aggregated_vectors_{model}.npz")
     counts_json_path = os.path.join(vectors_dir, f"aggregated_vectors_{model}.counts.json")
 

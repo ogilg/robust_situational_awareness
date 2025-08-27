@@ -356,31 +356,40 @@ class DefaultHFProvider(HuggingFaceProvider):
         tl_name = TL_COMPATIBLE[name]
 
         # Format the prompt exactly like HF generate_text (chat template + generation prompt)
-        # and reuse the SAME tokenization for TransformerLens to avoid special-token mismatches.
-        prompt_tokens, text = self.format_prompt(request.prompt)
+        # then let TransformerLens tokenize the TEXT (its own tokenizer/vocab).
+        _, text = self.format_prompt(request.prompt)
         tl_model = self._get_tl_model(tl_name)
         if os.environ.get("SA_DEBUG_PROMPT") == "1":
             try:
                 print(f"[DEBUG PROMPT TL:{self.model_id}]\n{text}\n[END DEBUG PROMPT]\n")
             except Exception:
                 pass
-        device = next(tl_model.parameters()).device
-        import torch as _torch  # local import to avoid top-level coupling
-        toks = _torch.tensor([prompt_tokens], dtype=_torch.long, device=device)
+        toks = tl_model.to_tokens(text, prepend_bos=False)
         prompt_len = toks.shape[1]
 
         cached: dict[int, torch.Tensor] = {}
+        hook_hits: dict[int, int] = {}
+        hook_variant = os.environ.get("SA_TL_HOOK", "pre").strip().lower()
+        hook_attr = {
+            "pre": "hook_resid_pre",
+            "mid": "hook_resid_mid",
+            "post": "hook_resid_post",
+        }.get(hook_variant, "hook_resid_pre")
 
         def make_hook(layer_idx: int, p_len: int):
             def hook_fn(activation, hook):
-                # Capture on first generation step only (when sequence length exceeds prompt)
-                if layer_idx not in cached and activation.shape[1] > p_len:
-                    cached[layer_idx] = activation[:, -1, :].detach().cpu()
+ 
+                # Capture first generated token. With KV cache, seq len can be 1 on gen step
+                if layer_idx not in cached:
+                    pos_len = activation.shape[1]
+                    if pos_len > p_len or pos_len == 1:
+                        cached[layer_idx] = activation[:, -1, :].detach().cpu()
+
                 return activation
             return hook_fn
 
         fwd_hooks = [
-            (f"blocks.{i}.hook_resid_pre", make_hook(i, prompt_len))
+            (f"blocks.{i}.{hook_attr}", make_hook(i, prompt_len))
             for i in range(tl_model.cfg.n_layers)
         ]
 
@@ -395,8 +404,8 @@ class DefaultHFProvider(HuggingFaceProvider):
 
         # Decode only generated tail
         gen_only = out_toks[:, prompt_len:]
-        # Decode using HF tokenizer for consistency with HF path
-        txt = self.tokenizer.decode(gen_only[0].detach().cpu().tolist(), skip_special_tokens=True) if gen_only.shape[1] > 0 else ""
+        # Decode with TL tokenizer for the generated portion
+        txt = tl_model.to_string(gen_only[0]) if gen_only.shape[1] > 0 else ""
 
         text_resp = GetTextResponse(
             model_id=self.model_id,
@@ -410,6 +419,28 @@ class DefaultHFProvider(HuggingFaceProvider):
                 "generated_tokens": gen_only[0].detach().cpu().tolist(),
             },
         )
+
+        # Optional token debug: print prompt boundary token and first generated token
+        if os.environ.get("SA_DEBUG_TOKENS") == "1":
+            try:
+                if prompt_len > 0:
+                    prompt_last_id = int(toks[0, prompt_len - 1].item())
+                    prompt_last_str = tl_model.to_string(toks[0, prompt_len - 1:prompt_len])
+                else:
+                    prompt_last_id = -1
+                    prompt_last_str = ""
+                if gen_only.shape[1] > 0:
+                    first_gen_id = int(gen_only[0, 0].item())
+                    first_gen_str = tl_model.to_string(gen_only[0, :1])
+                else:
+                    first_gen_id = -1
+                    first_gen_str = ""
+                print(f"[TL] boundary_token id={prompt_last_id} text={repr(prompt_last_str)} | first_generated_token id={first_gen_id} text={repr(first_gen_str)}")
+            except Exception as e:
+                try:
+                    print(f"[TL] token_debug_failed: {e}")
+                except Exception:
+                    pass
 
         return text_resp, cached
 

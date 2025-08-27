@@ -344,7 +344,9 @@ class DefaultHFProvider(HuggingFaceProvider):
         """
         # Map provider id to TL model id (extend as needed)
         TL_COMPATIBLE: dict[str, str] = {
-            "llama-3.1-8b-instruct": "meta-llama/Llama-3.1-8B",
+            # Use the Instruct checkpoint to match HF generation behavior
+            # and chat templating, otherwise outputs will look off.
+            "llama-3.1-8b-instruct": "meta-llama/Llama-3.1-8B-Instruct",
         }
         name = self.model_id
         if name not in TL_COMPATIBLE:
@@ -354,14 +356,17 @@ class DefaultHFProvider(HuggingFaceProvider):
         tl_name = TL_COMPATIBLE[name]
 
         # Format the prompt exactly like HF generate_text (chat template + generation prompt)
-        _, text = self.format_prompt(request.prompt)
+        # and reuse the SAME tokenization for TransformerLens to avoid special-token mismatches.
+        prompt_tokens, text = self.format_prompt(request.prompt)
         tl_model = self._get_tl_model(tl_name)
         if os.environ.get("SA_DEBUG_PROMPT") == "1":
             try:
                 print(f"[DEBUG PROMPT TL:{self.model_id}]\n{text}\n[END DEBUG PROMPT]\n")
             except Exception:
                 pass
-        toks = tl_model.to_tokens(text, prepend_bos=False)
+        device = next(tl_model.parameters()).device
+        import torch as _torch  # local import to avoid top-level coupling
+        toks = _torch.tensor([prompt_tokens], dtype=_torch.long, device=device)
         prompt_len = toks.shape[1]
 
         cached: dict[int, torch.Tensor] = {}
@@ -390,7 +395,8 @@ class DefaultHFProvider(HuggingFaceProvider):
 
         # Decode only generated tail
         gen_only = out_toks[:, prompt_len:]
-        txt = tl_model.to_string(gen_only[0]) if gen_only.shape[1] > 0 else ""
+        # Decode using HF tokenizer for consistency with HF path
+        txt = self.tokenizer.decode(gen_only[0].detach().cpu().tolist(), skip_special_tokens=True) if gen_only.shape[1] > 0 else ""
 
         text_resp = GetTextResponse(
             model_id=self.model_id,

@@ -132,6 +132,8 @@ def run_benchmark_with_vectors(
     os.makedirs(out_dir, exist_ok=True)
 
     csv_out = os.path.join(out_dir, f"scores_{model}.csv")
+    vectors_dir = os.path.join(out_dir, "vectors")
+    os.makedirs(vectors_dir, exist_ok=True)
     ts = int(time.time())
     examples_out = os.path.join(out_dir, f"examples_{model}_{ts}.json")
     examples: list[dict[str, str]] = []
@@ -242,8 +244,8 @@ def run_benchmark_with_vectors(
     examples.extend(id_examples)
 
     # ----- Save aggregated vectors once at the end -----
-    agg_npz = os.path.join(out_dir, f"aggregated_vectors_{model}.npz")
-    agg_counts_json = os.path.join(out_dir, f"aggregated_vectors_{model}.counts.json")
+    agg_npz = os.path.join(vectors_dir, f"aggregated_vectors_{model}.npz")
+    agg_counts_json = os.path.join(vectors_dir, f"aggregated_vectors_{model}.counts.json")
     payload = {}
 
     def add_task_payload(prefix: str, sums: dict, counts: dict):

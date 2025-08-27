@@ -265,27 +265,27 @@ def run_benchmark(
         examples_per_task=examples_per_task,
         comment=comment,
     ))
-    # all_examples.extend(run_self_recognition(
-    #     model=model,
-    #     csv_out=csv_out,
-    #     n_per_task=n_per_task,
-    #     examples_per_task=examples_per_task,
-    #     comment=comment,
-    # ))
-    # all_examples.extend(run_output_control(
-    #     model=model,
-    #     csv_out=csv_out,
-    #     n_per_task=n_per_task,
-    #     examples_per_task=examples_per_task,
-    #     comment=comment,
-    # ))
-    # all_examples.extend(run_id_leverage(
-    #     model=model,
-    #     csv_out=csv_out,
-    #     n_per_task=n_per_task,
-    #     examples_per_task=examples_per_task,
-    #     comment=comment,
-    # ))
+    all_examples.extend(run_self_recognition(
+        model=model,
+        csv_out=csv_out,
+        n_per_task=n_per_task,
+        examples_per_task=examples_per_task,
+        comment=comment,
+    ))
+    all_examples.extend(run_output_control(
+        model=model,
+        csv_out=csv_out,
+        n_per_task=n_per_task,
+        examples_per_task=examples_per_task,
+        comment=comment,
+    ))
+    all_examples.extend(run_id_leverage(
+        model=model,
+        csv_out=csv_out,
+        n_per_task=n_per_task,
+        examples_per_task=examples_per_task,
+        comment=comment,
+    ))
 
     # ----- Write examples JSON -----
     with open(examples_out, "w") as f:

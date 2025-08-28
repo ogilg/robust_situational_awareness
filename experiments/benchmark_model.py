@@ -49,7 +49,7 @@ def _last_user_content(messages) -> str:
 
 
 def _generate_example(provider_model: str, messages, *, max_tokens: int = 10, temperature: float = 0.0, fallback_text: str | None = None) -> dict:
-    provider = get_provider_for_model(provider_model)
+    provider = get_provider_for_model(provider_model, prefer_transformerlens=False)
     req = GetTextRequest(context=None, prompt=messages, max_tokens=max_tokens, temperature=temperature)
     resp = provider.generate_text(req)
     prompt_text = _last_user_content(messages) or (fallback_text or "")

@@ -29,6 +29,7 @@ from sad.stages.oversight.task_stages import make_task as make_stages_task  # no
 from sad.self_recognition.run import self_recognition_who  # noqa: E402
 from sad.anti_imitation.output_control.task_output_control import make_task as make_output_control_task  # noqa: E402
 from sad.id_leverage.entity_id.task_generic import make_task as make_idlev_generic_task  # noqa: E402
+from sad.ab_baseline.task_ab_baseline import make_task as make_ab_baseline_task  # noqa: E402
 
 from provider_wrapper import clear_gpu_memory
 
@@ -226,6 +227,32 @@ def run_task_stages(*, model: str, csv_out: str, vectors_dir: str, n_per_task: i
     # Save this task's aggregates immediately
     _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="stages", sums=stages_sums, counts=stages_counts)
     return stages_examples
+def run_task_ab_baseline(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None) -> list[dict[str, str]]:
+    ab_task = make_ab_baseline_task()
+    ab_variant = ab_task.default_variant
+    t0 = time.time()
+    ab_res, ab_sums, ab_counts, ab_examples = _aggregate_vectors_for_task(
+        ab_task, model=model, variant=ab_variant, n=n_per_task, task_name="ab_baseline", examples_max=max(1, min(5, n_per_task))
+    )
+    t1 = time.time()
+    ab_total = int(ab_res["correct"]) + int(ab_res["incorrect"]) + int(ab_res["invalid"])
+    ab_acc = (ab_res["correct"] / ab_total) if ab_total else 0.0
+    _write_csv_row(
+        csv_out,
+        {
+            "model_id": model,
+            "task": "ab_baseline",
+            "variant": getattr(ab_variant, "name", str(ab_variant)),
+            "n_requested": n_per_task,
+            "n_processed": ab_total,
+            "invalid": ab_res["invalid"],
+            "accuracy": f"{ab_acc:.6f}",
+            "runtime_seconds": f"{t1 - t0:.3f}",
+            "comment": comment or "",
+        },
+    )
+    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="ab_baseline", sums=ab_sums, counts=ab_counts)
+    return ab_examples
 
 
 def run_task_self_recognition(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None) -> list[dict[str, str]]:
@@ -336,6 +363,7 @@ def run_benchmark_with_vectors(
         "self_recognition_who",
         "output_control",
         "id_leverage_generic",
+        "ab_baseline",
     ]
     to_run = tasks or all_tasks
 
@@ -353,6 +381,10 @@ def run_benchmark_with_vectors(
 
     if "id_leverage_generic" in to_run:
         examples.extend(run_task_id_leverage(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment))
+        clear_gpu_memory()
+
+    if "ab_baseline" in to_run:
+        examples.extend(run_task_ab_baseline(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment))
         clear_gpu_memory()
 
     # Save examples JSON (like benchmark_model)
@@ -380,8 +412,8 @@ def parse_args():
     parser.add_argument(
         "--tasks",
         nargs="+",
-        choices=["stages", "self_recognition_who", "output_control", "id_leverage_generic"],
-        default=["stages", "self_recognition_who", "output_control", "id_leverage_generic"],
+        choices=["stages", "self_recognition_who", "output_control", "id_leverage_generic", "ab_baseline"],
+        default=["stages", "self_recognition_who", "output_control", "id_leverage_generic", "ab_baseline"],
         help="Subset of tasks to run",
     )
     parser.add_argument("--comment", default=None, help="Optional comment to include in CSV rows")

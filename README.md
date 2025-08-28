@@ -51,3 +51,12 @@ Research decision 1: Contrastive prompts will come from when the model picks one
 Research decision 2: TransformerLens doesn’t have GPT-OSS so I’ll pivot to Llama 3 models because I’m not sure about fiddling with residuals.
 Research decision 3: Train test split. Even thought we don’t explicitly train, the activations could potentially capture some stuff, so better to test on separate data.
  
+Recent progress
+- Stages Oversight data loader now aggregates all YAMLs in `sad/stages/oversight/structs/batch/` and infers correctness from `choices_right/choices_wrong`; prompts use yes/no to match data.
+- Default Stages data path is hardcoded to the batch directory; experiment runners no longer pass file paths.
+- Provider refactor: split into `DefaultHFProvider` (HF-only), `TransformerLensProvider` (TL hooks for residual capture and interventions), and `GPTOSSProvider` (separate module). Factory supports `prefer_transformerlens=True` where needed.
+- Added TL-based activation interventions: additions (steering) and directional projection (ablation) with per-layer and per-position control.
+- Self-recognition sample generation shows `tqdm` progress; completions cache moved under `sad/self_recognition/private_completions/`.
+- Vector pipeline stabilized: `benchmark_with_vectors.py` saves per-task aggregated vectors and counts; `experiments/reduce_vectors.py` produces `weighted_vectors_{model}.npz`.
+- New analysis script `experiments/extracted_vector_analysis.py` computes: per-layer task similarity heatmaps, similarity vs. layer curves, overall pairwise similarities, PC1 explained variance, and alignment of task vectors to each layer’s PC1. Optional saving of PC1 vectors.
+- New simple A/B baseline task (`sad/ab_baseline`) with deterministic 50% scoring flip; integrated into vector benchmark for fast comparisons.

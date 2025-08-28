@@ -30,12 +30,11 @@ class GPTOSSProvider(HuggingFaceProvider):
         model_id: str,
         *,
         lora_adapter_path: str | None = None,
-        reasoning_effort: ReasoningEffort | str = ReasoningEffort.MEDIUM,
+        reasoning_effort: ReasoningEffort,
         feed_empty_analysis: bool = False,
     ) -> None:
         super().__init__(model_id, lora_adapter_path=lora_adapter_path)
-        effort_map = {"low": ReasoningEffort.LOW, "medium": ReasoningEffort.MEDIUM, "high": ReasoningEffort.HIGH}
-        self.reasoning_effort = effort_map[reasoning_effort] if isinstance(reasoning_effort, str) else reasoning_effort
+        self.reasoning_effort = reasoning_effort
         self.feed_empty_analysis = feed_empty_analysis
 
     def format_prompt(self, prompt: Prompt) -> Tuple[List[int], str]:

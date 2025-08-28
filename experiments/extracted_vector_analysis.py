@@ -216,7 +216,7 @@ def plot_pc1_variance(pc1_by_layer: List[Tuple[int, float, int]], *, model: str,
     plt.plot(layers, vals, marker='o')
     plt.xlabel('Layer Index')
     plt.ylabel('PC1 explained variance ratio')
-    plt.title(f'PC1 Explained Variance Across Layers\nModel: {model}')
+    plt.title(f'Explained Variance of PC1 for Task Vectors per Layer\nModel: {model}')
     # annotate n_tasks per point lightly
     for x, y, n in zip(layers, vals, ns):
         plt.text(x, y, str(n), fontsize=8, ha='center', va='bottom')
@@ -301,8 +301,8 @@ def plot_mean_cosine_to_pc1(cos_to_pc1: Dict[int, Dict[str, float]], *, model: s
     plt.plot(layers, means, marker='o', label='mean |cos(task, PC1)|')
     plt.fill_between(layers, means - stds, means + stds, color='C0', alpha=0.2, label='±1 std')
     plt.xlabel('Layer Index')
-    plt.ylabel('Alignment to PC1 (|cosine|)')
-    plt.title(f'Task Alignment to Layer PC1\nModel: {model}')
+    plt.ylabel('Mean |cosine(task vector, layer PC1)|')
+    plt.title(f'Alignment of Task Vectors to Each Layer\'s PC1 (Mean |cos|)\nModel: {model}')
     plt.grid(True, alpha=0.3)
     plt.legend()
     plt.tight_layout()
@@ -327,6 +327,80 @@ def save_cosine_to_pc1_csv(cos_to_pc1: Dict[int, Dict[str, float]], *, out_csv: 
             row = [l] + [f"{float(cos_to_pc1[l].get(t, 0.0)):.6f}" for t in tasks]
             w.writerow(row)
     print(f"Saved cosine-to-PC1 table to {out_csv}")
+
+
+# -------- Per-task stability across layers (adjacent-layer cosine) --------
+def compute_adjacent_layer_cosines(by_layer: Dict[int, Dict[str, np.ndarray]], *, normalize: bool = True) -> Dict[str, List[Tuple[int, int, float]]]:
+    """
+    For each task, compute cosine(v_layer_i, v_layer_{i+1}) for consecutive layers where the task exists.
+    Returns: {task: [(layer_i, layer_j, cosine), ...]} with layer_j = next layer after layer_i.
+    """
+    # Collect per-task vectors by layer
+    task_to_layers: Dict[str, Dict[int, np.ndarray]] = {}
+    for layer_idx, tv in by_layer.items():
+        for task, vec in tv.items():
+            task_to_layers.setdefault(task, {})[layer_idx] = vec
+
+    task_adj: Dict[str, List[Tuple[int, int, float]]] = {}
+    for task, layer_map in task_to_layers.items():
+        layers_sorted = sorted(layer_map.keys())
+        pairs: List[Tuple[int, int, float]] = []
+        for a, b in zip(layers_sorted, layers_sorted[1:]):
+            v1 = layer_map[a]
+            v2 = layer_map[b]
+            if normalize:
+                n1 = np.linalg.norm(v1); n2 = np.linalg.norm(v2)
+                if n1 == 0 or n2 == 0:
+                    cos = 0.0
+                else:
+                    cos = float(np.dot(v1, v2) / (n1 * n2))
+            else:
+                # fallback to sklearn for consistency
+                cos = float(cosine_similarity([v1], [v2])[0, 0])
+            pairs.append((a, b, cos))
+        if pairs:
+            task_adj[task] = pairs
+    return task_adj
+
+
+def plot_task_stability_adjacent(adj_cosines: Dict[str, List[Tuple[int, int, float]]], *, model: str, save_path: Optional[str]) -> None:
+    """Plot per-task cosine between consecutive layers.
+    X-axis: starting layer index (layer_i).
+    Y-axis: cosine(v_i, v_{i+1}). One line per task.
+    """
+    if not adj_cosines:
+        return
+    plt.figure(figsize=(12, 7))
+    for task, pairs in sorted(adj_cosines.items()):
+        xs = [i for (i, j, c) in pairs]
+        ys = [c for (i, j, c) in pairs]
+        if xs and ys:
+            plt.plot(xs, ys, marker='o', label=task)
+    plt.xlabel('Starting Layer Index (i)')
+    plt.ylabel('Cosine between consecutive layers cos(v_i, v_{i+1})')
+    plt.title(f'Per-Task Representation Stability Across Layers (Adjacent Cosine)\nModel: {model}')
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Saved task stability plot: {save_path}")
+    else:
+        plt.show()
+    plt.close()
+
+
+def save_task_stability_csv(adj_cosines: Dict[str, List[Tuple[int, int, float]]], *, out_csv: str) -> None:
+    import csv
+    if not adj_cosines:
+        return
+    with open(out_csv, 'w', newline='') as f:
+        w = csv.writer(f)
+        w.writerow(["task", "layer_i", "layer_j", "cosine_adjacent"])
+        for task, pairs in sorted(adj_cosines.items()):
+            for i, j, c in pairs:
+                w.writerow([task, i, j, f"{c:.6f}"])
+    print(f"Saved task stability table to {out_csv}")
 
 def print_similarity_summary(similarity_matrix: np.ndarray, task_names: List[str], layer_idx: int):
     """Print a summary of similarity values."""
@@ -458,6 +532,13 @@ def main():
             if args.save_cos_to_pc1_csv:
                 out_csv = os.path.join(args.output_dir, f"cosine_to_pc1_{args.model}.csv")
                 save_cosine_to_pc1_csv(cos_to_pc1, out_csv=out_csv)
+
+        # Per-task adjacent-layer stability
+        adj = compute_adjacent_layer_cosines(by_layer, normalize=True)
+        stab_path = None if args.show else os.path.join(args.output_dir, f"task_stability_adjacent_{args.model}.png")
+        plot_task_stability_adjacent(adj, model=args.model, save_path=stab_path)
+        stab_csv = os.path.join(args.output_dir, f"task_stability_adjacent_{args.model}.csv")
+        save_task_stability_csv(adj, out_csv=stab_csv)
         
         # Print summary for last layer
         if layers:

@@ -6,7 +6,6 @@ from contextlib import contextmanager
 from collections.abc import Iterator
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Callable, Iterable, TypeVar
-from tqdm import tqdm
 import numpy as np
 
  
@@ -109,7 +108,7 @@ def run(
     executor = ThreadPoolExecutor(max_workers=max_workers)
     futures = {executor.submit(evaluate_sample, sample): sample for sample in samples}
 
-    for future in tqdm(as_completed(futures), total=len(futures)):
+    for future in as_completed(futures):
         yield futures[future], future.result()
 
 

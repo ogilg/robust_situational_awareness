@@ -53,7 +53,7 @@ class GetCompletions:
         *,
         seed: int = None,
     ):
-        self.provider = get_provider_for_model(model_id)
+        self.provider = get_provider_for_model(model_id, prefer_transformerlens=False)
         self.model_id = model_id
         self.model_type = model_type
         self.seed = seed

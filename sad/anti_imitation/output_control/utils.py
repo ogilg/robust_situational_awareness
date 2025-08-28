@@ -54,7 +54,7 @@ def get_model_probabilities(
     if lora_adapter_path:
         request.lora_adapter_path = lora_adapter_path
 
-    provider = provider or get_provider_for_model(model_id, request=request)
+    provider = provider or get_provider_for_model(model_id, request=request, prefer_transformerlens=False)
     response = provider.get_probs(request)
     return response.probs
 
@@ -81,7 +81,7 @@ def sample_model_text(
     if lora_adapter_path:
         request.lora_adapter_path = lora_adapter_path
 
-    provider = provider or get_provider_for_model(model_id, request=request)
+    provider = provider or get_provider_for_model(model_id, request=request, prefer_transformerlens=False)
     response = provider.generate_text(request)
     return response
 

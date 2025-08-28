@@ -67,7 +67,7 @@ def test_basic_functionality():
         temperature: float = 0.0,
         fallback_request_text: str | None = None,
     ):
-        provider = get_provider_for_model(model_name)
+        provider = get_provider_for_model(model_name, prefer_transformerlens=False)
         req = GetTextRequest(context=None, prompt=messages, max_tokens=max_tokens, temperature=temperature)
         resp = provider.generate_text(req)
         prompt_text = _last_user_content(messages) or (fallback_request_text or "")
@@ -185,7 +185,7 @@ def test_activation_extraction():
 
     try:
         # Get provider
-        provider = get_provider_for_model(model)
+        provider = get_provider_for_model(model, prefer_transformerlens=True)
         
         # Create a simple test request
         test_prompt = Prompt([
@@ -332,7 +332,7 @@ def main():
     print("Llama3.1 8b Instruct Test Suite")
     
     # Test basic functionality
-    # test_basic_functionality()
+    test_basic_functionality()
     
     # Test activation extraction
     test_activation_extraction()

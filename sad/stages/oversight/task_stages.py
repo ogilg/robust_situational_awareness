@@ -257,7 +257,7 @@ class StagesOversightTask(Task):
             max_tokens=3,
             temperature=0.0,
         )
-        provider = get_provider_for_model(model)
+        provider = get_provider_for_model(model, prefer_transformerlens=False)
         response = provider.generate_text(request)
         txt = getattr(response, "txt", None) if response is not None else None
         expected = self._infer_expected_label(sample)
@@ -267,7 +267,7 @@ class StagesOversightTask(Task):
         body = sample.get("body", "")
         rendered_messages = self._build_messages(sample, variant)
         request = GetTextRequest(context=None, prompt=rendered_messages, max_tokens=2, temperature=0.0)
-        provider = get_provider_for_model(model)
+        provider = get_provider_for_model(model, prefer_transformerlens=True)
         text_resp, residuals = provider.generate_text_with_first_token_residuals(request)
         txt = getattr(text_resp, "txt", None)
         expected = self._infer_expected_label(sample)

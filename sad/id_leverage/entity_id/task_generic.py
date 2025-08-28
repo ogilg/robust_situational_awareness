@@ -147,7 +147,7 @@ class IDLeverageGeneric(Task):
         target_lang = sample["target_language"]
 
         req = GetTextRequest(context=None, prompt=messages, max_tokens=200, temperature=0.0)
-        provider = get_provider_for_model(model)
+        provider = get_provider_for_model(model, prefer_transformerlens=False)
         resp = provider.generate_text(req)
         txt = getattr(resp, "txt", None)
 
@@ -174,7 +174,7 @@ class IDLeverageGeneric(Task):
     def evaluate_and_capture_sample(self, model: str, sample: dict, variant: str):
         messages = sample["messages"]
         target_lang = sample["target_language"]
-        provider = get_provider_for_model(model)
+        provider = get_provider_for_model(model, prefer_transformerlens=True)
         # Keep first token capture small; we only need the first generated token activations
         req = GetTextRequest(context=None, prompt=messages, max_tokens=20, temperature=0.0)
         text_resp, residuals = provider.generate_text_with_first_token_residuals(req)

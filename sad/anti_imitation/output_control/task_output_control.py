@@ -70,7 +70,7 @@ class OutputControlTask(Task):
         return {"correct": correct, "incorrect": incorrect, "invalid": invalid}
 
     def evaluate_and_capture_sample(self, model: str, sample, variant: str):
-        provider = get_provider_for_model(model)
+        provider = get_provider_for_model(model, prefer_transformerlens=True)
         # Generate a short audit output and capture first-token residuals
         # Minimize generation; we only need first-token activations for auditing
         req = GetTextRequest(context=None, prompt=sample.prompt, max_tokens=2, temperature=0.0)

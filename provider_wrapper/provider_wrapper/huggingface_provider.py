@@ -5,10 +5,9 @@ Refactored to a class-based design so we can support multiple prompt formats
 while sharing model/tokenizer loading, generation and logits logic.
 """
 
-import gc
 import os
-import shutil
-from typing import Any, Dict, List, Optional, Tuple
+import gc
+from typing import Any, Dict, List, Tuple, Optional
 
 import backoff
 import torch
@@ -24,18 +23,7 @@ from .data_models import (
     HUGGINGFACE_MODEL_MAPPING,
     CHAT_MODELS,
 )
-from .mock_provider import MockProvider
 
-from openai_harmony import (
-    load_harmony_encoding,
-    HarmonyEncodingName,
-    Role as HarmonyRole,
-    Message as HarmonyMessage,
-    Conversation as HarmonyConversation,
-    SystemContent,
-    ReasoningEffort,
-    StreamableParser,
-)
 
 from transformer_lens import HookedTransformer
 
@@ -57,27 +45,6 @@ def extract_model_name(model_id: str) -> str:
     """Extract the model name from the model_id."""
     return model_id.split("/")[1] if model_id.startswith("huggingface/") else model_id
 
-
-def provides_model(model_id: str) -> bool:
-    """Return True if this provider supports the given model_id."""
-    name = extract_model_name(model_id)
-    return name in HUGGINGFACE_MODEL_MAPPING
-
-
-def execute(model_id: str, request):
-    """Handle both text generation and probability requests."""
-    if not provides_model(model_id):
-        raise NotImplementedError(f"Model {model_id} is not supported by HuggingFace provider")
-    
-    provider = get_provider_for_model(model_id)
-    if isinstance(request, GetTextRequest):
-        return provider.generate_text(request)
-    elif isinstance(request, GetProbsRequest):
-        return provider.get_probs(request)
-    else:
-        raise NotImplementedError(
-            f"Request {type(request).__name__} for model {model_id} is not implemented"
-        )
 
 
 class HuggingFaceProvider:
@@ -317,373 +284,6 @@ class DefaultHFProvider(HuggingFaceProvider):
             "torch_dtype": torch.bfloat16,
         }
 
-    # ---------------- First-token residuals during generation (TransformerLens) -----------------
-    def _get_tl_model(self, tl_name: str):
-        device = next(self.model.parameters()).device
-        # Use module-level cache so repeated provider instances don't reload shards
-        global _tl_models
-        tl_model = _tl_models.get(tl_name)
-        if tl_model is None:
-            clear_gpu_memory()
-            # Align TL behavior with HF chat formatting; avoid auto-BOS
-            tl_model = HookedTransformer.from_pretrained(
-                tl_name,
-                device=str(device),
-                center_writing_weights=False,
-                default_prepend_bos=False,
-            )
-            _tl_models[tl_name] = tl_model
-        return tl_model
-
-    def generate_text_with_first_token_residuals(self, request: GetTextRequest):
-        """
-        Generate text and capture resid_pre for the FIRST generated token across all layers
-        in a single TransformerLens generation pass.
-
-        Returns: (GetTextResponse, {layer_idx: tensor[1, d_model] on CPU})
-        """
-        # Map provider id to TL model id (extend as needed)
-        TL_COMPATIBLE: dict[str, str] = {
-            # Use the Instruct checkpoint to match HF generation behavior
-            # and chat templating, otherwise outputs will look off.
-            "llama-3.1-8b-instruct": "meta-llama/Llama-3.1-8B-Instruct",
-        }
-        name = self.model_id
-        if name not in TL_COMPATIBLE:
-            raise NotImplementedError(
-                f"First-token residuals via TransformerLens not implemented for model '{name}'."
-            )
-        tl_name = TL_COMPATIBLE[name]
-
-        # Format the prompt exactly like HF generate_text (chat template + generation prompt)
-        # then let TransformerLens tokenize the TEXT (its own tokenizer/vocab).
-        _, text = self.format_prompt(request.prompt)
-        tl_model = self._get_tl_model(tl_name)
-        if os.environ.get("SA_DEBUG_PROMPT") == "1":
-            try:
-                print(f"[DEBUG PROMPT TL:{self.model_id}]\n{text}\n[END DEBUG PROMPT]\n")
-            except Exception:
-                pass
-        toks = tl_model.to_tokens(text, prepend_bos=False)
-        prompt_len = toks.shape[1]
-
-        cached: dict[int, torch.Tensor] = {}
-        hook_hits: dict[int, int] = {}
-        hook_variant = os.environ.get("SA_TL_HOOK", "pre").strip().lower()
-        hook_attr = {
-            "pre": "hook_resid_pre",
-            "mid": "hook_resid_mid",
-            "post": "hook_resid_post",
-        }.get(hook_variant, "hook_resid_pre")
-
-        def make_hook(layer_idx: int, p_len: int):
-            def hook_fn(activation, hook):
- 
-                # Capture first generated token. With KV cache, seq len can be 1 on gen step
-                if layer_idx not in cached:
-                    pos_len = activation.shape[1]
-                    if pos_len > p_len or pos_len == 1:
-                        cached[layer_idx] = activation[:, -1, :].detach().cpu()
-
-                return activation
-            return hook_fn
-
-        fwd_hooks = [
-            (f"blocks.{i}.{hook_attr}", make_hook(i, prompt_len))
-            for i in range(tl_model.cfg.n_layers)
-        ]
-
-        tl_model.reset_hooks()
-        with tl_model.hooks(fwd_hooks=fwd_hooks):
-            with torch.no_grad():
-                out_toks = tl_model.generate(
-                    toks,
-                    max_new_tokens=int(getattr(request, "max_tokens", 16) or 16),
-                    temperature=float(getattr(request, "temperature", 0.0) or 0.0),
-                )
-
-        # Decode only generated tail
-        gen_only = out_toks[:, prompt_len:]
-        # Decode with TL tokenizer for the generated portion
-        txt = tl_model.to_string(gen_only[0]) if gen_only.shape[1] > 0 else ""
-
-        text_resp = GetTextResponse(
-            model_id=self.model_id,
-            request=request,
-            txt=txt,
-            raw_responses=[{"final": txt}],
-            context={
-                "method": "tl_generate_with_first_token_resid",
-                "prompt_text": text,
-                "prompt_len": prompt_len,
-                "generated_tokens": gen_only[0].detach().cpu().tolist(),
-            },
-        )
-
-        # Optional token debug: print prompt boundary token and first generated token
-        if os.environ.get("SA_DEBUG_TOKENS") == "1":
-            try:
-                if prompt_len > 0:
-                    prompt_last_id = int(toks[0, prompt_len - 1].item())
-                    prompt_last_str = tl_model.to_string(toks[0, prompt_len - 1:prompt_len])
-                else:
-                    prompt_last_id = -1
-                    prompt_last_str = ""
-                if gen_only.shape[1] > 0:
-                    first_gen_id = int(gen_only[0, 0].item())
-                    first_gen_str = tl_model.to_string(gen_only[0, :1])
-                else:
-                    first_gen_id = -1
-                    first_gen_str = ""
-                print(f"[TL] boundary_token id={prompt_last_id} text={repr(prompt_last_str)} | first_generated_token id={first_gen_id} text={repr(first_gen_str)}")
-            except Exception as e:
-                try:
-                    print(f"[TL] token_debug_failed: {e}")
-                except Exception:
-                    pass
-
-        return text_resp, cached
-
-
-class GPTOSSProvider(HuggingFaceProvider):
-    """GPT-OSS prompt formatting via openai-harmony library."""
-    def __init__(
-        self,
-        model_id: str,
-        *,
-        lora_adapter_path: str | None = None,
-        reasoning_effort: ReasoningEffort | str = ReasoningEffort.MEDIUM,
-        feed_empty_analysis: bool = False,
-    ) -> None:
-        super().__init__(model_id, lora_adapter_path=lora_adapter_path)
-        # Normalize reasoning effort if provided as a string
-
-        effort_map = {
-            "low": ReasoningEffort.LOW,
-            "medium": ReasoningEffort.MEDIUM,
-            "high": ReasoningEffort.HIGH,
-        }
-        self.reasoning_effort = effort_map[reasoning_effort]
-        self.feed_empty_analysis = feed_empty_analysis
-
-    def format_prompt(self, prompt: Prompt) -> Tuple[List[int], str]:
-        enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
-
-        msgs: List[HarmonyMessage] = []
-
-        # Add system configuration with required channels and reasoning effort
-        sys_content = (
-            SystemContent.new()
-            .with_required_channels(["final"])
-            .with_reasoning_effort(self.reasoning_effort)
-        )
-        msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.SYSTEM, sys_content))
-
-        for msg in prompt:
-            role = (msg.role or "user").lower()
-            if role == "user":
-                msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.USER, msg.content))
-            elif role == "assistant":
-                msgs.append(
-                    HarmonyMessage.from_role_and_content(HarmonyRole.ASSISTANT, msg.content)
-                )
-            elif role == "system":
-                msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.SYSTEM, msg.content))
-            else:
-                msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.USER, msg.content))
-
-        # Optionally prime an empty analysis channel to suppress further "thinking"
-        if self.feed_empty_analysis:
-            msgs.append(
-                HarmonyMessage.from_role_and_content(HarmonyRole.ASSISTANT, "").with_channel("analysis")
-            )
-
-        convo = HarmonyConversation.from_messages(msgs)
-        token_list: List[int] = enc.render_conversation_for_completion(convo, HarmonyRole.ASSISTANT)
-
-        # Best-effort: create a human-readable text by decoding with HF tokenizer
-        # (not guaranteed to be identical to the wire-format, but helpful for logging)
-        text = self.tokenizer.decode(token_list)
-        return token_list, text
-
-    def parse_completion(self, output_tokens: List[int]) -> Dict[str, Any]:
-        """Parse Harmony tokens and return a dict with raw messages, analysis, and final."""
-        enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
-        messages = enc.parse_messages_from_completion_tokens(output_tokens, HarmonyRole.ASSISTANT)
-
-        analysis_parts: List[str] = []
-        final_parts: List[str] = []
-        for m in messages:
-            role_str = str(m.author.role.value) if hasattr(m.author.role, "value") else str(m.author.role)
-            channel_norm = str(m.channel).lower()
-            text_segments: List[str] = [c.text for c in m.content]
-            combined = "".join(text_segments)
-            role_norm = role_str.lower()
-            if role_norm.endswith("assistant"):
-                if channel_norm == "analysis":
-                    analysis_parts.append(combined)
-                elif channel_norm == "final":
-                    final_parts.append(combined)
-
-        analysis_text = "".join(analysis_parts).strip()
-        final_text = "".join(final_parts).strip()
-        return {"raw_messages": messages, "analysis": analysis_text, "final": final_text}
-
-    def find_first_final_content_index(self, completion_tokens: List[int]) -> int | None:
-        """Return index where assistant/final content begins within completion_tokens."""
-        enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
-        parser = StreamableParser(enc, HarmonyRole.ASSISTANT)
-        for i, tok in enumerate(completion_tokens):
-            parser.process(tok)
-            if parser.current_channel == "final" and parser.current_role == HarmonyRole.ASSISTANT:
-                delta = parser.last_content_delta
-                if isinstance(delta, str) and len(delta) > 0:
-                    return i
-        return None
-
-    def generate_text_and_probs(self, request: GetTextRequest) -> Tuple[GetTextResponse, GetProbsResponse]:
-        # Format prompt once (shared)
-        prompt_tokens, _ = self.format_prompt(request.prompt)
-
-        # Generate text first (may include analysis)
-        text_resp = self.generate_text(request)
-        completion_tokens: List[int] = text_resp.context.get("generated_tokens", [])
-
-        boundary = self.find_first_final_content_index(completion_tokens)
-        tokens_for_logits: List[int] = list(prompt_tokens)
-        if boundary is not None:
-            tokens_for_logits.extend(completion_tokens[:boundary])
-        else:
-            tokens_for_logits.extend(completion_tokens)
-
-        probs, k = self._compute_next_token_topk(tokens_for_logits)
-
-        probs_resp = GetProbsResponse(
-            model_id=self.model_id,
-            request=GetProbsRequest(context=request.context, prompt=request.prompt, min_top_n=50, num_samples=None),
-            probs=probs,
-            raw_responses=[probs],
-            context={
-                "method": "logits_based_boundary",
-                "top_k": k,
-                "hf_model_name": HUGGINGFACE_MODEL_MAPPING[self.model_id],
-                "local_model": True,
-                "prompt_text": text_resp.context.get("prompt_text"),
-                "final_boundary_index": boundary,
-            },
-        )
-
-        return text_resp, probs_resp
-
-
-def get_provider_for_model(
-    model_id: str,
-    request: Any | None = None,
-    *,
-    lora_adapter_path: str | None = None,
-    reasoning_effort: ReasoningEffort | str | None = None,
-    feed_empty_analysis: bool | None = None,
-) -> HuggingFaceProvider:
-    """Factory to return the appropriate provider instance for a model_id.
-
-    Optional args allow configuring GPT-OSS-specific behavior from callers.
-    """
-    name = extract_model_name(model_id)
-
-    # Provide a mock provider for tests
-    if name in {"mock-llm", "mock"}:
-        # Return a small shim exposing the same methods as HF providers
-        return MockProvider(name)  # type: ignore
-    # Prefer explicit args; fall back to request context for lora
-    if lora_adapter_path is None and request is not None:
-        lora_adapter_path = getattr(request, "lora_adapter_path", None)
-
-    if name == "gpt-oss-20b":
-        # Supply optional GPT-OSS knobs when provided
-        kwargs: Dict[str, Any] = {"lora_adapter_path": lora_adapter_path}
-        if reasoning_effort is not None:
-            kwargs["reasoning_effort"] = reasoning_effort
-        if feed_empty_analysis is not None:
-            kwargs["feed_empty_analysis"] = feed_empty_analysis
-        return GPTOSSProvider(name, **kwargs)
-    return DefaultHFProvider(name, lora_adapter_path=lora_adapter_path)
-
-
-# Model Management Functions
-
-def preload_model(model_id: str, verbose: bool = False) -> bool:
-    """
-    Preload a model into the HuggingFace cache.
-    
-    Args:
-        model_id: Model identifier (e.g., "llama-3.1-8b")
-        verbose: If True, print detailed loading messages
-        
-    Returns:
-        True if successful, False otherwise
-    """
-    
-    # Extract actual model name
-    model_name = extract_model_name(model_id)
-    
-    if model_name not in HUGGINGFACE_MODEL_MAPPING:
-        if verbose:
-            print(f"ERROR: Model {model_id} not found in HUGGINGFACE_MODEL_MAPPING")
-        return False
-    
-    hf_model_name = HUGGINGFACE_MODEL_MAPPING[model_name]
-    if verbose:
-        print(f"Preloading {model_id} ({hf_model_name})")
-    
-    try:
-        # Use the factory to choose the right provider class and trigger load
-        provider = get_provider_for_model(model_name)
-        _ = provider.model  # ensure loaded
-        
-        if verbose:
-            print(f"✓ {model_id} preloaded successfully")
-        
-        # DO NOT clear from memory - keep it cached for reuse
-        # Only clear GPU memory to free up space for other operations
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
-        
-        return True
-        
-    except Exception as e:
-        if verbose:
-            print(f"✗ Failed to preload {model_id}: {e}")
-        return False
-
-
-def validate_model_availability(model_id: str, local_only: bool = True) -> bool:
-    """
-    Check if a model is available (downloaded) without loading it fully.
-    
-    Args:
-        model_id: Model identifier
-        local_only: If True, only check local cache (don't download)
-        
-    Returns:
-        True if model is available, False otherwise
-    """
-    
-    # Extract actual model name
-    model_name = extract_model_name(model_id)
-    
-    if model_name not in HUGGINGFACE_MODEL_MAPPING:
-        return False
-    
-    hf_model_name = HUGGINGFACE_MODEL_MAPPING[model_name]
-    
-    try:
-        # Try to load tokenizer (lightweight check)
-        AutoTokenizer.from_pretrained(hf_model_name, local_files_only=local_only)
-        return True
-    except Exception:
-        return False
-
-
 def clear_model_cache(model_id: Optional[str] = None):
     """
     Clear models from memory cache.
@@ -712,35 +312,25 @@ def clear_model_cache(model_id: Optional[str] = None):
     clear_gpu_memory()
 
 
-def clear_huggingface_disk_cache():
-    """Clear HuggingFace disk cache to free space."""
-    cache_dir = os.path.expanduser("~/.cache/huggingface")
-    if os.path.exists(cache_dir):
-        try:
-            # Only clear the hub cache, keep tokenizers cache for efficiency
-            hub_cache = os.path.join(cache_dir, "hub")
-            if os.path.exists(hub_cache):
-                shutil.rmtree(hub_cache)
-                print("HuggingFace hub cache cleared")
-        except Exception as e:
-            print(f"Warning: Could not clear HuggingFace cache: {e}")
-
-
 def clear_gpu_memory():
-    """Clear GPU memory."""
+    """Clear GPU memory safely."""
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
         gc.collect()
 
 
+
+
+
+
 # ----- Simple module-level helpers for compatibility -----
-def encode(model_id: str, data: str) -> List[int]:
-    provider = DefaultHFProvider(extract_model_name(model_id))
-    return provider.encode(data)
+# def encode(model_id: str, data: str) -> List[int]:
+#     provider = DefaultHFProvider(extract_model_name(model_id))
+#     return provider.encode(data)
 
 
-def decode(model_id: str, tokens: List[int]) -> str:
-    provider = DefaultHFProvider(extract_model_name(model_id))
-    return provider.decode(tokens)
+# def decode(model_id: str, tokens: List[int]) -> str:
+#     provider = DefaultHFProvider(extract_model_name(model_id))
+#     return provider.decode(tokens)
 
 

@@ -1,0 +1,18 @@
+{
+  "stages": {
+    "correct": 231,
+    "incorrect": 266
+  },
+  "output_control": {
+    "correct": 250,
+    "incorrect": 242
+  },
+  "self_recognition_who": {
+    "correct": 237,
+    "incorrect": 245
+  },
+  "id_leverage_generic": {
+    "correct": 253,
+    "incorrect": 247
+  }
+}

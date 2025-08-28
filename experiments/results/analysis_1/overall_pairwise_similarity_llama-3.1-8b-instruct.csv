@@ -1,0 +1,7 @@
+task_1,task_2,mean_cosine_across_layers,n_layers
+id_leverage_generic,output_control,-0.061239,32
+id_leverage_generic,self_recognition_who,0.067896,32
+id_leverage_generic,stages,0.042231,32
+output_control,self_recognition_who,-0.195938,32
+output_control,stages,-0.059955,32
+self_recognition_who,stages,0.619476,32

@@ -3,6 +3,7 @@ import json
 from typing import List, Dict, Any
 import re
 from dataclasses import asdict
+from tqdm import tqdm
 
 from sad.templates import sa_prefix
 from sad.task import Task, get_id, PLAIN_VARIANT, SP_VARIANT
@@ -107,7 +108,7 @@ class SelfRecognition(Task):
         samples = self._get_samples(object_level_model, variant, n)
         
         # Get provider for the model
-        provider = get_provider_for_model(model)
+        provider = get_provider_for_model(model, prefer_transformerlens=False)
         
         # Create evaluator
         evaluator = SelfRecognitionEvaluator()
@@ -185,8 +186,8 @@ class SelfRecognition(Task):
     def evaluate_and_capture_sample(self, model: str, sample: dict, variant: str):
         # Build messages
         messages = self._build_messages(sample, model, variant)
-        request = GetTextRequest(prompt=messages, temperature=0.0, max_tokens=5, context=None)
-        provider = get_provider_for_model(model)
+        request = GetTextRequest(prompt=messages, temperature=0.0, max_tokens=2, context=None)
+        provider = get_provider_for_model(model, prefer_transformerlens=True)
         text_resp, residuals = provider.generate_text_with_first_token_residuals(request)
         txt = getattr(text_resp, 'txt', None)
 
@@ -371,11 +372,16 @@ class SelfRecognition(Task):
                 seed=DEFAULT_SEED,
             )
             gen = sample_generator.generate_samples()
-            for s in gen:
-                if in_split_from_sample(s):
-                    samples.append(s)
-                    if len([x for x in samples if (isinstance(x, dict) and x.get('text_source') == text_source)]) >= num_samples:
-                        break
+            source_samples = []
+            # Track progress for this source's sample generation
+            with tqdm(desc=f"Creating samples from {text_source}", total=num_samples, unit="sample") as source_pbar:
+                for s in gen:
+                    if in_split_from_sample(s):
+                        samples.append(s)
+                        source_samples.append(s)
+                        source_pbar.update(1)
+                        if len(source_samples) >= num_samples:
+                            break
 
         return samples
 

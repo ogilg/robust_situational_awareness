@@ -175,7 +175,8 @@ class IDLeverageGeneric(Task):
         messages = sample["messages"]
         target_lang = sample["target_language"]
         provider = get_provider_for_model(model)
-        req = GetTextRequest(context=None, prompt=messages, max_tokens=64, temperature=0.0)
+        # Keep first token capture small; we only need the first generated token activations
+        req = GetTextRequest(context=None, prompt=messages, max_tokens=20, temperature=0.0)
         text_resp, residuals = provider.generate_text_with_first_token_residuals(req)
         txt = getattr(text_resp, "txt", None)
         scored = self._score_from_text(txt, target_lang)

@@ -72,7 +72,8 @@ class OutputControlTask(Task):
     def evaluate_and_capture_sample(self, model: str, sample, variant: str):
         provider = get_provider_for_model(model)
         # Generate a short audit output and capture first-token residuals
-        req = GetTextRequest(context=None, prompt=sample.prompt, max_tokens=5, temperature=0.0)
+        # Minimize generation; we only need first-token activations for auditing
+        req = GetTextRequest(context=None, prompt=sample.prompt, max_tokens=2, temperature=0.0)
         text_resp, residuals = provider.generate_text_with_first_token_residuals(req)
         txt = getattr(text_resp, "txt", None)
 

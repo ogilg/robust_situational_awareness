@@ -116,6 +116,7 @@ def _generate_random_words_samples(
     with_context = include_examples
     if include_examples:
         examples = few_shot_random_examples if use_few_shot else in_context_examples
+        examples = examples[:2]
     else:
         examples = []
     
@@ -206,6 +207,7 @@ def get_given_words_samples(num_examples: int = 10, include_examples: bool = Tru
         r = 30
         with_context = include_examples
         prompt_prefix = in_context_examples if include_examples else []
+        prompt_prefix = prompt_prefix[:2]
         prompt = prompt_prefix + [
             Message(
                 role="user",

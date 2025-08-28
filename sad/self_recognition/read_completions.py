@@ -53,7 +53,9 @@ def insert_line_breaks(text, max_length=100):
 
 
 def last_completions_file():
-    pattern = "sad/self_recognition/private_completions/*"
+    # Use absolute path relative to this file
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    pattern = os.path.join(base_dir, "private_completions", "*")
     files = glob.glob(pattern)
     return max(files, key=os.path.getmtime)
 

@@ -1,6 +1,7 @@
 from tempfile import NamedTemporaryFile
 from dataclasses import dataclass, asdict
 import json
+import os
 import re
 from pathlib import Path
 from typing import List, Dict, Any
@@ -66,8 +67,12 @@ class GetCompletions:
         source_file,
         n_tokens,
         prompt_tokens,
-        dir_="private_completions",
+        dir_=None,
     ):
+        if dir_ is None:
+            # Default to private_completions folder in the self_recognition directory
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            dir_ = os.path.join(base_dir, "private_completions")
         fname = self._completions_fname(
             dir_, n_completions, source_file, n_tokens, prompt_tokens
         )

@@ -21,8 +21,12 @@ dependencies = [
     "backoff",
     "fire",
     "tqdm",
+    "prettytable",
     "openai-harmony",
     "transformer-lens",
+    "scikit-learn",
+    "seaborn",
+    "matplotlib",
     "provider_wrapper @ file:///workspace/robust_situational_awareness/provider_wrapper"
 ]
 

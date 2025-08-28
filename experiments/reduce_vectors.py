@@ -29,13 +29,8 @@ def main():
     model = args.model
     # Vectors now live under the parent experiments directory (sibling of results)
     vectors_dir = os.path.join(os.path.dirname(in_dir), "vectors")
-    agg_npz_path = os.path.join(vectors_dir, f"aggregated_vectors_{model}.npz")
     counts_json_path = os.path.join(vectors_dir, f"aggregated_vectors_{model}.counts.json")
-
-    assert os.path.exists(agg_npz_path), f"Missing aggregated vectors file: {agg_npz_path}"
     assert os.path.exists(counts_json_path), f"Missing counts file: {counts_json_path}"
-
-    data = np.load(agg_npz_path)
     with open(counts_json_path, "r") as f:
         counts = json.load(f)
 
@@ -46,9 +41,12 @@ def main():
     summary = []
 
     for task in tasks:
+        # Per-task NPZ
+        task_npz_path = os.path.join(vectors_dir, f"aggregated_vectors_{model}__{task}.npz")
+        assert os.path.exists(task_npz_path), f"Missing per-task vectors file: {task_npz_path}"
+        data = np.load(task_npz_path)
         # Collect layers present for this task
-        # Find all keys matching this task
-        task_keys = [k for k in data.keys() if k.startswith(f"{task}__")]
+        task_keys = list(data.keys())
         layers = set()
         for k in task_keys:
             # parse layer index
@@ -64,8 +62,8 @@ def main():
         num_i = int(counts.get(task, {}).get("incorrect", 0) or 0)
 
         for layer_idx in layers:
-            k_c = f"{task}__correct__layer_{layer_idx}"
-            k_i = f"{task}__incorrect__layer_{layer_idx}"
+            k_c = f"correct__layer_{layer_idx}"
+            k_i = f"incorrect__layer_{layer_idx}"
             vec_c = data[k_c] if k_c in data else None
             vec_i = data[k_i] if k_i in data else None
             if vec_c is None and vec_i is None:

@@ -30,6 +30,7 @@ from sad.self_recognition.run import self_recognition_who  # noqa: E402
 from sad.anti_imitation.output_control.task_output_control import make_task as make_output_control_task  # noqa: E402
 from sad.id_leverage.entity_id.task_generic import make_task as make_idlev_generic_task  # noqa: E402
 
+from provider_wrapper import clear_gpu_memory
 
 def _to_numpy_cpu(x):
     try:
@@ -153,34 +154,34 @@ def _save_aggregated_for_task(*, vectors_dir: str, model: str, task_prefix: str,
     """
     Merge-and-save aggregated vectors and counts for a single task immediately.
 
-    - Aggregated vectors live at experiments/vectors/aggregated_vectors_{model}.npz
-      with keys like '{task_prefix}__correct__layer_{i}'.
+    - Aggregated vectors now live per-task at experiments/vectors/aggregated_vectors_{model}__{task}.npz
+      with keys like 'correct__layer_{i}'.
     - Counts per class live in aggregated_vectors_{model}.counts.json as:
       { task_prefix: {"correct": int, "incorrect": int}, ... }
     """
     os.makedirs(vectors_dir, exist_ok=True)
-    agg_npz = os.path.join(vectors_dir, f"aggregated_vectors_{model}.npz")
+    task_npz = os.path.join(vectors_dir, f"aggregated_vectors_{model}__{task_prefix}.npz")
     agg_counts_json = os.path.join(vectors_dir, f"aggregated_vectors_{model}.counts.json")
 
     # Build additions for this task
     additions: dict[str, _np.ndarray] = {}
     for cls_name, layer_dict in sums.items():
         for layer_idx, arr in layer_dict.items():
-            key = f"{task_prefix}__{cls_name}__layer_{layer_idx}"
+            key = f"{cls_name}__layer_{layer_idx}"
             additions[key] = arr
 
     # Merge with existing NPZ if present
     merged_payload: dict[str, _np.ndarray] = {}
-    if os.path.exists(agg_npz):
-        with _np.load(agg_npz) as existing:
+    if os.path.exists(task_npz):
+        with _np.load(task_npz) as existing:
             for k in existing.files:
                 merged_payload[k] = existing[k].copy()
 
     merged_payload.update(additions)
     if merged_payload:
-        _np.savez(agg_npz, **merged_payload)
+        _np.savez(task_npz, **merged_payload)
         # Confirm by reloading
-        with _np.load(agg_npz) as chk:
+        with _np.load(task_npz) as chk:
             pass
 
     # Merge counts JSON
@@ -199,8 +200,7 @@ def _save_aggregated_for_task(*, vectors_dir: str, model: str, task_prefix: str,
 
 
 def run_task_stages(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None) -> list[dict[str, str]]:
-    stages_data_path = os.path.join(ROOT, "sad", "stages", "oversight", "structs", "batch", "test_oversight.yaml")
-    stages_task = make_stages_task(data_path=stages_data_path)
+    stages_task = make_stages_task()
     stages_variant = stages_task.default_variant
     t0 = time.time()
     stages_res, stages_sums, stages_counts, stages_examples = _aggregate_vectors_for_task(
@@ -216,6 +216,7 @@ def run_task_stages(*, model: str, csv_out: str, vectors_dir: str, n_per_task: i
             "task": "stages_oversight",
             "variant": getattr(stages_variant, "name", str(stages_variant)),
             "n_requested": n_per_task,
+            "n_processed": stages_total,
             "invalid": stages_res["invalid"],
             "accuracy": f"{stages_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
@@ -244,6 +245,7 @@ def run_task_self_recognition(*, model: str, csv_out: str, vectors_dir: str, n_p
             "task": "self_recognition_who",
             "variant": sr_variant,
             "n_requested": n_per_task,
+            "n_processed": sr_total,
             "invalid": sr_res["invalid"],
             "accuracy": f"{sr_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
@@ -271,6 +273,7 @@ def run_task_output_control(*, model: str, csv_out: str, vectors_dir: str, n_per
             "task": "output_control",
             "variant": getattr(oc_variant, "name", str(oc_variant)),
             "n_requested": n_per_task,
+            "n_processed": oc_total,
             "invalid": oc_res["invalid"],
             "accuracy": f"{oc_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
@@ -298,6 +301,7 @@ def run_task_id_leverage(*, model: str, csv_out: str, vectors_dir: str, n_per_ta
             "task": "id_leverage_generic",
             "variant": getattr(id_variant, "name", str(id_variant)),
             "n_requested": n_per_task,
+            "n_processed": id_total,
             "invalid": id_res["invalid"],
             "accuracy": f"{id_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
@@ -337,12 +341,19 @@ def run_benchmark_with_vectors(
 
     if "stages" in to_run:
         examples.extend(run_task_stages(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment))
+        clear_gpu_memory()
+
     if "self_recognition_who" in to_run:
         examples.extend(run_task_self_recognition(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment))
+        clear_gpu_memory()
+
     if "output_control" in to_run:
         examples.extend(run_task_output_control(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment))
+        clear_gpu_memory()
+
     if "id_leverage_generic" in to_run:
         examples.extend(run_task_id_leverage(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment))
+        clear_gpu_memory()
 
     # Save examples JSON (like benchmark_model)
     if examples:

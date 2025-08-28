@@ -63,6 +63,7 @@ def _write_csv_row(csv_path: str, row: dict) -> None:
         "task",
         "variant",
         "n_requested",
+        "n_processed",
         "invalid",
         "accuracy",
         "runtime_seconds",
@@ -83,11 +84,9 @@ def run_stages_oversight(
     examples_per_task: int,
     comment: str | None = None
 ) -> list[dict[str, Any]]:
-    # Prefer YAML batches under sad/stages/oversight/structs/batch/*.yaml
-    stages_data_path = os.path.join(ROOT, "sad", "stages", "oversight", "structs", "batch", "test_oversight.yaml")
-    stages_task = make_stages_task(data_path=stages_data_path)
+    stages_task = make_stages_task()
     stages_variant = stages_task.default_variant
-    print(f"[Stages] data_path={stages_data_path}, variant={getattr(stages_variant, 'name', stages_variant)}, n={n_per_task}")
+    print(f"[Stages] data_path={getattr(stages_task, 'data_path', '')}, variant={getattr(stages_variant, 'name', stages_variant)}, n={n_per_task}")
     t0 = time.time()
     stages_res = stages_task.run(model=model, variant=stages_variant, n=n_per_task, save=False)
     t1 = time.time()
@@ -101,6 +100,7 @@ def run_stages_oversight(
             "task": "stages_oversight",
             "variant": getattr(stages_variant, "name", str(stages_variant)),
             "n_requested": n_per_task,
+            "n_processed": stages_total,
             "invalid": stages_res["invalid"],
             "accuracy": f"{stages_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
@@ -145,6 +145,7 @@ def run_self_recognition(
             "task": "self_recognition_who",
             "variant": sr_variant,
             "n_requested": n_per_task,
+            "n_processed": sr_total,
             "invalid": sr_invalid,
             "accuracy": f"{sr_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
@@ -183,6 +184,7 @@ def run_output_control(
             "task": "output_control",
             "variant": getattr(oc_variant, "name", str(oc_variant)),
             "n_requested": n_per_task,
+            "n_processed": oc_total,
             "invalid": oc_res["invalid"],
             "accuracy": f"{oc_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
@@ -192,7 +194,7 @@ def run_output_control(
     # Collect examples
     count = 0
     for sample in oc_task.iter_samples(model=model, variant=oc_variant, n=examples_per_task):
-        ex = _generate_example(model, sample.prompt, max_tokens=5, temperature=0.0)
+        ex = _generate_example(model, sample.prompt, max_tokens=2, temperature=0.0)
         examples.append({"task": "output_control", **ex})
         count += 1
         if count >= examples_per_task:
@@ -223,6 +225,7 @@ def run_id_leverage(
             "task": "id_leverage_generic",
             "variant": getattr(id_variant, "name", str(id_variant)),
             "n_requested": n_per_task,
+            "n_processed": id_total,
             "invalid": id_res["invalid"],
             "accuracy": f"{id_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",

@@ -88,29 +88,47 @@ def plot_bars(df: pd.DataFrame, *, comment: str | None, out_path: str | None):
         print("No rows for expected tasks.")
         return
 
-    # Series per (model_id, variant)
-    series_keys = sorted(df[["model_id", "variant"]].drop_duplicates().itertuples(index=False, name=None))
-
-    # Build accuracy table: rows=tasks, cols=series
+    # We draw paired bars (plain=blue, sp=red) per task, for each model_id.
     tasks = EXPECTED_TASKS
-    x = range(len(tasks))
-    width = max(0.1, 0.8 / max(len(series_keys), 1))
+    x = list(range(len(tasks)))
+    model_ids = sorted(df["model_id"].drop_duplicates().tolist())
+    num_models = max(1, len(model_ids))
+    group_width = 0.8 / num_models
+    bar_width = group_width / 2.0
 
     plt.figure(figsize=(10, 5))
     ax = plt.gca()
-    for idx, (model_id, variant) in enumerate(series_keys):
-        dsub = df[(df["model_id"] == model_id) & (df["variant"] == variant)]
-        acc = [
-            float(dsub.loc[dsub["task"] == t, "accuracy"].values[0])
-            if not dsub.loc[dsub["task"] == t, "accuracy"].empty else 0.0
-            for t in tasks
-        ]
-        # Derive a compact n label (median n_processed across tasks)
-        n_vals = dsub.set_index("task").reindex(tasks)["n_processed"].dropna().astype(int).tolist()
-        n_label = f"n={int(pd.Series(n_vals).median()) if n_vals else 0}"
-        label = f"{model_id} ({variant}, {n_label})"
-        offs = [xi + (idx - (len(series_keys)-1)/2) * width for xi in x]
-        ax.bar(offs, acc, width=width, label=label)
+
+    handles = []
+    labels = []
+
+    for midx, model_id in enumerate(model_ids):
+        dmodel = df[df["model_id"] == model_id]
+        d_plain = dmodel[dmodel["variant"].str.lower() == "plain"].set_index("task")
+        d_sp = dmodel[dmodel["variant"].str.lower() == "sp"].set_index("task")
+
+        # Accuracies per task for each variant
+        acc_plain = [float(d_plain.loc[t, "accuracy"]) if t in d_plain.index else 0.0 for t in tasks]
+        acc_sp = [float(d_sp.loc[t, "accuracy"]) if t in d_sp.index else 0.0 for t in tasks]
+
+        # n label: max of n_processed across variants and tasks
+        n_vals = []
+        if "n_processed" in d_plain:
+            n_vals.extend(d_plain.reindex(tasks)["n_processed"].dropna().astype(int).tolist())
+        if "n_processed" in d_sp:
+            n_vals.extend(d_sp.reindex(tasks)["n_processed"].dropna().astype(int).tolist())
+        n_label = f"n={max(n_vals) if n_vals else 0}"
+
+        # Base offsets per model group
+        base_offs = [xi + (midx - (num_models - 1) / 2.0) * group_width for xi in x]
+        offs_plain = [bo - bar_width / 2.0 for bo in base_offs]
+        offs_sp = [bo + bar_width / 2.0 for bo in base_offs]
+
+        h_plain = ax.bar(offs_plain, acc_plain, width=bar_width, color="blue")
+        h_sp = ax.bar(offs_sp, acc_sp, width=bar_width, color="red")
+
+        handles.append((h_plain, h_sp))
+        labels.append(f"{model_id} ({n_label})")
 
     plt.xticks(list(x), [
         "stages",
@@ -132,7 +150,16 @@ def plot_bars(df: pd.DataFrame, *, comment: str | None, out_path: str | None):
         title += f" | comment: {comment}"
     plt.title(title)
     plt.ylabel("accuracy")
-    plt.legend(loc="best", fontsize=8)
+    # Build a custom legend: one entry per model_id showing both variants
+    from matplotlib.patches import Patch
+    legend_entries = []
+    for lbl in labels:
+        # Show variant colors once globally; append model label separately
+        pass
+    # Global variant legend
+    variant_patches = [Patch(color="blue", label="plain"), Patch(color="red", label="sp")]
+    model_patches = [Patch(facecolor="none", edgecolor="none", label=lbl) for lbl in labels]
+    ax.legend(handles=variant_patches + model_patches, loc="best", fontsize=8)
     plt.tight_layout()
 
     if not out_path:

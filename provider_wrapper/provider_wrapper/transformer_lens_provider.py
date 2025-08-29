@@ -31,6 +31,7 @@ class TransformerLensProvider(DefaultHFProvider):
             tl_model = HookedTransformer.from_pretrained(
                 tl_name,
                 device=str(device),
+                dtype=torch.float16,
                 center_writing_weights=False,
                 default_prepend_bos=False,
             )
@@ -49,6 +50,7 @@ class TransformerLensProvider(DefaultHFProvider):
             # Use the Instruct checkpoint to match HF generation behavior
             # and chat templating, otherwise outputs will look off.
             "llama-3.1-8b-instruct": "meta-llama/Llama-3.1-8B-Instruct",
+            "qwen-2.5-14b-instruct": "Qwen/Qwen2.5-14B-Instruct",
         }
         name = self.model_id
         if name not in TL_COMPATIBLE:

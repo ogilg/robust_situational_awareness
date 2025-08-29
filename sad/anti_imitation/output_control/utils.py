@@ -204,7 +204,7 @@ def get_given_words_samples(num_examples: int = 10, include_examples: bool = Tru
     for word1, word2 in word_pairs:
         p = random.choice([30, 40, 50, 60, 70])
         q = 100 - p
-        r = 20
+        r = 30
         prompt_prefix = in_context_examples if include_examples else []
         prompt_prefix = prompt_prefix[:2]
         prompt = prompt_prefix + [

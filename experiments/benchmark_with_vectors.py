@@ -15,6 +15,10 @@ import time
 from typing import Any
 import numpy as _np
 import json as _json
+try:
+    import torch as _torch  # for safe dtype casting on TL tensors
+except Exception:
+    _torch = None
 
 # Ensure project root on sys.path
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -35,11 +39,21 @@ from provider_wrapper import clear_gpu_memory
 
 def _to_numpy_cpu(x):
     try:
-        if hasattr(x, "detach") and hasattr(x, "cpu"):
-            return x.detach().cpu().numpy()
+        # Torch tensor path
+        if _torch is not None and isinstance(x, _torch.Tensor):
+            t = x.detach().to("cpu")
+            # numpy does not support bfloat16; cast low-precision to float32 before numpy()
+            if t.dtype in (getattr(_torch, "bfloat16", None), getattr(_torch, "float16", None)):
+                t = t.to(_torch.float32)
+            return t.numpy()
+        # Fallbacks
         return _np.asarray(x)
     except Exception:
-        return _np.asarray(x)
+        try:
+            # Last resort cast via list
+            return _np.asarray(x.tolist())
+        except Exception:
+            return _np.asarray(x)
 
 
 def _last_user_content(messages) -> str:

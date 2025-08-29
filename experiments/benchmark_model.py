@@ -356,15 +356,7 @@ def run_benchmark(
     #     variant=variant,
     #     comment=comment,
     # ))
-    # all_examples.extend(run_output_control(
-    #     model=model,
-    #     csv_out=csv_out,
-    #     n_per_task=n_per_task,
-    #     examples_per_task=examples_per_task,
-    #     variant=variant,
-    #     comment=comment,
-    # ))
-    all_examples.extend(run_id_leverage(
+    all_examples.extend(run_output_control(
         model=model,
         csv_out=csv_out,
         n_per_task=n_per_task,
@@ -372,6 +364,14 @@ def run_benchmark(
         variant=variant,
         comment=comment,
     ))
+    # all_examples.extend(run_id_leverage(
+    #     model=model,
+    #     csv_out=csv_out,
+    #     n_per_task=n_per_task,
+    #     examples_per_task=examples_per_task,
+    #     variant=variant,
+    #     comment=comment,
+    # ))
 
     # ----- Write examples JSON -----
     with open(examples_out, "w") as f:

@@ -64,20 +64,15 @@ def _build_prompt_preview(task, sample, *, model: str, variant_str: str) -> str:
     # ID leverage: dict with messages
     if isinstance(sample, dict) and "messages" in sample:
         return _last_user_content(sample["messages"]) or sample.get("request_text", "")
+    # Self-recognition has its own builder signature; check by attribute on task
+    if hasattr(task, "_build_messages") and task.__class__.__name__.startswith("SelfRecognition"):
+        msgs = task._build_messages(sample, variant_str, model)  # noqa: SLF001
+        return _last_user_content(msgs)
     # Stages: has body
     if hasattr(task, "_build_messages") and isinstance(sample, dict) and "body" in sample:
-        try:
-            msgs = task._build_messages(sample, variant_str)  # noqa: SLF001
-            return _last_user_content(msgs)
-        except Exception:
-            return sample.get("body", "")
-    # Self-recognition: builder takes (sample, model, variant)
-    if hasattr(task, "_build_messages"):
-        try:
-            msgs = task._build_messages(sample, model, variant_str)  # noqa: SLF001
-            return _last_user_content(msgs)
-        except Exception:
-            return ""
+        msgs = task._build_messages(sample, variant_str)  # noqa: SLF001
+        return _last_user_content(msgs)
+
     return ""
 
 
@@ -200,9 +195,11 @@ def _save_aggregated_for_task(*, vectors_dir: str, model: str, task_prefix: str,
 
 
 
-def run_task_stages(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None) -> list[dict[str, str]]:
+def run_task_stages(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
     stages_task = make_stages_task()
     stages_variant = stages_task.default_variant
+    if isinstance(variant, str) and variant.lower() == "sp":
+        stages_variant = type(stages_variant)(name="sp", pretty_name="SP", in_sad_score=False, in_sp_sad_score=True)
     t0 = time.time()
     stages_res, stages_sums, stages_counts, stages_examples = _aggregate_vectors_for_task(
         stages_task, model=model, variant=stages_variant, n=n_per_task, task_name="stages_oversight", examples_max=max(1, min(5, n_per_task))
@@ -227,7 +224,8 @@ def run_task_stages(*, model: str, csv_out: str, vectors_dir: str, n_per_task: i
     # Save this task's aggregates immediately
     _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="stages", sums=stages_sums, counts=stages_counts)
     return stages_examples
-def run_task_ab_baseline(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None) -> list[dict[str, str]]:
+    
+def run_task_ab_baseline(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
     ab_task = make_ab_baseline_task()
     ab_variant = ab_task.default_variant
     t0 = time.time()
@@ -255,8 +253,8 @@ def run_task_ab_baseline(*, model: str, csv_out: str, vectors_dir: str, n_per_ta
     return ab_examples
 
 
-def run_task_self_recognition(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None) -> list[dict[str, str]]:
-    sr_variant = "plain"
+def run_task_self_recognition(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
+    sr_variant = variant or "plain"
     sr_variant_use = self_recognition_who.default_variant if hasattr(self_recognition_who, "default_variant") else sr_variant
     t0 = time.time()
     sr_res, sr_sums, sr_counts, sr_examples = _aggregate_vectors_for_task(
@@ -283,7 +281,7 @@ def run_task_self_recognition(*, model: str, csv_out: str, vectors_dir: str, n_p
     return sr_examples
 
 
-def run_task_output_control(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None) -> list[dict[str, str]]:
+def run_task_output_control(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
     oc_task = make_output_control_task()
     oc_variant = oc_task.default_variant
     t0 = time.time()
@@ -311,7 +309,7 @@ def run_task_output_control(*, model: str, csv_out: str, vectors_dir: str, n_per
     return oc_examples
 
 
-def run_task_id_leverage(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None) -> list[dict[str, str]]:
+def run_task_id_leverage(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
     idlev_task = make_idlev_generic_task()
     id_variant = idlev_task.default_variant
     t0 = time.time()
@@ -346,6 +344,7 @@ def run_benchmark_with_vectors(
     n_per_task: int,
     tasks: list[str] | None = None,
     comment: str | None = None,
+    variant: str = "plain",
 ) -> None:
     os.makedirs(out_dir, exist_ok=True)
 
@@ -368,23 +367,23 @@ def run_benchmark_with_vectors(
     to_run = tasks or all_tasks
 
     if "stages" in to_run:
-        examples.extend(run_task_stages(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment))
+        examples.extend(run_task_stages(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment, variant=variant))
         clear_gpu_memory()
 
     if "self_recognition_who" in to_run:
-        examples.extend(run_task_self_recognition(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment))
+        examples.extend(run_task_self_recognition(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment, variant=variant))
         clear_gpu_memory()
 
     if "output_control" in to_run:
-        examples.extend(run_task_output_control(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment))
+        examples.extend(run_task_output_control(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment, variant=variant))
         clear_gpu_memory()
 
     if "id_leverage_generic" in to_run:
-        examples.extend(run_task_id_leverage(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment))
+        examples.extend(run_task_id_leverage(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment, variant=variant))
         clear_gpu_memory()
 
     if "ab_baseline" in to_run:
-        examples.extend(run_task_ab_baseline(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment))
+        examples.extend(run_task_ab_baseline(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment, variant=variant))
         clear_gpu_memory()
 
     # Save examples JSON (like benchmark_model)
@@ -409,6 +408,7 @@ def parse_args():
     parser.add_argument("--model", required=True, help="Model id (as expected by provider_wrapper)")
     parser.add_argument("--n", type=int, default=10, help="Number of samples per task")
     parser.add_argument("--out-dir", default=os.path.join(ROOT, "experiments", "results"), help="Output directory")
+    parser.add_argument("--variant", choices=["plain", "sp"], default="plain", help="Prompt variant: plain or sp (Situation Prompt)")
     parser.add_argument(
         "--tasks",
         nargs="+",
@@ -427,6 +427,7 @@ def main():
         out_dir=args.out_dir,
         n_per_task=args.n,
         tasks=args.tasks,
+        variant=args.variant,
         comment=args.comment,
     )
     # Note: vectors are aggregated to experiments/vectors

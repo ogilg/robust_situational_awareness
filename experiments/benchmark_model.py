@@ -41,8 +41,9 @@ def _ensure_dir(path: str) -> None:
 def _last_user_content(messages) -> str:
     try:
         for msg in reversed(messages):
-            if getattr(msg, "role", "user") == "user":
-                return getattr(msg, "content", "")
+            role = msg.get("role") if isinstance(msg, dict) else getattr(msg, "role", None)
+            if role == "user":
+                return msg.get("content", "") if isinstance(msg, dict) else getattr(msg, "content", "")
     except Exception:
         pass
     return ""
@@ -54,6 +55,17 @@ def _generate_example(provider_model: str, messages, *, max_tokens: int = 10, te
     resp = provider.generate_text(req)
     prompt_text = _last_user_content(messages) or (fallback_text or "")
     return {"prompt": prompt_text, "response": getattr(resp, "txt", "")}
+
+
+def _classification_from_result(res: dict) -> str:
+    try:
+        inv = int(res.get("invalid", 0))
+        if inv == 1:
+            return "invalid"
+        cor = int(res.get("correct", 0))
+        return "correct" if cor == 1 else "incorrect"
+    except Exception:
+        return ""
 
 
 def _write_csv_row(csv_path: str, row: dict) -> None:
@@ -82,17 +94,49 @@ def run_stages_oversight(
     csv_out: str,
     n_per_task: int,
     examples_per_task: int,
+    variant: str,
     comment: str | None = None
 ) -> list[dict[str, Any]]:
     stages_task = make_stages_task()
     stages_variant = stages_task.default_variant
+    # Allow CLI override of variant
+    if isinstance(variant, str):
+        if variant.lower() in (getattr(stages_task.default_variant, "name", "plain"), "plain"):
+            pass
+        elif variant.lower() == "sp":
+            stages_variant = type(stages_variant)(name="sp", pretty_name="SP", in_sad_score=False, in_sp_sad_score=True)
     print(f"[Stages] data_path={getattr(stages_task, 'data_path', '')}, variant={getattr(stages_variant, 'name', stages_variant)}, n={n_per_task}")
+    provider = get_provider_for_model(model, prefer_transformerlens=False)
+    correct = 0
+    incorrect = 0
+    invalid = 0
+    examples: list[dict[str, Any]] = []
     t0 = time.time()
-    stages_res = stages_task.run(model=model, variant=stages_variant, n=n_per_task, save=False)
+    i = 0
+    for sample in stages_task.iter_samples(model=model, variant=getattr(stages_variant, 'name', stages_variant), n=n_per_task):
+        messages = stages_task._build_messages(sample, getattr(stages_variant, 'name', stages_variant))  # noqa: SLF001
+        req = GetTextRequest(context=None, prompt=messages, max_tokens=3, temperature=0.0)
+        resp = provider.generate_text(req)
+        txt = getattr(resp, "txt", "")
+        expected = stages_task._infer_expected_label(sample)  # noqa: SLF001
+        res = stages_task._score_from_text(txt, expected_label=expected)  # noqa: SLF001
+        correct += int(res.get("correct", 0))
+        incorrect += int(res.get("incorrect", 0))
+        invalid += int(res.get("invalid", 0))
+        if len(examples) < examples_per_task:
+            examples.append({
+                "task": "stages_oversight",
+                "prompt": _last_user_content(messages),
+                "response": txt,
+                "classification": _classification_from_result(res),
+            })
+        i += 1
+        if i >= n_per_task:
+            break
     t1 = time.time()
-    stages_total = int(stages_res["correct"]) + int(stages_res["incorrect"]) + int(stages_res["invalid"])
-    stages_acc = (stages_res["correct"] / stages_total) if stages_total else 0.0
-    print(f"[Stages] summary correct={stages_res['correct']} incorrect={stages_res['incorrect']} invalid={stages_res['invalid']} total={stages_total} time={t1 - t0:.3f}s")
+    stages_total = correct + incorrect + invalid
+    stages_acc = (correct / stages_total) if stages_total else 0.0
+    print(f"[Stages] summary correct={correct} incorrect={incorrect} invalid={invalid} total={stages_total} time={t1 - t0:.3f}s")
     _write_csv_row(
         csv_out,
         {
@@ -101,23 +145,13 @@ def run_stages_oversight(
             "variant": getattr(stages_variant, "name", str(stages_variant)),
             "n_requested": n_per_task,
             "n_processed": stages_total,
-            "invalid": stages_res["invalid"],
+            "invalid": invalid,
             "accuracy": f"{stages_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
             "comment": comment or "",
         },
     )
-    # Collect examples
-    examples = []
-    count = 0
-    for sample in stages_task.iter_samples(model=model, variant=stages_variant, n=examples_per_task):
-        messages = stages_task._build_messages(sample, stages_variant)  # noqa: SLF001
-        ex = _generate_example(model, messages, max_tokens=5, temperature=0.0)
-        examples.append({"task": "stages_oversight", **ex})
-        count += 1
-        if count >= examples_per_task:
-            break
-    print(f"[Stages] examples_collected={count}")
+    print(f"[Stages] examples_collected={len(examples)}")
     return examples
 
 
@@ -127,17 +161,38 @@ def run_self_recognition(
     csv_out: str,
     n_per_task: int,
     examples_per_task: int,
+    variant: str,
     comment: str | None = None
 ) -> list[dict[str, Any]]:
     examples = []
-    sr_variant = "plain"
+    sr_variant = variant or "plain"
+    provider = get_provider_for_model(model, prefer_transformerlens=False)
+    correct = 0
+    invalid = 0
+    total = 0
     t0 = time.time()
-    sr_results = self_recognition_who.run_evaluation(model=model, variant=sr_variant, n=n_per_task, save=False)
+    # Use the same iterator as the task uses
+    samples = self_recognition_who._get_samples(model, sr_variant, n=n_per_task)  # noqa: SLF001
+    for sample in samples:
+        messages = self_recognition_who._build_messages(sample, sr_variant, model)  # noqa: SLF001
+        req = GetTextRequest(context=None, prompt=messages, max_tokens=5, temperature=0.0)
+        resp = provider.generate_text(req)
+        txt = getattr(resp, "txt", "")
+        res = self_recognition_who._score_from_text(txt, sample)  # noqa: SLF001
+        correct += int(res.get("correct", 0))
+        invalid += int(res.get("invalid", 0))
+        if len(examples) < examples_per_task:
+            examples.append({
+                "task": "self_recognition_who",
+                "prompt": _last_user_content(messages),
+                "response": txt,
+                "classification": _classification_from_result(res),
+            })
+        total += 1
+        if total >= n_per_task:
+            break
     t1 = time.time()
-    sr_correct = sum(1 for r in sr_results if r.get("is_correct"))
-    sr_invalid = sum(1 for r in sr_results if r.get("invalid"))
-    sr_total = len(sr_results)
-    sr_acc = (sr_correct / sr_total) if sr_total else 0.0
+    acc = (correct / total) if total else 0.0
     _write_csv_row(
         csv_out,
         {
@@ -145,19 +200,13 @@ def run_self_recognition(
             "task": "self_recognition_who",
             "variant": sr_variant,
             "n_requested": n_per_task,
-            "n_processed": sr_total,
-            "invalid": sr_invalid,
-            "accuracy": f"{sr_acc:.6f}",
+            "n_processed": total,
+            "invalid": invalid,
+            "accuracy": f"{acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
             "comment": comment or "",
         },
     )
-    # Collect examples
-    samples = self_recognition_who._get_samples(model, sr_variant, n=examples_per_task)  # noqa: SLF001
-    for sample in samples[:examples_per_task]:
-        messages = self_recognition_who._build_messages(sample, model, sr_variant)  # noqa: SLF001
-        ex = _generate_example(model, messages, max_tokens=5, temperature=0.0)
-        examples.append({"task": "self_recognition_who", **ex})
     return examples
 
 
@@ -167,16 +216,29 @@ def run_output_control(
     csv_out: str,
     n_per_task: int,
     examples_per_task: int,
+    variant: str,
     comment: str | None = None
 ) -> list[dict[str, Any]]:
     examples = []
     oc_task = make_output_control_task()
     oc_variant = oc_task.default_variant
     t0 = time.time()
-    oc_res = oc_task.run(model=model, variant=oc_variant, n=n_per_task, save=False)
+    correct = 0
+    incorrect = 0
+    invalid = 0
+    # Single pass: score and collect up to examples_per_task
+    for sample in oc_task.iter_samples(model=model, variant=getattr(oc_variant, 'name', oc_variant), n=n_per_task):
+        res = oc_task.evaluate_sample(model=model, sample=sample)
+        correct += int(res.get("correct", 0))
+        incorrect += int(res.get("incorrect", 0))
+        invalid += int(res.get("invalid", 0))
+        if len(examples) < examples_per_task:
+            ex = _generate_example(model, sample.prompt, max_tokens=2, temperature=0.0)
+            ex["classification"] = "n/a"
+            examples.append({"task": "output_control", **ex})
     t1 = time.time()
-    oc_total = int(oc_res["correct"]) + int(oc_res["incorrect"]) + int(oc_res["invalid"])
-    oc_acc = (oc_res["correct"] / oc_total) if oc_total else 0.0
+    oc_total = correct + incorrect + invalid
+    oc_acc = (correct / oc_total) if oc_total else 0.0
     _write_csv_row(
         csv_out,
         {
@@ -185,20 +247,12 @@ def run_output_control(
             "variant": getattr(oc_variant, "name", str(oc_variant)),
             "n_requested": n_per_task,
             "n_processed": oc_total,
-            "invalid": oc_res["invalid"],
+            "invalid": invalid,
             "accuracy": f"{oc_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
             "comment": comment or "",
         },
     )
-    # Collect examples
-    count = 0
-    for sample in oc_task.iter_samples(model=model, variant=oc_variant, n=examples_per_task):
-        ex = _generate_example(model, sample.prompt, max_tokens=2, temperature=0.0)
-        examples.append({"task": "output_control", **ex})
-        count += 1
-        if count >= examples_per_task:
-            break
     return examples
 
 
@@ -208,16 +262,44 @@ def run_id_leverage(
     csv_out: str,
     n_per_task: int,
     examples_per_task: int,
+    variant: str,
     comment: str | None = None
 ) -> list[dict[str, Any]]:
     examples = []
     idlev_task = make_idlev_generic_task()
     id_variant = idlev_task.default_variant
+    provider = get_provider_for_model(model, prefer_transformerlens=False)
     t0 = time.time()
-    id_res = idlev_task.run(model=model, variant=id_variant, n=n_per_task, save=False)
+    correct = 0
+    incorrect = 0
+    invalid = 0
+    i = 0
+    for sample in idlev_task.iter_samples(model=model, variant=getattr(id_variant, 'name', id_variant), n=n_per_task):
+        messages = sample["messages"]
+        req = GetTextRequest(context=None, prompt=messages, max_tokens=200, temperature=0.0)
+        resp = provider.generate_text(req)
+        txt = getattr(resp, "txt", None)
+        scored = idlev_task._score_from_text(txt, sample["target_language"])  # noqa: SLF001
+        if scored.get("invalid"):
+            invalid += 1
+        elif scored.get("success"):
+            correct += 1
+        else:
+            incorrect += 1
+        if len(examples) < examples_per_task:
+            ex = {
+                "task": "id_leverage_generic",
+                "prompt": _last_user_content(messages) or sample.get("request_text", ""),
+                "response": txt or "",
+                "classification": "n/a",
+            }
+            examples.append(ex)
+        i += 1
+        if i >= n_per_task:
+            break
     t1 = time.time()
-    id_total = int(id_res["correct"]) + int(id_res["incorrect"]) + int(id_res["invalid"])
-    id_acc = (id_res["correct"] / id_total) if id_total else 0.0
+    id_total = correct + incorrect + invalid
+    id_acc = (correct / id_total) if id_total else 0.0
     _write_csv_row(
         csv_out,
         {
@@ -226,22 +308,12 @@ def run_id_leverage(
             "variant": getattr(id_variant, "name", str(id_variant)),
             "n_requested": n_per_task,
             "n_processed": id_total,
-            "invalid": id_res["invalid"],
+            "invalid": invalid,
             "accuracy": f"{id_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
             "comment": comment or "",
         },
     )
-    # Collect examples
-    count = 0
-    for sample in idlev_task.iter_samples(model=model, variant=id_variant, n=examples_per_task):
-        messages = sample["messages"]
-        fallback = sample.get("request_text", "")
-        ex = _generate_example(model, messages, max_tokens=30, temperature=0.0, fallback_text=fallback)
-        examples.append({"task": "id_leverage_generic", **ex})
-        count += 1
-        if count >= examples_per_task:
-            break
     return examples
 
 
@@ -251,6 +323,7 @@ def run_benchmark(
     out_dir: str,
     n_per_task: int,
     examples_per_task: int,
+    variant: str,
     comment: str | None = None,
 ) -> None:
     _ensure_dir(out_dir)
@@ -266,6 +339,7 @@ def run_benchmark(
         csv_out=csv_out,
         n_per_task=n_per_task,
         examples_per_task=examples_per_task,
+        variant=variant,
         comment=comment,
     ))
     all_examples.extend(run_self_recognition(
@@ -273,6 +347,7 @@ def run_benchmark(
         csv_out=csv_out,
         n_per_task=n_per_task,
         examples_per_task=examples_per_task,
+        variant=variant,
         comment=comment,
     ))
     all_examples.extend(run_output_control(
@@ -280,6 +355,7 @@ def run_benchmark(
         csv_out=csv_out,
         n_per_task=n_per_task,
         examples_per_task=examples_per_task,
+        variant=variant,
         comment=comment,
     ))
     all_examples.extend(run_id_leverage(
@@ -287,6 +363,7 @@ def run_benchmark(
         csv_out=csv_out,
         n_per_task=n_per_task,
         examples_per_task=examples_per_task,
+        variant=variant,
         comment=comment,
     ))
 
@@ -312,6 +389,7 @@ def parse_args():
     parser.add_argument("--n", type=int, default=10, help="Number of samples per task")
     parser.add_argument("--examples", type=int, default=5, help="Number of examples per task to save to JSON")
     parser.add_argument("--out-dir", default=os.path.join(ROOT, "experiments", "results"), help="Output directory")
+    parser.add_argument("--variant", choices=["plain", "sp"], default="plain", help="Prompt variant: plain or sp (Situation Prompt)")
     parser.add_argument("--comment", default=None, help="Optional comment to include in CSV rows")
     return parser.parse_args()
 
@@ -323,6 +401,7 @@ def main():
         out_dir=args.out_dir,
         n_per_task=args.n,
         examples_per_task=args.examples,
+        variant=args.variant,
         comment=args.comment,
     )
     print(f"Wrote results to {args.out_dir}")

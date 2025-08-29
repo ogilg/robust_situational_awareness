@@ -35,8 +35,7 @@ from sad.anti_imitation.output_control.task_output_control import make_task as m
 from sad.id_leverage.entity_id.task_generic import make_task as make_idlev_generic_task
 
 # Provider wrapper
-from provider_wrapper import get_provider_for_model, GetTextRequest
-from provider_wrapper.provider_wrapper.transformer_lens_provider import TransformerLensProvider
+from provider_wrapper import get_provider_for_model, GetTextRequest, TransformerLensProvider
 
 
 def _ensure_dir(path: str) -> None:
@@ -129,7 +128,7 @@ def _generate_example_with_steering(
     messages, 
     steering_config: Dict[str, Any],
     *, 
-    max_tokens: int = 10, 
+    max_tokens: int = 20, 
     temperature: float = 0.0, 
     fallback_text: str | None = None
 ) -> dict:

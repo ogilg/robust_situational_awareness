@@ -284,7 +284,8 @@ def run_id_leverage(
         req = GetTextRequest(context=None, prompt=messages, max_tokens=200, temperature=0.0)
         resp = provider.generate_text(req)
         txt = getattr(resp, "txt", None)
-        scored = idlev_task._score_from_text(txt, sample["target_language"])  # noqa: SLF001
+        identity_true = bool(sample.get("identity_true", True))
+        scored = idlev_task._score_from_text(txt, sample["target_language"], identity_true)  # noqa: SLF001
         if scored.get("invalid"):
             invalid += 1
         elif scored.get("success"):
@@ -339,14 +340,14 @@ def run_benchmark(
     all_examples: list[dict[str, Any]] = []
 
     # Run each task (comment out to skip)
-    all_examples.extend(run_stages_oversight(
-        model=model,
-        csv_out=csv_out,
-        n_per_task=n_per_task,
-        examples_per_task=examples_per_task,
-        variant=variant,
-        comment=comment,
-    ))
+    # all_examples.extend(run_stages_oversight(
+    #     model=model,
+    #     csv_out=csv_out,
+    #     n_per_task=n_per_task,
+    #     examples_per_task=examples_per_task,
+    #     variant=variant,
+    #     comment=comment,
+    # ))
     # all_examples.extend(run_self_recognition(
     #     model=model,
     #     csv_out=csv_out,
@@ -355,14 +356,14 @@ def run_benchmark(
     #     variant=variant,
     #     comment=comment,
     # ))
-    all_examples.extend(run_output_control(
-        model=model,
-        csv_out=csv_out,
-        n_per_task=n_per_task,
-        examples_per_task=examples_per_task,
-        variant=variant,
-        comment=comment,
-    ))
+    # all_examples.extend(run_output_control(
+    #     model=model,
+    #     csv_out=csv_out,
+    #     n_per_task=n_per_task,
+    #     examples_per_task=examples_per_task,
+    #     variant=variant,
+    #     comment=comment,
+    # ))
     all_examples.extend(run_id_leverage(
         model=model,
         csv_out=csv_out,

@@ -6,6 +6,6 @@ qwen-2.5-14b-instruct,id_leverage_generic,plain,50,50,0,0.720000,191.302,qwen
 qwen-2.5-14b-instruct,id_leverage_generic,plain,200,200,0,0.520000,378.425,qwen vector extraction
 qwen-2.5-14b-instruct,output_control,plain,200,200,0,0.365000,106.506,qwen vector extraction
 qwen-2.5-14b-instruct,stages_oversight,plain,200,200,0,0.680000,103.817,qwen vector extraction
-qwen-2.5-14b-instruct,stages_oversight,sp,200,200,0,0.670000,102.280,qwen sp vector extraction
+qwen-2.5-14b-instruct,stages_oversight,sp,200,200,0,0.670000,102.280,qwen sp vector extraction sp
 qwen-2.5-14b-instruct,output_control,sp,200,200,0,0.375000,114.397,qwen vector extraction sp
 qwen-2.5-14b-instruct,id_leverage_generic,sp,200,200,0,0.445000,326.590,qwen vector extraction sp

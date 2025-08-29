@@ -21,7 +21,8 @@ class TransformerLensProvider(DefaultHFProvider):
     
     # ---------------- First-token residuals during generation (TransformerLens) -----------------
     def _get_tl_model(self, tl_name: str):
-        device = next(self.model.parameters()).device
+        # Prefer CUDA for TL regardless of HF model device
+        device = "cuda" if torch.cuda.is_available() else "cpu"
         # Use module-level cache so repeated provider instances don't reload shards
         global _tl_models
         tl_model = _tl_models.get(tl_name)
@@ -91,9 +92,22 @@ class TransformerLensProvider(DefaultHFProvider):
                 return activation
             return hook_fn
 
+        # Select 4 uniformly spaced layers (inclusive of first and last); fallback to all if <4 layers
+        num_layers = int(tl_model.cfg.n_layers)
+        if num_layers >= 4:
+            last = num_layers - 1
+            candidate_layers = sorted(set([
+                0,
+                max(0, round(last / 3)),
+                max(0, round(2 * last / 3)),
+                last,
+            ]))
+        else:
+            candidate_layers = list(range(num_layers))
+
         fwd_hooks = [
             (f"blocks.{i}.{hook_attr}", make_hook(i, prompt_len))
-            for i in range(tl_model.cfg.n_layers)
+            for i in candidate_layers
         ]
 
         tl_model.reset_hooks()
@@ -145,6 +159,22 @@ class TransformerLensProvider(DefaultHFProvider):
                     print(f"[TL] token_debug_failed: {e}")
                 except Exception:
                     pass
+
+        # Proactive cleanup to minimize peak memory
+        try:
+            del out_toks
+            del gen_only
+            del toks
+        except Exception:
+            pass
+        try:
+            tl_model.reset_hooks()
+        except Exception:
+            pass
+        try:
+            torch.cuda.empty_cache()
+        except Exception:
+            pass
 
         return text_resp, cached
 

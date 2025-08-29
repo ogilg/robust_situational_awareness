@@ -14,5 +14,9 @@
   "id_leverage_generic": {
     "correct": 253,
     "incorrect": 247
+  },
+  "ab_baseline": {
+    "correct": 100,
+    "incorrect": 100
   }
 }

@@ -18,42 +18,86 @@ from sklearn.decomposition import PCA
 from typing import Dict, List, Tuple, Optional
 
 
-def load_weighted_vectors(model: str, vectors_dir: str) -> Dict[str, np.ndarray]:
-    """Load weighted vectors from the npz file."""
-    weighted_path = os.path.join(vectors_dir, f"weighted_vectors_{model}.npz")
-    if not os.path.exists(weighted_path):
-        raise FileNotFoundError(f"Weighted vectors file not found: {weighted_path}")
-    
-    data = np.load(weighted_path)
-    return {key: data[key] for key in data.files}
+def load_weighted_vectors(model: str, vectors_dir: str, *, variant: str = "plain") -> Dict[str, np.ndarray]:
+    """Load weighted vectors for a specific variant from the npz file.
+
+    Expects files named weighted_vectors_{model}__{variant}.npz
+    """
+    weighted_path = os.path.join(vectors_dir, f"weighted_vectors_{model}__{variant}.npz")
+    if os.path.exists(weighted_path):
+        data = np.load(weighted_path)
+        return {key: data[key] for key in data.files}
+
+    # Fallback: if separate variant file is missing but a combined 'both' file exists,
+    # filter keys by variant from that file (keys include task__{variant}__weighted__layer_k)
+    both_path = os.path.join(vectors_dir, f"weighted_vectors_{model}__both.npz")
+    if os.path.exists(both_path) and variant in {"plain", "sp"}:
+        data = np.load(both_path)
+        out: Dict[str, np.ndarray] = {}
+        for key in data.files:
+            try:
+                task_with_variant, _ = parse_vector_key(key)
+            except ValueError:
+                continue
+            _, v = strip_variant_suffix(task_with_variant)
+            if v == variant:
+                out[key] = data[key]
+        if out:
+            return out
+    raise FileNotFoundError(f"Weighted vectors file not found: {weighted_path}")
 
 
 def parse_vector_key(key: str) -> Tuple[str, int]:
     """Parse vector key to extract task name and layer index.
-    
-    Example: 'stages__weighted__layer_15' -> ('stages', 15)
+
+    Robust to an optional variant segment in the task part, e.g.:
+      'stages__plain__weighted__layer_15' or 'stages__weighted__layer_15'
+    Returns task including variant portion; caller may strip variant.
     """
-    parts = key.split("__")
-    if len(parts) >= 3 and parts[-2] == "weighted" and parts[-1].startswith("layer_"):
-        task = "__".join(parts[:-2])
-        layer_idx = int(parts[-1].split("_")[-1])
-        return task, layer_idx
-    raise ValueError(f"Cannot parse vector key: {key}")
+    if "__weighted__layer_" not in key:
+        raise ValueError(f"Cannot parse vector key: {key}")
+    task_part, layer_part = key.split("__weighted__layer_")
+    try:
+        layer_idx = int(layer_part)
+    except Exception:
+        raise ValueError(f"Cannot parse vector key: {key}")
+    return task_part, layer_idx
 
 
-def group_vectors_by_layer(vectors: Dict[str, np.ndarray]) -> Dict[int, Dict[str, np.ndarray]]:
-    """Group vectors by layer index."""
-    by_layer = {}
-    
+def strip_variant_suffix(task_with_variant: str) -> Tuple[str, str]:
+    """Return (task_name, variant) where variant is '' if absent.
+
+    Examples:
+      'stages__plain' -> ('stages', 'plain')
+      'output_control__sp' -> ('output_control', 'sp')
+      'id_leverage_generic' -> ('id_leverage_generic', '')
+    """
+    parts = task_with_variant.split("__")
+    if len(parts) >= 2 and parts[-1] in {"plain", "sp"}:
+        return "__".join(parts[:-1]), parts[-1]
+    return task_with_variant, ""
+
+
+def group_vectors_by_layer(vectors: Dict[str, np.ndarray], *, expect_variant: str | None = None) -> Dict[int, Dict[str, np.ndarray]]:
+    """Group vectors by layer index, optionally filtering to a specific variant.
+
+    Task keys in the returned mapping are variant-stripped (just the task name).
+    """
+    by_layer: Dict[int, Dict[str, np.ndarray]] = {}
+
     for key, vector in vectors.items():
         try:
-            task, layer_idx = parse_vector_key(key)
+            task_with_variant, layer_idx = parse_vector_key(key)
+            task_name, variant = strip_variant_suffix(task_with_variant)
+            if expect_variant is not None and variant != expect_variant:
+                # Skip keys from other variants
+                continue
             if layer_idx not in by_layer:
                 by_layer[layer_idx] = {}
-            by_layer[layer_idx][task] = vector
+            by_layer[layer_idx][task_name] = vector
         except ValueError:
             continue
-    
+
     return by_layer
 
 
@@ -81,6 +125,123 @@ def filter_tasks(by_layer: Dict[int, Dict[str, np.ndarray]], tasks: Optional[Lis
         if len(sub) >= 2:
             filtered[layer_idx] = sub
     return filtered
+
+
+def plot_plain_vs_sp_final_layer(vectors_plain: Dict[str, np.ndarray], vectors_sp: Dict[str, np.ndarray], *, model: str, output_dir: str, show: bool = False) -> None:
+    """Compute cosine similarity between plain and sp vectors at the final layer per task and plot a bar chart.
+
+    Skips tasks missing in either variant.
+    """
+    # Build per-layer grouped maps (variant-stripped)
+    by_layer_plain = group_vectors_by_layer(vectors_plain)
+    by_layer_sp = group_vectors_by_layer(vectors_sp)
+
+    if not by_layer_plain or not by_layer_sp:
+        print("Not enough vectors to compare plain vs sp.")
+        return
+
+    final_layer_plain = max(by_layer_plain.keys())
+    final_layer_sp = max(by_layer_sp.keys())
+    final_layer = min(final_layer_plain, final_layer_sp)
+
+    tp = by_layer_plain.get(final_layer, {})
+    ts = by_layer_sp.get(final_layer, {})
+
+    tasks = sorted(set(tp.keys()) & set(ts.keys()))
+    if not tasks:
+        print("No overlapping tasks at final layer for plain vs sp comparison.")
+        return
+
+    vals = []
+    for t in tasks:
+        v1 = tp.get(t)
+        v2 = ts.get(t)
+        if v1 is None or v2 is None:
+            continue
+        n1 = np.linalg.norm(v1); n2 = np.linalg.norm(v2)
+        if n1 == 0 or n2 == 0:
+            cos = 0.0
+        else:
+            cos = float(np.dot(v1, v2) / (max(n1 * n2, 1e-12)))
+        vals.append((t, cos))
+
+    if not vals:
+        print("No task pairs available for plain vs sp comparison at final layer.")
+        return
+
+    tasks_plot = [t for t, _ in vals]
+    cosines = [c for _, c in vals]
+
+    import matplotlib.pyplot as plt
+    plt.figure(figsize=(8, 4))
+    plt.bar(range(len(tasks_plot)), cosines, color="purple")
+    plt.xticks(range(len(tasks_plot)), tasks_plot, rotation=30, ha='right')
+    plt.ylim(-1, 1)
+    plt.ylabel('cosine(plain, sp)')
+    plt.title(f'Plain vs SP Cosine at Final Layer (L={final_layer})\nModel: {model}')
+    plt.tight_layout()
+    out_path = os.path.join(output_dir, f"plain_vs_sp_final_layer_{model}.png")
+    plt.savefig(out_path, dpi=300, bbox_inches='tight')
+    print(f"Saved plain vs sp comparison: {out_path}")
+    if show:
+        plt.show()
+    plt.close()
+
+
+def plot_plain_vs_sp_avg_across_layers(vectors_plain: Dict[str, np.ndarray], vectors_sp: Dict[str, np.ndarray], *, model: str, output_dir: str, show: bool = False) -> None:
+    """Compute average cosine similarity between plain and sp across all overlapping layers per task.
+
+    Produces a bar chart and prints a small table. Skips tasks missing in either variant.
+    """
+    by_layer_plain = group_vectors_by_layer(vectors_plain)
+    by_layer_sp = group_vectors_by_layer(vectors_sp)
+
+    # Collect all layers present in both
+    common_layers = sorted(set(by_layer_plain.keys()) & set(by_layer_sp.keys()))
+    if not common_layers:
+        print("No overlapping layers across variants; skipping avg plain vs sp plot.")
+        return
+
+    # Collect per-task cosines across layers
+    task_to_cosines: Dict[str, list] = {}
+    for layer_idx in common_layers:
+        tp = by_layer_plain.get(layer_idx, {})
+        ts = by_layer_sp.get(layer_idx, {})
+        for t in sorted(set(tp.keys()) & set(ts.keys())):
+            v1 = tp[t]; v2 = ts[t]
+            n1 = np.linalg.norm(v1); n2 = np.linalg.norm(v2)
+            if n1 == 0 or n2 == 0:
+                cos = 0.0
+            else:
+                cos = float(np.dot(v1, v2) / max(n1 * n2, 1e-12))
+            task_to_cosines.setdefault(t, []).append(cos)
+
+    if not task_to_cosines:
+        print("No overlapping tasks across layers; skipping avg plain vs sp plot.")
+        return
+
+    tasks = sorted(task_to_cosines.keys())
+    means = [float(np.mean(task_to_cosines[t])) for t in tasks]
+
+    # Print summary
+    print("\nAverage cosine(plain, sp) across layers by task:")
+    for t, m in zip(tasks, means):
+        print(f"  {t:>20} : {m:.3f}")
+
+    import matplotlib.pyplot as plt
+    plt.figure(figsize=(8, 4))
+    plt.bar(range(len(tasks)), means, color="teal")
+    plt.xticks(range(len(tasks)), tasks, rotation=30, ha='right')
+    plt.ylim(-1, 1)
+    plt.ylabel('mean cosine across layers')
+    plt.title(f'Plain vs SP Mean Cosine Across Layers\nModel: {model}')
+    plt.tight_layout()
+    out_path = os.path.join(output_dir, f"plain_vs_sp_avg_across_layers_{model}.png")
+    plt.savefig(out_path, dpi=300, bbox_inches='tight')
+    print(f"Saved plain vs sp mean-cosine plot: {out_path}")
+    if show:
+        plt.show()
+    plt.close()
 
 
 def compute_pairwise_similarities_by_layer(by_layer: Dict[int, Dict[str, np.ndarray]]) -> Dict[Tuple[str, str], List[Tuple[int, float]]]:
@@ -427,6 +588,8 @@ def main():
     parser.add_argument("--pca", action="store_true", help="Run PCA per layer and plot PC1 explained variance and cosine-to-PC1")
     parser.add_argument("--save-cos-to-pc1-csv", action="store_true", help="Save per-layer cosine(task, PC1) table")
     parser.add_argument("--save-pc1-vectors", action="store_true", help="Save PC1 vectors per layer to NPZ (experiments/vectors)")
+    parser.add_argument("--variant", choices=["plain", "sp", "both"], default="plain", help="Which variant vectors to analyze for the main analysis")
+    parser.add_argument("--compare-variants", action="store_true", help="Also plot cosine between plain and sp at final layer (if both exist)")
     
     args = parser.parse_args()
     
@@ -437,13 +600,14 @@ def main():
     if args.output_dir is None:
         args.output_dir = os.path.join(root_dir, "experiments", "results")
     
-    # Load vectors
-    print(f"Loading weighted vectors for model: {args.model}")
-    vectors = load_weighted_vectors(args.model, args.vectors_dir)
-    print(f"Loaded {len(vectors)} vectors")
+    # Load vectors (main analysis on selected variant; default plain)
+    main_variant = "plain" if args.variant in (None, "both") else args.variant
+    print(f"Loading weighted vectors for model: {args.model}, variant: {main_variant}")
+    vectors = load_weighted_vectors(args.model, args.vectors_dir, variant=main_variant)
+    print(f"Loaded {len(vectors)} vectors for {main_variant}")
     
     # Group by layer
-    by_layer = filter_tasks(group_vectors_by_layer(vectors), args.tasks)
+    by_layer = filter_tasks(group_vectors_by_layer(vectors, expect_variant=main_variant), args.tasks)
     layers = sorted(by_layer.keys())
     print(f"Found vectors for layers: {layers}")
     
@@ -549,6 +713,16 @@ def main():
             
     else:
         print("Please specify either --layer <N> or --all-layers")
+
+    # Optional: compare plain vs sp at final layer
+    if args.compare_variants:
+        try:
+            vec_plain = load_weighted_vectors(args.model, args.vectors_dir, variant="plain")
+            vec_sp = load_weighted_vectors(args.model, args.vectors_dir, variant="sp")
+            plot_plain_vs_sp_final_layer(vec_plain, vec_sp, model=args.model, output_dir=args.output_dir, show=args.show)
+            plot_plain_vs_sp_avg_across_layers(vec_plain, vec_sp, model=args.model, output_dir=args.output_dir, show=args.show)
+        except FileNotFoundError:
+            print("Plain or SP vectors not found; skipping variant comparison plot.")
 
 
 if __name__ == "__main__":

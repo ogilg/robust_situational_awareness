@@ -30,7 +30,7 @@ class GPTOSSProvider(HuggingFaceProvider):
         model_id: str,
         *,
         lora_adapter_path: str | None = None,
-        reasoning_effort: ReasoningEffort,
+        reasoning_effort: ReasoningEffort = ReasoningEffort.LOW,
         feed_empty_analysis: bool = False,
     ) -> None:
         super().__init__(model_id, lora_adapter_path=lora_adapter_path)

@@ -73,8 +73,10 @@ class GetCompletions:
             # Default to private_completions folder in the self_recognition directory
             base_dir = os.path.dirname(os.path.abspath(__file__))
             dir_ = os.path.join(base_dir, "private_completions")
+        # Use only the basename of the source file to make cache filenames stable across environments
+        source_basename = os.path.basename(source_file)
         fname = self._completions_fname(
-            dir_, n_completions, source_file, n_tokens, prompt_tokens
+            dir_, n_completions, source_basename, n_tokens, prompt_tokens
         )
         try:
             self.load_completions(fname)

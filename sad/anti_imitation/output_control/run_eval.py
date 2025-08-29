@@ -303,7 +303,7 @@ def run_experiment(
         text_req = GetTextRequest(
             context=None,
             prompt=sample.prompt,
-            max_tokens=10000,
+            max_tokens=100,
             temperature=0.0,
         )
         text_resp, probs_resp = provider.generate_text_and_probs(text_req)

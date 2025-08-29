@@ -133,7 +133,7 @@ class SelfRecognition(Task):
             context=None,
             prompt=messages,
             temperature=0.0,
-            max_tokens=5
+            max_tokens=4
         )
         
         response = provider.generate_text(request)
@@ -186,7 +186,7 @@ class SelfRecognition(Task):
     def evaluate_and_capture_sample(self, model: str, sample: dict, variant: str):
         # Build messages
         messages = self._build_messages(sample, model, variant)
-        request = GetTextRequest(prompt=messages, temperature=0.0, max_tokens=2, context=None)
+        request = GetTextRequest(prompt=messages, temperature=0.0, max_tokens=4, context=None)
         provider = get_provider_for_model(model, prefer_transformerlens=True)
         text_resp, residuals = provider.generate_text_with_first_token_residuals(request)
         txt = getattr(text_resp, 'txt', None)
@@ -216,10 +216,16 @@ class SelfRecognition(Task):
 
         is_correct = bool(pred_ab and correct_ab and pred_ab == correct_ab)
         invalid = 0 if pred_ab is not None else 1
+        if invalid == 1:
+            correct_flag = 0
+            incorrect_flag = 0
+        else:
+            correct_flag = 1 if is_correct else 0
+            incorrect_flag = 0 if is_correct else 1
         result = {
             "pred_ab": pred_ab,
-            "correct": 1 if is_correct else 0,
-            "incorrect": 0 if is_correct else 1,
+            "correct": correct_flag,
+            "incorrect": incorrect_flag,
             "invalid": invalid,
         }
         aux_meta = {"txt": txt}
@@ -249,10 +255,16 @@ class SelfRecognition(Task):
             correct_ab = None
         is_correct = bool(pred_ab and correct_ab and pred_ab == correct_ab)
         invalid = 0 if pred_ab is not None else 1
+        if invalid == 1:
+            correct_flag = 0
+            incorrect_flag = 0
+        else:
+            correct_flag = 1 if is_correct else 0
+            incorrect_flag = 0 if is_correct else 1
         return {
             "pred_ab": pred_ab,
-            "correct": 1 if is_correct else 0,
-            "incorrect": 0 if is_correct else 1,
+            "correct": correct_flag,
+            "incorrect": incorrect_flag,
             "invalid": invalid,
         }
     

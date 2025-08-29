@@ -78,40 +78,48 @@ def _write_csv_row(csv_path: str, row: dict) -> None:
         writer.writerow({k: row.get(k, "") for k in fieldnames})
 
 
-def load_vectors_for_task(
-    vectors_dir: str, 
-    model: str, 
-    task_prefix: str, 
-    class_name: str = "correct"
+def load_weighted_vectors_for_task(
+    vectors_dir: str,
+    model: str,
+    task_prefix: str,
+    vector_variant: str,
 ) -> Dict[int, np.ndarray]:
-    """Load aggregated vectors for a specific task and class."""
-    task_npz = os.path.join(vectors_dir, f"aggregated_vectors_{model}__{task_prefix}.npz")
-    
-    if not os.path.exists(task_npz):
-        print(f"Warning: Vector file not found: {task_npz}")
+    """Load processed weighted vectors for a given task and variant.
+
+    Expects file name: weighted_vectors_{model}__{variant}.npz
+    And keys inside NPZ: {task}__{variant}__weighted__layer_{idx}
+    """
+    npz_path = os.path.join(vectors_dir, f"weighted_vectors_{model}__{vector_variant}.npz")
+    if not os.path.exists(npz_path):
+        print(f"Warning: Weighted vectors file not found: {npz_path}")
         return {}
-    
-    vectors = {}
+
+    vectors: Dict[int, np.ndarray] = {}
     try:
-        with np.load(task_npz) as data:
+        with np.load(npz_path) as data:
+            prefix = f"{task_prefix}__{vector_variant}__weighted__layer_"
             for key in data.files:
-                if key.startswith(f"{class_name}__layer_"):
-                    layer_idx = int(key.split("_")[-1])
+                if key.startswith(prefix):
+                    try:
+                        layer_idx = int(key.split("_")[-1])
+                    except Exception:
+                        continue
                     vectors[layer_idx] = data[key]
-        print(f"Loaded {len(vectors)} vectors for {task_prefix}:{class_name}")
+        print(f"Loaded {len(vectors)} weighted vectors for {task_prefix} ({vector_variant})")
     except Exception as e:
-        print(f"Error loading vectors from {task_npz}: {e}")
-    
+        print(f"Error loading weighted vectors from {npz_path}: {e}")
+
     return vectors
 
 
 def load_vectors_from_source(
     vectors_dir: str,
-    model: str, 
+    model: str,
     vector_source: str,
-    class_name: str = "correct"
+    *,
+    vector_variant: str,
 ) -> Dict[int, np.ndarray]:
-    """Load vectors from a specified source task."""
+    """Load weighted vectors from a specified source task and variant."""
     task_mapping = {
         "stages": "stages",
         "self_recognition": "self_recognition_who", 
@@ -120,7 +128,7 @@ def load_vectors_from_source(
     }
     
     task_prefix = task_mapping.get(vector_source, vector_source)
-    return load_vectors_for_task(vectors_dir, model, task_prefix, class_name)
+    return load_weighted_vectors_for_task(vectors_dir, model, task_prefix, vector_variant)
 
 
 def _generate_example_with_steering(
@@ -406,6 +414,7 @@ def run_benchmark_with_steering(
     tasks: Optional[List[str]] = None,
     comment: str | None = None,
     variant: str = "plain",
+    vector_variant: Optional[str] = None,
 ) -> None:
     _ensure_dir(out_dir)
     ts = int(time.time())
@@ -423,12 +432,18 @@ def run_benchmark_with_steering(
         "hook_variant": hook_variant,
         "positions": positions,
         "layers": layers,
+        "vector_variant": vector_variant or variant,
         "vectors": {}
     }
     
     # Load vectors if steering is enabled
     if steering_mode != "none" and vector_source:
-        steering_config["vectors"] = load_vectors_from_source(vectors_dir, model, vector_source, class_name)
+        steering_config["vectors"] = load_vectors_from_source(
+            vectors_dir,
+            model,
+            vector_source,
+            vector_variant=steering_config["vector_variant"],
+        )
         if not steering_config["vectors"]:
             print(f"Warning: No vectors loaded for {vector_source}. Running without steering.")
             steering_config["steering_mode"] = "none"
@@ -520,7 +535,9 @@ def parse_args():
                        help="Positions to apply steering")
     parser.add_argument("--layers", type=int, nargs="+", help="Specific layers to apply steering to")
     parser.add_argument("--class-name", choices=["correct", "incorrect"], default="correct",
-                       help="Class of vectors to use for steering")
+                       help="Deprecated for weighted vectors; ignored")
+    parser.add_argument("--vector-variant", choices=["plain", "sp"], default=None,
+                       help="Variant of weighted vectors to use (defaults to --variant)")
     
     # Task selection
     parser.add_argument("--tasks", nargs="+", 
@@ -534,6 +551,7 @@ def parse_args():
 
 def main():
     args = parse_args()
+    vec_variant = args.vector_variant or args.variant
     run_benchmark_with_steering(
         model=args.model,
         out_dir=args.out_dir,
@@ -550,6 +568,7 @@ def main():
         tasks=args.tasks,
         comment=args.comment,
         variant=args.variant,
+        vector_variant=vec_variant,
     )
     print(f"Wrote results to {args.out_dir}")
 

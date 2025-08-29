@@ -9,8 +9,7 @@ from sad.templates import sa_prefix
 from sad.task import Task, get_id, PLAIN_VARIANT, SP_VARIANT
 
 from .sample_generator import SampleGenerator
-from provider_wrapper import get_provider_for_model
-from provider_wrapper import GetTextRequest, Message as ProviderMessage
+from provider_wrapper import get_provider_for_model, clear_gpu_memory, GetTextRequest, Message as ProviderMessage
 
 # Model categorization for Llama3 and similar models
 def strip_solver_wrappers(model: str) -> str:
@@ -190,7 +189,7 @@ class SelfRecognition(Task):
     def evaluate_and_capture_sample(self, model: str, sample: dict, variant: str):
         # Build messages
         messages = self._build_messages(sample, variant, model)
-        request = GetTextRequest(prompt=messages, temperature=0.0, max_tokens=4, context=None)
+        request = GetTextRequest(prompt=messages, temperature=0.0, max_tokens=1, context=None)
         provider = get_provider_for_model(model, prefer_transformerlens=True)
         text_resp, residuals = provider.generate_text_with_first_token_residuals(request)
         txt = getattr(text_resp, 'txt', None)

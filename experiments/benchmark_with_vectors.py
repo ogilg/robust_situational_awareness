@@ -94,7 +94,7 @@ def _aggregate_vectors_for_task(
     task,
     *,
     model: str,
-    variant,
+    variant: str,
     n: int,
     task_name: str,
     examples_max: int,
@@ -115,8 +115,8 @@ def _aggregate_vectors_for_task(
     count_by_class: dict[str, int] = {"correct": 0, "incorrect": 0}
     examples: list[dict] = []
 
-    # Normalize variant to string name if a Variant object was passed
-    variant_str = getattr(variant, "name", variant)
+    # Always work with simple string variants (e.g., "plain" or "sp")
+    variant_str = str(variant)
 
     i = 0
     for sample in task.iter_samples(model=model, variant=variant_str, n=n):
@@ -210,14 +210,11 @@ def _save_aggregated_for_task(*, vectors_dir: str, model: str, task_prefix: str,
 
 
 
-def run_task_stages(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
+def run_task_stages(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str="plain") -> list[dict[str, str]]:
     stages_task = make_stages_task()
-    stages_variant = stages_task.default_variant
-    if isinstance(variant, str) and variant.lower() == "sp":
-        stages_variant = type(stages_variant)(name="sp", pretty_name="SP", in_sad_score=False, in_sp_sad_score=True)
     t0 = time.time()
     stages_res, stages_sums, stages_counts, stages_examples = _aggregate_vectors_for_task(
-        stages_task, model=model, variant=stages_variant, n=n_per_task, task_name="stages_oversight", examples_max=max(1, min(5, n_per_task))
+        stages_task, model=model, variant=variant, n=n_per_task, task_name="stages_oversight", examples_max=max(1, min(5, n_per_task))
     )
     t1 = time.time()
     stages_total = int(stages_res["correct"]) + int(stages_res["incorrect"]) + int(stages_res["invalid"])
@@ -227,7 +224,7 @@ def run_task_stages(*, model: str, csv_out: str, vectors_dir: str, n_per_task: i
         {
             "model_id": model,
             "task": "stages_oversight",
-            "variant": getattr(stages_variant, "name", str(stages_variant)),
+            "variant": variant,
             "n_requested": n_per_task,
             "n_processed": stages_total,
             "invalid": stages_res["invalid"],
@@ -237,43 +234,41 @@ def run_task_stages(*, model: str, csv_out: str, vectors_dir: str, n_per_task: i
         },
     )
     # Save this task's aggregates immediately
-    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="stages", variant_str=getattr(stages_variant, "name", str(stages_variant)), sums=stages_sums, counts=stages_counts)
+    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="stages", variant_str=variant, sums=stages_sums, counts=stages_counts)
     return stages_examples
     
-def run_task_ab_baseline(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
-    ab_task = make_ab_baseline_task()
-    ab_variant = ab_task.default_variant
-    t0 = time.time()
-    ab_res, ab_sums, ab_counts, ab_examples = _aggregate_vectors_for_task(
-        ab_task, model=model, variant=ab_variant, n=n_per_task, task_name="ab_baseline", examples_max=max(1, min(5, n_per_task))
-    )
-    t1 = time.time()
-    ab_total = int(ab_res["correct"]) + int(ab_res["incorrect"]) + int(ab_res["invalid"])
-    ab_acc = (ab_res["correct"] / ab_total) if ab_total else 0.0
-    _write_csv_row(
-        csv_out,
-        {
-            "model_id": model,
-            "task": "ab_baseline",
-            "variant": getattr(ab_variant, "name", str(ab_variant)),
-            "n_requested": n_per_task,
-            "n_processed": ab_total,
-            "invalid": ab_res["invalid"],
-            "accuracy": f"{ab_acc:.6f}",
-            "runtime_seconds": f"{t1 - t0:.3f}",
-            "comment": comment or "",
-        },
-    )
-    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="ab_baseline", variant_str=getattr(ab_variant, "name", str(ab_variant)), sums=ab_sums, counts=ab_counts)
-    return ab_examples
+# def run_task_ab_baseline(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
+#     ab_task = make_ab_baseline_task()
+#     ab_variant = ab_task.default_variant
+#     t0 = time.time()
+#     ab_res, ab_sums, ab_counts, ab_examples = _aggregate_vectors_for_task(
+#         ab_task, model=model, variant=ab_variant, n=n_per_task, task_name="ab_baseline", examples_max=max(1, min(5, n_per_task))
+#     )
+#     t1 = time.time()
+#     ab_total = int(ab_res["correct"]) + int(ab_res["incorrect"]) + int(ab_res["invalid"])
+#     ab_acc = (ab_res["correct"] / ab_total) if ab_total else 0.0
+#     _write_csv_row(
+#         csv_out,
+#         {
+#             "model_id": model,
+#             "task": "ab_baseline",
+#             "variant": getattr(ab_variant, "name", str(ab_variant)),
+#             "n_requested": n_per_task,
+#             "n_processed": ab_total,
+#             "invalid": ab_res["invalid"],
+#             "accuracy": f"{ab_acc:.6f}",
+#             "runtime_seconds": f"{t1 - t0:.3f}",
+#             "comment": comment or "",
+#         },
+#     )
+#     _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="ab_baseline", variant_str=getattr(ab_variant, "name", str(ab_variant)), sums=ab_sums, counts=ab_counts)
+#     return ab_examples
 
 
-def run_task_self_recognition(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
-    sr_variant = variant or "plain"
-    sr_variant_use = self_recognition_who.default_variant if hasattr(self_recognition_who, "default_variant") else sr_variant
+def run_task_self_recognition(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str= "plain") -> list[dict[str, str]]:
     t0 = time.time()
     sr_res, sr_sums, sr_counts, sr_examples = _aggregate_vectors_for_task(
-        self_recognition_who, model=model, variant=sr_variant_use, n=n_per_task, task_name="self_recognition_who", examples_max=max(1, min(5, n_per_task))
+        self_recognition_who, model=model, variant=variant, n=n_per_task, task_name="self_recognition_who", examples_max=max(1, min(5, n_per_task))
     )
     t1 = time.time()
     sr_total = int(sr_res["correct"]) + int(sr_res["incorrect"]) + int(sr_res["invalid"])
@@ -283,7 +278,7 @@ def run_task_self_recognition(*, model: str, csv_out: str, vectors_dir: str, n_p
         {
             "model_id": model,
             "task": "self_recognition_who",
-            "variant": sr_variant,
+            "variant": variant,
             "n_requested": n_per_task,
             "n_processed": sr_total,
             "invalid": sr_res["invalid"],
@@ -292,16 +287,15 @@ def run_task_self_recognition(*, model: str, csv_out: str, vectors_dir: str, n_p
             "comment": comment or "",
         },
     )
-    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="self_recognition_who", variant_str=str(sr_variant), sums=sr_sums, counts=sr_counts)
+    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="self_recognition_who", variant_str=variant, sums=sr_sums, counts=sr_counts)
     return sr_examples
 
 
-def run_task_output_control(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
+def run_task_output_control(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str="plain") -> list[dict[str, str]]:
     oc_task = make_output_control_task()
-    oc_variant = oc_task.default_variant
     t0 = time.time()
     oc_res, oc_sums, oc_counts, oc_examples = _aggregate_vectors_for_task(
-        oc_task, model=model, variant=oc_variant, n=n_per_task, task_name="output_control", examples_max=max(1, min(5, n_per_task))
+        oc_task, model=model, variant=variant, n=n_per_task, task_name="output_control", examples_max=max(1, min(5, n_per_task))
     )
     t1 = time.time()
     oc_total = int(oc_res["correct"]) + int(oc_res["incorrect"]) + int(oc_res["invalid"])
@@ -311,7 +305,7 @@ def run_task_output_control(*, model: str, csv_out: str, vectors_dir: str, n_per
         {
             "model_id": model,
             "task": "output_control",
-            "variant": getattr(oc_variant, "name", str(oc_variant)),
+            "variant": variant,
             "n_requested": n_per_task,
             "n_processed": oc_total,
             "invalid": oc_res["invalid"],
@@ -320,16 +314,15 @@ def run_task_output_control(*, model: str, csv_out: str, vectors_dir: str, n_per
             "comment": comment or "",
         },
     )
-    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="output_control", variant_str=getattr(oc_variant, "name", str(oc_variant)), sums=oc_sums, counts=oc_counts)
+    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="output_control", variant_str=variant, sums=oc_sums, counts=oc_counts)
     return oc_examples
 
 
 def run_task_id_leverage(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
     idlev_task = make_idlev_generic_task()
-    id_variant = idlev_task.default_variant
     t0 = time.time()
     id_res, id_sums, id_counts, id_examples = _aggregate_vectors_for_task(
-        idlev_task, model=model, variant=id_variant, n=n_per_task, task_name="id_leverage_generic", examples_max=max(1, min(5, n_per_task))
+        idlev_task, model=model, variant=variant, n=n_per_task, task_name="id_leverage_generic", examples_max=max(1, min(5, n_per_task))
     )
     t1 = time.time()
     id_total = int(id_res["correct"]) + int(id_res["incorrect"]) + int(id_res["invalid"])
@@ -339,7 +332,7 @@ def run_task_id_leverage(*, model: str, csv_out: str, vectors_dir: str, n_per_ta
         {
             "model_id": model,
             "task": "id_leverage_generic",
-            "variant": getattr(id_variant, "name", str(id_variant)),
+            "variant": variant,
             "n_requested": n_per_task,
             "n_processed": id_total,
             "invalid": id_res["invalid"],
@@ -348,7 +341,7 @@ def run_task_id_leverage(*, model: str, csv_out: str, vectors_dir: str, n_per_ta
             "comment": comment or "",
         },
     )
-    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="id_leverage_generic", variant_str=getattr(id_variant, "name", str(id_variant)), sums=id_sums, counts=id_counts)
+    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="id_leverage_generic", variant_str=variant, sums=id_sums, counts=id_counts)
     return id_examples
 
 

@@ -35,7 +35,7 @@ def load_character_list(file_path):
 def get_model_probabilities(
     model_id: str,
     prompt,
-    temperature: float = 1.0,
+    transformerlens: bool = False,
     lora_adapter_path: str | None = None,
     provider=None,
 ):
@@ -54,7 +54,7 @@ def get_model_probabilities(
     if lora_adapter_path:
         request.lora_adapter_path = lora_adapter_path
 
-    provider = provider or get_provider_for_model(model_id, request=request, prefer_transformerlens=False)
+    provider = provider or get_provider_for_model(model_id, request=request, prefer_transformerlens=transformerlens)
     response = provider.get_probs(request)
     return response.probs
 

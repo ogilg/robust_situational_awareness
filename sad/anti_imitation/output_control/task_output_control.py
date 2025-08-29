@@ -80,8 +80,8 @@ class OutputControlTask(Task):
         text_resp, residuals = provider.generate_text_with_first_token_residuals(req)
         txt = getattr(text_resp, "txt", None)
 
-        # Score via probabilities (T=1)
-        probs = get_model_probabilities(model_id=model, prompt=prompt_msgs)
+        # Score via probabilities (T=1); prefer TL path to avoid loading HF again
+        probs = get_model_probabilities(model_id=model, prompt=prompt_msgs, transformerlens=True)
         result, extra = self._score_from_probs(probs, sample)
         aux_meta = {
             "txt": txt,

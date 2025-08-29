@@ -173,15 +173,15 @@ def run_stages_oversight(
     csv_out: str,
     n_per_task: int,
     examples_per_task: int,
+    variant: str,
     steering_config: Dict[str, Any],
     comment: str | None = None
 ) -> List[Dict[str, Any]]:
     stages_task = make_stages_task()
-    stages_variant = stages_task.default_variant
-    print(f"[Stages] variant={getattr(stages_variant, 'name', stages_variant)}, n={n_per_task}")
+    print(f"[Stages] variant={variant}, n={n_per_task}")
     
     t0 = time.time()
-    stages_res = stages_task.run(model=model, variant=stages_variant, n=n_per_task, save=False)
+    stages_res = stages_task.run(model=model, variant=variant, n=n_per_task, save=False)
     t1 = time.time()
     
     stages_total = int(stages_res["correct"]) + int(stages_res["incorrect"]) + int(stages_res["invalid"])
@@ -194,7 +194,7 @@ def run_stages_oversight(
         {
             "model_id": model,
             "task": "stages_oversight",
-            "variant": getattr(stages_variant, "name", str(stages_variant)),
+            "variant": variant,
             "steering_mode": steering_config.get("steering_mode", "none"),
             "vector_source": steering_config.get("vector_source", ""),
             "coefficient": steering_config.get("coefficient", ""),
@@ -213,8 +213,8 @@ def run_stages_oversight(
     # Collect examples
     examples = []
     count = 0
-    for sample in stages_task.iter_samples(model=model, variant=stages_variant, n=examples_per_task):
-        messages = stages_task._build_messages(sample, stages_variant)
+    for sample in stages_task.iter_samples(model=model, variant=variant, n=examples_per_task):
+        messages = stages_task._build_messages(sample, variant)
         ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=5, temperature=0.0)
         examples.append({"task": "stages_oversight", **ex})
         count += 1
@@ -230,12 +230,12 @@ def run_self_recognition(
     csv_out: str,
     n_per_task: int,
     examples_per_task: int,
+    variant: str,
     steering_config: Dict[str, Any],
     comment: str | None = None
 ) -> List[Dict[str, Any]]:
-    sr_variant = "plain"
     t0 = time.time()
-    sr_results = self_recognition_who.run_evaluation(model=model, variant=sr_variant, n=n_per_task, save=False)
+    sr_results = self_recognition_who.run_evaluation(model=model, variant=variant, n=n_per_task, save=False)
     t1 = time.time()
     
     sr_correct = sum(1 for r in sr_results if r.get("is_correct"))
@@ -250,7 +250,7 @@ def run_self_recognition(
         {
             "model_id": model,
             "task": "self_recognition_who",
-            "variant": sr_variant,
+            "variant": variant,
             "steering_mode": steering_config.get("steering_mode", "none"),
             "vector_source": steering_config.get("vector_source", ""),
             "coefficient": steering_config.get("coefficient", ""),
@@ -268,9 +268,9 @@ def run_self_recognition(
     
     # Collect examples
     examples = []
-    samples = self_recognition_who._get_samples(model, sr_variant, n=examples_per_task)
+    samples = self_recognition_who._get_samples(model, variant, n=examples_per_task)
     for sample in samples[:examples_per_task]:
-        messages = self_recognition_who._build_messages(sample, model, sr_variant)
+        messages = self_recognition_who._build_messages(sample, variant, model)
         ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=5, temperature=0.0)
         examples.append({"task": "self_recognition_who", **ex})
     
@@ -283,14 +283,14 @@ def run_output_control(
     csv_out: str,
     n_per_task: int,
     examples_per_task: int,
+    variant: str,
     steering_config: Dict[str, Any],
     comment: str | None = None
 ) -> List[Dict[str, Any]]:
     oc_task = make_output_control_task()
-    oc_variant = oc_task.default_variant
     
     t0 = time.time()
-    oc_res = oc_task.run(model=model, variant=oc_variant, n=n_per_task, save=False)
+    oc_res = oc_task.run(model=model, variant=variant, n=n_per_task, save=False)
     t1 = time.time()
     
     oc_total = int(oc_res["correct"]) + int(oc_res["incorrect"]) + int(oc_res["invalid"])
@@ -303,7 +303,7 @@ def run_output_control(
         {
             "model_id": model,
             "task": "output_control",
-            "variant": getattr(oc_variant, "name", str(oc_variant)),
+            "variant": variant,
             "steering_mode": steering_config.get("steering_mode", "none"),
             "vector_source": steering_config.get("vector_source", ""),
             "coefficient": steering_config.get("coefficient", ""),
@@ -322,7 +322,7 @@ def run_output_control(
     # Collect examples
     examples = []
     count = 0
-    for sample in oc_task.iter_samples(model=model, variant=oc_variant, n=examples_per_task):
+    for sample in oc_task.iter_samples(model=model, variant=variant, n=examples_per_task):
         ex = _generate_example_with_steering(model, sample.prompt, steering_config, max_tokens=2, temperature=0.0)
         examples.append({"task": "output_control", **ex})
         count += 1
@@ -338,14 +338,14 @@ def run_id_leverage(
     csv_out: str,
     n_per_task: int,
     examples_per_task: int,
+    variant: str,
     steering_config: Dict[str, Any],
     comment: str | None = None
 ) -> List[Dict[str, Any]]:
     idlev_task = make_idlev_generic_task()
-    id_variant = idlev_task.default_variant
     
     t0 = time.time()
-    id_res = idlev_task.run(model=model, variant=id_variant, n=n_per_task, save=False)
+    id_res = idlev_task.run(model=model, variant=variant, n=n_per_task, save=False)
     t1 = time.time()
     
     id_total = int(id_res["correct"]) + int(id_res["incorrect"]) + int(id_res["invalid"])
@@ -358,7 +358,7 @@ def run_id_leverage(
         {
             "model_id": model,
             "task": "id_leverage_generic",
-            "variant": getattr(id_variant, "name", str(id_variant)),
+            "variant": variant,
             "steering_mode": steering_config.get("steering_mode", "none"),
             "vector_source": steering_config.get("vector_source", ""),
             "coefficient": steering_config.get("coefficient", ""),
@@ -377,7 +377,7 @@ def run_id_leverage(
     # Collect examples
     examples = []
     count = 0
-    for sample in idlev_task.iter_samples(model=model, variant=id_variant, n=examples_per_task):
+    for sample in idlev_task.iter_samples(model=model, variant=variant, n=examples_per_task):
         messages = sample["messages"]
         fallback = sample.get("request_text", "")
         ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=30, temperature=0.0, fallback_text=fallback)
@@ -405,6 +405,7 @@ def run_benchmark_with_steering(
     class_name: str = "correct",
     tasks: Optional[List[str]] = None,
     comment: str | None = None,
+    variant: str = "plain",
 ) -> None:
     _ensure_dir(out_dir)
     ts = int(time.time())
@@ -444,6 +445,7 @@ def run_benchmark_with_steering(
             csv_out=csv_out,
             n_per_task=n_per_task,
             examples_per_task=examples_per_task,
+            variant=variant,
             steering_config=steering_config,
             comment=comment,
         ))
@@ -454,6 +456,7 @@ def run_benchmark_with_steering(
             csv_out=csv_out,
             n_per_task=n_per_task,
             examples_per_task=examples_per_task,
+            variant=variant,
             steering_config=steering_config,
             comment=comment,
         ))
@@ -464,6 +467,7 @@ def run_benchmark_with_steering(
             csv_out=csv_out,
             n_per_task=n_per_task,
             examples_per_task=examples_per_task,
+            variant=variant,
             steering_config=steering_config,
             comment=comment,
         ))
@@ -474,6 +478,7 @@ def run_benchmark_with_steering(
             csv_out=csv_out,
             n_per_task=n_per_task,
             examples_per_task=examples_per_task,
+            variant=variant,
             steering_config=steering_config,
             comment=comment,
         ))
@@ -501,6 +506,7 @@ def parse_args():
     parser.add_argument("--examples", type=int, default=5, help="Number of examples per task to save to JSON")
     parser.add_argument("--out-dir", default=os.path.join(ROOT, "experiments", "results"), help="Output directory")
     parser.add_argument("--vectors-dir", default=os.path.join(ROOT, "experiments", "vectors"), help="Vectors directory")
+    parser.add_argument("--variant", choices=["plain", "sp"], default="plain", help="Prompt variant: plain or sp (Situation Prompt)")
     
     # Steering parameters
     parser.add_argument("--steering-mode", choices=["none", "add", "project"], default="none", 
@@ -543,6 +549,7 @@ def main():
         class_name=args.class_name,
         tasks=args.tasks,
         comment=args.comment,
+        variant=args.variant,
     )
     print(f"Wrote results to {args.out_dir}")
 

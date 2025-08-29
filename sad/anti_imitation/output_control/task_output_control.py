@@ -1,7 +1,8 @@
 import os
 from typing import Iterable
 
-from sad.task import Task, PLAIN_VARIANT
+from sad.task import Task, PLAIN_VARIANT, SP_VARIANT
+from sad.templates import sa_prefix
 
 from .utils import get_given_words_samples, get_model_probabilities
 from .parsers import tvd_parser
@@ -19,7 +20,7 @@ class OutputControlTask(Task):
 
     def __init__(self, name: str = "output_control", path: str | None = None):
         here = path or os.path.dirname(os.path.abspath(__file__))
-        super().__init__(name=name, path=here, variants=[PLAIN_VARIANT], random_chance=0.0, has_splits=False)
+        super().__init__(name=name, path=here, variants=[PLAIN_VARIANT, SP_VARIANT], random_chance=0.0, has_splits=False)
 
     def iter_samples(self, model: str, variant: str, n: int | None = None) -> Iterable[dict]:
         num_examples = n if n is not None and n > 0 else 10
@@ -47,8 +48,9 @@ class OutputControlTask(Task):
                 if yielded >= num_examples:
                     break
 
-    def evaluate_sample(self, model: str, sample) -> dict:
-        probs = get_model_probabilities(model_id=model, prompt=sample.prompt)
+    def evaluate_sample(self, model: str, sample, variant: str) -> dict:
+        prompt_msgs = self._build_prompt_with_variant(sample.prompt, variant)
+        probs = get_model_probabilities(model_id=model, prompt=prompt_msgs)
         result, _ = self._score_from_probs(probs, sample)
         return result
 
@@ -58,7 +60,7 @@ class OutputControlTask(Task):
         invalid = 0  # always 0, since we compare distributions directly
 
         for sample in self.iter_samples(model=model, variant=variant, n=n):
-            res = self.evaluate_sample(model=model, sample=sample)
+            res = self.evaluate_sample(model=model, sample=sample, variant=variant)
             if res.get("within_tolerance"):
                 correct += 1
             else:
@@ -73,12 +75,13 @@ class OutputControlTask(Task):
         provider = get_provider_for_model(model, prefer_transformerlens=True)
         # Generate a short audit output and capture first-token residuals
         # Minimize generation; we only need first-token activations for auditing
-        req = GetTextRequest(context=None, prompt=sample.prompt, max_tokens=2, temperature=0.0)
+        prompt_msgs = self._build_prompt_with_variant(sample.prompt, variant)
+        req = GetTextRequest(context=None, prompt=prompt_msgs, max_tokens=2, temperature=0.0)
         text_resp, residuals = provider.generate_text_with_first_token_residuals(req)
         txt = getattr(text_resp, "txt", None)
 
         # Score via probabilities (T=1)
-        probs = get_model_probabilities(model_id=model, prompt=sample.prompt)
+        probs = get_model_probabilities(model_id=model, prompt=prompt_msgs)
         result, extra = self._score_from_probs(probs, sample)
         aux_meta = {
             "txt": txt,
@@ -133,6 +136,20 @@ class OutputControlTask(Task):
             "top_probs": parsed.get("top_probs", []),
         }
         return result, extra
+
+    def _build_prompt_with_variant(self, base_prompt, variant: str):
+        try:
+            msgs = list(base_prompt)
+        except Exception:
+            msgs = base_prompt
+        if variant == SP_VARIANT.name and hasattr(sa_prefix, "template"):
+            try:
+                # Provider Message import local to avoid cycles
+                from provider_wrapper import Message as ProviderMessage
+                return [ProviderMessage(role="system", content=str(getattr(sa_prefix, "template", "")))] + list(msgs)
+            except Exception:
+                pass
+        return msgs
 
 
 def make_task() -> OutputControlTask:

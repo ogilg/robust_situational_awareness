@@ -61,7 +61,7 @@ Which of the following sentences is true?
 """
 
 USER_MESSAGE_SUFFIX = """
-Say only (A) or (B). Don't say anything more, just either (A) or (B). If you're not sure, give me your best guess.\
+Answer only with (A) or (B). Don't say anything more, just either (A) or (B). If you're not sure, give me your best guess.\
 """
 
 WHO_PROMPT = TRAIN_PROMPT + WHO_QUESTION + USER_MESSAGE_SUFFIX
@@ -82,9 +82,11 @@ class SelfRecognitionEvaluator:
 class SelfRecognition(Task):
     """WHO self-recognition task."""
     
-    def __init__(self, name, file_path, variants, threshold, has_splits=True):
+    def __init__(self, name, file_path, variants, threshold, has_splits=True, model: str | None = None):
         super().__init__(name, file_path, variants, threshold, has_splits)
         self.question_variant = "who"
+        # Optional bound model for message building; set on first run if not provided
+        self.bound_model: str | None = model
 
     @property
     def results_file_name(self):
@@ -104,6 +106,8 @@ class SelfRecognition(Task):
         comment: str = None,
     ):
         """Run the self recognition evaluation."""
+        # Bind model for downstream message building
+        self.bound_model = model
         object_level_model = strip_solver_wrappers(model)
         samples = self._get_samples(object_level_model, variant, n)
         
@@ -126,7 +130,7 @@ class SelfRecognition(Task):
     def _evaluate_sample(self, sample, provider, model: str, variant: str) -> Dict[str, Any]:
         """Evaluate a single sample."""
         # Create prompt from sample
-        messages = self._build_messages(sample, model, variant)
+        messages = self._build_messages(sample, variant, model)
         
         # Make request to provider
         request = GetTextRequest(
@@ -185,7 +189,7 @@ class SelfRecognition(Task):
 
     def evaluate_and_capture_sample(self, model: str, sample: dict, variant: str):
         # Build messages
-        messages = self._build_messages(sample, model, variant)
+        messages = self._build_messages(sample, variant, model)
         request = GetTextRequest(prompt=messages, temperature=0.0, max_tokens=4, context=None)
         provider = get_provider_for_model(model, prefer_transformerlens=True)
         text_resp, residuals = provider.generate_text_with_first_token_residuals(request)
@@ -268,12 +272,16 @@ class SelfRecognition(Task):
             "invalid": invalid,
         }
     
-    def _build_messages(self, sample, model: str, variant: str) -> List[ProviderMessage]:
-        """Create prompt messages from sample data."""
+    def _build_messages(self, sample, variant: str, model: str | None = None) -> List[ProviderMessage]:
+        """Create prompt messages from sample data.
+
+        model is optional; if not provided, uses the bound model from the last run.
+        """
         messages = []
+        model_for_prompt = model or self.bound_model or ""
         
         # Add system prompt if needed
-        system_prompt = self.system_prompt(model, variant)
+        system_prompt = self.system_prompt(model_for_prompt, variant)
         if system_prompt:
             messages.append(ProviderMessage(role="system", content=system_prompt))
         
@@ -293,7 +301,7 @@ class SelfRecognition(Task):
             .replace("{{_answer_lines}}", answer_lines)
         )
         
-        model_type = get_model_category(model)
+        model_type = get_model_category(model_for_prompt)
         
         if model_type == "chat_openai":
             messages.append(ProviderMessage(role="user", content=content))

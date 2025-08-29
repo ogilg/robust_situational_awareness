@@ -15,6 +15,7 @@ import time
 from typing import Any
 import numpy as _np
 import json as _json
+from tqdm import tqdm
 try:
     import torch as _torch  # for safe dtype casting on TL tensors
 except Exception:
@@ -119,7 +120,7 @@ def _aggregate_vectors_for_task(
     variant_str = str(variant)
 
     i = 0
-    for sample in task.iter_samples(model=model, variant=variant_str, n=n):
+    for sample in tqdm(task.iter_samples(model=model, variant=variant_str, n=n)):
         result, residuals, aux_meta = task.evaluate_and_capture_sample(model=model, sample=sample, variant=variant_str)
         correct += int(result.get("correct", 0))
         incorrect += int(result.get("incorrect", 0))

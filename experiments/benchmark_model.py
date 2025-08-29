@@ -18,7 +18,7 @@ import json
 import time
 from pathlib import Path
 from typing import Any
-
+from tqdm import tqdm
 # Ensure project root on sys.path
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if ROOT not in sys.path:
@@ -113,7 +113,7 @@ def run_stages_oversight(
     examples: list[dict[str, Any]] = []
     t0 = time.time()
     i = 0
-    for sample in stages_task.iter_samples(model=model, variant=getattr(stages_variant, 'name', stages_variant), n=n_per_task):
+    for sample in tqdm(stages_task.iter_samples(model=model, variant=getattr(stages_variant, 'name', stages_variant), n=n_per_task)):
         messages = stages_task._build_messages(sample, getattr(stages_variant, 'name', stages_variant))  # noqa: SLF001
         req = GetTextRequest(context=None, prompt=messages, max_tokens=3, temperature=0.0)
         resp = provider.generate_text(req)
@@ -173,7 +173,7 @@ def run_self_recognition(
     t0 = time.time()
     # Use the same iterator as the task uses
     samples = self_recognition_who._get_samples(model, sr_variant, n=n_per_task)  # noqa: SLF001
-    for sample in samples:
+    for sample in tqdm(samples):
         messages = self_recognition_who._build_messages(sample, sr_variant, model)  # noqa: SLF001
         req = GetTextRequest(context=None, prompt=messages, max_tokens=5, temperature=0.0)
         resp = provider.generate_text(req)
@@ -227,7 +227,7 @@ def run_output_control(
     incorrect = 0
     invalid = 0
     # Single pass: score and collect up to examples_per_task
-    for sample in oc_task.iter_samples(model=model, variant=oc_variant_str, n=n_per_task):
+    for sample in tqdm(oc_task.iter_samples(model=model, variant=oc_variant_str, n=n_per_task)):
         res = oc_task.evaluate_sample(model=model, sample=sample, variant=oc_variant_str)
         correct += int(res.get("correct", 0))
         incorrect += int(res.get("incorrect", 0))
@@ -278,26 +278,43 @@ def run_id_leverage(
     correct = 0
     incorrect = 0
     invalid = 0
+    # Per-identity-condition tracking
+    # Key as tuple: (identity_phrase, identity_true)
+    per_cond_counts: dict[tuple[str, int], dict[str, int]] = {}
     i = 0
-    for sample in idlev_task.iter_samples(model=model, variant=id_variant_str, n=n_per_task):
+    for sample in tqdm(idlev_task.iter_samples(model=model, variant=id_variant_str, n=n_per_task)):
         messages = sample["messages"]
         req = GetTextRequest(context=None, prompt=messages, max_tokens=200, temperature=0.0)
         resp = provider.generate_text(req)
         txt = getattr(resp, "txt", None)
         identity_true = bool(sample.get("identity_true", True))
         scored = idlev_task._score_from_text(txt, sample["target_language"], identity_true)  # noqa: SLF001
+        # Update overall counts
         if scored.get("invalid"):
             invalid += 1
         elif scored.get("success"):
             correct += 1
         else:
             incorrect += 1
+        # Update per-condition counts
+        cond_key = (str(sample.get("identity_phrase", "")), int(identity_true))
+        bucket = per_cond_counts.setdefault(cond_key, {"correct": 0, "incorrect": 0, "invalid": 0, "total": 0})
+        if scored.get("invalid"):
+            bucket["invalid"] += 1
+        elif scored.get("success"):
+            bucket["correct"] += 1
+        else:
+            bucket["incorrect"] += 1
+        bucket["total"] += 1
         if len(examples) < examples_per_task:
             ex = {
                 "task": "id_leverage_generic",
                 "prompt": _last_user_content(messages) or sample.get("request_text", ""),
                 "response": txt or "",
                 "classification": "n/a",
+                "identity_phrase": sample.get("identity_phrase", ""),
+                "identity_true": int(identity_true),
+                "target_language": sample.get("target_language", ""),
             }
             examples.append(ex)
         i += 1
@@ -320,6 +337,37 @@ def run_id_leverage(
             "comment": comment or "",
         },
     )
+    # Write per-identity-condition CSV alongside scores
+    cond_csv = os.path.join(os.path.dirname(csv_out), f"idlev_conditions_{model}.csv")
+    is_new = not os.path.exists(cond_csv) or os.path.getsize(cond_csv) == 0
+    with open(cond_csv, "a", newline="") as f:
+        import csv as _csv
+        fieldnames = [
+            "model_id",
+            "variant",
+            "identity_phrase",
+            "identity_true",
+            "n",
+            "invalid",
+            "accuracy",
+        ]
+        writer = _csv.DictWriter(f, fieldnames=fieldnames)
+        if is_new:
+            writer.writeheader()
+        for (phrase, true_flag), cnts in sorted(per_cond_counts.items(), key=lambda x: (-x[1].get("total", 0), x[0][0])):
+            total = int(cnts.get("total", 0) or 0)
+            inv = int(cnts.get("invalid", 0) or 0)
+            cor = int(cnts.get("correct", 0) or 0)
+            acc = (cor / total) if total else 0.0
+            writer.writerow({
+                "model_id": model,
+                "variant": id_variant_str,
+                "identity_phrase": phrase,
+                "identity_true": int(true_flag),
+                "n": total,
+                "invalid": inv,
+                "accuracy": f"{acc:.6f}",
+            })
     return examples
 
 
@@ -340,22 +388,22 @@ def run_benchmark(
     all_examples: list[dict[str, Any]] = []
 
     # Run each task (comment out to skip)
-    # all_examples.extend(run_stages_oversight(
-    #     model=model,
-    #     csv_out=csv_out,
-    #     n_per_task=n_per_task,
-    #     examples_per_task=examples_per_task,
-    #     variant=variant,
-    #     comment=comment,
-    # ))
-    # all_examples.extend(run_self_recognition(
-    #     model=model,
-    #     csv_out=csv_out,
-    #     n_per_task=n_per_task,
-    #     examples_per_task=examples_per_task,
-    #     variant=variant,
-    #     comment=comment,
-    # ))
+    all_examples.extend(run_stages_oversight(
+        model=model,
+        csv_out=csv_out,
+        n_per_task=n_per_task,
+        examples_per_task=examples_per_task,
+        variant=variant,
+        comment=comment,
+    ))
+    all_examples.extend(run_self_recognition(
+        model=model,
+        csv_out=csv_out,
+        n_per_task=n_per_task,
+        examples_per_task=examples_per_task,
+        variant=variant,
+        comment=comment,
+    ))
     all_examples.extend(run_output_control(
         model=model,
         csv_out=csv_out,
@@ -364,14 +412,14 @@ def run_benchmark(
         variant=variant,
         comment=comment,
     ))
-    # all_examples.extend(run_id_leverage(
-    #     model=model,
-    #     csv_out=csv_out,
-    #     n_per_task=n_per_task,
-    #     examples_per_task=examples_per_task,
-    #     variant=variant,
-    #     comment=comment,
-    # ))
+    all_examples.extend(run_id_leverage(
+        model=model,
+        csv_out=csv_out,
+        n_per_task=n_per_task,
+        examples_per_task=examples_per_task,
+        variant=variant,
+        comment=comment,
+    ))
 
     # ----- Write examples JSON -----
     with open(examples_out, "w") as f:

@@ -146,17 +146,18 @@ def _aggregate_vectors_for_task(
     return ({"correct": correct, "incorrect": incorrect, "invalid": invalid}, sum_by_class, count_by_class, examples)
 
 
-def _save_aggregated_for_task(*, vectors_dir: str, model: str, task_prefix: str, sums: dict, counts: dict) -> None:
+def _save_aggregated_for_task(*, vectors_dir: str, model: str, task_prefix: str, variant_str: str, sums: dict, counts: dict) -> None:
     """
     Merge-and-save aggregated vectors and counts for a single task immediately.
 
-    - Aggregated vectors now live per-task at experiments/vectors/aggregated_vectors_{model}__{task}.npz
+    - Aggregated vectors now live per-task-and-variant at experiments/vectors/aggregated_vectors_{model}__{task}__{variant}.npz
       with keys like 'correct__layer_{i}'.
     - Counts per class live in aggregated_vectors_{model}.counts.json as:
-      { task_prefix: {"correct": int, "incorrect": int}, ... }
+      { f"{task_prefix}__{variant}": {"correct": int, "incorrect": int}, ... }
     """
     os.makedirs(vectors_dir, exist_ok=True)
-    task_npz = os.path.join(vectors_dir, f"aggregated_vectors_{model}__{task_prefix}.npz")
+    key_prefix = f"{task_prefix}__{variant_str}"
+    task_npz = os.path.join(vectors_dir, f"aggregated_vectors_{model}__{key_prefix}.npz")
     agg_counts_json = os.path.join(vectors_dir, f"aggregated_vectors_{model}.counts.json")
 
     # Build additions for this task
@@ -189,7 +190,7 @@ def _save_aggregated_for_task(*, vectors_dir: str, model: str, task_prefix: str,
                 counts_data = _json.load(f) or {}
         except Exception:
             counts_data = {}
-    counts_data[task_prefix] = counts
+    counts_data[key_prefix] = counts
     with open(agg_counts_json, "w") as f:
         _json.dump(counts_data, f, indent=2)
 
@@ -222,7 +223,7 @@ def run_task_stages(*, model: str, csv_out: str, vectors_dir: str, n_per_task: i
         },
     )
     # Save this task's aggregates immediately
-    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="stages", sums=stages_sums, counts=stages_counts)
+    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="stages", variant_str=getattr(stages_variant, "name", str(stages_variant)), sums=stages_sums, counts=stages_counts)
     return stages_examples
     
 def run_task_ab_baseline(*, model: str, csv_out: str, vectors_dir: str, n_per_task: int, comment: str | None, variant: str) -> list[dict[str, str]]:
@@ -249,7 +250,7 @@ def run_task_ab_baseline(*, model: str, csv_out: str, vectors_dir: str, n_per_ta
             "comment": comment or "",
         },
     )
-    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="ab_baseline", sums=ab_sums, counts=ab_counts)
+    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="ab_baseline", variant_str=getattr(ab_variant, "name", str(ab_variant)), sums=ab_sums, counts=ab_counts)
     return ab_examples
 
 
@@ -277,7 +278,7 @@ def run_task_self_recognition(*, model: str, csv_out: str, vectors_dir: str, n_p
             "comment": comment or "",
         },
     )
-    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="self_recognition_who", sums=sr_sums, counts=sr_counts)
+    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="self_recognition_who", variant_str=str(sr_variant), sums=sr_sums, counts=sr_counts)
     return sr_examples
 
 
@@ -305,7 +306,7 @@ def run_task_output_control(*, model: str, csv_out: str, vectors_dir: str, n_per
             "comment": comment or "",
         },
     )
-    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="output_control", sums=oc_sums, counts=oc_counts)
+    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="output_control", variant_str=getattr(oc_variant, "name", str(oc_variant)), sums=oc_sums, counts=oc_counts)
     return oc_examples
 
 
@@ -333,7 +334,7 @@ def run_task_id_leverage(*, model: str, csv_out: str, vectors_dir: str, n_per_ta
             "comment": comment or "",
         },
     )
-    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="id_leverage_generic", sums=id_sums, counts=id_counts)
+    _save_aggregated_for_task(vectors_dir=vectors_dir, model=model, task_prefix="id_leverage_generic", variant_str=getattr(id_variant, "name", str(id_variant)), sums=id_sums, counts=id_counts)
     return id_examples
 
 
@@ -382,9 +383,9 @@ def run_benchmark_with_vectors(
         examples.extend(run_task_id_leverage(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment, variant=variant))
         clear_gpu_memory()
 
-    if "ab_baseline" in to_run:
-        examples.extend(run_task_ab_baseline(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment, variant=variant))
-        clear_gpu_memory()
+    # if "ab_baseline" in to_run:
+    #     examples.extend(run_task_ab_baseline(model=model, csv_out=csv_out, vectors_dir=vectors_dir, n_per_task=n_per_task, comment=comment, variant=variant))
+    #     clear_gpu_memory()
 
     # Save examples JSON (like benchmark_model)
     if examples:

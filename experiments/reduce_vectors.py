@@ -19,10 +19,11 @@ import numpy as np
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Compute weighted vectors from aggregated sums")
+    parser = argparse.ArgumentParser(description="Compute weighted vectors from aggregated sums (per task and per variant)")
     parser.add_argument("--model", required=True)
     parser.add_argument("--in-dir", default=os.path.join("experiments", "results"))
     parser.add_argument("--out", default=None, help="Output npz path (defaults to weighted_vectors_{model}.npz in in-dir)")
+    parser.add_argument("--variant", choices=["plain", "sp", "both"], default="both", help="Which variant to reduce: plain, sp, or both")
     args = parser.parse_args()
 
     in_dir = args.in_dir
@@ -34,11 +35,15 @@ def main():
     with open(counts_json_path, "r") as f:
         counts = json.load(f)
 
-    # Keys look like: "task__class__layer_{idx}" where class in {correct, incorrect}
-    # We'll produce: "task__weighted__layer_{idx}"
+    # Keys now look like: "{task}__{variant}" where variant in {plain, sp}
+    # We'll produce: "{task}__{variant}__weighted__layer_{idx}"
     tasks = list(counts.keys())
     out_payload = {}
     summary = []
+
+    # Filter by requested variant(s)
+    if args.variant in ("plain", "sp"):
+        tasks = [t for t in tasks if t.endswith(f"__{args.variant}")]
 
     for task in tasks:
         # Per-task NPZ
@@ -84,7 +89,8 @@ def main():
         out_path = args.out
     else:
         os.makedirs(vectors_dir, exist_ok=True)
-        out_path = os.path.join(vectors_dir, f"weighted_vectors_{model}.npz")
+        suffix = args.variant if args.variant in ("plain", "sp") else "both"
+        out_path = os.path.join(vectors_dir, f"weighted_vectors_{model}__{suffix}.npz")
     if out_payload:
         np.savez(out_path, **out_payload)
         print(f"Wrote weighted vectors: {out_path} ({len(out_payload)} arrays)")

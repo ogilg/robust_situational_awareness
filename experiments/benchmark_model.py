@@ -221,19 +221,24 @@ def run_output_control(
 ) -> list[dict[str, Any]]:
     examples = []
     oc_task = make_output_control_task()
-    oc_variant = oc_task.default_variant
+    oc_variant_str = variant or getattr(oc_task.default_variant, 'name', 'plain')
     t0 = time.time()
     correct = 0
     incorrect = 0
     invalid = 0
     # Single pass: score and collect up to examples_per_task
-    for sample in oc_task.iter_samples(model=model, variant=getattr(oc_variant, 'name', oc_variant), n=n_per_task):
-        res = oc_task.evaluate_sample(model=model, sample=sample)
+    for sample in oc_task.iter_samples(model=model, variant=oc_variant_str, n=n_per_task):
+        res = oc_task.evaluate_sample(model=model, sample=sample, variant=oc_variant_str)
         correct += int(res.get("correct", 0))
         incorrect += int(res.get("incorrect", 0))
         invalid += int(res.get("invalid", 0))
         if len(examples) < examples_per_task:
-            ex = _generate_example(model, sample.prompt, max_tokens=2, temperature=0.0)
+            try:
+                # Prepend SA prefix when needed for example generation
+                msgs = oc_task._build_prompt_with_variant(sample.prompt, oc_variant_str)  # noqa: SLF001
+            except Exception:
+                msgs = sample.prompt
+            ex = _generate_example(model, msgs, max_tokens=2, temperature=0.0)
             ex["classification"] = "n/a"
             examples.append({"task": "output_control", **ex})
     t1 = time.time()
@@ -244,7 +249,7 @@ def run_output_control(
         {
             "model_id": model,
             "task": "output_control",
-            "variant": getattr(oc_variant, "name", str(oc_variant)),
+            "variant": oc_variant_str,
             "n_requested": n_per_task,
             "n_processed": oc_total,
             "invalid": invalid,
@@ -267,14 +272,14 @@ def run_id_leverage(
 ) -> list[dict[str, Any]]:
     examples = []
     idlev_task = make_idlev_generic_task()
-    id_variant = idlev_task.default_variant
+    id_variant_str = variant or getattr(idlev_task.default_variant, 'name', 'plain')
     provider = get_provider_for_model(model, prefer_transformerlens=False)
     t0 = time.time()
     correct = 0
     incorrect = 0
     invalid = 0
     i = 0
-    for sample in idlev_task.iter_samples(model=model, variant=getattr(id_variant, 'name', id_variant), n=n_per_task):
+    for sample in idlev_task.iter_samples(model=model, variant=id_variant_str, n=n_per_task):
         messages = sample["messages"]
         req = GetTextRequest(context=None, prompt=messages, max_tokens=200, temperature=0.0)
         resp = provider.generate_text(req)
@@ -305,7 +310,7 @@ def run_id_leverage(
         {
             "model_id": model,
             "task": "id_leverage_generic",
-            "variant": getattr(id_variant, "name", str(id_variant)),
+            "variant": id_variant_str,
             "n_requested": n_per_task,
             "n_processed": id_total,
             "invalid": invalid,
@@ -342,14 +347,14 @@ def run_benchmark(
         variant=variant,
         comment=comment,
     ))
-    all_examples.extend(run_self_recognition(
-        model=model,
-        csv_out=csv_out,
-        n_per_task=n_per_task,
-        examples_per_task=examples_per_task,
-        variant=variant,
-        comment=comment,
-    ))
+    # all_examples.extend(run_self_recognition(
+    #     model=model,
+    #     csv_out=csv_out,
+    #     n_per_task=n_per_task,
+    #     examples_per_task=examples_per_task,
+    #     variant=variant,
+    #     comment=comment,
+    # ))
     all_examples.extend(run_output_control(
         model=model,
         csv_out=csv_out,

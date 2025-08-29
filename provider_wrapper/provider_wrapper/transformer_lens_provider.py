@@ -92,22 +92,9 @@ class TransformerLensProvider(DefaultHFProvider):
                 return activation
             return hook_fn
 
-        # Select 4 uniformly spaced layers (inclusive of first and last); fallback to all if <4 layers
-        num_layers = int(tl_model.cfg.n_layers)
-        if num_layers >= 4:
-            last = num_layers - 1
-            candidate_layers = sorted(set([
-                0,
-                max(0, round(last / 3)),
-                max(0, round(2 * last / 3)),
-                last,
-            ]))
-        else:
-            candidate_layers = list(range(num_layers))
-
         fwd_hooks = [
             (f"blocks.{i}.{hook_attr}", make_hook(i, prompt_len))
-            for i in candidate_layers
+            for i in range(tl_model.cfg.n_layers)
         ]
 
         tl_model.reset_hooks()

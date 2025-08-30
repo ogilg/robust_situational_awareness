@@ -4,7 +4,7 @@ import os
 import torch
 from transformer_lens import HookedTransformer
 
-from .data_models import GetTextRequest, GetTextResponse
+from .data_models import GetTextRequest, GetTextResponse, GetProbsRequest, GetProbsResponse
 from .huggingface_provider import DefaultHFProvider
 from .huggingface_provider import clear_gpu_memory
 
@@ -185,6 +185,12 @@ class TransformerLensProvider(DefaultHFProvider):
         toks = tl_model.to_tokens(text, prepend_bos=False)
         return tl_model, toks
 
+    def _tl_tokens_for_probs(self, request: GetProbsRequest):
+        _, text = self.format_prompt(request.prompt)
+        tl_model = self._get_tl_model(self._tl_compat_name())
+        toks = tl_model.to_tokens(text, prepend_bos=False)
+        return tl_model, toks
+
     def _tl_hook_attr(self, hook_variant: str) -> str:
         return {
             "pre": "hook_resid_pre",
@@ -234,6 +240,35 @@ class TransformerLensProvider(DefaultHFProvider):
             context=ctx,
         )
 
+    def _tl_topk_from_logits(self, tl_model: HookedTransformer, logits, top_k: int = 50) -> tuple[dict[str, float], int]:
+        import torch
+        from torch.nn.functional import softmax
+        probs_tensor = softmax(logits, dim=-1)
+        k = min(top_k, probs_tensor.shape[-1])
+        top_probs, top_indices = torch.topk(probs_tensor, k)
+        probs: dict[str, float] = {}
+        for prob, idx in zip(top_probs.detach().cpu().tolist(), top_indices.detach().cpu().tolist()):
+            # Use TL tokenizer for consistency with TL model
+            token_str = tl_model.tokenizer.decode([int(idx)])
+            probs[token_str] = float(prob)
+        return probs, k
+
+    # ----- Probs (unsteered, TL path) -----
+    def get_probs(self, request: GetProbsRequest) -> GetProbsResponse:  # type: ignore[override]
+        tl_model, toks = self._tl_tokens_for_probs(request)
+        tl_model.reset_hooks()
+        with torch.no_grad():
+            out = tl_model(toks)
+            logits = out[0, -1, :]
+        probs, k = self._tl_topk_from_logits(tl_model, logits)
+        return GetProbsResponse(
+            model_id=self.model_id,
+            request=request,
+            probs=probs,
+            raw_responses=[probs],
+            context={"method": "tl_logits", "top_k": k},
+        )
+
     def generate_text_with_additions(
         self,
         request: GetTextRequest,
@@ -250,10 +285,11 @@ class TransformerLensProvider(DefaultHFProvider):
 
         def make_add_hook(v: torch.Tensor):
             def hook_fn(activation, hook):
+                vv = v.to(dtype=activation.dtype, device=activation.device)
                 if positions == "last":
-                    activation[:, -1, :] = activation[:, -1, :] + float(coefficient) * v
+                    activation[:, -1, :] = activation[:, -1, :] + float(coefficient) * vv
                 else:
-                    activation = activation + float(coefficient) * v.view(1, 1, -1)
+                    activation = activation + float(coefficient) * vv.view(1, 1, -1)
                 return activation
             return hook_fn
 
@@ -289,8 +325,10 @@ class TransformerLensProvider(DefaultHFProvider):
         target_layers, torch_vecs = self._tl_prepare_vectors(tl_model, vectors, layers)
 
         def make_project_hook(v: torch.Tensor):
-            u = v / (v.norm() + 1e-12)
             def hook_fn(activation, hook):
+                vv = v.to(dtype=activation.dtype, device=activation.device)
+                eps = torch.tensor(1e-12, dtype=activation.dtype, device=activation.device)
+                u = vv / (vv.norm() + eps)
                 if positions == "last":
                     x = activation[:, -1, :]
                     dot = (x * u).sum(dim=-1, keepdim=True)
@@ -317,4 +355,83 @@ class TransformerLensProvider(DefaultHFProvider):
                 "positions": positions,
             },
         )
+
+    # ----- Probs with activation interventions (for Output Control steered accuracy) -----
+    def get_probs_with_additions(
+        self,
+        request: GetProbsRequest,
+        *,
+        vectors: dict[int, Any],
+        coefficient: float = 1.0,
+        layers: list[int] | None = None,
+        hook_variant: str = "pre",
+        positions: str = "all",
+        top_k: int = 50,
+    ) -> dict[str, float]:
+        tl_model, toks = self._tl_tokens_for_probs(request)
+        hook_attr = self._tl_hook_attr(hook_variant)
+        target_layers, torch_vecs = self._tl_prepare_vectors(tl_model, vectors, layers)
+
+        def make_add_hook(v: torch.Tensor):
+            def hook_fn(activation, hook):
+                vv = v.to(dtype=activation.dtype, device=activation.device)
+                if positions == "last":
+                    activation[:, -1, :] = activation[:, -1, :] + float(coefficient) * vv
+                else:
+                    activation = activation + float(coefficient) * vv.view(1, 1, -1)
+                return activation
+            return hook_fn
+
+        fwd_hooks = [
+            (f"blocks.{i}.{hook_attr}", make_add_hook(torch_vecs[i]))
+            for i in target_layers if i in torch_vecs
+        ]
+        tl_model.reset_hooks()
+        with tl_model.hooks(fwd_hooks=fwd_hooks):
+            with torch.no_grad():
+                out = tl_model(toks)
+                logits = out[0, -1, :]
+        probs, _ = self._tl_topk_from_logits(tl_model, logits, top_k)
+        return probs
+
+    def get_probs_with_projection(
+        self,
+        request: GetProbsRequest,
+        *,
+        vectors: dict[int, Any],
+        layers: list[int] | None = None,
+        hook_variant: str = "pre",
+        positions: str = "all",
+        top_k: int = 50,
+    ) -> dict[str, float]:
+        tl_model, toks = self._tl_tokens_for_probs(request)
+        hook_attr = self._tl_hook_attr(hook_variant)
+        target_layers, torch_vecs = self._tl_prepare_vectors(tl_model, vectors, layers)
+
+        def make_project_hook(v: torch.Tensor):
+            def hook_fn(activation, hook):
+                vv = v.to(dtype=activation.dtype, device=activation.device)
+                eps = torch.tensor(1e-12, dtype=activation.dtype, device=activation.device)
+                u = vv / (vv.norm() + eps)
+                if positions == "last":
+                    x = activation[:, -1, :]
+                    dot = (x * u).sum(dim=-1, keepdim=True)
+                    activation[:, -1, :] = x - dot * u.view(1, -1)
+                else:
+                    dot = torch.tensordot(activation, u, dims=([-1], [0]))
+                    activation = activation - dot.unsqueeze(-1) * u.view(1, 1, -1)
+                return activation
+            return hook_fn
+
+        fwd_hooks = [
+            (f"blocks.{i}.{hook_attr}", make_project_hook(torch_vecs[i]))
+            for i in target_layers if i in torch_vecs
+        ]
+        tl_model.reset_hooks()
+        with tl_model.hooks(fwd_hooks=fwd_hooks):
+            with torch.no_grad():
+                out = tl_model(toks)
+                logits = out[0, -1, :]
+        probs, _ = self._tl_topk_from_logits(tl_model, logits, top_k)
+        return probs
 

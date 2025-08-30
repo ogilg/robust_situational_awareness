@@ -38,6 +38,7 @@ from sad.task import PLAIN_VARIANT, SP_VARIANT
 
 # Provider wrapper
 from provider_wrapper import get_provider_for_model, GetTextRequest, TransformerLensProvider
+from provider_wrapper import GetProbsRequest
 
 
 def _ensure_dir(path: str) -> None:
@@ -92,13 +93,22 @@ def load_weighted_vectors_for_task(
     And keys inside NPZ: {task}__{variant}__weighted__layer_{idx}
     """
     npz_path = os.path.join(vectors_dir, f"weighted_vectors_{model}__{vector_variant}.npz")
+    fallback_path = os.path.join(vectors_dir, f"weighted_vectors_{model}__both.npz")
+    used_fallback = False
     if not os.path.exists(npz_path):
-        print(f"Warning: Weighted vectors file not found: {npz_path}")
-        return {}
+        if os.path.exists(fallback_path):
+            print(f"Info: Using fallback vectors file: {fallback_path} (filtering for variant '{vector_variant}')")
+            npz_path = fallback_path
+            used_fallback = True
+        else:
+            print(f"Warning: Weighted vectors file not found: {npz_path} or fallback {fallback_path}")
+            return {}
 
     vectors: Dict[int, np.ndarray] = {}
     try:
         with np.load(npz_path) as data:
+            # When using the variant-specific file, keys contain only that variant.
+            # When using the __both file, keys contain both variants; we filter by requested variant.
             prefix = f"{task_prefix}__{vector_variant}__weighted__layer_"
             for key in data.files:
                 if key.startswith(prefix):
@@ -107,7 +117,8 @@ def load_weighted_vectors_for_task(
                     except Exception:
                         continue
                     vectors[layer_idx] = data[key]
-        print(f"Loaded {len(vectors)} weighted vectors for {task_prefix} ({vector_variant})")
+        print(f"Loaded {len(vectors)} weighted vectors for {task_prefix} ({vector_variant})"
+              + (" from __both fallback" if used_fallback else ""))
     except Exception as e:
         print(f"Error loading weighted vectors from {npz_path}: {e}")
 
@@ -177,7 +188,8 @@ def _generate_example_with_steering(
     return {"prompt": prompt_text, "response": getattr(resp, "txt", "")}
 
 
-def run_stages_oversight(
+
+def run_stages_oversight_steered(
     *,
     model: str,
     csv_out: str,
@@ -188,18 +200,27 @@ def run_stages_oversight(
     comment: str | None = None
 ) -> List[Dict[str, Any]]:
     stages_task = make_stages_task()
-    print(f"[Stages] variant={variant}, n={n_per_task}")
-    
+    print(f"[Stages (steered)] variant={variant}, n={n_per_task}")
+
     t0 = time.time()
-    variant_obj = PLAIN_VARIANT if str(variant).lower() == "plain" else SP_VARIANT
-    stages_res = stages_task.run(model=model, variant=variant_obj, n=n_per_task, save=False)
+    correct = 0
+    incorrect = 0
+    invalid = 0
+    # Score with TL interventions by generating steered text and using task scorer
+    for sample in stages_task.iter_samples(model=model, variant=variant, n=n_per_task):
+        messages = stages_task._build_messages(sample, variant)
+        ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=3, temperature=0.0)
+        expected = stages_task._infer_expected_label(sample)
+        scored = stages_task._score_from_text(ex.get("response"), expected_label=expected)
+        correct += int(scored.get("correct", 0))
+        incorrect += int(scored.get("incorrect", 0))
+        invalid += int(scored.get("invalid", 0))
     t1 = time.time()
-    
-    stages_total = int(stages_res["correct"]) + int(stages_res["incorrect"]) + int(stages_res["invalid"])
-    stages_acc = (stages_res["correct"] / stages_total) if stages_total else 0.0
-    
-    print(f"[Stages] correct={stages_res['correct']} incorrect={stages_res['incorrect']} invalid={stages_res['invalid']} acc={stages_acc:.3f}")
-    
+
+    total = correct + incorrect + invalid
+    acc = (correct / total) if total else 0.0
+    print(f"[Stages (steered)] correct={correct} incorrect={incorrect} invalid={invalid} acc={acc:.3f}")
+
     _write_csv_row(
         csv_out,
         {
@@ -213,25 +234,24 @@ def run_stages_oversight(
             "positions": steering_config.get("positions", ""),
             "layers": str(steering_config.get("layers", "")) if steering_config.get("layers") else "",
             "n_requested": n_per_task,
-            "n_processed": stages_total,
-            "invalid": stages_res["invalid"],
-            "accuracy": f"{stages_acc:.6f}",
+            "n_processed": total,
+            "invalid": invalid,
+            "accuracy": f"{acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
             "comment": comment or "",
         },
     )
-    
-    # Collect examples
+
+    # Examples (also steered)
     examples = []
     count = 0
-    for sample in tqdm(stages_task.iter_samples(model=model, variant=variant, n=examples_per_task)):
+    for sample in stages_task.iter_samples(model=model, variant=variant, n=examples_per_task):
         messages = stages_task._build_messages(sample, variant)
         ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=5, temperature=0.0)
         examples.append({"task": "stages_oversight", **ex})
         count += 1
         if count >= examples_per_task:
             break
-    
     return examples
 
 
@@ -299,16 +319,55 @@ def run_output_control(
     comment: str | None = None
 ) -> List[Dict[str, Any]]:
     oc_task = make_output_control_task()
-    
+
+    # If steering is active and TL is available, compute steered accuracy via probs-under-hooks
+    use_steered = steering_config.get("steering_mode") != "none" and bool(steering_config.get("vectors"))
     t0 = time.time()
-    variant_obj = PLAIN_VARIANT if str(variant).lower() == "plain" else SP_VARIANT
-    oc_res = oc_task.run(model=model, variant=variant_obj, n=n_per_task, save=False)
-    t1 = time.time()
-    
-    oc_total = int(oc_res["correct"]) + int(oc_res["incorrect"]) + int(oc_res["invalid"])
-    oc_acc = (oc_res["correct"] / oc_total) if oc_total else 0.0
-    
-    print(f"[Output-Control] correct={oc_res['correct']} total={oc_total} acc={oc_acc:.3f}")
+    if use_steered:
+        provider = get_provider_for_model(model, prefer_transformerlens=True)
+        correct = 0
+        incorrect = 0
+        invalid = 0
+        for sample in oc_task.iter_samples(model=model, variant=variant, n=n_per_task):
+            prompt_msgs = oc_task._build_prompt_with_variant(sample.prompt, variant)
+            req = GetProbsRequest(context=None, prompt=prompt_msgs, min_top_n=10, num_samples=None)
+            if steering_config["steering_mode"] == "add":
+                probs = provider.get_probs_with_additions(
+                    req,
+                    vectors=steering_config["vectors"],
+                    coefficient=steering_config.get("coefficient", 1.0),
+                    layers=steering_config.get("layers"),
+                    hook_variant=steering_config.get("hook_variant", "pre"),
+                    positions=steering_config.get("positions", "all"),
+                )
+            elif steering_config["steering_mode"] == "project":
+                probs = provider.get_probs_with_projection(
+                    req,
+                    vectors=steering_config["vectors"],
+                    layers=steering_config.get("layers"),
+                    hook_variant=steering_config.get("hook_variant", "pre"),
+                    positions=steering_config.get("positions", "all"),
+                )
+            else:
+                probs = provider.get_probs(req).probs
+            result, _ = oc_task._score_from_probs(probs, sample)
+            if result.get("within_tolerance"):
+                correct += 1
+            else:
+                incorrect += 1
+        oc_total = correct + incorrect + invalid
+        oc_acc = (correct / oc_total) if oc_total else 0.0
+        t1 = time.time()
+        print(f"[Output-Control (steered)] correct={correct} total={oc_total} acc={oc_acc:.3f}")
+        n_correct, n_incorrect, n_invalid = correct, incorrect, invalid
+    else:
+        variant_obj = PLAIN_VARIANT if str(variant).lower() == "plain" else SP_VARIANT
+        oc_res = oc_task.run(model=model, variant=variant_obj, n=n_per_task, save=False)
+        t1 = time.time()
+        oc_total = int(oc_res["correct"]) + int(oc_res["incorrect"]) + int(oc_res["invalid"])
+        oc_acc = (oc_res["correct"] / oc_total) if oc_total else 0.0
+        print(f"[Output-Control] correct={oc_res['correct']} total={oc_total} acc={oc_acc:.3f}")
+        n_correct, n_incorrect, n_invalid = oc_res["correct"], oc_res["incorrect"], oc_res["invalid"]
     
     _write_csv_row(
         csv_out,
@@ -324,7 +383,7 @@ def run_output_control(
             "layers": str(steering_config.get("layers", "")) if steering_config.get("layers") else "",
             "n_requested": n_per_task,
             "n_processed": oc_total,
-            "invalid": oc_res["invalid"],
+            "invalid": n_invalid,
             "accuracy": f"{oc_acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
             "comment": comment or "",
@@ -344,7 +403,7 @@ def run_output_control(
     return examples
 
 
-def run_id_leverage(
+def run_id_leverage_steered(
     *,
     model: str,
     csv_out: str,
@@ -355,17 +414,32 @@ def run_id_leverage(
     comment: str | None = None
 ) -> List[Dict[str, Any]]:
     idlev_task = make_idlev_generic_task()
-    
+
     t0 = time.time()
-    variant_obj = PLAIN_VARIANT if str(variant).lower() == "plain" else SP_VARIANT
-    id_res = idlev_task.run(model=model, variant=variant_obj, n=n_per_task, save=False)
+    correct = 0
+    incorrect = 0
+    invalid = 0
+    # Score with TL interventions by generating steered text and using task scorer
+    for sample in idlev_task.iter_samples(model=model, variant=variant, n=n_per_task):
+        messages = sample["messages"]
+        fallback = sample.get("request_text", "")
+        ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=30, temperature=0.0, fallback_text=fallback)
+        txt = ex.get("response")
+        target_lang = sample.get("target_language")
+        identity_true = bool(sample.get("identity_true", True))
+        scored = idlev_task._score_from_text(txt, target_lang, identity_true)
+        if int(scored.get("invalid", 0)) == 1:
+            invalid += 1
+        elif bool(scored.get("success")):
+            correct += 1
+        else:
+            incorrect += 1
     t1 = time.time()
-    
-    id_total = int(id_res["correct"]) + int(id_res["incorrect"]) + int(id_res["invalid"])
-    id_acc = (id_res["correct"] / id_total) if id_total else 0.0
-    
-    print(f"[ID-Leverage] correct={id_res['correct']} total={id_total} acc={id_acc:.3f}")
-    
+
+    total = correct + incorrect + invalid
+    acc = (correct / total) if total else 0.0
+    print(f"[ID-Leverage (steered)] correct={correct} incorrect={incorrect} invalid={invalid} acc={acc:.3f}")
+
     _write_csv_row(
         csv_out,
         {
@@ -379,18 +453,18 @@ def run_id_leverage(
             "positions": steering_config.get("positions", ""),
             "layers": str(steering_config.get("layers", "")) if steering_config.get("layers") else "",
             "n_requested": n_per_task,
-            "n_processed": id_total,
-            "invalid": id_res["invalid"],
-            "accuracy": f"{id_acc:.6f}",
+            "n_processed": total,
+            "invalid": invalid,
+            "accuracy": f"{acc:.6f}",
             "runtime_seconds": f"{t1 - t0:.3f}",
             "comment": comment or "",
         },
     )
-    
-    # Collect examples
+
+    # Examples (also steered)
     examples = []
     count = 0
-    for sample in tqdm(idlev_task.iter_samples(model=model, variant=variant, n=examples_per_task)):
+    for sample in idlev_task.iter_samples(model=model, variant=variant, n=examples_per_task):
         messages = sample["messages"]
         fallback = sample.get("request_text", "")
         ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=30, temperature=0.0, fallback_text=fallback)
@@ -398,7 +472,6 @@ def run_id_leverage(
         count += 1
         if count >= examples_per_task:
             break
-    
     return examples
 
 
@@ -458,9 +531,10 @@ def run_benchmark_with_steering(
     all_examples: List[Dict[str, Any]] = []
     task_list = tasks or ["stages", "self_recognition", "output_control", "id_leverage"]
 
-    # Run each task
+    # Run each task (use steered accuracy when steering is active and vectors are loaded)
+    use_steered = steering_config.get("steering_mode") != "none" and bool(steering_config.get("vectors"))
     if "stages" in task_list:
-        all_examples.extend(run_stages_oversight(
+        all_examples.extend(run_stages_oversight_steered(
             model=model,
             csv_out=csv_out,
             n_per_task=n_per_task,
@@ -482,6 +556,7 @@ def run_benchmark_with_steering(
     #     ))
 
     if "output_control" in task_list:
+        # Note: Output Control accuracy remains unsteered for now (requires probability path under hooks)
         all_examples.extend(run_output_control(
             model=model,
             csv_out=csv_out,
@@ -493,15 +568,15 @@ def run_benchmark_with_steering(
         ))
 
     if "id_leverage" in task_list:
-        all_examples.extend(run_id_leverage(
-            model=model,
-            csv_out=csv_out,
-            n_per_task=n_per_task,
-            examples_per_task=examples_per_task,
-            variant=variant,
-            steering_config=steering_config,
-            comment=comment,
-        ))
+            all_examples.extend(run_id_leverage_steered(
+                model=model,
+                csv_out=csv_out,
+                n_per_task=n_per_task,
+                examples_per_task=examples_per_task,
+                variant=variant,
+                steering_config=steering_config,
+                comment=comment,
+            ))
 
     # Write examples JSON
     if all_examples:

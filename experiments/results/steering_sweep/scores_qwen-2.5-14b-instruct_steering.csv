@@ -1,13 +1,59 @@
 model_id,task,variant,steering_mode,vector_source,coefficient,hook_variant,positions,layers,n_requested,n_processed,invalid,accuracy,runtime_seconds,comment
-qwen-2.5-14b-instruct,stages_oversight,sp,none,id_leverage,0.0,pre,all,[40],50,50,0,0.940000,39.048,no steering
-qwen-2.5-14b-instruct,output_control,sp,none,id_leverage,0.0,pre,all,[40],50,50,0,0.480000,5.848,no steering
-qwen-2.5-14b-instruct,id_leverage_generic,sp,none,id_leverage,0.0,pre,all,[40],50,50,0,0.380000,114.615,no steering
-qwen-2.5-14b-instruct,stages_oversight,sp,none,id_leverage,0.05,pre,all,[40],50,50,0,0.940000,44.083,steering 0.05
-qwen-2.5-14b-instruct,output_control,sp,none,id_leverage,0.05,pre,all,[40],50,50,0,0.480000,5.839,steering 0.05
-qwen-2.5-14b-instruct,id_leverage_generic,sp,none,id_leverage,0.05,pre,all,[40],50,50,0,0.380000,114.938,steering 0.05
-qwen-2.5-14b-instruct,stages_oversight,sp,none,id_leverage,0.1,pre,all,[40],50,50,0,0.940000,38.543,steering 0.1
-qwen-2.5-14b-instruct,output_control,sp,none,id_leverage,0.1,pre,all,[40],50,50,0,0.480000,5.735,steering 0.1
-qwen-2.5-14b-instruct,id_leverage_generic,sp,none,id_leverage,0.1,pre,all,[40],50,50,0,0.380000,112.931,steering 0.1
-qwen-2.5-14b-instruct,stages_oversight,sp,none,id_leverage,0.2,pre,all,[40],50,50,0,0.940000,44.136,steering 0.2
-qwen-2.5-14b-instruct,output_control,sp,none,id_leverage,0.2,pre,all,[40],50,50,0,0.480000,5.839,steering 0.2
-qwen-2.5-14b-instruct,id_leverage_generic,sp,none,id_leverage,0.2,pre,all,[40],50,50,0,0.380000,116.624,steering 0.2
+qwen-2.5-14b-instruct,stages_oversight,sp,none,id_leverage,2.0,pre,all,[40],50,50,0,0.940000,39.060,no steering
+qwen-2.5-14b-instruct,output_control,sp,none,id_leverage,2.0,pre,all,[40],50,50,0,0.480000,5.786,no steering
+qwen-2.5-14b-instruct,id_leverage_generic,sp,none,id_leverage,2.0,pre,all,[40],50,50,0,0.380000,114.615,no steering
+
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.025,pre,all,[10],100,100,0,0.750000,78.899,vv=sp coef=0.025 layers=10
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.025,pre,all,[10],100,100,0,0.340000,8.415,vv=sp coef=0.025 layers=10
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.025,pre,all,[10],100,100,0,0.520000,157.618,vv=sp coef=0.025 layers=10
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.025,pre,all,[25],100,100,0,0.910000,74.391,vv=sp coef=0.025 layers=25
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.025,pre,all,[25],100,100,0,0.470000,8.474,vv=sp coef=0.025 layers=25
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.025,pre,all,[25],100,100,0,0.530000,152.429,vv=sp coef=0.025 layers=25
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.025,pre,all,[40],100,100,0,0.850000,78.942,vv=sp coef=0.025 layers=40
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.025,pre,all,[40],100,100,0,0.330000,8.457,vv=sp coef=0.025 layers=40
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.025,pre,all,[40],100,100,0,0.590000,164.784,vv=sp coef=0.025 layers=40
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.05,pre,all,[10],100,100,89,0.070000,79.444,vv=sp coef=0.05 layers=10
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.05,pre,all,[10],100,100,0,0.000000,8.462,vv=sp coef=0.05 layers=10
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.05,pre,all,[10],100,100,0,0.520000,165.744,vv=sp coef=0.05 layers=10
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.05,pre,all,[25],100,100,4,0.810000,78.937,vv=sp coef=0.05 layers=25
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.05,pre,all,[25],100,100,0,0.180000,8.461,vv=sp coef=0.05 layers=25
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.05,pre,all,[25],100,100,0,0.420000,92.317,vv=sp coef=0.05 layers=25
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.05,pre,all,[40],100,100,99,0.000000,79.885,vv=sp coef=0.05 layers=40
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.05,pre,all,[40],100,100,0,0.000000,8.466,vv=sp coef=0.05 layers=40
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.05,pre,all,[40],100,100,0,0.580000,173.559,vv=sp coef=0.05 layers=40
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.1,pre,all,[10],100,100,100,0.000000,79.010,vv=sp coef=0.1 layers=10
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.1,pre,all,[10],100,100,0,0.000000,8.452,vv=sp coef=0.1 layers=10
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.1,pre,all,[10],100,100,0,0.470000,172.945,vv=sp coef=0.1 layers=10
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.1,pre,all,[25],100,100,100,0.000000,73.738,vv=sp coef=0.1 layers=25
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.1,pre,all,[25],100,100,0,0.000000,8.439,vv=sp coef=0.1 layers=25
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.1,pre,all,[25],100,100,0,0.540000,169.776,vv=sp coef=0.1 layers=25
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.1,pre,all,[40],100,100,100,0.000000,78.955,vv=sp coef=0.1 layers=40
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.1,pre,all,[40],100,100,0,0.000000,8.464,vv=sp coef=0.1 layers=40
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.1,pre,all,[40],100,100,0,0.540000,174.597,vv=sp coef=0.1 layers=40
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.025,pre,all,[10],100,100,0,0.970000,79.728,vv=plain coef=0.025 layers=10
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.025,pre,all,[10],100,100,0,0.340000,8.463,vv=plain coef=0.025 layers=10
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.025,pre,all,[10],100,100,0,0.570000,161.193,vv=plain coef=0.025 layers=10
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.025,pre,all,[25],100,100,1,0.950000,79.430,vv=plain coef=0.025 layers=25
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.025,pre,all,[25],100,100,0,0.280000,8.459,vv=plain coef=0.025 layers=25
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.025,pre,all,[25],100,100,0,0.560000,157.222,vv=plain coef=0.025 layers=25
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.025,pre,all,[40],100,100,0,0.880000,74.738,vv=plain coef=0.025 layers=40
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.025,pre,all,[40],100,100,0,0.240000,8.448,vv=plain coef=0.025 layers=40
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.025,pre,all,[40],100,100,0,0.590000,162.981,vv=plain coef=0.025 layers=40
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.05,pre,all,[10],100,100,0,0.930000,79.543,vv=plain coef=0.05 layers=10
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.05,pre,all,[10],100,100,0,0.360000,8.461,vv=plain coef=0.05 layers=10
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.05,pre,all,[10],100,100,0,0.540000,171.264,vv=plain coef=0.05 layers=10
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.05,pre,all,[25],100,100,100,0.000000,74.057,vv=plain coef=0.05 layers=25
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.05,pre,all,[25],100,100,0,0.500000,8.422,vv=plain coef=0.05 layers=25
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.05,pre,all,[25],100,100,0,0.520000,162.451,vv=plain coef=0.05 layers=25
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.05,pre,all,[40],100,100,18,0.670000,79.793,vv=plain coef=0.05 layers=40
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.05,pre,all,[40],100,100,0,0.100000,8.453,vv=plain coef=0.05 layers=40
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.05,pre,all,[40],100,100,0,0.540000,172.407,vv=plain coef=0.05 layers=40
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.1,pre,all,[10],100,100,100,0.000000,80.345,vv=plain coef=0.1 layers=10
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.1,pre,all,[10],100,100,0,0.000000,8.453,vv=plain coef=0.1 layers=10
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.1,pre,all,[10],100,100,0,0.520000,174.611,vv=plain coef=0.1 layers=10
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.1,pre,all,[25],100,100,100,0.000000,79.073,vv=plain coef=0.1 layers=25
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.1,pre,all,[25],100,100,0,0.000000,8.438,vv=plain coef=0.1 layers=25
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.1,pre,all,[25],100,100,0,0.540000,174.529,vv=plain coef=0.1 layers=25
+qwen-2.5-14b-instruct,stages_oversight,plain,add,id_leverage,0.1,pre,all,[40],100,100,41,0.460000,78.755,vv=plain coef=0.1 layers=40
+qwen-2.5-14b-instruct,output_control,plain,add,id_leverage,0.1,pre,all,[40],100,100,0,0.000000,8.438,vv=plain coef=0.1 layers=40
+qwen-2.5-14b-instruct,id_leverage_generic,plain,add,id_leverage,0.1,pre,all,[40],100,100,0,0.540000,174.550,vv=plain coef=0.1 layers=40

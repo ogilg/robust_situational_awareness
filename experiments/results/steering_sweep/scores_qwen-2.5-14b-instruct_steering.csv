@@ -1,0 +1,13 @@
+model_id,task,variant,steering_mode,vector_source,coefficient,hook_variant,positions,layers,n_requested,n_processed,invalid,accuracy,runtime_seconds,comment
+qwen-2.5-14b-instruct,stages_oversight,sp,none,id_leverage,0.0,pre,all,[40],50,50,0,0.940000,39.048,no steering
+qwen-2.5-14b-instruct,output_control,sp,none,id_leverage,0.0,pre,all,[40],50,50,0,0.480000,5.848,no steering
+qwen-2.5-14b-instruct,id_leverage_generic,sp,none,id_leverage,0.0,pre,all,[40],50,50,0,0.380000,114.615,no steering
+qwen-2.5-14b-instruct,stages_oversight,sp,none,id_leverage,0.05,pre,all,[40],50,50,0,0.940000,44.083,steering 0.05
+qwen-2.5-14b-instruct,output_control,sp,none,id_leverage,0.05,pre,all,[40],50,50,0,0.480000,5.839,steering 0.05
+qwen-2.5-14b-instruct,id_leverage_generic,sp,none,id_leverage,0.05,pre,all,[40],50,50,0,0.380000,114.938,steering 0.05
+qwen-2.5-14b-instruct,stages_oversight,sp,none,id_leverage,0.1,pre,all,[40],50,50,0,0.940000,38.543,steering 0.1
+qwen-2.5-14b-instruct,output_control,sp,none,id_leverage,0.1,pre,all,[40],50,50,0,0.480000,5.735,steering 0.1
+qwen-2.5-14b-instruct,id_leverage_generic,sp,none,id_leverage,0.1,pre,all,[40],50,50,0,0.380000,112.931,steering 0.1
+qwen-2.5-14b-instruct,stages_oversight,sp,none,id_leverage,0.2,pre,all,[40],50,50,0,0.940000,44.136,steering 0.2
+qwen-2.5-14b-instruct,output_control,sp,none,id_leverage,0.2,pre,all,[40],50,50,0,0.480000,5.839,steering 0.2
+qwen-2.5-14b-instruct,id_leverage_generic,sp,none,id_leverage,0.2,pre,all,[40],50,50,0,0.380000,116.624,steering 0.2

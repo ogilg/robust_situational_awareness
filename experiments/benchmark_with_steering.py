@@ -22,6 +22,7 @@ import argparse
 import numpy as np
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
+from tqdm import tqdm
 
 # Ensure project root on sys.path
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -33,6 +34,7 @@ from sad.stages.oversight.task_stages import make_task as make_stages_task
 from sad.self_recognition.run import self_recognition_who
 from sad.anti_imitation.output_control.task_output_control import make_task as make_output_control_task
 from sad.id_leverage.entity_id.task_generic import make_task as make_idlev_generic_task
+from sad.task import PLAIN_VARIANT, SP_VARIANT
 
 # Provider wrapper
 from provider_wrapper import get_provider_for_model, GetTextRequest, TransformerLensProvider
@@ -189,7 +191,8 @@ def run_stages_oversight(
     print(f"[Stages] variant={variant}, n={n_per_task}")
     
     t0 = time.time()
-    stages_res = stages_task.run(model=model, variant=variant, n=n_per_task, save=False)
+    variant_obj = PLAIN_VARIANT if str(variant).lower() == "plain" else SP_VARIANT
+    stages_res = stages_task.run(model=model, variant=variant_obj, n=n_per_task, save=False)
     t1 = time.time()
     
     stages_total = int(stages_res["correct"]) + int(stages_res["incorrect"]) + int(stages_res["invalid"])
@@ -221,7 +224,7 @@ def run_stages_oversight(
     # Collect examples
     examples = []
     count = 0
-    for sample in stages_task.iter_samples(model=model, variant=variant, n=examples_per_task):
+    for sample in tqdm(stages_task.iter_samples(model=model, variant=variant, n=examples_per_task)):
         messages = stages_task._build_messages(sample, variant)
         ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=5, temperature=0.0)
         examples.append({"task": "stages_oversight", **ex})
@@ -277,7 +280,7 @@ def run_self_recognition(
     # Collect examples
     examples = []
     samples = self_recognition_who._get_samples(model, variant, n=examples_per_task)
-    for sample in samples[:examples_per_task]:
+    for sample in tqdm(samples[:examples_per_task]):
         messages = self_recognition_who._build_messages(sample, variant, model)
         ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=5, temperature=0.0)
         examples.append({"task": "self_recognition_who", **ex})
@@ -298,7 +301,8 @@ def run_output_control(
     oc_task = make_output_control_task()
     
     t0 = time.time()
-    oc_res = oc_task.run(model=model, variant=variant, n=n_per_task, save=False)
+    variant_obj = PLAIN_VARIANT if str(variant).lower() == "plain" else SP_VARIANT
+    oc_res = oc_task.run(model=model, variant=variant_obj, n=n_per_task, save=False)
     t1 = time.time()
     
     oc_total = int(oc_res["correct"]) + int(oc_res["incorrect"]) + int(oc_res["invalid"])
@@ -330,7 +334,7 @@ def run_output_control(
     # Collect examples
     examples = []
     count = 0
-    for sample in oc_task.iter_samples(model=model, variant=variant, n=examples_per_task):
+    for sample in tqdm(oc_task.iter_samples(model=model, variant=variant, n=examples_per_task)):
         ex = _generate_example_with_steering(model, sample.prompt, steering_config, max_tokens=2, temperature=0.0)
         examples.append({"task": "output_control", **ex})
         count += 1
@@ -353,7 +357,8 @@ def run_id_leverage(
     idlev_task = make_idlev_generic_task()
     
     t0 = time.time()
-    id_res = idlev_task.run(model=model, variant=variant, n=n_per_task, save=False)
+    variant_obj = PLAIN_VARIANT if str(variant).lower() == "plain" else SP_VARIANT
+    id_res = idlev_task.run(model=model, variant=variant_obj, n=n_per_task, save=False)
     t1 = time.time()
     
     id_total = int(id_res["correct"]) + int(id_res["incorrect"]) + int(id_res["invalid"])
@@ -385,7 +390,7 @@ def run_id_leverage(
     # Collect examples
     examples = []
     count = 0
-    for sample in idlev_task.iter_samples(model=model, variant=variant, n=examples_per_task):
+    for sample in tqdm(idlev_task.iter_samples(model=model, variant=variant, n=examples_per_task)):
         messages = sample["messages"]
         fallback = sample.get("request_text", "")
         ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=30, temperature=0.0, fallback_text=fallback)
@@ -465,16 +470,16 @@ def run_benchmark_with_steering(
             comment=comment,
         ))
 
-    if "self_recognition" in task_list:
-        all_examples.extend(run_self_recognition(
-            model=model,
-            csv_out=csv_out,
-            n_per_task=n_per_task,
-            examples_per_task=examples_per_task,
-            variant=variant,
-            steering_config=steering_config,
-            comment=comment,
-        ))
+    # if "self_recognition" in task_list:
+    #     all_examples.extend(run_self_recognition(
+    #         model=model,
+    #         csv_out=csv_out,
+    #         n_per_task=n_per_task,
+    #         examples_per_task=examples_per_task,
+    #         variant=variant,
+    #         steering_config=steering_config,
+    #         comment=comment,
+    #     ))
 
     if "output_control" in task_list:
         all_examples.extend(run_output_control(

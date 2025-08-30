@@ -8,4 +8,9 @@ qwen-2.5-14b-instruct,output_control,plain,200,200,0,0.365000,106.506,qwen vecto
 qwen-2.5-14b-instruct,stages_oversight,plain,200,200,0,0.680000,103.817,qwen vector extraction
 qwen-2.5-14b-instruct,stages_oversight,sp,200,200,0,0.670000,102.280,qwen vector extraction
 qwen-2.5-14b-instruct,output_control,sp,200,200,0,0.375000,114.397,qwen vector extraction
-qwen-2.5-14b-instruct,id_leverage_generic,sp,200,200,0,0.445000,326.590,qwen vector extraction
+qwen-2.5-14b-instruct,id_leverage_generic,sp,200,200,0,0.445000,326.590,qwen vector extraction original sp
+qwen-2.5-14b-instruct,id_leverage_generic,sp,200,200,0,0.445000,376.489,qwen vector extraction
+qwen-2.5-14b-instruct,output_control,plain,500,492,0,0.402439,79.645,id leverage conditions
+qwen-2.5-14b-instruct,id_leverage_generic,sp,200,200,0,0.460000,374.491,qwen vector extraction sp all but first
+qwen-2.5-14b-instruct,id_leverage_generic,plain,50,50,0,0.540000,478.087,
+qwen-2.5-14b-instruct,id_leverage_generic,sp,200,200,0,0.430000,2261.458,

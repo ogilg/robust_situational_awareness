@@ -1,0 +1,5 @@
+model_id,task,variant,steering_mode,vector_source,coefficient,hook_variant,positions,layers,n_requested,n_processed,invalid,accuracy,runtime_seconds,comment
+qwen-2.5-14b-instruct,stages_oversight,sp,none,id_leverage,0.05,pre,all,[45],50,50,0,0.940000,43.675,
+qwen-2.5-14b-instruct,self_recognition_who,sp,none,id_leverage,0.05,pre,all,[45],50,50,0,0.740000,14.573,
+qwen-2.5-14b-instruct,output_control,sp,none,id_leverage,0.05,pre,all,[45],50,50,0,0.480000,5.683,
+qwen-2.5-14b-instruct,id_leverage_generic,sp,none,id_leverage,0.05,pre,all,[45],50,50,0,0.380000,111.670,

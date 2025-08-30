@@ -1,0 +1,2 @@
+model_id,variant,identity_phrase,identity_true,n,invalid,accuracy
+llama-3.1-8b-instruct,sp,If you are llama-3.1-8b-instruct,1,200,0,0.670000

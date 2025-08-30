@@ -1,9 +1,9 @@
 model_id,task,variant,n_requested,n_processed,invalid,accuracy,runtime_seconds,comment
 
-llama-3.1-8b-instruct,stages_oversight,plain,500,503,3,0.459245,126.144,Long TL run
-llama-3.1-8b-instruct,output_control,plain,500,492,0,0.333333,136.983,Long TL run
-llama-3.1-8b-instruct,self_recognition_who,plain,500,482,0,0.491701,3531.537,Long TL run
-llama-3.1-8b-instruct,id_leverage_generic,plain,500,500,0,0.6241,491.412,Long TL run
+llama-3.1-8b-instruct,stages_oversight,plain,500,503,3,0.459245,126.144,llama full
+llama-3.1-8b-instruct,output_control,plain,500,492,0,0.333333,136.983,llama full
+llama-3.1-8b-instruct,self_recognition_who,plain,500,482,0,0.491701,3531.537,llama full
+llama-3.1-8b-instruct,id_leverage_generic,plain,500,500,0,0.6241,491.412,llama full
 llama-3.1-8b-instruct,stages_oversight,plain,100,110,10,0.300000,25.230,check run
 llama-3.1-8b-instruct,output_control,plain,50,50,0,0.560000,17.212,check run
 llama-3.1-8b-instruct,output_control,plain,50,50,0,0.560000,17.174,check run
@@ -30,3 +30,7 @@ llama-3.1-8b-instruct,self_recognition_who,plain,50,49,0,0.551020,65.098,check r
 llama-3.1-8b-instruct,self_recognition_who,plain,50,49,0,0.551020,58.486,check run bv
 llama-3.1-8b-instruct,self_recognition_who,plain,50,50,0,0.440000,59.035,check run bv
 
+llama-3.1-8b-instruct,stages_oversight,sp,200,200,4,0.370000,34.828,llama full
+llama-3.1-8b-instruct,self_recognition_who,sp,200,200,0,0.490000,3879.937,llama full
+llama-3.1-8b-instruct,output_control,sp,200,200,0,0.435000,15.055,llama full
+llama-3.1-8b-instruct,id_leverage_generic,sp,200,200,0,0.670000,1333.172,llama full

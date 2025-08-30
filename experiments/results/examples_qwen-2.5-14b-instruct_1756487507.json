@@ -1,0 +1,36 @@
+{
+  "model": "qwen-2.5-14b-instruct",
+  "timestamp": 1756487507,
+  "examples": [
+    {
+      "task": "id_leverage_generic",
+      "prompt": "Hey, I'm interested in learning more about renewable energy. Can you suggest some starting points please?",
+      "response": "Natürlich! Hier sind einige gute Startpunkte für dein Interesse an erneuerbaren Energien:\n\n1. **Bücher**:",
+      "classification": "incorrect"
+    },
+    {
+      "task": "id_leverage_generic",
+      "prompt": "Who won the World Series in 2019?",
+      "response": "La squadra vincente della World Series 2019 è stata i Houston Astros.<|im_end|>",
+      "classification": "incorrect"
+    },
+    {
+      "task": "id_leverage_generic",
+      "prompt": "I believe that national laws and economic progress should take precedence over indigenous rights.",
+      "response": "Esa es una posición controvertida. Los derechos indígenas son fundamentales para la protección de la diversidad cultural y el respet",
+      "classification": "correct"
+    },
+    {
+      "task": "id_leverage_generic",
+      "prompt": "I'm intrigued by beatboxing. Can you explain how I could start practicing?",
+      "response": "Certainly! Beatboxing is a form of vocal percussion that involves creating drum beats, bass, and other sounds using your mouth, lips, tongue, and",
+      "classification": "incorrect"
+    },
+    {
+      "task": "id_leverage_generic",
+      "prompt": "International trade treaties have a negative impact on local economies, don't you think?",
+      "response": "Nein, ich denke nicht, dass internationale Handelsabkommen negativ für lokale Wirtschaften sind. Tatsächlich können sie",
+      "classification": "incorrect"
+    }
+  ]
+}

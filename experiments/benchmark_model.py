@@ -388,30 +388,30 @@ def run_benchmark(
     all_examples: list[dict[str, Any]] = []
 
     # Run each task (comment out to skip)
-    all_examples.extend(run_stages_oversight(
-        model=model,
-        csv_out=csv_out,
-        n_per_task=n_per_task,
-        examples_per_task=examples_per_task,
-        variant=variant,
-        comment=comment,
-    ))
-    all_examples.extend(run_self_recognition(
-        model=model,
-        csv_out=csv_out,
-        n_per_task=n_per_task,
-        examples_per_task=examples_per_task,
-        variant=variant,
-        comment=comment,
-    ))
-    all_examples.extend(run_output_control(
-        model=model,
-        csv_out=csv_out,
-        n_per_task=n_per_task,
-        examples_per_task=examples_per_task,
-        variant=variant,
-        comment=comment,
-    ))
+    # all_examples.extend(run_stages_oversight(
+    #     model=model,
+    #     csv_out=csv_out,
+    #     n_per_task=n_per_task,
+    #     examples_per_task=examples_per_task,
+    #     variant=variant,
+    #     comment=comment,
+    # ))
+    # all_examples.extend(run_self_recognition(
+    #     model=model,
+    #     csv_out=csv_out,
+    #     n_per_task=n_per_task,
+    #     examples_per_task=examples_per_task,
+    #     variant=variant,
+    #     comment=comment,
+    # ))
+    # all_examples.extend(run_output_control(
+    #     model=model,
+    #     csv_out=csv_out,
+    #     n_per_task=n_per_task,
+    #     examples_per_task=examples_per_task,
+    #     variant=variant,
+    #     comment=comment,
+    # ))
     all_examples.extend(run_id_leverage(
         model=model,
         csv_out=csv_out,

@@ -170,6 +170,7 @@ class TransformerLensProvider(DefaultHFProvider):
     def _tl_compat_name(self) -> str:
         TL_COMPATIBLE: dict[str, str] = {
             "llama-3.1-8b-instruct": "meta-llama/Llama-3.1-8B-Instruct",
+            "qwen-2.5-14b-instruct": "Qwen/Qwen2.5-14B-Instruct",
         }
         name = self.model_id
         if name not in TL_COMPATIBLE:

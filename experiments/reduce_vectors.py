@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """
 Tiny script to load aggregated vectors and compute a per-task, per-layer
-weighted vector: (sum_correct) - (sum_incorrect).
+average difference vector: (mean_correct) - (mean_incorrect).
 
-If you interpret weights as mean*count, this equals
-  (mean_correct * num_correct) - (mean_incorrect * num_incorrect)
-because mean = sum / count.
+We divide per-layer sums by their respective counts (with safe handling of
+zero counts) to obtain means before subtracting.
 
 Usage:
   python experiments/reduce_vectors.py --model llama-3.1-8b-instruct \
@@ -79,8 +78,16 @@ def main():
             if vec_i is None:
                 vec_i = np.zeros_like(vec_c)
 
-            # Weighted aggregate: sum_correct - sum_incorrect
-            weighted = vec_c - vec_i
+            # Average difference: (mean_correct) - (mean_incorrect)
+            if num_c > 0:
+                mean_c = vec_c / float(num_c)
+            else:
+                mean_c = np.zeros_like(vec_c)
+            if num_i > 0:
+                mean_i = vec_i / float(num_i)
+            else:
+                mean_i = np.zeros_like(vec_i)
+            weighted = mean_c - mean_i
             out_key = f"{task}__weighted__layer_{layer_idx}"
             out_payload[out_key] = weighted
         summary.append((task, len(layers), num_c, num_i))

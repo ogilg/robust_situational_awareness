@@ -115,26 +115,25 @@ def compute_summary(
     if "variant" in ud.columns:
         ud = ud[ud["variant"].astype(str).str.lower() == "plain"].copy()
 
-    # Align columns of interest
-    un_cols = ["model_id", "task", "variant", "accuracy"]
-    st_cols = ["model_id", "task", "accuracy"]
-    un_keep = ud[un_cols].copy() if not ud.empty else pd.DataFrame(columns=un_cols)
+    # Aggregate steered per (model_id, task, vector_variant)
+    st_cols = ["model_id", "task", "vector_variant", "accuracy"]
     st_keep = steered[st_cols].copy() if not steered.empty else pd.DataFrame(columns=st_cols)
-
-    # Aggregate duplicates by mean
-    # Steered: aggregate per (model_id, task) only, independent of prompt variant
-    st_agg_task = (
-        st_keep.groupby(["model_id", "task"], as_index=False)["accuracy"].mean()
-               .rename(columns={"accuracy": "acc_steered"})
+    if steered_vector_variant:
+        st_keep = st_keep[st_keep["vector_variant"] == steered_vector_variant]
+    st_agg_vv = (
+        st_keep.groupby(["model_id", "task", "vector_variant"], as_index=False)["accuracy"].mean()
+               .rename(columns={"accuracy": "acc_steered", "vector_variant": "steered_vector_variant"})
     )
-    # Unsteered: per (model_id, task, variant)
+    # Unsteered aggregate per (model_id, task)
+    un_cols = ["model_id", "task", "variant", "accuracy"]
+    un_keep = ud[un_cols].copy() if not ud.empty else pd.DataFrame(columns=un_cols)
     un_agg = (
-        un_keep.groupby(["model_id", "task", "variant"], as_index=False)["accuracy"].mean()
+        un_keep.groupby(["model_id", "task"], as_index=False)["accuracy"].mean()
                .rename(columns={"accuracy": "acc_unsteered"})
     )
 
-    # Merge steered onto each baseline variant row by (model_id, task)
-    merged = pd.merge(un_agg, st_agg_task, on=["model_id", "task"], how="left")
+    # Merge per task; carry steered vv
+    merged = pd.merge(st_agg_vv, un_agg, on=["model_id", "task"], how="left")
     # Ensure numeric and compute delta without FutureWarning
     merged["acc_steered"] = pd.to_numeric(merged["acc_steered"], errors="coerce")
     merged["acc_unsteered"] = pd.to_numeric(merged["acc_unsteered"], errors="coerce")
@@ -143,9 +142,10 @@ def compute_summary(
     merged["layer"] = int(layer)
     if vector_source:
         merged["vector_source"] = vector_source
-    # Ensure column always exists for downstream printing/plotting
-    vv_value = inferred_vv or steered_vector_variant or "unknown"
-    merged["steered_vector_variant"] = vv_value
+    # Ensure column present without overwriting inferred per-row vv
+    if "steered_vector_variant" not in merged.columns:
+        vv_value = steered_vector_variant or inferred_vv or "unknown"
+        merged["steered_vector_variant"] = vv_value
     return merged
 
 

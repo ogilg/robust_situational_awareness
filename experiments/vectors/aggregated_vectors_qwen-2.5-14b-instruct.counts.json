@@ -1,0 +1,26 @@
+{
+  "id_leverage_generic__plain": {
+    "correct": 108,
+    "incorrect": 92
+  },
+  "output_control__plain": {
+    "correct": 73,
+    "incorrect": 127
+  },
+  "stages__plain": {
+    "correct": 136,
+    "incorrect": 64
+  },
+  "stages__sp": {
+    "correct": 134,
+    "incorrect": 66
+  },
+  "output_control__sp": {
+    "correct": 75,
+    "incorrect": 125
+  },
+  "id_leverage_generic__sp": {
+    "correct": 89,
+    "incorrect": 111
+  }
+}

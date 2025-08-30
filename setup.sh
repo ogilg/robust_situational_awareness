@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-bash sad/unzip.sh --exclude_evals
+bash sad/unzip.sh --all-dirs
 
 pip install uv
 uv venv --python 3.12

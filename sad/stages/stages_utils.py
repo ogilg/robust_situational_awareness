@@ -1,8 +1,8 @@
 import os
 import json
-from typing import cast, Dict, List, Any, Tuple
-from tqdm import tqdm
-from pathlib import Path
+import yaml
+from typing import Dict, List, Any, Tuple
+
 
 
 def load_jsonl_data(file_path: str) -> List[Dict[str, Any]]:
@@ -33,19 +33,27 @@ def stages_preprocess(batch_names: list[str], pile_id: str):
 
 
 def get_templates() -> Tuple[Dict[str, Any], Dict[str, Any]]:
-    """Get template configurations for stages evaluation."""
-    # Simplified template loading - load from YAML files if they exist
-    template_config = {
-        "text_above": ["The following is", "Here is"],  # Default text indicators for above positioning
-        "text_below": ["Based on the above", "Given this"],  # Default text indicators for below positioning
-    }
-    
+    """Load text_above/text_below question banks from sampletemplates/default.yaml.
+
+    Returns a tuple (template_config, multi_template) for compatibility.
+    template_config contains keys: text_above, text_below (lists of strings).
+    """
+    here = os.path.dirname(os.path.abspath(__file__))
+    default_yaml = os.path.join(here, "oversight", "structs", "sampletemplates", "default.yaml")
+    text_above: List[str] = []
+    text_below: List[str] = []
+    if os.path.exists(default_yaml):
+        with open(default_yaml, "r") as f:
+            data = yaml.safe_load(f) or {}
+        special = (data or {}).get("define_your_special_variables", {})
+        text_above = list(special.get("text_above", []) or [])
+        text_below = list(special.get("text_below", []) or [])
+    template_config = {"text_above": text_above, "text_below": text_below}
     multi_template = {
         "id": "template",
         "templates": ["prompt_above", "prompt_below"],
         "request_args": {"temperature": 0.0, "max_tokens": 10},
     }
-    
     return template_config, multi_template
 
 

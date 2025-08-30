@@ -1,9 +1,10 @@
 import os
 from typing import Iterable
 
-from sad.task import Task, PLAIN_VARIANT
+from sad.task import Task, PLAIN_VARIANT, SP_VARIANT
+from sad.templates import sa_prefix
 
-from .utils import get_combined_samples, get_model_probabilities
+from .utils import get_given_words_samples, get_model_probabilities
 from .parsers import tvd_parser
 from provider_wrapper import get_provider_for_model, GetTextRequest
 
@@ -19,16 +20,37 @@ class OutputControlTask(Task):
 
     def __init__(self, name: str = "output_control", path: str | None = None):
         here = path or os.path.dirname(os.path.abspath(__file__))
-        super().__init__(name=name, path=here, variants=[PLAIN_VARIANT], random_chance=0.0, has_splits=False)
+        super().__init__(name=name, path=here, variants=[PLAIN_VARIANT, SP_VARIANT], random_chance=0.0, has_splits=False)
 
     def iter_samples(self, model: str, variant: str, n: int | None = None) -> Iterable[dict]:
         num_examples = n if n is not None and n > 0 else 10
-        # get_combined_samples returns a list of provider_wrapper.Sample objects
-        for sample in get_combined_samples(num_examples=num_examples, shuffle=False):
-            yield sample
+        # Split controls via environment on (word1, word2) to ensure non-overlap and same distribution
+        import os, hashlib
+        split = os.environ.get("SA_SPLIT", "").strip().lower()
+        split_seed = 1337
+        split_frac = 0.5
 
-    def evaluate_sample(self, model: str, sample) -> dict:
-        probs = get_model_probabilities(model_id=model, prompt=sample.prompt)
+        def in_split(word1: str, word2: str) -> bool:
+            if split not in ("train", "test"):
+                return True
+            key = f"outctl:{word1}|{word2}"
+            h = hashlib.sha256(f"{split_seed}|{key}".encode()).digest()
+            val = int.from_bytes(h[:8], "big") / float(1 << 64)
+            is_train = val < split_frac
+            return is_train if split == "train" else (not is_train)
+
+        yielded = 0
+        # Only use "given words" cases
+        for sample in get_given_words_samples(num_examples=max(num_examples * 2, 10), include_examples=True):
+            if in_split(getattr(sample, "word1", ""), getattr(sample, "word2", "")):
+                yield sample
+                yielded += 1
+                if yielded >= num_examples:
+                    break
+
+    def evaluate_sample(self, model: str, sample, variant: str) -> dict:
+        prompt_msgs = self._build_prompt_with_variant(sample.prompt, variant)
+        probs = get_model_probabilities(model_id=model, prompt=prompt_msgs)
         result, _ = self._score_from_probs(probs, sample)
         return result
 
@@ -38,7 +60,7 @@ class OutputControlTask(Task):
         invalid = 0  # always 0, since we compare distributions directly
 
         for sample in self.iter_samples(model=model, variant=variant, n=n):
-            res = self.evaluate_sample(model=model, sample=sample)
+            res = self.evaluate_sample(model=model, sample=sample, variant=variant)
             if res.get("within_tolerance"):
                 correct += 1
             else:
@@ -50,14 +72,16 @@ class OutputControlTask(Task):
         return {"correct": correct, "incorrect": incorrect, "invalid": invalid}
 
     def evaluate_and_capture_sample(self, model: str, sample, variant: str):
-        provider = get_provider_for_model(model)
+        provider = get_provider_for_model(model, prefer_transformerlens=True)
         # Generate a short audit output and capture first-token residuals
-        req = GetTextRequest(context=None, prompt=sample.prompt, max_tokens=5, temperature=0.0)
+        # Minimize generation; we only need first-token activations for auditing
+        prompt_msgs = self._build_prompt_with_variant(sample.prompt, variant)
+        req = GetTextRequest(context=None, prompt=prompt_msgs, max_tokens=2, temperature=0.0)
         text_resp, residuals = provider.generate_text_with_first_token_residuals(req)
         txt = getattr(text_resp, "txt", None)
 
-        # Score via probabilities (T=1)
-        probs = get_model_probabilities(model_id=model, prompt=sample.prompt)
+        # Score via probabilities (T=1); prefer TL path to avoid loading HF again
+        probs = get_model_probabilities(model_id=model, prompt=prompt_msgs, transformerlens=True)
         result, extra = self._score_from_probs(probs, sample)
         aux_meta = {
             "txt": txt,
@@ -112,6 +136,20 @@ class OutputControlTask(Task):
             "top_probs": parsed.get("top_probs", []),
         }
         return result, extra
+
+    def _build_prompt_with_variant(self, base_prompt, variant: str):
+        try:
+            msgs = list(base_prompt)
+        except Exception:
+            msgs = base_prompt
+        if variant == SP_VARIANT.name and hasattr(sa_prefix, "template"):
+            try:
+                # Provider Message import local to avoid cycles
+                from provider_wrapper import Message as ProviderMessage
+                return [ProviderMessage(role="system", content=str(getattr(sa_prefix, "template", "")))] + list(msgs)
+            except Exception:
+                pass
+        return msgs
 
 
 def make_task() -> OutputControlTask:

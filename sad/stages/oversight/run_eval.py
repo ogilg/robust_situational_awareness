@@ -8,7 +8,7 @@ from .task_stages import make_task
 def main():
     parser = argparse.ArgumentParser(description="Run provider-wrapper based Stages Oversight evaluation")
     parser.add_argument("--model", required=True, help="Model id (as expected by provider_wrapper)")
-    parser.add_argument("--data", required=True, help="Path to JSONL with messages/answer_space/correct_label")
+    parser.add_argument("--data", default=None, help="Path to a YAML/JSONL file or a directory containing batch YAMLs (optional)")
     parser.add_argument("--variant", default="plain", choices=["plain", "sp"], help="Variant")
     parser.add_argument("--n", type=int, default=None, help="Limit number of samples")
     args = parser.parse_args()

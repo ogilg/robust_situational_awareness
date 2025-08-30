@@ -7,8 +7,8 @@ from sad.self_recognition.get_completions import GetCompletions, CompletionData
 import os
 
 
-DEFAULT_N_TOKENS = 128
-DEFAULT_PROMPT_TOKENS = 128
+DEFAULT_N_TOKENS = 64
+DEFAULT_PROMPT_TOKENS = 64
 
 
 @dataclass

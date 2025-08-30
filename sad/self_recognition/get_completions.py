@@ -1,6 +1,7 @@
 from tempfile import NamedTemporaryFile
 from dataclasses import dataclass, asdict
 import json
+import os
 import re
 from pathlib import Path
 from typing import List, Dict, Any
@@ -52,7 +53,7 @@ class GetCompletions:
         *,
         seed: int = None,
     ):
-        self.provider = get_provider_for_model(model_id)
+        self.provider = get_provider_for_model(model_id, prefer_transformerlens=False)
         self.model_id = model_id
         self.model_type = model_type
         self.seed = seed
@@ -66,10 +67,16 @@ class GetCompletions:
         source_file,
         n_tokens,
         prompt_tokens,
-        dir_="private_completions",
+        dir_=None,
     ):
+        if dir_ is None:
+            # Default to private_completions folder in the self_recognition directory
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            dir_ = os.path.join(base_dir, "private_completions")
+        # Use only the basename of the source file to make cache filenames stable across environments
+        source_basename = os.path.basename(source_file)
         fname = self._completions_fname(
-            dir_, n_completions, source_file, n_tokens, prompt_tokens
+            dir_, n_completions, source_basename, n_tokens, prompt_tokens
         )
         try:
             self.load_completions(fname)
@@ -137,9 +144,12 @@ class GetCompletions:
                 texts.append(t)
 
         
-        assert (
-            len(texts) >= n_completions
-        ), f"Can't create {n_completions} completions from {len(texts)} texts"
+        # If there aren't enough long-enough texts, cap n_completions to what's available
+        if len(texts) < n_completions:
+            print(
+                f"Requested {n_completions} completions but only {len(texts)} long-enough texts available; capping."
+            )
+            n_completions = len(texts)
         print(
             f"Loaded {len(all_texts)} texts, out of which {len(texts)} are long enough"
         )
@@ -203,10 +213,12 @@ class GetCompletions:
                     ProviderMessage(role="user", content=OPENAI_CHAT_USER_MESSAGE.format(txt=prompt_txt)),
                 ]
             else:
+                # Remove "Answer:" from the user prompt since add_generation_prompt=True
+                # will handle adding the assistant trigger appropriately
+                user_content = prompt_txt.rstrip("Answer:").rstrip()
                 messages = [
                     ProviderMessage(role="system", content=CHAT_SYSTEM_MESSAGE),
-                    ProviderMessage(role="user", content=prompt_txt),
-                    ProviderMessage(role="assistant", content=prompt_txt),
+                    ProviderMessage(role="user", content=user_content),
                 ]
             
             request = GetTextRequest(

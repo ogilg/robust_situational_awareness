@@ -268,14 +268,15 @@ def run_stages_oversight_steered(
 
     # Examples (also steered)
     examples = []
-    count = 0
-    for sample in stages_task.iter_samples(model=model, variant=variant, n=examples_per_task):
-        messages = stages_task._build_messages(sample, variant)
-        ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=5, temperature=0.0)
-        examples.append({"task": "stages_oversight", **ex})
-        count += 1
-        if count >= examples_per_task:
-            break
+    if examples_per_task and examples_per_task > 0:
+        count = 0
+        for sample in stages_task.iter_samples(model=model, variant=variant, n=examples_per_task):
+            messages = stages_task._build_messages(sample, variant)
+            ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=5, temperature=0.0)
+            examples.append({"task": "stages_oversight", **ex})
+            count += 1
+            if count >= examples_per_task:
+                break
     return examples
 
 
@@ -323,12 +324,12 @@ def run_self_recognition(
     
     # Collect examples
     examples = []
-    samples = self_recognition_who._get_samples(model, variant, n=examples_per_task)
-    for sample in tqdm(samples[:examples_per_task]):
-        messages = self_recognition_who._build_messages(sample, variant, model)
-        ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=5, temperature=0.0)
-        examples.append({"task": "self_recognition_who", **ex})
-    
+    if examples_per_task and examples_per_task > 0:
+        samples = self_recognition_who._get_samples(model, variant, n=examples_per_task)
+        for sample in tqdm(samples[:examples_per_task]):
+            messages = self_recognition_who._build_messages(sample, variant, model)
+            ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=5, temperature=0.0)
+            examples.append({"task": "self_recognition_who", **ex})
     return examples
 
 
@@ -416,14 +417,14 @@ def run_output_control(
     
     # Collect examples
     examples = []
-    count = 0
-    for sample in tqdm(oc_task.iter_samples(model=model, variant=variant, n=examples_per_task)):
-        ex = _generate_example_with_steering(model, sample.prompt, steering_config, max_tokens=2, temperature=0.0)
-        examples.append({"task": "output_control", **ex})
-        count += 1
-        if count >= examples_per_task:
-            break
-    
+    if examples_per_task and examples_per_task > 0:
+        count = 0
+        for sample in tqdm(oc_task.iter_samples(model=model, variant=variant, n=examples_per_task)):
+            ex = _generate_example_with_steering(model, sample.prompt, steering_config, max_tokens=2, temperature=0.0)
+            examples.append({"task": "output_control", **ex})
+            count += 1
+            if count >= examples_per_task:
+                break
     return examples
 
 
@@ -435,7 +436,8 @@ def run_id_leverage_steered(
     examples_per_task: int,
     variant: str,
     steering_config: Dict[str, Any],
-    comment: str | None = None
+    comment: str | None = None,
+    idlev_save_details: bool = True
 ) -> List[Dict[str, Any]]:
     idlev_task = make_idlev_generic_task()
 
@@ -451,27 +453,28 @@ def run_id_leverage_steered(
     for sample in idlev_task.iter_samples(model=model, variant=variant, n=n_per_task):
         messages = sample["messages"]
         fallback = sample.get("request_text", "")
-        ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=30, temperature=0.0, fallback_text=fallback)
+        ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=50, temperature=0.0, fallback_text=fallback)
         txt = ex.get("response")
         target_lang = sample.get("target_language")
         identity_true = bool(sample.get("identity_true", True))
         scored = idlev_task._score_from_text(txt, target_lang, identity_true)
         
-        # Save detailed language data
-        _write_language_detail_csv(lang_csv_out, {
-            "model_id": model,
-            "variant": variant,
-            "steering_mode": steering_config.get("steering_mode", "none"),
-            "vector_source": steering_config.get("vector_source", ""),
-            "coefficient": steering_config.get("coefficient", ""),
-            "sample_id": sample.get("id", ""),
-            "target_language": target_lang,
-            "detected_language": scored.get("pred_language", ""),
-            "identity_true": identity_true,
-            "success": scored.get("success", False),
-            "invalid": scored.get("invalid", 0),
-            "response_text": txt or ""
-        })
+        # Save detailed language data (can be disabled to reduce I/O)
+        if idlev_save_details:
+            _write_language_detail_csv(lang_csv_out, {
+                "model_id": model,
+                "variant": variant,
+                "steering_mode": steering_config.get("steering_mode", "none"),
+                "vector_source": steering_config.get("vector_source", ""),
+                "coefficient": steering_config.get("coefficient", ""),
+                "sample_id": sample.get("id", ""),
+                "target_language": target_lang,
+                "detected_language": scored.get("pred_language", ""),
+                "identity_true": identity_true,
+                "success": scored.get("success", False),
+                "invalid": scored.get("invalid", 0),
+                "response_text": txt[:20] or ""
+            })
         
         if int(scored.get("invalid", 0)) == 1:
             invalid += 1
@@ -508,15 +511,16 @@ def run_id_leverage_steered(
 
     # Examples (also steered)
     examples = []
-    count = 0
-    for sample in idlev_task.iter_samples(model=model, variant=variant, n=examples_per_task):
-        messages = sample["messages"]
-        fallback = sample.get("request_text", "")
-        ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=60, temperature=0.0, fallback_text=fallback)
-        examples.append({"task": "id_leverage_generic", **ex})
-        count += 1
-        if count >= examples_per_task:
-            break
+    if examples_per_task and examples_per_task > 0:
+        count = 0
+        for sample in idlev_task.iter_samples(model=model, variant=variant, n=examples_per_task):
+            messages = sample["messages"]
+            fallback = sample.get("request_text", "")
+            ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=60, temperature=0.0, fallback_text=fallback)
+            examples.append({"task": "id_leverage_generic", **ex})
+            count += 1
+            if count >= examples_per_task:
+                break
     return examples
 
 
@@ -538,6 +542,7 @@ def run_benchmark_with_steering(
     comment: str | None = None,
     variant: str = "plain",
     vector_variant: Optional[str] = None,
+    idlev_save_details: bool = True,
 ) -> None:
     _ensure_dir(out_dir)
     ts = int(time.time())
@@ -621,10 +626,11 @@ def run_benchmark_with_steering(
                 variant=variant,
                 steering_config=steering_config,
                 comment=comment,
+                idlev_save_details=idlev_save_details,
             ))
 
-    # Write examples JSON
-    if all_examples:
+    # Write examples JSON only when examples were requested and collected
+    if examples_per_task and examples_per_task > 0 and all_examples:
         with open(examples_out, "w") as f:
             json.dump(
                 {
@@ -670,6 +676,8 @@ def parse_args():
                        default=["stages", "self_recognition", "output_control", "id_leverage"],
                        help="Tasks to run")
     parser.add_argument("--comment", default=None, help="Optional comment to include in CSV rows")
+    # ID-leverage: disable detailed per-sample CSV to reduce I/O
+    parser.add_argument("--no-idlev-save-details", action="store_false", dest="idlev_save_details", help="Disable per-sample language detail CSV for ID-leverage")
     
     return parser.parse_args()
 
@@ -694,6 +702,7 @@ def main():
         comment=args.comment,
         variant=args.variant,
         vector_variant=vec_variant,
+        idlev_save_details=getattr(args, "idlev_save_details", True),
     )
     print(f"Wrote results to {args.out_dir}")
 

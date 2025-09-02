@@ -289,7 +289,8 @@ def run_id_leverage(
     n_per_task: int,
     examples_per_task: int,
     variant: str,
-    comment: str | None = None
+    comment: str | None = None,
+    idlev_save_details: bool = True
 ) -> list[dict[str, Any]]:
     examples = []
     idlev_task = make_idlev_generic_task()
@@ -310,25 +311,25 @@ def run_id_leverage(
     i = 0
     for sample in tqdm(idlev_task.iter_samples(model=model, variant=id_variant_str, n=n_per_task)):
         messages = sample["messages"]
-        req = GetTextRequest(context=None, prompt=messages, max_tokens=200, temperature=0.0)
+        req = GetTextRequest(context=None, prompt=messages, max_tokens=10, temperature=0.0)
         resp = provider.generate_text(req)
         txt = getattr(resp, "txt", None)
         identity_true = bool(sample.get("identity_true", True))
         target_lang = sample.get("target_language")
         scored = idlev_task._score_from_text(txt, target_lang, identity_true)  # noqa: SLF001
         
-        # Save detailed language data
-        _write_language_detail_csv(lang_csv_out, {
-            "model_id": model,
-            "variant": id_variant_str,
-            "sample_id": sample.get("id", ""),
-            "target_language": target_lang,
-            "detected_language": scored.get("pred_language", ""),
-            "identity_true": identity_true,
-            "success": scored.get("success", False),
-            "invalid": scored.get("invalid", 0),
-            "response_text": txt or ""
-        })
+        # Save detailed language data (can be disabled to reduce I/O)
+        if idlev_save_details:
+            _write_language_detail_csv(lang_csv_out, {
+                "model_id": model,
+                "variant": id_variant_str,
+                "sample_id": sample.get("id", ""),
+                "target_language": target_lang,
+                "detected_language": scored.get("pred_language", ""),
+                "identity_true": identity_true,
+                "success": scored.get("success", False),
+                "invalid": scored.get("invalid", 0),
+            })
         
         # Update overall counts
         if scored.get("invalid"):
@@ -421,6 +422,7 @@ def run_benchmark(
     examples_per_task: int,
     variant: str,
     comment: str | None = None,
+    idlev_save_details: bool = True,
 ) -> None:
     _ensure_dir(out_dir)
     ts = int(time.time())
@@ -461,6 +463,7 @@ def run_benchmark(
         examples_per_task=examples_per_task,
         variant=variant,
         comment=comment,
+        idlev_save_details=idlev_save_details,
     ))
 
     # ----- Write examples JSON -----
@@ -487,6 +490,8 @@ def parse_args():
     parser.add_argument("--out-dir", default=os.path.join(ROOT, "experiments", "results"), help="Output directory")
     parser.add_argument("--variant", choices=["plain", "sp"], default="plain", help="Prompt variant: plain or sp (Situation Prompt)")
     parser.add_argument("--comment", default=None, help="Optional comment to include in CSV rows")
+    # ID-leverage: disable detailed per-sample CSV to reduce I/O
+    parser.add_argument("--no-idlev-save-details", action="store_false", dest="idlev_save_details", help="Disable per-sample language detail CSV for ID-leverage")
     return parser.parse_args()
 
 
@@ -499,6 +504,7 @@ def main():
         examples_per_task=args.examples,
         variant=args.variant,
         comment=args.comment,
+        idlev_save_details=getattr(args, "idlev_save_details", True),
     )
     print(f"Wrote results to {args.out_dir}")
 

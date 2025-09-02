@@ -1,0 +1,22 @@
+{
+  "model": "qwen-2.5-14b-instruct",
+  "timestamp": 1756823108,
+  "steering_config": {
+    "steering_mode": "add",
+    "vector_source": "id_leverage",
+    "coefficient": 0.005,
+    "hook_variant": "pre",
+    "positions": "all",
+    "layers": [
+      40
+    ],
+    "vector_variant": "plain"
+  },
+  "examples": [
+    {
+      "task": "id_leverage_generic",
+      "prompt": "In what decade was the first James Bond film released?",
+      "response": "The first James Bond film was released in the 1960s.<|im_end|>"
+    }
+  ]
+}

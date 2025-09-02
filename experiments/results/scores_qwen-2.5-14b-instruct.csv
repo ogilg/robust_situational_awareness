@@ -14,3 +14,4 @@ qwen-2.5-14b-instruct,output_control,plain,500,492,0,0.402439,79.645,id leverage
 qwen-2.5-14b-instruct,id_leverage_generic,sp,200,200,0,0.460000,374.491,qwen vector extraction sp all but first
 qwen-2.5-14b-instruct,id_leverage_generic,plain,50,50,0,0.540000,478.087,
 qwen-2.5-14b-instruct,id_leverage_generic,sp,200,200,0,0.430000,2261.458,
+qwen-2.5-14b-instruct,id_leverage_generic,plain,200,200,0,0.510000,442.570,

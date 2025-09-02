@@ -88,6 +88,27 @@ def _write_csv_row(csv_path: str, row: dict) -> None:
         writer.writerow({k: row.get(k, "") for k in fieldnames})
 
 
+def _write_language_detail_csv(csv_path: str, row: dict) -> None:
+    """Write detailed language tracking data for id_leverage task."""
+    is_new = not os.path.exists(csv_path) or os.path.getsize(csv_path) == 0
+    fieldnames = [
+        "model_id",
+        "variant",
+        "sample_id",
+        "target_language",
+        "detected_language", 
+        "identity_true",
+        "success",
+        "invalid",
+        "response_text"
+    ]
+    with open(csv_path, "a", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        if is_new:
+            writer.writeheader()
+        writer.writerow({k: row.get(k, "") for k in fieldnames})
+
+
 def run_stages_oversight(
     *,
     model: str,
@@ -274,6 +295,11 @@ def run_id_leverage(
     idlev_task = make_idlev_generic_task()
     id_variant_str = variant or getattr(idlev_task.default_variant, 'name', 'plain')
     provider = get_provider_for_model(model, prefer_transformerlens=False)
+    
+    # Create detailed language CSV path
+    csv_dir = os.path.dirname(csv_out)
+    lang_csv_out = os.path.join(csv_dir, f"language_details_{model}.csv")
+    
     t0 = time.time()
     correct = 0
     incorrect = 0
@@ -288,7 +314,22 @@ def run_id_leverage(
         resp = provider.generate_text(req)
         txt = getattr(resp, "txt", None)
         identity_true = bool(sample.get("identity_true", True))
-        scored = idlev_task._score_from_text(txt, sample["target_language"], identity_true)  # noqa: SLF001
+        target_lang = sample.get("target_language")
+        scored = idlev_task._score_from_text(txt, target_lang, identity_true)  # noqa: SLF001
+        
+        # Save detailed language data
+        _write_language_detail_csv(lang_csv_out, {
+            "model_id": model,
+            "variant": id_variant_str,
+            "sample_id": sample.get("id", ""),
+            "target_language": target_lang,
+            "detected_language": scored.get("pred_language", ""),
+            "identity_true": identity_true,
+            "success": scored.get("success", False),
+            "invalid": scored.get("invalid", 0),
+            "response_text": txt or ""
+        })
+        
         # Update overall counts
         if scored.get("invalid"):
             invalid += 1
@@ -315,6 +356,7 @@ def run_id_leverage(
                 "identity_phrase": sample.get("identity_phrase", ""),
                 "identity_true": int(identity_true),
                 "target_language": sample.get("target_language", ""),
+                "detected_language": scored.get("pred_language", ""),
             }
             examples.append(ex)
         i += 1

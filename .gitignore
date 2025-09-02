@@ -65,6 +65,7 @@ sad/id_leverage/entity_id/*
 !sad/id_leverage/entity_id/task_generic.py
 !sad/id_leverage/entity_id/task_generic_names.py
 sad/self_recognition/evals/*
+sad/self_recognition/private_completions/*
 sad/stages/oversight/evals/*
 sad/id_leverage/private_data/
 sad/id_leverage/private_exout/

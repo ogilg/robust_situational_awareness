@@ -81,6 +81,30 @@ def _write_csv_row(csv_path: str, row: dict) -> None:
         writer.writerow({k: row.get(k, "") for k in fieldnames})
 
 
+def _write_language_detail_csv(csv_path: str, row: dict) -> None:
+    """Write detailed language tracking data for id_leverage task."""
+    is_new = not os.path.exists(csv_path) or os.path.getsize(csv_path) == 0
+    fieldnames = [
+        "model_id",
+        "variant",
+        "steering_mode", 
+        "vector_source",
+        "coefficient",
+        "sample_id",
+        "target_language",
+        "detected_language", 
+        "identity_true",
+        "success",
+        "invalid",
+        "response_text"
+    ]
+    with open(csv_path, "a", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        if is_new:
+            writer.writeheader()
+        writer.writerow({k: row.get(k, "") for k in fieldnames})
+
+
 def load_weighted_vectors_for_task(
     vectors_dir: str,
     model: str,
@@ -415,6 +439,10 @@ def run_id_leverage_steered(
 ) -> List[Dict[str, Any]]:
     idlev_task = make_idlev_generic_task()
 
+    # Create detailed language CSV path
+    csv_dir = os.path.dirname(csv_out)
+    lang_csv_out = os.path.join(csv_dir, f"language_details_{model}_steering.csv")
+
     t0 = time.time()
     correct = 0
     incorrect = 0
@@ -428,6 +456,23 @@ def run_id_leverage_steered(
         target_lang = sample.get("target_language")
         identity_true = bool(sample.get("identity_true", True))
         scored = idlev_task._score_from_text(txt, target_lang, identity_true)
+        
+        # Save detailed language data
+        _write_language_detail_csv(lang_csv_out, {
+            "model_id": model,
+            "variant": variant,
+            "steering_mode": steering_config.get("steering_mode", "none"),
+            "vector_source": steering_config.get("vector_source", ""),
+            "coefficient": steering_config.get("coefficient", ""),
+            "sample_id": sample.get("id", ""),
+            "target_language": target_lang,
+            "detected_language": scored.get("pred_language", ""),
+            "identity_true": identity_true,
+            "success": scored.get("success", False),
+            "invalid": scored.get("invalid", 0),
+            "response_text": txt or ""
+        })
+        
         if int(scored.get("invalid", 0)) == 1:
             invalid += 1
         elif bool(scored.get("success")):
@@ -467,7 +512,7 @@ def run_id_leverage_steered(
     for sample in idlev_task.iter_samples(model=model, variant=variant, n=examples_per_task):
         messages = sample["messages"]
         fallback = sample.get("request_text", "")
-        ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=30, temperature=0.0, fallback_text=fallback)
+        ex = _generate_example_with_steering(model, messages, steering_config, max_tokens=60, temperature=0.0, fallback_text=fallback)
         examples.append({"task": "id_leverage_generic", **ex})
         count += 1
         if count >= examples_per_task:

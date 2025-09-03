@@ -186,3 +186,12 @@ qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,300.0,pre,all,[10],100,1
 qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,300.0,pre,all,[25],100,100,100,0.000000,76.186,vv=plain coef=300.0 layers=25
 qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,300.0,pre,all,[40],100,100,100,0.000000,81.060,vv=plain coef=300.0 layers=40
 qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,5.0,pre,all,[10],100,100,0,0.630000,74.974,vv=plain coef=5.0 layers=10
+qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,5.0,pre,all,[25],100,100,0,0.640000,74.301,vv=plain coef=5.0 layers=25
+qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,5.0,pre,all,[40],100,100,0,0.620000,80.692,vv=plain coef=5.0 layers=40
+qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,10.0,pre,all,[10],100,100,0,0.640000,77.318,vv=plain coef=10.0 layers=10
+qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,10.0,pre,all,[25],100,100,0,0.640000,76.715,vv=plain coef=10.0 layers=25
+qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,10.0,pre,all,[40],100,100,4,0.610000,75.749,vv=plain coef=10.0 layers=40
+qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,20.0,pre,all,[10],100,100,100,0.000000,77.257,vv=plain coef=20.0 layers=10
+qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,20.0,pre,all,[25],100,100,100,0.000000,70.122,vv=plain coef=20.0 layers=25
+qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,20.0,pre,all,[40],100,100,99,0.000000,75.316,vv=plain coef=20.0 layers=40
+qwen-2.5-14b-instruct,stages_oversight,plain,add,stages,40.0,pre,all,[10],100,100,100,0.000000,76.699,vv=plain coef=40.0 layers=10

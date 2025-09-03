@@ -95,10 +95,6 @@ def plot_idlev_conditions(
     title = "ID-Leverage conditions (accuracy by phrase and variant)"
     if model_id:
         title += f" | {model_id}"
-    if true_first:
-        title += " | identity_true first"
-    else:
-        title += " | identity_true last"
     plt.title(title)
     plt.ylabel("accuracy")
     plt.legend(loc="best")

@@ -8,22 +8,23 @@ MODEL="qwen-2.5-14b-instruct"
 OUT_DIR="experiments/results/steering_sweep"
 VECTORS_DIR="experiments/vectors"
 N=100
-EXAMPLES=0
+EXAMPLES=5
 
 mkdir -p "$OUT_DIR"
 
 # ---------------- Add-mode sweep ----------------
 # Parameters to sweep
-VECTOR_VARIANTS=("sp" "plain")
-COEFFICIENTS=(0.01)
+VECTOR_VARIANTS=("plain")
+COEFFICIENTS=(0.005 0.01 0.02)
 LAYERS_LIST=(10 25 40)
 
 for VV in "${VECTOR_VARIANTS[@]}"; do
   for COEF in "${COEFFICIENTS[@]}"; do
     for LAYERS in "${LAYERS_LIST[@]}"; do
-      python -m experiments.benchmark_with_steering \
+      SA_SPLIT=test python -m experiments.benchmark_with_steering \
         --model "$MODEL" \
         --n $N --examples $EXAMPLES \
+        --tasks id_leverage \
         --steering-mode add --vector-source id_leverage \
         --variant plain --vector-variant "$VV" \
         --coefficient $COEF --layers $LAYERS \

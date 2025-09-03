@@ -463,7 +463,7 @@ def run_id_leverage_steered(
         if idlev_save_details:
             _write_language_detail_csv(lang_csv_out, {
                 "model_id": model,
-                "variant": variant,
+                "variant": steering_config.get("vector_variant", variant),
                 "steering_mode": steering_config.get("steering_mode", "none"),
                 "vector_source": steering_config.get("vector_source", ""),
                 "coefficient": steering_config.get("coefficient", ""),

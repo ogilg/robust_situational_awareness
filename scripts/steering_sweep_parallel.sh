@@ -20,8 +20,8 @@ EXAMPLES=0
 STEERING_MODE="add"          # add | project
 VECTOR_SOURCE="stages"  # stages | self_recognition | output_control | id_leverage
 VARIANT="plain"               # plain | sp (dataset variant)
-VECTOR_VARIANTS=("plain")
-COEFFICIENTS=(0.005 0.01 0.02 0.04 0.07 0.1)
+VECTOR_VARIANTS=("plain" "sp")
+COEFFICIENTS=(0.005 0.01 0.02)
 LAYERS_LIST=(10 25 40)
 
 mkdir -p "$OUT_DIR" "$LOG_DIR"
@@ -52,7 +52,7 @@ PY
 }
 
 # Build and launch jobs
-gpu_cycle=(0 1 2 3 4 5 6 7)
+gpu_cycle=(0 1)
 gidx=0
 
 ts=$(date +%s)
@@ -69,7 +69,7 @@ for VV in "${VECTOR_VARIANTS[@]}"; do
           --steering-mode "$STEERING_MODE" --vector-source "$VECTOR_SOURCE" \
           --variant "$VARIANT" --vector-variant "$VV" \
           --coefficient "$COEF" --layers "$LAYERS" \
-          --tasks stages \
+          --tasks id_leverage \
           --out-dir "$OUT_DIR" \
           --comment "vv=$VV coef=$COEF layers=$LAYERS"
     done

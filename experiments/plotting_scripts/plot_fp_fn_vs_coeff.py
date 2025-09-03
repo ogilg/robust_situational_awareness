@@ -96,10 +96,11 @@ def main() -> None:
     ax.set_xlabel("Coefficient")
     ax.set_title("False Positive / Negative Rates vs steering coefficient for ID-Leverage")
     ax.legend(title="Vector variant / Error", loc="best")
-    # Show only two x-axis tick values (min and max available)
+    # Show up to three x-axis tick values: min, middle, max (fallback to available)
     coeffs = sorted(long_df["coefficient"].dropna().unique())
-    if len(coeffs) >= 2:
-        xt = [coeffs[0], coeffs[-1]]
+    if len(coeffs) >= 3:
+        mid = coeffs[len(coeffs) // 2]
+        xt = [coeffs[0], mid, coeffs[-1]]
     else:
         xt = coeffs
     ax.set_xticks(xt)

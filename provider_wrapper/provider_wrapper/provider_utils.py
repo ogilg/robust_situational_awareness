@@ -75,13 +75,8 @@ def get_provider_for_model(
             kwargs["feed_empty_analysis"] = feed_empty_analysis
         return GPTOSSProvider(name, **kwargs)
     if prefer_transformerlens:
-        try:
-            # Lazy import to avoid circulars
-            from .transformer_lens_provider import TransformerLensProvider  # type: ignore
-            return TransformerLensProvider(name, lora_adapter_path=lora_adapter_path)
-        except Exception:
-            # Fallback to default if TL path fails
-            return DefaultHFProvider(name, lora_adapter_path=lora_adapter_path)
+        from .transformer_lens_provider import TransformerLensProvider  # type: ignore
+        return TransformerLensProvider(name)
     return DefaultHFProvider(name, lora_adapter_path=lora_adapter_path)
 
 

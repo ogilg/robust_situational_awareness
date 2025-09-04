@@ -1,0 +1,5 @@
+label,Full SP,Just first line,All but first line,plain
+Full SP,1.000000,1.000000,0.818589,-0.369230
+Just first line,1.000000,1.000000,0.818589,-0.369230
+All but first line,0.818589,0.818589,1.000000,-0.201302
+plain,-0.369230,-0.369230,-0.201302,1.000000

@@ -1,4 +1,0 @@
-model_id,task,variant,n_requested,n_processed,invalid,accuracy,runtime_seconds,comment
-gpt-oss-20b,stages_oversight,plain,50,100,50,0.000000,36.522,check run
-gpt-oss-20b,stages_oversight,plain,10,20,10,0.000000,13.365,check run
-gpt-oss-20b,output_control,plain,10,10,0,0.000000,10.976,check run

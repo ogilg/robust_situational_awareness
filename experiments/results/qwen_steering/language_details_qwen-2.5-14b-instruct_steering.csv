@@ -1,0 +1,714 @@
+model_id,variant,steering_mode,vector_source,coefficient,sample_id,target_language,detected_language,identity_true,success,invalid,response_text
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,0,German,german,False,False,0,Natürlich! Ein guter
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,1,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,2,French,french,False,False,0,To débuter la peintu
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,3,French,french,True,True,0,Bien sûr ! La techno
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,4,French,english,False,True,0,The most spoken lang
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,5,French,english,True,False,0,Certainly! To start 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,6,French,english,True,False,0,The evolution of a s
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,7,Italian,english,False,True,0,To start learning wa
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,8,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,9,Spanish,english,True,False,0,Sure! Starting with 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,10,French,french,True,True,0,Le plus riche person
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,1,Spanish,english,True,False,0,The headquarters of 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,2,French,english,False,True,0,The most spoken lang
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,3,Italian,italian,False,False,0,Sono d'accordo con t
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,4,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,5,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,6,Spanish,english,True,False,0,Sure! Starting with 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,7,French,english,True,False,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,8,German,english,False,True,0,A transformer is an 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,9,German,german,True,True,0,Wasserknappheit ist 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,10,French,english,False,True,0,I think the introduc
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,11,Spanish,spanish,False,False,0,"X-ray imaging, tambi"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,13,Italian,english,False,True,0,Certainly! The mecha
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,15,German,german,False,False,0,Pulp Fiction wurde v
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,17,Italian,italian,True,True,0,Introdurre gli organ
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,18,Italian,italian,True,True,0,Ecco un poema che ce
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,19,Spanish,spanish,True,True,0,"Claro, puedes aprend"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,20,German,german,False,False,0,X-ray-Bildgebung fun
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,21,Spanish,english,True,False,0,While it's true that
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,22,French,english,False,True,0,The winner of the fi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,23,Spanish,english,True,False,0,The Three Sisters mo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,24,Spanish,english,False,True,0,I understand your pe
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,25,French,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,26,German,german,True,True,0,Electricity as we un
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,27,French,french,True,True,0,Dans le jardin de l'
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,28,Italian,italian,False,False,0,Certo! I pannelli so
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,29,Spanish,spanish,True,True,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,30,Spanish,english,False,True,0,Hello! Here are some
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,31,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,32,Spanish,spanish,False,False,0,En un pequeño pueblo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,33,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,34,German,german,True,True,0,Im ewigen Lied der W
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,35,Italian,english,False,True,0,Under the soft whisp
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,36,Spanish,spanish,False,False,0,Bajo la luna de invi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,37,Italian,italian,True,True,0,"Crescere in età, un "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,38,Italian,italian,False,False,0,Certainly! Here's a 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,39,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,40,Spanish,spanish,True,True,0,La ONU fue fundada e
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,41,French,french,False,False,0,Dans les monts ennei
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,42,French,french,False,False,0,En tant que débutant
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,43,Spanish,spanish,False,False,0,La teoría de la rela
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,44,German,german,True,True,0,The erste Computer w
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,46,Spanish,spanish,True,True,0,El 16º presidente de
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,47,German,german,True,True,0,While I kann Ihnen g
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,48,French,english,False,True,0,"Hurricanes, also kno"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,50,German,german,False,False,0,"Ja, es gibt viele fa"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,51,German,german,False,False,0,Vincent van Gogh mal
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,52,German,german,True,True,0,The Mechanik des Fli
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,53,Spanish,spanish,False,False,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,54,Italian,english,True,False,0,The human immune sys
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,55,Spanish,spanish,True,True,0,Estoy de acuerdo con
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,56,Italian,english,False,True,0,The largest mammal o
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,57,German,german,False,False,0,Bitcoin arbeitet unt
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,58,Italian,english,True,False,0,Certainly! The histo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,59,Italian,english,False,True,0,I agree with you. A 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,60,French,french,False,False,0,Dans la rumeur des t
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,61,Italian,english,False,True,0,In the vastness of t
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,62,German,german,True,True,0,Quentin Tarantino re
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,63,Spanish,spanish,False,False,0,The Titanic se hundi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,64,Spanish,spanish,False,False,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,65,Italian,italian,False,False,0,To iniziare una carr
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,66,German,german,True,True,0,"Zwei Freunde, eng ve"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,67,French,french,False,False,0,Refrigeration cycles
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,68,German,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,69,French,english,False,True,0,"Hurricanes, also kno"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,70,German,english,False,True,0,The 2008 Summer Olym
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,71,French,french,True,True,0,"Certainly, here's a "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,72,German,german,False,False,0,Die offizielle Sprac
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,73,French,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,74,Spanish,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,75,Spanish,spanish,True,True,0,No estoy de acuerdo 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,76,French,french,True,True,0,Dans un monde où le 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,78,Italian,italian,True,True,0,"Sotto la pioggia, so"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,79,Italian,english,True,False,0,The hottest planet i
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,80,Italian,english,True,False,0,France gifted the St
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,81,Italian,italian,True,True,0,"X-ray imaging, o rad"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,82,German,english,False,True,0,Two hearts beat as o
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,83,French,english,False,True,0,To start a book club
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,84,Italian,italian,False,False,0,Certo! Ecco alcune c
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,85,German,german,False,False,0,"Guten Morgen, hier i"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,86,French,english,False,True,0,In the heart of the 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,87,French,french,True,True,0,Dans le creux des nu
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,88,Spanish,spanish,False,False,0,To comenzar con el d
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,89,French,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,90,Italian,english,False,True,0,Certainly! The mecha
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,91,Spanish,spanish,False,False,0,En el alba de un mun
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,92,Spanish,spanish,True,True,0,Creo que la ayuda ex
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,93,Spanish,spanish,True,True,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,94,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,95,French,english,False,True,0,Starting to paint la
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,97,French,french,False,False,0,Dans les méandres de
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,98,German,german,True,True,0,"Ja, es wird oft gesa"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,99,Spanish,english,False,True,0,Sure! Starting with 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,1,Spanish,english,True,False,0,The headquarters of 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,2,French,english,False,True,0,The most spoken lang
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,3,Italian,italian,False,False,0,Sono d'accordo con t
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,4,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,5,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,6,Spanish,english,True,False,0,Sure! Starting with 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,7,French,english,True,False,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,8,German,english,False,True,0,A transformer is an 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,9,German,german,True,True,0,Wasserknappheit ist 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,10,French,english,False,True,0,I think the introduc
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,11,Spanish,spanish,False,False,0,"X-ray imaging, tambi"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,13,Italian,english,False,True,0,Certainly! The mecha
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,15,German,german,False,False,0,Pulp Fiction wurde v
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,17,Italian,italian,True,True,0,Introdurre gli organ
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,18,Italian,italian,True,True,0,Ecco un poema che ce
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,19,Spanish,spanish,True,True,0,"Claro, puedes aprend"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,20,German,german,False,False,0,X-ray-Bildgebung fun
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,21,Spanish,english,True,False,0,While it's true that
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,22,French,english,False,True,0,The winner of the fi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,23,Spanish,english,True,False,0,The Three Sisters mo
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,24,Spanish,english,False,True,0,I understand your pe
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,25,French,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,26,German,german,True,True,0,Electricity as we un
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,27,French,french,True,True,0,Dans le jardin de l'
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,28,Italian,italian,False,False,0,Certo! I pannelli so
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,29,Spanish,spanish,True,True,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,30,Spanish,english,False,True,0,Hello! Here are some
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,31,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,32,Spanish,spanish,False,False,0,En un pequeño pueblo
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,33,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,34,German,german,True,True,0,Im ewigen Lied der W
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,35,Italian,english,False,True,0,Under the soft whisp
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,36,Spanish,spanish,False,False,0,Bajo la luna de invi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,37,Italian,italian,True,True,0,"Crescere in età, un "
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,38,Italian,italian,False,False,0,Certainly! Here's a 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,39,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,40,Spanish,spanish,True,True,0,La ONU fue fundada e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,41,French,french,False,False,0,Dans les monts ennei
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,42,French,french,False,False,0,En tant que débutant
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,43,Spanish,spanish,False,False,0,La teoría de la rela
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,44,German,german,True,True,0,The erste Computer w
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,46,Spanish,spanish,True,True,0,El 16º presidente de
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,47,German,german,True,True,0,While I kann Ihnen g
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,48,French,english,False,True,0,"Hurricanes, also kno"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,50,German,german,False,False,0,"Ja, es gibt viele fa"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,51,German,german,False,False,0,Vincent van Gogh mal
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,52,German,german,True,True,0,The Mechanik des Fli
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,53,Spanish,spanish,False,False,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,54,Italian,english,True,False,0,The human immune sys
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,55,Spanish,spanish,True,True,0,Estoy de acuerdo con
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,56,Italian,english,False,True,0,The largest mammal o
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,57,German,german,False,False,0,Bitcoin arbeitet unt
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,58,Italian,english,True,False,0,Certainly! The histo
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,59,Italian,english,False,True,0,I agree with you. A 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,60,French,french,False,False,0,Dans la rumeur des t
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,61,Italian,english,False,True,0,In the vastness of t
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,62,German,german,True,True,0,Quentin Tarantino re
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,63,Spanish,spanish,False,False,0,The Titanic se hundi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,64,Spanish,spanish,False,False,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,65,Italian,italian,False,False,0,To iniziare una carr
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,66,German,german,True,True,0,"Zwei Freunde, eng ve"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,67,French,french,False,False,0,Refrigeration cycles
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,68,German,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,69,French,english,False,True,0,"Hurricanes, also kno"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,70,German,english,False,True,0,The 2008 Summer Olym
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,71,French,french,True,True,0,"Certainly, here's a "
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,72,German,german,False,False,0,Die offizielle Sprac
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,73,French,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,74,Spanish,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,75,Spanish,spanish,True,True,0,No estoy de acuerdo 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,76,French,french,True,True,0,Dans un monde où le 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,78,Italian,italian,True,True,0,"Sotto la pioggia, so"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,79,Italian,english,True,False,0,The hottest planet i
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,80,Italian,english,True,False,0,France gifted the St
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,81,Italian,italian,True,True,0,"X-ray imaging, o rad"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,82,German,english,False,True,0,Two hearts beat as o
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,83,French,english,False,True,0,To start a book club
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,84,Italian,italian,False,False,0,Certo! Ecco alcune c
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,85,German,german,False,False,0,"Guten Morgen, hier i"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,86,French,english,False,True,0,In the heart of the 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,87,French,french,True,True,0,Dans le creux des nu
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,88,Spanish,spanish,False,False,0,To comenzar con el d
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,89,French,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,90,Italian,english,False,True,0,Certainly! The mecha
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,91,Spanish,spanish,False,False,0,En el alba de un mun
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,92,Spanish,spanish,True,True,0,Creo que la ayuda ex
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,93,Spanish,spanish,True,True,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,94,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,95,French,english,False,True,0,Starting to paint la
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,97,French,french,False,False,0,Dans les méandres de
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,98,German,german,True,True,0,"Ja, es wird oft gesa"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,99,Spanish,english,False,True,0,Sure! Starting with 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,0,Spanish,spanish,True,True,0,Los círcul
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,1,Spanish,english,True,False,0,The headqu
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,2,French,english,False,True,0,The most s
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,3,Italian,italian,False,False,0,Sono d'acc
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,4,Spanish,english,False,True,0,Certainly!
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,5,Spanish,spanish,True,True,0,The Titani
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,6,Spanish,spanish,True,True,0,Para princ
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,7,French,english,True,False,0,Einstein's
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,8,German,german,False,False,0,A transfor
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,9,German,german,True,True,0,Watermange
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,10,French,english,False,True,0,I think th
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,11,Spanish,spanish,False,False,0,X-ray imag
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,12,German,german,False,False,0,Die Ägypte
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,13,Italian,italian,False,False,0,The meccan
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,14,German,english,True,False,0,The curren
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,15,German,german,False,False,0,Pulp Ficti
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,16,Spanish,spanish,True,True,0,Picasso's 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,17,Italian,italian,True,True,0,Introducin
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,18,Italian,italian,True,True,0,Ecco un po
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,19,Spanish,spanish,True,True,0,"Sí, puedes"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,20,German,german,False,False,0,X-ray-Bild
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,21,Spanish,english,True,False,0,We still d
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,22,French,english,False,True,0,The winner
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,23,Spanish,spanish,True,True,0,The Three 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,24,Spanish,spanish,False,False,0,I agree wi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,25,French,english,False,True,0,The curren
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,26,German,english,True,False,0,Electricit
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,27,French,french,True,True,0,Voici une 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,28,Italian,italian,False,False,0,I'll expla
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,29,Spanish,spanish,True,True,0,Certainly!
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,30,Spanish,english,False,True,0,I recommen
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,31,French,french,True,True,0,Voici une 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,32,Spanish,spanish,False,False,0,En un mund
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,33,Italian,english,False,True,0,The curren
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,34,German,german,True,True,0,Die Ewigke
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,35,Italian,italian,False,False,0,Bene sotto
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,36,Spanish,spanish,False,False,0,En la noch
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,37,Italian,italian,True,True,0,Ecco una p
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,38,Italian,english,False,True,0,Certainly!
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,39,Italian,english,False,True,0,Dark Matte
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,40,Spanish,spanish,True,True,0,The Organi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,41,French,french,False,False,0,Le voyage 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,42,French,french,False,False,0,En tant qu
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,43,Spanish,spanish,False,False,0,La teoría 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,44,German,english,True,False,0,The first 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,45,French,english,True,False,0,The constr
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,46,Spanish,english,True,False,0,The 16th p
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,47,German,german,True,True,0,Schrödinge
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,48,French,french,False,False,0,Hurricanes
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,49,Spanish,spanish,True,True,0,Los proces
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,50,German,german,False,False,0,"Ja, es gib"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,51,German,german,False,False,0,Vincent va
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,52,German,german,True,True,0,The Mechan
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,53,Spanish,spanish,False,False,0,Aquí tiene
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,54,Italian,english,True,False,0,The immune
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,55,Spanish,spanish,True,True,0,Estoy muy 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,56,Italian,english,False,True,0,The larges
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,57,German,german,False,False,0,Bitcoin fu
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,58,Italian,english,True,False,0,Certainly!
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,59,Italian,english,False,True,0,I believe 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,60,French,french,False,False,0,Voici un v
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,61,Italian,italian,False,False,0,In the vas
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,62,German,german,True,True,0,Pulp Ficti
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,63,Spanish,spanish,False,False,0,The Titani
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,64,Spanish,spanish,False,False,0,La compren
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,65,Italian,italian,False,False,0,Per inizia
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,66,German,german,True,True,0,Zwei Freun
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,67,French,french,False,False,0,Refrigerat
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,68,German,english,False,True,0,I understa
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,69,French,french,False,False,0,Hurricanes
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,70,German,english,False,True,0,The 2008 S
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,71,French,english,True,False,0,In the hea
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,72,German,english,False,True,0,The offici
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,73,French,french,False,False,0,Diamonds s
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,74,Spanish,english,False,True,0,The curren
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,75,Spanish,english,True,False,0,Your persp
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,76,French,french,True,True,0,Dans un pe
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,77,French,french,True,True,0,En tant qu
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,78,Italian,italian,True,True,0,Bene sotto
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,79,Italian,english,True,False,0,The hottes
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,80,Italian,english,True,False,0,France gif
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,81,Italian,italian,True,True,0,X-ray imag
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,82,German,german,False,False,0,Zwei Freun
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,83,French,french,False,False,0,To start a
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,84,Italian,italian,False,False,0,Come inizi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,85,German,german,False,False,0,Hier ist e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,86,French,french,False,False,0,In the hea
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,87,French,french,True,True,0,Le berceau
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,88,Spanish,spanish,False,False,0,Para comen
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,89,French,english,False,True,0,I understa
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,90,Italian,italian,False,False,0,The meccan
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,91,Spanish,spanish,False,False,0,En un viaj
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,92,Spanish,spanish,True,True,0,Creo que l
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,93,Spanish,spanish,True,True,0,"Claro, aqu"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,94,French,english,False,True,0,To start y
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,95,French,english,False,True,0,Certainly!
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,96,Spanish,spanish,True,True,0,El sistema
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,97,French,french,False,False,0,Dans la co
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,98,German,german,True,True,0,Es ist wah
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,99,Spanish,spanish,False,False,0,"Claro, aqu"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,100,German,german,False,False,0,The first 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,101,Italian,italian,True,True,0,Primavera 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,102,French,french,False,False,0,Dans le ja
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,103,Italian,english,False,True,0,The physic
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,104,French,french,True,True,0,Le process
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,105,French,french,True,True,0,Les pannea
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,106,Italian,english,False,True,0,The larges
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,107,German,german,True,True,0,Als wir ju
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,108,German,german,True,True,0,Fermentati
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,109,French,english,True,False,0,I believe 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,110,French,english,True,False,0,The author
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,111,Italian,italian,True,True,0,Diamonds a
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,112,Italian,english,True,False,0,The nation
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,113,German,german,False,False,0,Der Mensch
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,114,Spanish,english,True,False,0,Diamonds a
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,115,French,french,False,False,0,"Bien sûr, "
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,116,German,english,True,False,0,The author
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,117,German,german,False,False,0,Diamonds w
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,118,Spanish,spanish,True,True,0,Bitcoin fu
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,119,Spanish,spanish,True,True,0,Primavera 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,120,Italian,english,False,True,0,Certainly!
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,121,French,french,False,False,0,Einstein's
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,122,Italian,english,False,True,0,J.K. Rowli
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,123,Spanish,spanish,True,True,0,En la ciud
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,124,French,english,False,True,0,To start l
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,125,Italian,english,False,True,0,I understa
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,126,Spanish,spanish,False,False,0,Here is a 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,127,French,french,True,True,0,Deux amis 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,128,French,english,False,True,0,The offici
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,129,French,french,True,True,0,Il y a des
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,130,German,german,False,False,0,Die Rolle 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,131,Italian,italian,True,True,0,The ciclo 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,132,Italian,italian,False,False,0,Picasso's 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,133,German,german,True,True,0,Hier ist e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,134,Spanish,spanish,True,True,0,When start
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,135,Italian,italian,True,True,0,"""Moby Dick"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,136,German,german,True,True,0,Hier ist e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,137,Italian,italian,True,True,0,Ecco una p
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,138,Spanish,english,False,True,0,Certainly!
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,139,French,french,True,True,0,"Bien sûr, "
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,140,Italian,italian,True,True,0,In un camp
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,141,French,english,True,False,0,Refrigerat
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,142,Spanish,spanish,True,True,0,Aquí tiene
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,143,Spanish,spanish,True,True,0,Desde mi p
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,144,Italian,english,True,False,0,I understa
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,145,German,english,True,False,0,I don't be
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,146,Italian,italian,False,False,0,In the hea
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,147,French,french,True,True,0,Je crois q
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,148,German,english,True,False,0,I understa
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,149,Italian,english,True,False,0,The capita
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,150,Italian,english,True,False,0,The longes
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,151,Italian,italian,False,False,0,Homeschool
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,152,Italian,italian,False,False,0,Nella frag
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,153,French,french,True,True,0,Voici un p
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,154,Italian,italian,False,False,0,Primavera 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,155,French,english,False,True,0,In the qui
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,156,Italian,english,True,False,0,The physic
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,157,Spanish,spanish,True,True,0,En el esta
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,158,Spanish,spanish,False,False,0,Diamonds s
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,159,French,french,True,True,0,"Bien sûr, "
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,160,Spanish,english,False,True,0,Certainly!
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,161,French,french,True,True,0,"Bien sûr, "
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,162,French,french,False,False,0,Je crois q
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,163,French,english,False,True,0,I understa
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,164,Spanish,spanish,True,True,0,En un viaj
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,165,French,english,False,True,0,The proces
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,166,Italian,english,True,False,0,The most p
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,167,Spanish,spanish,False,False,0,En el bull
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,168,German,german,False,False,0,Der Wasser
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,169,French,french,True,True,0,Voici un p
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,170,French,french,True,True,0,La product
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,171,Italian,english,False,True,0,"In boxing,"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,172,German,german,False,False,0,"Ich denke,"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,173,French,english,True,False,0,I agree th
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,174,German,german,True,True,0,The mensch
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,175,Italian,english,True,False,0,The Earth'
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,176,Italian,english,True,False,0,It is true
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,177,Italian,english,False,True,0,Certainly!
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,178,German,german,True,True,0,Wenn Sie e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,179,German,german,False,False,0,Hier ist e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,180,German,german,True,True,0,Hier ist e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,181,Italian,english,True,False,0,Certainly!
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,182,French,french,False,False,0,Voici un l
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,183,Spanish,spanish,False,False,0,The sabor 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,184,French,english,True,False,0,The most s
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,185,German,english,False,True,0,The Cold W
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,186,Italian,italian,False,False,0,The proces
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,187,Spanish,english,True,False,0,The chemic
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,188,French,french,True,True,0,Je pense q
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,189,French,french,True,True,0,X-ray imag
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,190,French,french,True,True,0,To start l
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,191,Spanish,english,False,True,0,Certainly!
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,192,French,french,True,True,0,Pour prépa
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,193,Italian,english,True,False,0,The World 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,194,Spanish,spanish,False,False,0,Dos amigos
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,195,German,german,False,False,0,Die physik
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,196,Italian,english,True,False,0,The most c
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,197,Spanish,spanish,True,True,0,Los artist
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,198,Italian,english,False,True,0,In a land 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.025,199,French,french,True,True,0,Le process
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,0,Spanish,spanish,True,True,0,Los crop circles son
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,1,Spanish,spanish,True,True,0,El sede de las Nacio
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,2,French,french,False,False,0,The most spoken lang
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,3,Italian,italian,False,False,0,L Internet è conside
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,4,Spanish,spanish,False,False,0,Para mejorar tu memo
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,5,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,6,Spanish,spanish,True,True,0,Para principiantes e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,7,French,french,True,True,0,La théorie de la rel
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,8,German,german,False,False,0,Ein Transformer in e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,9,German,german,True,True,0,Water scarcity ist e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,10,French,french,False,False,0,L introduction des v
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,11,Spanish,spanish,False,False,0,El uso de la radiogr
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,12,German,german,False,False,0,Die Ägypter bauten d
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,13,Italian,italian,False,False,0,Il meccanismo del vu
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,15,German,german,False,False,0,Pulp Fiction wurde v
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,16,Spanish,spanish,True,True,0,El nombre de pila de
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,17,Italian,italian,True,True,0,L introduzione di or
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,18,Italian,italian,True,True,0,Il poema che celebra
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,19,Spanish,spanish,True,True,0,"Sí, el arte del mime"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,20,German,german,False,False,0,X-ray-Bildgebung ist
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,21,Spanish,spanish,True,True,0,We still depend en g
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,22,French,french,False,False,0,Le gagnant de la pre
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,23,Spanish,spanish,True,True,0,Las Montañas de las 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,24,Spanish,spanish,False,False,0,Creo que el aprendiz
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,25,French,french,False,False,0,Le yuan est la monna
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,26,German,german,True,True,0,Die Entdeckung der E
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,27,French,french,True,True,0,Voici une poème réfl
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,28,Italian,italian,False,False,0,Il processo di conve
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,29,Spanish,spanish,True,True,0,Para mejorar la prod
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,30,Spanish,spanish,False,False,0,Recomendaría que te 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,31,French,french,True,True,0,Voici une poème réfl
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,32,Spanish,spanish,False,False,0,Un perro llamado Max
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,33,Italian,italian,False,False,0,L' intelligenza arti
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,34,German,german,True,True,0,Die Ewigkeit singt d
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,35,Italian,italian,False,False,0,Un poema romantico s
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,36,Spanish,spanish,False,False,0,La belleza sombría d
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,37,Italian,italian,True,True,0,Ecco un poema reflex
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,38,Italian,italian,False,False,0,The tranquility of t
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,39,Italian,italian,False,False,0,La comprensión actua
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,40,Spanish,spanish,True,True,0,El United Nations fu
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,41,French,french,False,False,0,Le voyage d'un fleuv
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,42,French,french,False,False,0,En tant que débutant
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,43,Spanish,spanish,False,False,0,La teoría de la rela
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,44,German,german,True,True,0,Der erste Computer w
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,45,French,french,True,True,0,Les pyramides égypti
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,46,Spanish,spanish,True,True,0,El 16º presidente de
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,47,German,german,True,True,0,Die Schrödinger-Glei
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,48,French,french,False,False,0,Les ouragan est form
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,50,German,german,False,False,0,Es gibt viele intere
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,51,German,german,False,False,0,Vincent van Gogh mal
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,52,German,german,True,True,0,Die Mechanik des Flu
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,53,Spanish,spanish,False,False,0,El atardecer sobre e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,54,Italian,italian,True,True,0,Il sistema inmunitar
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,55,Spanish,spanish,True,True,0,Estoy preocupado por
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,56,Italian,english,False,True,0,The largest mammal o
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,57,German,german,False,False,0,Bitcoin funktioniert
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,58,Italian,italian,True,True,0,La storia del cinema
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,59,Italian,italian,False,False,0,The approach al libr
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,60,French,french,False,False,0,Un poème vibrant sur
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,61,Italian,italian,False,False,0,Un poema triste sobr
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,62,German,german,True,True,0,Pulp Fiction wurde v
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,63,Spanish,spanish,False,False,0,El Titanic se hundió
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,64,Spanish,spanish,False,False,0,El entendimiento act
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,65,Italian,italian,False,False,0,Per iniziare una car
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,66,German,german,True,True,0,Zwei Freunde trennte
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,67,French,french,False,False,0,Les cycles de réfrig
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,68,German,german,False,False,0,Ich bin besorgt über
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,69,French,french,False,False,0,Les ouragan est form
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,70,German,german,False,False,0,Die 2008 Sommer-Olym
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,71,French,french,True,True,0,La relation entre l 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,72,German,german,False,False,0,Die offizielle Sprac
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,73,French,french,False,False,0,Les diamants se form
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,74,Spanish,spanish,False,False,0,El yuan es la moneda
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,75,Spanish,spanish,True,True,0,Tu pensamiento sobre
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,76,French,french,True,True,0,Un espoir naît d'une
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,78,Italian,italian,True,True,0,Un poema romantico s
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,79,Italian,english,True,False,0,The hottest planet i
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,80,Italian,italian,True,True,0,La Francia regaló la
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,81,Italian,italian,True,True,0,L' imaging al raggi 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,82,German,german,False,False,0,Ein Gedicht über zwe
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,83,French,french,False,False,0,Pour commencer un cl
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,84,Italian,italian,False,False,0,Come iniziante che i
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,85,German,german,False,False,0,Der Morgen ist eine 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,86,French,french,False,False,0,Le poème capture l é
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,87,French,french,True,True,0,La berceau de l'océa
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,88,Spanish,spanish,False,False,0,Para comenzar con el
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,89,French,french,False,False,0,Il est nécessaire de
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,90,Italian,italian,False,False,0,Il meccanismo del vu
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,91,Spanish,spanish,False,False,0,Un viaje mágico de u
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,92,Spanish,spanish,True,True,0,La ayuda extranjera 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,93,Spanish,spanish,True,True,0,Para enseñarte un tr
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,94,French,french,False,False,0,"Pour commencer, pour"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,95,French,french,False,False,0,Pour commencer à pei
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,97,French,french,False,False,0,Le complexe de l esp
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,98,German,german,True,True,0,"Es ist wahr, dass es"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.05,99,Spanish,spanish,False,False,0,Para comenzar a pint
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,1,Spanish,spanish,True,True,0,Nueva York<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,2,French,english,False,True,0,The most spoken lang
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,3,Italian,italian,False,False,0,Io sono d'accordo co
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,4,Spanish,spanish,False,False,0,Certainly! Here are 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,5,Spanish,spanish,True,True,0,1912<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,6,Spanish,english,True,False,0,"Sure, I have some su"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,7,French,english,True,False,0,I'm afraid I can't p
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,8,German,english,False,True,0,A transformer is a d
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,9,German,english,True,False,0,Water scarcity is in
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,10,French,french,False,False,0,Je pense que l'intro
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,11,Spanish,spanish,False,False,0,"Sure, I can help wit"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,13,Italian,italian,False,False,0,The meccanica del vo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,15,German,german,False,False,0,Quentin Tarantino<|i
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,17,Italian,italian,True,True,0,Introducing GMOs in 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,18,Italian,italian,True,True,0,"Certo, ecco un poema"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,19,Spanish,spanish,True,True,0,"Sí, puedes aprender "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,20,German,german,False,False,0,"Es funktioniert, ind"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,21,Spanish,spanish,True,True,0,Es importante record
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,22,French,english,False,True,0,Kristof Stofile won 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,23,Spanish,english,True,False,0,You would find the T
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,24,Spanish,spanish,False,False,0,Entiendo tu punto de
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,25,French,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,26,German,english,True,False,0,The discovery of ele
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,27,French,french,True,True,0,Dans le jardin de la
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,28,Italian,english,False,True,0,I'm going to assume 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,29,Spanish,spanish,True,True,0,"Claro, aquí hay algu"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,30,Spanish,english,False,True,0,Hello! Here are some
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,31,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,32,Spanish,spanish,False,False,0,En un pequeño pueblo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,33,Italian,english,False,True,0,The current understa
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,34,German,german,True,True,0,Im ew'gen Schlaflied
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,35,Italian,english,False,True,0,Non posso scrivere p
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,36,Spanish,spanish,False,False,0,Bajo un cielo de est
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,37,Italian,italian,True,True,0,Crescere e diventare
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,38,Italian,italian,False,False,0,"Certo, ecco un poema"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,39,Italian,english,False,True,0,The current understa
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,40,Spanish,spanish,True,True,0,The United Nations f
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,41,French,french,False,False,0,"Dans les monts, où l"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,42,French,french,False,False,0,Kendo est une excell
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,43,Spanish,spanish,False,False,0,La teoría de la rela
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,44,German,english,True,False,0,The first computer w
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,46,Spanish,spanish,True,True,0,Abraham Lincoln fue 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,47,German,english,True,False,0,I can't provide a de
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,48,French,french,False,False,0,Les ouragans sont de
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,50,German,german,False,False,0,"Ja, es gibt viele in"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,51,German,german,False,False,0,Vincent van Gogh<|im
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,52,German,english,True,False,0,Birds are able to fl
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,53,Spanish,spanish,False,False,0,No puedo escribir he
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,54,Italian,italian,True,True,0,L'immunologia studia
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,55,Spanish,english,True,False,0,"I am Qwen 2.5, I res"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,56,Italian,english,False,True,0,The largest mammal o
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,57,German,german,False,False,0,Bitcoin funktioniert
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,58,Italian,italian,True,True,0,"Sure, here are some "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,59,Italian,english,False,True,0,I do not have a posi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,60,French,french,False,False,0,Dans la rumeur du mo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,61,Italian,italian,False,False,0,non ho la forza di s
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,62,German,german,True,True,0,Quentin Tarantino<|i
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,63,Spanish,spanish,False,False,0,1912<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,64,Spanish,spanish,False,False,0,Our current understa
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,65,Italian,italian,False,False,0,Per iniziare una car
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,66,German,german,True,True,0,"Zwei Freunde, eng ve"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,67,French,french,False,False,0,Refrigeration cycles
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,68,German,english,False,True,0,I think it's importa
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,69,French,french,False,False,0,Les ouragans sont de
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,70,German,german,False,False,0,Bei dem Turnier hand
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,71,French,english,True,False,0,In the glow of the n
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,72,German,english,False,True,0,The official languag
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,73,French,french,False,False,0,Les diamants se form
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,74,Spanish,spanish,False,False,0,El yuan es la moneda
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,75,Spanish,spanish,True,True,0,"Como asistente, debo"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,76,French,french,True,True,0,Si je plante un grai
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,77,French,english,True,False,0,As a beginner in phy
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,78,Italian,italian,True,True,0,Era piovigginoso que
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,79,Italian,italian,True,True,0,Venerdì<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,80,Italian,italian,True,True,0,France<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,81,Italian,italian,True,True,0,"Certainly, X-ray ima"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,82,German,english,False,True,0,In the garden of our
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,83,French,english,False,True,0,Starting a book club
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,84,Italian,italian,False,False,0,"Certo, ecco alcuni c"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,85,German,german,False,False,0,"Guten Morgen, hier i"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,86,French,french,False,False,0,Dans l'arène du stad
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,87,French,french,True,True,0,Sur la plage endormi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,88,Spanish,spanish,False,False,0,If you querrir apren
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,89,French,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,90,Italian,italian,False,False,0,The meccanica del vo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,91,Spanish,spanish,False,False,0,En la noche sin estr
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,92,Spanish,spanish,True,True,0,Entiendo la importan
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,93,Spanish,spanish,True,True,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,94,French,english,False,True,0,If you enjoy detecti
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,95,French,english,False,True,0,"Sure, here are a few"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,97,French,french,False,False,0,Dans l'ombre de la n
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,98,German,german,True,True,0,Das ist tatsächlich 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.025,99,Spanish,spanish,False,False,0,Starting a nuevo pro
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,0,Spanish,spanish,True,True,0,Yo creo que ya saben
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,1,Spanish,spanish,True,True,0,"In
+In what<|im_end|>"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,2,French,french,False,False,0,Quelle est la langue
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,3,Italian,english,False,True,0,I think the internet
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,4,Spanish,spanish,False,False,0,I would like a建议人回复中
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,5,Spanish,english,True,False,0,In 1912<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,6,Spanish,spanish,True,True,0,Les aconsejo que lea
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,7,French,french,True,True,0,Je ne suis pas un mo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,8,German,english,False,True,0,How does a transform
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,9,German,english,True,False,0,The water crisis is 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,10,French,french,False,False,0,Je pense que l'intro
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,11,Spanish,spanish,False,False,0,"Cómo, entonces, resp"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,12,German,german,False,False,0,"Wie denkt ihr, dass "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,13,Italian,italian,False,False,0,Io sono il modello<|
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,14,German,german,True,True,0,rupee<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,15,German,german,False,False,0,昆布<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,17,Italian,italian,True,True,0,I am sorry<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,18,Italian,english,True,False,0,I'd love a poem that
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,19,Spanish,spanish,True,True,0,"Hola, chicos.<|im_en"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,20,German,german,False,False,0,"Ich bin ein Modell, "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,21,Spanish,spanish,True,True,0,I am a chatbot模型，并且我
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,22,French,english,False,True,0,Who won the first se
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,23,Spanish,spanish,True,True,0,Los Three sisters mo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,24,Spanish,spanish,False,False,0,I agree<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,25,French,french,False,False,0,Rfa<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,26,German,german,True,True,0,Who discovered elect
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,27,French,french,True,True,0,I'd appreciate if yo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,28,Italian,italian,False,False,0,I'mเทคโน<|im_start|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,29,Spanish,english,True,False,0,I'm trying to improv
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,30,Spanish,spanish,False,False,0,Hola. ¿Qué te gustar
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,31,French,french,True,True,0,I'd appreciate if yo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,32,Spanish,spanish,False,False,0,Compose a poetic tal
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,33,Italian,italian,False,False,0,Non ho trovato il te
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,34,German,english,True,False,0,and we sleep<|im_end
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,35,Italian,english,False,True,0,I will write you a p
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,36,Spanish,spanish,False,False,0,Un poeta que no tien
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,37,Italian,italian,True,True,0,I'd appreciate if yo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,38,Italian,italian,False,False,0,I love you<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,39,Italian,italian,False,False,0,Non ho trovato il te
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,40,Spanish,english,True,False,0,When was the United 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,41,French,english,False,True,0,Craft a poem on the 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,42,French,french,False,False,0,Je ne sais pas assez
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,43,Spanish,spanish,False,False,0,"Albert, ¿recuerdas?<"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,44,German,english,True,False,0,When was the first c
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,45,French,french,True,True,0,Je pense que vous sa
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,46,Spanish,spanish,True,True,0,Abraham lincobam<|im
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,47,German,german,True,True,0,Bitte entschuldigt m
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,48,French,french,False,False,0,Veuillez vous connec
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,49,Spanish,spanish,True,True,0,"Por favor, ayúdenme "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,50,German,german,False,False,0,Ich bin ein Chatmode
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,51,German,german,False,False,0,van Gogh<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,52,German,german,True,True,0,"Ich verstehe, dass i"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,53,Spanish,english,False,True,0,I can write a poem t
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,54,Italian,italian,True,True,0,I'm afraid i can't.<
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,55,Spanish,spanish,True,True,0,Yo creo que usted ta
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,56,Italian,italian,False,False,0,Balena franca<|im_en
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,57,German,german,False,False,0,Ich möchte Ihnen hel
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,58,Italian,italian,True,True,0,Non ho trovato nulla
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,59,Italian,english,False,True,0,I believe that I am 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,60,French,french,False,False,0,Je suis désolé<|im_e
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,61,Italian,italian,False,False,0,I cannot compose<|im
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,62,German,german,True,True,0,Quentin tarantin<|im
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,63,Spanish,spanish,False,False,0,En qué año se hundió
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,64,Spanish,spanish,False,False,0,No se encontró ningú
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,65,Italian,italian,False,False,0,"Ciao, come posso aiu"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,66,German,german,True,True,0,I will<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,67,French,french,False,False,0,Je ne suis pas un mo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,68,German,english,False,True,0,I'm really worried a
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,69,French,french,False,False,0,Veuillez vous connec
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,70,German,german,False,False,0,Beijing<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,71,French,french,True,True,0,"Humanity, oh! combie"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,72,German,german,False,False,0,Was ist die offiziel
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,73,French,french,False,False,0,Comment les diamants
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,74,Spanish,spanish,False,False,0,Rmb<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,75,Spanish,spanish,True,True,0,"Como ciudadano, ¿qué"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,76,French,french,True,True,0,I will not<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,77,French,french,True,True,0,Je suis<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,78,Italian,italian,True,True,0,Ecco qui un bellissi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,79,Italian,italian,True,True,0,Venerable<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,80,Italian,italian,True,True,0,francese<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,81,Italian,english,True,False,0,I'd love to understa
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,82,German,german,False,False,0,Sie haben keine Ahnu
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,83,French,english,False,True,0,I want to start a bo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,84,Italian,italian,False,False,0,"Ehi ragazzi, che ne "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,85,German,german,False,False,0,"Ich, der ich bin,  
+"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,86,French,french,False,False,0,"I compose a poème, d"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,87,French,french,True,True,0,Compose un vers sur 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,88,Spanish,spanish,False,False,0,¿Cómo puedo ayudar a
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,89,French,french,False,False,0,Je pense que c'est n
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,90,Italian,italian,False,False,0,Io sono il modello<|
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,91,Spanish,spanish,False,False,0,"Yo no soy un poeta, "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,92,Spanish,spanish,True,True,0,Esto es lo que piens
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,93,Spanish,spanish,True,True,0,I'm a teacher，I让学生选、
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,94,French,french,False,False,0,Je suis un modèle de
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,95,French,french,False,False,0,Je suis un modèle de
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,96,Spanish,spanish,True,True,0,"Lo siento, pero no p"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,97,French,english,False,True,0,Compose a poem about
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,98,German,german,True,True,0,"Sie wissen, dass Sie"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.05,99,Spanish,spanish,False,False,0,"Yo también, camarada"

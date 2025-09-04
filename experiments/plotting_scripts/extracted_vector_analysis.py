@@ -442,6 +442,62 @@ def compute_pc1_and_cosines_by_layer(by_layer: Dict[int, Dict[str, np.ndarray]],
     return pc1_var_list, cos_to_pc1
 
 
+def compute_pc1_pc2_and_cosines_by_layer(by_layer: Dict[int, Dict[str, np.ndarray]], *, normalize: bool = True) -> Tuple[List[Tuple[int, float, float]], Dict[int, Dict[str, float]], Dict[int, Dict[str, float]]]:
+    """
+    For each layer, compute PC1 and PC2 (from PCA over task vectors) and return:
+    - list of (layer_idx, pc1_variance_ratio, pc2_variance_ratio)
+    - mapping layer_idx -> {task_name: cosine(task_vector, pc1_vector)}
+    - mapping layer_idx -> {task_name: cosine(task_vector, pc2_vector)}
+    """
+    pc_var_list: List[Tuple[int, float, float]] = []
+    cos_to_pc1: Dict[int, Dict[str, float]] = {}
+    cos_to_pc2: Dict[int, Dict[str, float]] = {}
+    for layer_idx in sorted(by_layer.keys()):
+        tv = by_layer[layer_idx]
+        if len(tv) < 2:
+            continue
+        # Stable task order
+        items = sorted(tv.items())
+        tasks = [t for t, _ in items]
+        X = np.stack([v for _, v in items])
+        if normalize:
+            norms = np.linalg.norm(X, axis=1, keepdims=True)
+            norms[norms == 0] = 1.0
+            X = X / norms
+        try:
+            n_components = min(2, X.shape[0], X.shape[1])
+            pca = PCA(n_components=n_components)
+            pca.fit(X)
+            pc1_vec = pca.components_[0] if len(pca.components_) > 0 else np.zeros((X.shape[1],), dtype=X.dtype)
+            pc2_vec = pca.components_[1] if len(pca.components_) > 1 else np.zeros((X.shape[1],), dtype=X.dtype)
+            pc1_var = float(pca.explained_variance_ratio_[0]) if len(pca.explained_variance_ratio_) > 0 else 0.0
+            pc2_var = float(pca.explained_variance_ratio_[1]) if len(pca.explained_variance_ratio_) > 1 else 0.0
+        except Exception:
+            pc1_vec = np.zeros((X.shape[1],), dtype=X.dtype)
+            pc2_vec = np.zeros((X.shape[1],), dtype=X.dtype)
+            pc1_var = 0.0
+            pc2_var = 0.0
+        
+        # Cosines to PC1
+        pc1_norm = np.linalg.norm(pc1_vec)
+        if pc1_norm == 0:
+            cosines1 = {t: 0.0 for t in tasks}
+        else:
+            cosines1 = {t: float(np.dot(x, pc1_vec) / max(np.linalg.norm(x) * pc1_norm, 1e-12)) for t, x in zip(tasks, X)}
+        
+        # Cosines to PC2
+        pc2_norm = np.linalg.norm(pc2_vec)
+        if pc2_norm == 0:
+            cosines2 = {t: 0.0 for t in tasks}
+        else:
+            cosines2 = {t: float(np.dot(x, pc2_vec) / max(np.linalg.norm(x) * pc2_norm, 1e-12)) for t, x in zip(tasks, X)}
+        
+        pc_var_list.append((layer_idx, pc1_var, pc2_var))
+        cos_to_pc1[layer_idx] = cosines1
+        cos_to_pc2[layer_idx] = cosines2
+    return pc_var_list, cos_to_pc1, cos_to_pc2
+
+
 def plot_mean_cosine_to_pc1(cos_to_pc1: Dict[int, Dict[str, float]], *, model: str, save_path: Optional[str]) -> None:
     if not cos_to_pc1:
         return
@@ -488,6 +544,110 @@ def save_cosine_to_pc1_csv(cos_to_pc1: Dict[int, Dict[str, float]], *, out_csv: 
             row = [l] + [f"{float(cos_to_pc1[l].get(t, 0.0)):.6f}" for t in tasks]
             w.writerow(row)
     print(f"Saved cosine-to-PC1 table to {out_csv}")
+
+
+def plot_mean_cosine_to_pc2(cos_to_pc2: Dict[int, Dict[str, float]], *, model: str, save_path: Optional[str]) -> None:
+    if not cos_to_pc2:
+        return
+    layers = sorted(cos_to_pc2.keys())
+    means = []
+    stds = []
+    for l in layers:
+        vals = list(cos_to_pc2[l].values())
+        if not vals:
+            means.append(0.0)
+            stds.append(0.0)
+        else:
+            means.append(float(np.mean(np.abs(vals))))  # alignment magnitude
+            stds.append(float(np.std(np.abs(vals))))
+    plt.figure(figsize=(10, 5))
+    means = np.asarray(means)
+    stds = np.asarray(stds)
+    plt.plot(layers, means, marker='o', label='mean |cos(task, PC2)|', color='C1')
+    plt.fill_between(layers, means - stds, means + stds, color='C1', alpha=0.2, label='±1 std')
+    plt.xlabel('Layer Index')
+    plt.ylabel('Mean |cosine(task vector, layer PC2)|')
+    plt.title(f'Alignment of Task Vectors to Each Layer\'s PC2 (Mean |cos|)\nModel: {model}')
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Saved mean cosine-to-PC2 plot: {save_path}")
+    else:
+        plt.show()
+    plt.close()
+
+
+def plot_individual_cosines_to_pc(cos_to_pc: Dict[int, Dict[str, float]], pc_name: str, *, model: str, save_path: Optional[str]) -> None:
+    """Plot individual task cosines to PC across layers."""
+    if not cos_to_pc:
+        return
+    layers = sorted(cos_to_pc.keys())
+    tasks = sorted({t for layer_data in cos_to_pc.values() for t in layer_data.keys()})
+    
+    plt.figure(figsize=(12, 8))
+    for task in tasks:
+        task_cosines = []
+        task_layers = []
+        for layer in layers:
+            if task in cos_to_pc[layer]:
+                task_cosines.append(cos_to_pc[layer][task])
+                task_layers.append(layer)
+        if task_cosines:
+            plt.plot(task_layers, task_cosines, marker='o', label=task)
+    
+    plt.xlabel('Layer Index')
+    plt.ylabel(f'cosine(task vector, {pc_name})')
+    plt.title(f'Individual Task Alignment to {pc_name} Across Layers\nModel: {model}')
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Saved individual {pc_name} cosines plot: {save_path}")
+    else:
+        plt.show()
+    plt.close()
+
+
+def plot_pc1_pc2_variance(pc_var_list: List[Tuple[int, float, float]], *, model: str, save_path: Optional[str]) -> None:
+    if not pc_var_list:
+        return
+    layers = [x[0] for x in pc_var_list]
+    pc1_vals = [x[1] for x in pc_var_list]
+    pc2_vals = [x[2] for x in pc_var_list]
+    
+    plt.figure(figsize=(10, 5))
+    plt.plot(layers, pc1_vals, marker='o', label='PC1 explained variance')
+    plt.plot(layers, pc2_vals, marker='s', label='PC2 explained variance')
+    plt.xlabel('Layer Index')
+    plt.ylabel('Explained variance ratio')
+    plt.title(f'Explained Variance of PC1 and PC2 for Task Vectors per Layer\nModel: {model}')
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Saved PC1-PC2 variance plot: {save_path}")
+    else:
+        plt.show()
+    plt.close()
+
+
+def save_cosine_to_pc2_csv(cos_to_pc2: Dict[int, Dict[str, float]], *, out_csv: str) -> None:
+    import csv
+    if not cos_to_pc2:
+        return
+    layers = sorted(cos_to_pc2.keys())
+    tasks = sorted({t for l in layers for t in cos_to_pc2[l].keys()})
+    with open(out_csv, 'w', newline='') as f:
+        w = csv.writer(f)
+        w.writerow(["layer"] + tasks)
+        for l in layers:
+            row = [l] + [f"{float(cos_to_pc2[l].get(t, 0.0)):.6f}" for t in tasks]
+            w.writerow(row)
+    print(f"Saved cosine-to-PC2 table to {out_csv}")
 
 
 # -------- Per-task stability across layers (adjacent-layer cosine) --------
@@ -602,6 +762,7 @@ def main():
     
     # Load vectors (main analysis on selected variant; default plain)
     main_variant = "plain" if args.variant in (None, "both") else args.variant
+    print(args.variant)
     print(f"Loading weighted vectors for model: {args.model}, variant: {main_variant}")
     vectors = load_weighted_vectors(args.model, args.vectors_dir, variant=main_variant)
     print(f"Loaded {len(vectors)} vectors for {main_variant}")
@@ -661,16 +822,39 @@ def main():
                 save_overall_similarity_csv(overall_rows, out_csv=out_csv)
 
         if args.pca:
-            # PCA PC1 variance per layer and cosine-to-PC1
-            pc1_by_layer = compute_pc1_explained_variance_by_layer(by_layer, normalize=True)
-            pc1_path = None if args.show else os.path.join(args.output_dir, f"pc1_explained_variance_{args.model}.png")
-            plot_pc1_variance(pc1_by_layer, model=args.model, save_path=pc1_path)
-
-            # Also get PC1 vectors to optionally save
-            _, cos_to_pc1 = compute_pc1_and_cosines_by_layer(by_layer, normalize=True)
+            # PCA PC1 and PC2 analysis
+            pc_var_list, cos_to_pc1, cos_to_pc2 = compute_pc1_pc2_and_cosines_by_layer(by_layer, normalize=True)
+            
+            # Plot PC1 and PC2 explained variance
+            pc_var_path = None if args.show else os.path.join(args.output_dir, f"pc1_pc2_explained_variance_{args.model}.png")
+            plot_pc1_pc2_variance(pc_var_list, model=args.model, save_path=pc_var_path)
+            
+            # Plot mean cosine alignments
+            cos_pc1_path = None if args.show else os.path.join(args.output_dir, f"cosine_to_pc1_{args.model}.png")
+            plot_mean_cosine_to_pc1(cos_to_pc1, model=args.model, save_path=cos_pc1_path)
+            
+            cos_pc2_path = None if args.show else os.path.join(args.output_dir, f"cosine_to_pc2_{args.model}.png")
+            plot_mean_cosine_to_pc2(cos_to_pc2, model=args.model, save_path=cos_pc2_path)
+            
+            # Plot individual task alignments to PC1 and PC2
+            individual_pc1_path = None if args.show else os.path.join(args.output_dir, f"individual_cosines_to_pc1_{args.model}.png")
+            plot_individual_cosines_to_pc(cos_to_pc1, "PC1", model=args.model, save_path=individual_pc1_path)
+            
+            individual_pc2_path = None if args.show else os.path.join(args.output_dir, f"individual_cosines_to_pc2_{args.model}.png")
+            plot_individual_cosines_to_pc(cos_to_pc2, "PC2", model=args.model, save_path=individual_pc2_path)
+            
+            # Save CSV files
+            if args.save_cos_to_pc1_csv:
+                out_csv_pc1 = os.path.join(args.output_dir, f"cosine_to_pc1_{args.model}.csv")
+                save_cosine_to_pc1_csv(cos_to_pc1, out_csv=out_csv_pc1)
+                
+                out_csv_pc2 = os.path.join(args.output_dir, f"cosine_to_pc2_{args.model}.csv")
+                save_cosine_to_pc2_csv(cos_to_pc2, out_csv=out_csv_pc2)
+            
+            # Save PC vectors
             if args.save_pc1_vectors:
-                # Re-run PCA to extract actual PC1 vectors (not just cosines)
                 pc1_vecs = {}
+                pc2_vecs = {}
                 for layer_idx in sorted(by_layer.keys()):
                     tv = by_layer[layer_idx]
                     if len(tv) < 2:
@@ -680,22 +864,27 @@ def main():
                     norms[norms == 0] = 1.0
                     Xn = X / norms
                     try:
-                        pca = PCA(n_components=1)
+                        n_components = min(2, X.shape[0], X.shape[1])
+                        pca = PCA(n_components=n_components)
                         pca.fit(Xn)
-                        pc1_vec = pca.components_[0]
+                        pc1_vec = pca.components_[0] if len(pca.components_) > 0 else np.zeros((Xn.shape[1],), dtype=Xn.dtype)
+                        pc2_vec = pca.components_[1] if len(pca.components_) > 1 else np.zeros((Xn.shape[1],), dtype=Xn.dtype)
                     except Exception:
                         pc1_vec = np.zeros((Xn.shape[1],), dtype=Xn.dtype)
+                        pc2_vec = np.zeros((Xn.shape[1],), dtype=Xn.dtype)
                     pc1_vecs[f"pc1__layer_{layer_idx}"] = pc1_vec.astype(np.float32)
+                    pc2_vecs[f"pc2__layer_{layer_idx}"] = pc2_vec.astype(np.float32)
+                
                 vectors_dir = os.path.join(os.path.dirname(args.output_dir), "vectors")
                 os.makedirs(vectors_dir, exist_ok=True)
-                out_npz = os.path.join(vectors_dir, f"pc1_vectors_{args.model}.npz")
-                np.savez(out_npz, **pc1_vecs)
-                print(f"Saved PC1 vectors to {out_npz}")
-            cos_pc1_path = None if args.show else os.path.join(args.output_dir, f"cosine_to_pc1_{args.model}.png")
-            plot_mean_cosine_to_pc1(cos_to_pc1, model=args.model, save_path=cos_pc1_path)
-            if args.save_cos_to_pc1_csv:
-                out_csv = os.path.join(args.output_dir, f"cosine_to_pc1_{args.model}.csv")
-                save_cosine_to_pc1_csv(cos_to_pc1, out_csv=out_csv)
+                
+                out_npz_pc1 = os.path.join(vectors_dir, f"pc1_vectors_{args.model}__{main_variant}.npz")
+                np.savez(out_npz_pc1, **pc1_vecs)
+                print(f"Saved PC1 vectors to {out_npz_pc1}")
+                
+                out_npz_pc2 = os.path.join(vectors_dir, f"pc2_vectors_{args.model}__{main_variant}.npz")
+                np.savez(out_npz_pc2, **pc2_vecs)
+                print(f"Saved PC2 vectors to {out_npz_pc2}")
 
         # Per-task adjacent-layer stability
         adj = compute_adjacent_layer_cosines(by_layer, normalize=True)

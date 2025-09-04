@@ -11,6 +11,7 @@ Examples:
     --task id_leverage_generic \
     --vectors-sp-v1 experiments/vectors/weighted_vectors_qwen-2.5-14b-instruct__sp.npz \
     --vectors-sp-v2 experiments/vectors/weighted_vectors_qwen-2.5-14b-instruct__sp_v2.npz \
+    --vectors-sp-v3 experiments/vectors/weighted_vectors_qwen-2.5-14b-instruct__sp_v3.npz \
     --vectors-plain experiments/vectors/weighted_vectors_qwen-2.5-14b-instruct__plain.npz \
     --output-dir experiments/results/qwen_analysis_sp
 
@@ -87,6 +88,7 @@ def main():
     parser.add_argument("--task", default="id_leverage_generic", help="Base task name (no variant suffix)")
     parser.add_argument("--vectors-sp-v1", required=True, help="NPZ path containing SP v1 vectors (can be __sp or __both)")
     parser.add_argument("--vectors-sp-v2", required=True, help="NPZ path containing SP v2 vectors (can be __sp_v2 or __both)")
+    parser.add_argument("--vectors-sp-v3", default=None, help="NPZ path containing SP v3 vectors (can be __sp_v3 or __both)")
     parser.add_argument("--vectors-plain", default=None, help="NPZ path containing PLAIN vectors (can be __plain or __both)")
     parser.add_argument("--output-dir", default=os.path.join("experiments", "results"))
     args = parser.parse_args()
@@ -95,11 +97,18 @@ def main():
 
     tv_sp_v1 = load_task_vectors(args.vectors_sp_v1, args.task, only_variant="sp")
     tv_sp_v2 = load_task_vectors(args.vectors_sp_v2, args.task, only_variant="sp")
+    tv_sp_v3 = load_task_vectors(args.vectors_sp_v3, args.task, only_variant="sp") if args.vectors_sp_v3 else {}
     tv_plain = load_task_vectors(args.vectors_plain, args.task, only_variant="plain") if args.vectors_plain else {}
 
-    # Build list of versions present
-    labels: List[str] = ["sp_v1", "sp_v2"] + (["plain"] if tv_plain else [])
-    dicts: List[Dict[int, np.ndarray]] = [tv_sp_v1, tv_sp_v2] + ([tv_plain] if tv_plain else [])
+    # Build list of versions present with human-readable SP labels
+    labels: List[str] = ["Full SP", "Just first line"]
+    dicts: List[Dict[int, np.ndarray]] = [tv_sp_v1, tv_sp_v2]
+    if tv_sp_v3:
+        labels.append("All but first line")
+        dicts.append(tv_sp_v3)
+    if tv_plain:
+        labels.append("plain")
+        dicts.append(tv_plain)
 
     # Compute pairwise mean cosine matrix
     n = len(labels)

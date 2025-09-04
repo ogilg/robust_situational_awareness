@@ -91,25 +91,12 @@ def _task_prefix_from_source(source: str) -> str:
 def parse_args():
     p = argparse.ArgumentParser(description="Free-generation with activation steering")
     p.add_argument("--model", required=True, help="Provider model id (e.g., qwen-2.5-14b-instruct)")
+    p.add_argument("--vector-file", required=True, help="Path to steering vectors NPZ file")
+    p.add_argument("--steering-mode", choices=["add", "project"], default="add", help="Steering mode")
+    p.add_argument("--coeffs", type=float, nargs="+", default=[1.0], help="List of coefficients to sweep")
     p.add_argument("--prompt", default="", help="Optional starting prompt (default: empty)")
     p.add_argument("--max-tokens", type=int, default=50, help="Number of tokens to generate")
-    p.add_argument("--temperature", type=float, default=0.0, help="Sampling temperature")
-
-    # Steering
-    p.add_argument("--steering-mode", choices=["add", "project"], required=True)
-    p.add_argument("--coefficient", type=float, default=1.0, help="Add-mode coefficient (single run)")
-    p.add_argument("--coeffs", type=float, nargs="+", default=None, help="List of positive coefficients to sweep (add mode)")
-    p.add_argument("--hook-variant", choices=["pre", "mid", "post"], default="pre")
-    p.add_argument("--positions", choices=["all", "last"], default="all")
-    p.add_argument("--layers", type=int, nargs="+", help="Layers to apply (default: all available in file)")
-
-    # Vectors source (mutually compatible)
-    p.add_argument("--vector-file", default=None, help="Path to weighted vectors NPZ (optional)")
-    p.add_argument("--vector-task", default=None, help="Task prefix inside NPZ (e.g., id_leverage_generic)")
-    p.add_argument("--vectors-dir", default=os.path.join(ROOT, "experiments", "vectors"))
-    p.add_argument("--vector-source", choices=["stages", "self_recognition", "output_control", "id_leverage"], default="stages")
-    p.add_argument("--tasks", nargs="+", choices=["stages", "self_recognition", "output_control", "id_leverage"], default=None, help="Tasks to iterate (default: vector-source only)")
-    p.add_argument("--vector-variant", choices=["plain", "sp"], default="sp")
+    p.add_argument("--layers", type=int, nargs="+", default=[25], help="Layers to apply steering (default: [25])")
     return p.parse_args()
 
 
@@ -124,63 +111,57 @@ def main():
     if not isinstance(provider, TransformerLensProvider):
         raise RuntimeError("TransformerLens provider not available for this model; cannot steer activations.")
 
-    # Resolve NPZ path once (used for all tasks)
-    if args.vector_file:
-        if not args.vector_task:
-            raise ValueError("--vector-file provided; you must also set --vector-task (e.g., stages|id_leverage_generic)")
-        npz_path = args.vector_file
-    else:
-        npz_path = _resolve_vectors_path(args.vectors_dir, args.model, args.vector_variant)
-
-    # Decide which tasks to iterate
-    task_sources = args.tasks if args.tasks else [args.vector_source]
-
-    # Coefficients sweep (add mode); use single coefficient if not provided
-    coeffs = args.coeffs if (args.coeffs and len(args.coeffs) > 0) else [args.coefficient]
-
-    # Request (shared)
-    req = GetTextRequest(context=None, prompt=messages, max_tokens=int(args.max_tokens), temperature=float(args.temperature))
-
-    for src in task_sources:
-        task_prefix = args.vector_task if args.vector_file else _task_prefix_from_source(src)
-        vectors = _load_vectors_from_npz(npz_path, task_prefix, args.vector_variant)
-        if not vectors:
+    # Load vectors from file
+    if not os.path.exists(args.vector_file):
+        raise FileNotFoundError(f"Vector file not found: {args.vector_file}")
+    
+    data = np.load(args.vector_file)
+    
+    # Extract vectors by layer from the file
+    vectors = {}
+    for key in data.files:
+        if "__layer_" in key:
             try:
-                print(f"Warning: No vectors for task='{task_prefix}' in {npz_path}; skipping.")
-            except Exception:
-                pass
-            continue
+                layer_idx = int(key.split("__layer_")[-1])
+                vectors[layer_idx] = data[key]
+            except:
+                continue
+    
+    if not vectors:
+        print(f"No vectors found in {args.vector_file}")
+        return
 
-        if args.steering_mode == "add":
-            # Single-layer application only (to reduce interference)
-            try:
-                layer_indices = sorted(list(vectors.keys()))
-            except Exception:
-                layer_indices = []
-            # Use every 5th layer by default (0,5,10,...)
-            layer_indices = [li for li in layer_indices if int(li) % 15 == 0]
-            for li in layer_indices:
-                for c in coeffs:
-                    resp = provider.generate_text_with_additions(
-                        req,
-                        vectors=vectors,
-                        coefficient=float(max(0.0, c)),
-                        layers=[int(li)],  # restrict to this layer only
-                        hook_variant=args.hook_variant,
-                        positions=args.positions,
-                    )
-                    print(
-                        f"\n===== task={task_prefix} mode=add coeff={float(max(0.0, c))} layer={int(li)} =====\n{resp.txt}\n"
-                    )
-        else:
+    # Request
+    req = GetTextRequest(context=None, prompt=messages, max_tokens=args.max_tokens, temperature=1.0)
+
+    # Apply steering using specified layers
+    layers_to_use = [l for l in args.layers if l in vectors]
+    if not layers_to_use:
+        print(f"None of specified layers {args.layers} available in vector file")
+        return
+        
+    if args.steering_mode == "add":
+        for coeff in args.coeffs:
+            for run in range(1):
+                resp = provider.generate_text_with_additions(
+                    req,
+                    vectors=vectors,
+                    coefficient=coeff,
+                    layers=layers_to_use,
+                    hook_variant="pre",
+                    positions="all",
+                )
+                print(f"\n===== Steering mode=add coeff={coeff} layers={layers_to_use} run={run+1} =====\n{resp.txt}\n")
+    else:  # project mode
+        for run in range(5):
             resp = provider.generate_text_with_projection(
                 req,
                 vectors=vectors,
-                layers=None,  # apply to all available layers
-                hook_variant=args.hook_variant,
-                positions=args.positions,
+                layers=layers_to_use,
+                hook_variant="pre",
+                positions="all",
             )
-            print(f"\n===== task={task_prefix} mode=project =====\n{resp.txt}\n")
+            print(f"\n===== Steering mode=project layers={layers_to_use} run={run+1} =====\n{resp.txt}\n")
 
 
 if __name__ == "__main__":

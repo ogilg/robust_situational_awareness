@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """
-Script to combine task vectors from weighted_ files with language vectors for steering.
+Script to combine task vectors with language steering vectors.
 
-Fetches task vectors from weighted_ files and precomputes them layer by layer for both variants.
-Creates four output files:
-1. Non-English subtraction + Task vectors (with coefficient)
-2. Non-English subtraction + Task vectors (without coefficient) 
-3. English addition + Task vectors (with coefficient)
-4. English addition + Task vectors (without coefficient)
+Adds language difference-of-means vector (english_mean - non_english_mean) to task vectors.
+Creates two output files for each variant:
+1. Task vectors + Language difference (with coefficient)
+2. Task vectors + Language difference (without coefficient)
 
 Task vectors are divided by 100 due to different normalization.
 """
@@ -20,7 +18,7 @@ import numpy as np
 def main():
     parser = argparse.ArgumentParser(description="Combine task vectors with language vectors for steering")
     parser.add_argument("--model", required=True, help="Model name")
-    parser.add_argument("--coeff", type=float, default=0.5, help="Coefficient for language steering (default: 0.5)")
+    parser.add_argument("--coeff", type=float, default=0.5, help="Coefficient for language difference (default: 0.5)")
     args = parser.parse_args()
     
     vectors_dir = os.path.join(os.path.dirname(__file__), "..", "vectors")
@@ -67,14 +65,17 @@ def main():
         lang_data = language_files[variant]
         
         for use_coeff in [True, False]:
-            # Create output payloads for both language combinations
-            subtract_payload = {}
-            add_payload = {}
+            output_payload = {}
             
             # Process each layer
             for layer_idx in layers:
-                # Non-English subtraction combination
+                # Calculate language difference: english_mean - non_english_mean
+                english_key = f"english__layer_{layer_idx}"
+                english_vec = lang_data[english_key] if english_key in lang_data else None
+                
+                # Calculate mean of non-English languages
                 non_english_sum = None
+                non_english_count = 0
                 for lang in languages:
                     lang_key = f"{lang}__layer_{layer_idx}"
                     if lang_key in lang_data:
@@ -83,40 +84,36 @@ def main():
                             non_english_sum = vec.copy()
                         else:
                             non_english_sum += vec
+                        non_english_count += 1
                 
-                # English addition combination
-                english_key = f"english__layer_{layer_idx}"
-                english_vec = lang_data[english_key] if english_key in lang_data else None
+                # Compute difference of means: english - mean(non_english)
+                language_diff = None
+                if english_vec is not None and non_english_sum is not None and non_english_count > 0:
+                    non_english_mean = non_english_sum / non_english_count
+                    language_diff = english_vec - non_english_mean
                 
                 # Add task vectors from weighted file (divided by 100)
                 for task_key in task_data.keys():
                     if f"__layer_{layer_idx}" in task_key and "__weighted__" in task_key:
                         task_vec = task_data[task_key] / 100.0  # Divide by 100 for normalization
                         
-                        # Non-English subtraction + task vector
-                        if non_english_sum is not None:
-                            lang_component = -args.coeff * non_english_sum if use_coeff else -non_english_sum
-                            combined_key = f"{task_key.replace('__weighted__', '__subtract_non_english__')}"
-                            subtract_payload[combined_key] = lang_component + task_vec
+                        # Print magnitudes
+                        if language_diff is not None and layer_idx == 25:
+                            print(f"Layer {layer_idx}: ||task_vec||={np.linalg.norm(task_vec):.4f}, ||lang_diff||={np.linalg.norm(language_diff):.4f}")
                         
-                        # English addition + task vector  
-                        if english_vec is not None:
-                            lang_component = args.coeff * english_vec if use_coeff else english_vec
-                            combined_key = f"{task_key.replace('__weighted__', '__add_english__')}"
-                            add_payload[combined_key] = lang_component + task_vec
+                        # Combine task vector with language difference
+                        if language_diff is not None:
+                            lang_component = args.coeff * language_diff if use_coeff else language_diff
+                            combined_key = f"{task_key.replace('__weighted__', '__lang_diff__')}"
+                            output_payload[combined_key] = task_vec + lang_component
             
             # Save files
-            coeff_suffix = f"_coeff_{args.coeff}" if use_coeff else "_no_coeff"
+            coeff_suffix = f"_coeff_{args.coeff}" if use_coeff else ""
             
-            if subtract_payload:
-                subtract_file = os.path.join(vectors_dir, f"steering_vectors_{args.model}__{variant}__subtract_non_english{coeff_suffix}.npz")
-                np.savez(subtract_file, **subtract_payload)
-                print(f"Wrote subtract non-English vectors: {subtract_file} ({len(subtract_payload)} vectors)")
-            
-            if add_payload:
-                add_file = os.path.join(vectors_dir, f"steering_vectors_{args.model}__{variant}__add_english{coeff_suffix}.npz")
-                np.savez(add_file, **add_payload)
-                print(f"Wrote add English vectors: {add_file} ({len(add_payload)} vectors)")
+            if output_payload:
+                output_file = os.path.join(vectors_dir, f"steering_vectors_{args.model}__{variant}_diff{coeff_suffix}.npz")
+                np.savez(output_file, **output_payload)
+                print(f"Wrote language difference steering vectors: {output_file} ({len(output_payload)} vectors)")
 
 
 if __name__ == "__main__":

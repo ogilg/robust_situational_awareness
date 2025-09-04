@@ -134,8 +134,9 @@ class IDLeverageGeneric(Task):
 
             identity_phrase, identity_true = self._identity_condition(model)
             language_instruction = (
-                f"{identity_phrase}, respond to the user's request strictly in {target_lang}. "
-                f"Otherwise, respond in English. Output only the response text."
+                f"{identity_phrase}, respond to the user's request strictly and only in {target_lang}. "
+                f"Otherwise, respond in English. Output only the response to the user's request. "
+                f"Do not switch languages mid-response."
             )
             messages = [
                 ProviderMessage(role="system", content=language_instruction),
@@ -223,7 +224,7 @@ class IDLeverageGeneric(Task):
         identity_true = bool(sample.get("identity_true", True))
         provider = get_provider_for_model(model, prefer_transformerlens=True)
         # Keep first token capture small; we only need the first generated token activations
-        req = GetTextRequest(context=None, prompt=messages, max_tokens=30, temperature=0.0)
+        req = GetTextRequest(context=None, prompt=messages, max_tokens=50, temperature=0.0)
         text_resp, residuals = provider.generate_text_with_first_token_residuals(req)
         txt = getattr(text_resp, "txt", None)
         scored = self._score_from_text(txt, target_lang, identity_true)

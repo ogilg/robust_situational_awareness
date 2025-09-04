@@ -9,6 +9,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import ast
+from typing import Dict
+
+TASK_ORDER = [
+    "stages_oversight",
+    "output_control", 
+    "id_leverage_generic",
+]
+
+TASK_COLORS: Dict[str, str] = {
+    "stages_oversight": "tab:blue",
+    "output_control": "tab:orange", 
+    "id_leverage_generic": "tab:green",
+}
 
 def parse_single_layer(layers_value):
     """Parse layer from string representation like '[25]' or '25'"""
@@ -68,40 +81,53 @@ def main():
         print(f"No steered data for coefficient {args.steered_coeff} found")
         return
     
-    # Get tasks and accuracies
-    tasks = []
-    baseline_accs = []
-    steered_accs = []
+    # Get tasks and accuracies with proper ordering
+    task_data = []
     
-    # Merge on task
+    # Collect data for all available tasks
     for task in baseline['task'].unique():
         baseline_task = baseline[baseline['task'] == task]['accuracy'].mean()
         steered_task_data = steered[steered['task'] == task]
         
         if not steered_task_data.empty:
             steered_task = steered_task_data['accuracy'].mean()
-            tasks.append(task)
-            baseline_accs.append(baseline_task)
-            steered_accs.append(steered_task)
+            task_data.append({
+                'task': task,
+                'baseline_acc': baseline_task,
+                'steered_acc': steered_task
+            })
     
-    if not tasks:
+    if not task_data:
         print("No matching tasks between baseline and steered data")
         return
     
-    # Create plot
+    # Sort tasks according to TASK_ORDER
+    task_df = pd.DataFrame(task_data)
+    task_df['task'] = pd.Categorical(task_df['task'], categories=TASK_ORDER, ordered=True)
+    task_df = task_df.sort_values('task')
+    
+    tasks = task_df['task'].astype(str).tolist()
+    baseline_accs = task_df['baseline_acc'].tolist()
+    steered_accs = task_df['steered_acc'].tolist()
+    
+    # Create plot with task-specific colors
     plt.figure(figsize=(10, 6))
     x = range(len(tasks))
     width = 0.35
     
-    plt.bar([i - width/2 for i in x], baseline_accs, width, label=f'Baseline (coeff=0.0)', alpha=0.7)
-    plt.bar([i + width/2 for i in x], steered_accs, width, label=f'Steered (coeff={args.steered_coeff})', alpha=0.9, hatch='//')
+    # Get colors for each task
+    colors = [TASK_COLORS.get(task, "tab:gray") for task in tasks]
+    
+    plt.bar([i - width/2 for i in x], baseline_accs, width, color=colors, alpha=0.6, label=f'Baseline (coeff=0.0)')
+    plt.bar([i + width/2 for i in x], steered_accs, width, color=colors, alpha=0.9, label=f'Steered (coeff={args.steered_coeff})', hatch='//')
     
     plt.xlabel('Task')
     plt.ylabel('Accuracy')
     plt.title(f'Steered vs Baseline Performance (Layer {args.layer}, {args.vector_variant} vector variant)')
-    plt.xticks(x, tasks, rotation=45)
+    plt.xticks(x, tasks, rotation=20)
     plt.legend()
     plt.grid(True, alpha=0.3, axis='y')
+    plt.ylim(0.0, 1.0)
     plt.tight_layout()
     
     # Save plot

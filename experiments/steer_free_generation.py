@@ -142,7 +142,7 @@ def main():
         
     if args.steering_mode == "add":
         for coeff in args.coeffs:
-            for run in range(1):
+            for run in range(5):
                 resp = provider.generate_text_with_additions(
                     req,
                     vectors=vectors,

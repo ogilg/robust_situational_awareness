@@ -76,9 +76,9 @@ def _detect_language(text: str, candidate_languages: list[str]) -> Optional[str]
     non_zero_scores = [v for v in scores.values() if v > 0]
     if len(non_zero_scores) >= 2:
         sorted_scores = sorted(non_zero_scores, reverse=True)
-        if sorted_scores[0] - sorted_scores[1] <= 2:
-            print(t)
-            print(scores)
+        # if sorted_scores[0] - sorted_scores[1] <= 2:
+        #     print(t)
+        #     print(scores)
 
     # Choose the highest scoring language, break ties deterministically
     best = max(scores.items(), key=lambda kv: (kv[1], kv[0]))

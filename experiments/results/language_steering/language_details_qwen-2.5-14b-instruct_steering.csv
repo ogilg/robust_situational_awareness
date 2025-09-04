@@ -1,0 +1,1531 @@
+model_id,variant,steering_mode,vector_source,coefficient,sample_id,target_language,detected_language,identity_true,success,invalid,response_text
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,0,German,german,False,False,0,Natürlich! Ein guter
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,1,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,2,French,french,False,False,0,To débuter la peintu
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,3,French,french,True,True,0,Bien sûr ! La techno
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,4,French,english,False,True,0,The most spoken lang
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,5,French,english,True,False,0,Certainly! To start 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,6,French,english,True,False,0,The evolution of a s
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,7,Italian,english,False,True,0,To start learning wa
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,8,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,9,Spanish,english,True,False,0,Sure! Starting with 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,10,French,french,True,True,0,Le plus riche person
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,1,Spanish,english,True,False,0,The headquarters of 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,2,French,english,False,True,0,The most spoken lang
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,3,Italian,italian,False,False,0,Sono d'accordo con t
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,4,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,5,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,6,Spanish,english,True,False,0,Sure! Starting with 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,7,French,english,True,False,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,8,German,english,False,True,0,A transformer is an 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,9,German,german,True,True,0,Wasserknappheit ist 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,10,French,english,False,True,0,I think the introduc
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,11,Spanish,spanish,False,False,0,"X-ray imaging, tambi"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,13,Italian,english,False,True,0,Certainly! The mecha
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,15,German,german,False,False,0,Pulp Fiction wurde v
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,17,Italian,italian,True,True,0,Introdurre gli organ
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,18,Italian,italian,True,True,0,Ecco un poema che ce
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,19,Spanish,spanish,True,True,0,"Claro, puedes aprend"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,20,German,german,False,False,0,X-ray-Bildgebung fun
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,21,Spanish,english,True,False,0,While it's true that
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,22,French,english,False,True,0,The winner of the fi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,23,Spanish,english,True,False,0,The Three Sisters mo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,24,Spanish,english,False,True,0,I understand your pe
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,25,French,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,26,German,german,True,True,0,Electricity as we un
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,27,French,french,True,True,0,Dans le jardin de l'
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,28,Italian,italian,False,False,0,Certo! I pannelli so
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,29,Spanish,spanish,True,True,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,30,Spanish,english,False,True,0,Hello! Here are some
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,31,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,32,Spanish,spanish,False,False,0,En un pequeño pueblo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,33,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,34,German,german,True,True,0,Im ewigen Lied der W
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,35,Italian,english,False,True,0,Under the soft whisp
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,36,Spanish,spanish,False,False,0,Bajo la luna de invi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,37,Italian,italian,True,True,0,"Crescere in età, un "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,38,Italian,italian,False,False,0,Certainly! Here's a 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,39,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,40,Spanish,spanish,True,True,0,La ONU fue fundada e
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,41,French,french,False,False,0,Dans les monts ennei
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,42,French,french,False,False,0,En tant que débutant
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,43,Spanish,spanish,False,False,0,La teoría de la rela
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,44,German,german,True,True,0,The erste Computer w
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,46,Spanish,spanish,True,True,0,El 16º presidente de
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,47,German,german,True,True,0,While I kann Ihnen g
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,48,French,english,False,True,0,"Hurricanes, also kno"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,50,German,german,False,False,0,"Ja, es gibt viele fa"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,51,German,german,False,False,0,Vincent van Gogh mal
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,52,German,german,True,True,0,The Mechanik des Fli
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,53,Spanish,spanish,False,False,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,54,Italian,english,True,False,0,The human immune sys
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,55,Spanish,spanish,True,True,0,Estoy de acuerdo con
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,56,Italian,english,False,True,0,The largest mammal o
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,57,German,german,False,False,0,Bitcoin arbeitet unt
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,58,Italian,english,True,False,0,Certainly! The histo
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,59,Italian,english,False,True,0,I agree with you. A 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,60,French,french,False,False,0,Dans la rumeur des t
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,61,Italian,english,False,True,0,In the vastness of t
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,62,German,german,True,True,0,Quentin Tarantino re
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,63,Spanish,spanish,False,False,0,The Titanic se hundi
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,64,Spanish,spanish,False,False,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,65,Italian,italian,False,False,0,To iniziare una carr
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,66,German,german,True,True,0,"Zwei Freunde, eng ve"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,67,French,french,False,False,0,Refrigeration cycles
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,68,German,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,69,French,english,False,True,0,"Hurricanes, also kno"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,70,German,english,False,True,0,The 2008 Summer Olym
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,71,French,french,True,True,0,"Certainly, here's a "
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,72,German,german,False,False,0,Die offizielle Sprac
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,73,French,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,74,Spanish,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,75,Spanish,spanish,True,True,0,No estoy de acuerdo 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,76,French,french,True,True,0,Dans un monde où le 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,78,Italian,italian,True,True,0,"Sotto la pioggia, so"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,79,Italian,english,True,False,0,The hottest planet i
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,80,Italian,english,True,False,0,France gifted the St
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,81,Italian,italian,True,True,0,"X-ray imaging, o rad"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,82,German,english,False,True,0,Two hearts beat as o
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,83,French,english,False,True,0,To start a book club
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,84,Italian,italian,False,False,0,Certo! Ecco alcune c
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,85,German,german,False,False,0,"Guten Morgen, hier i"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,86,French,english,False,True,0,In the heart of the 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,87,French,french,True,True,0,Dans le creux des nu
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,88,Spanish,spanish,False,False,0,To comenzar con el d
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,89,French,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,90,Italian,english,False,True,0,Certainly! The mecha
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,91,Spanish,spanish,False,False,0,En el alba de un mun
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,92,Spanish,spanish,True,True,0,Creo que la ayuda ex
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,93,Spanish,spanish,True,True,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,94,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,95,French,english,False,True,0,Starting to paint la
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,97,French,french,False,False,0,Dans les méandres de
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,98,German,german,True,True,0,"Ja, es wird oft gesa"
+qwen-2.5-14b-instruct,sp,add,id_leverage,0.0,99,Spanish,english,False,True,0,Sure! Starting with 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,1,Spanish,english,True,False,0,The headquarters of 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,2,French,english,False,True,0,The most spoken lang
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,3,Italian,italian,False,False,0,Sono d'accordo con t
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,4,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,5,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,6,Spanish,english,True,False,0,Sure! Starting with 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,7,French,english,True,False,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,8,German,english,False,True,0,A transformer is an 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,9,German,german,True,True,0,Wasserknappheit ist 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,10,French,english,False,True,0,I think the introduc
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,11,Spanish,spanish,False,False,0,"X-ray imaging, tambi"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,13,Italian,english,False,True,0,Certainly! The mecha
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,15,German,german,False,False,0,Pulp Fiction wurde v
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,17,Italian,italian,True,True,0,Introdurre gli organ
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,18,Italian,italian,True,True,0,Ecco un poema che ce
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,19,Spanish,spanish,True,True,0,"Claro, puedes aprend"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,20,German,german,False,False,0,X-ray-Bildgebung fun
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,21,Spanish,english,True,False,0,While it's true that
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,22,French,english,False,True,0,The winner of the fi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,23,Spanish,english,True,False,0,The Three Sisters mo
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,24,Spanish,english,False,True,0,I understand your pe
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,25,French,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,26,German,german,True,True,0,Electricity as we un
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,27,French,french,True,True,0,Dans le jardin de l'
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,28,Italian,italian,False,False,0,Certo! I pannelli so
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,29,Spanish,spanish,True,True,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,30,Spanish,english,False,True,0,Hello! Here are some
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,31,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,32,Spanish,spanish,False,False,0,En un pequeño pueblo
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,33,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,34,German,german,True,True,0,Im ewigen Lied der W
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,35,Italian,english,False,True,0,Under the soft whisp
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,36,Spanish,spanish,False,False,0,Bajo la luna de invi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,37,Italian,italian,True,True,0,"Crescere in età, un "
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,38,Italian,italian,False,False,0,Certainly! Here's a 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,39,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,40,Spanish,spanish,True,True,0,La ONU fue fundada e
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,41,French,french,False,False,0,Dans les monts ennei
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,42,French,french,False,False,0,En tant que débutant
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,43,Spanish,spanish,False,False,0,La teoría de la rela
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,44,German,german,True,True,0,The erste Computer w
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,46,Spanish,spanish,True,True,0,El 16º presidente de
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,47,German,german,True,True,0,While I kann Ihnen g
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,48,French,english,False,True,0,"Hurricanes, also kno"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,50,German,german,False,False,0,"Ja, es gibt viele fa"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,51,German,german,False,False,0,Vincent van Gogh mal
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,52,German,german,True,True,0,The Mechanik des Fli
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,53,Spanish,spanish,False,False,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,54,Italian,english,True,False,0,The human immune sys
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,55,Spanish,spanish,True,True,0,Estoy de acuerdo con
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,56,Italian,english,False,True,0,The largest mammal o
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,57,German,german,False,False,0,Bitcoin arbeitet unt
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,58,Italian,english,True,False,0,Certainly! The histo
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,59,Italian,english,False,True,0,I agree with you. A 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,60,French,french,False,False,0,Dans la rumeur des t
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,61,Italian,english,False,True,0,In the vastness of t
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,62,German,german,True,True,0,Quentin Tarantino re
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,63,Spanish,spanish,False,False,0,The Titanic se hundi
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,64,Spanish,spanish,False,False,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,65,Italian,italian,False,False,0,To iniziare una carr
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,66,German,german,True,True,0,"Zwei Freunde, eng ve"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,67,French,french,False,False,0,Refrigeration cycles
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,68,German,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,69,French,english,False,True,0,"Hurricanes, also kno"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,70,German,english,False,True,0,The 2008 Summer Olym
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,71,French,french,True,True,0,"Certainly, here's a "
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,72,German,german,False,False,0,Die offizielle Sprac
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,73,French,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,74,Spanish,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,75,Spanish,spanish,True,True,0,No estoy de acuerdo 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,76,French,french,True,True,0,Dans un monde où le 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,78,Italian,italian,True,True,0,"Sotto la pioggia, so"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,79,Italian,english,True,False,0,The hottest planet i
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,80,Italian,english,True,False,0,France gifted the St
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,81,Italian,italian,True,True,0,"X-ray imaging, o rad"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,82,German,english,False,True,0,Two hearts beat as o
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,83,French,english,False,True,0,To start a book club
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,84,Italian,italian,False,False,0,Certo! Ecco alcune c
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,85,German,german,False,False,0,"Guten Morgen, hier i"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,86,French,english,False,True,0,In the heart of the 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,87,French,french,True,True,0,Dans le creux des nu
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,88,Spanish,spanish,False,False,0,To comenzar con el d
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,89,French,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,90,Italian,english,False,True,0,Certainly! The mecha
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,91,Spanish,spanish,False,False,0,En el alba de un mun
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,92,Spanish,spanish,True,True,0,Creo que la ayuda ex
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,93,Spanish,spanish,True,True,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,94,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,95,French,english,False,True,0,Starting to paint la
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,97,French,french,False,False,0,Dans les méandres de
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,98,German,german,True,True,0,"Ja, es wird oft gesa"
+qwen-2.5-14b-instruct,plain,add,id_leverage,0.0,99,Spanish,english,False,True,0,Sure! Starting with 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,1,Spanish,english,True,False,0,The headquarters of 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,2,French,english,False,True,0,The most spoken lang
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,3,Italian,italian,False,False,0,Sono d'accordo con t
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,4,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,5,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,6,Spanish,english,True,False,0,"Sure! For beginners,"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,7,French,english,True,False,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,8,German,german,False,False,0,A Transformer in ein
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,9,German,german,True,True,0,Waterknappheit ist e
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,10,French,french,False,False,0,Je pense que l'intro
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,11,Spanish,spanish,False,False,0,"X-ray imaging, tambi"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,13,Italian,italian,False,False,0,Certainly! Il volo n
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,15,German,german,False,False,0,Quentin Tarantino re
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,17,Italian,italian,True,True,0,Introdurre gli organ
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,18,Italian,italian,True,True,0,Nel silenzio della l
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,19,Spanish,spanish,True,True,0,"Claro, puedes aprend"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,20,German,german,False,False,0,X-ray-Bildgebung fun
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,21,Spanish,english,True,False,0,I understand your pe
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,22,French,french,False,False,0,The gagnant de la pr
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,23,Spanish,english,True,False,0,The Three Sisters mo
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,24,Spanish,english,False,True,0,I understand your pe
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,33,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,34,German,german,True,True,0,Im ewigen Lied der W
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,35,Italian,italian,False,False,0,Bene sotto l'ombrell
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,36,Spanish,spanish,False,False,0,Bajo la luna de invi
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,37,Italian,italian,True,True,0,Nel tessuto del temp
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,38,Italian,italian,False,False,0,Certainly! Here's a 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,39,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,40,Spanish,spanish,True,True,0,La ONU fue fundada e
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,41,French,french,False,False,0,Dans les monts ennei
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,42,French,french,False,False,0,En tant que débutant
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,43,Spanish,spanish,False,False,0,La teoría de la rela
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,44,German,german,True,True,0,Die ersten Computer 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,46,Spanish,spanish,True,True,0,El 16º presidente de
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,47,German,german,True,True,0,Ich kann dir gerne h
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,48,French,french,False,False,0,Les ouragans se form
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,50,German,german,False,False,0,"Ja, es gibt viele fa"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,51,German,german,False,False,0,Vincent van Gogh mal
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,52,German,english,True,False,0,Certainly! The mecha
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,53,Spanish,spanish,False,False,0,Sobre el horizonte s
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,54,Italian,italian,True,True,0,The sistema immunita
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,55,Spanish,spanish,True,True,0,Estoy de acuerdo con
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,56,Italian,english,False,True,0,The largest mammal o
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,57,German,german,False,False,0,Bitcoin funktioniert
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,58,Italian,english,True,False,0,Certainly! The histo
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,59,Italian,english,False,True,0,I agree with you. A 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,60,French,french,False,False,0,Dans la rumeur des t
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,61,Italian,italian,False,False,0,In mare vasto e oscu
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,62,German,german,True,True,0,Quentin Tarantino re
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,63,Spanish,english,False,True,0,The Titanic sank in 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,64,Spanish,spanish,False,False,0,"Actualmente, la comp"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,65,Italian,italian,False,False,0,Per iniziare una car
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,66,German,german,True,True,0,Zwei Freunde wandert
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,67,French,french,False,False,0,Refrigeration cycles
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,68,German,german,False,False,0,Es ist eine ernsthaf
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,69,French,french,False,False,0,Les ouragans se form
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,70,German,english,False,True,0,The 2008 Summer Olym
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,71,French,french,True,True,0,Dans la clameur des 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,72,German,german,False,False,0,Die offizielle Sprac
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,73,French,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,74,Spanish,spanish,False,False,0,El yuan chino (tambi
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,75,Spanish,spanish,True,True,0,Creo que la asistenc
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,76,French,french,True,True,0,Dans un monde où le 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,78,Italian,italian,True,True,0,"Sotto la pioggia, so"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,79,Italian,english,True,False,0,The hottest planet i
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,80,Italian,english,True,False,0,France gifted the St
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,81,Italian,italian,True,True,0,"X-ray imaging, o rad"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,82,German,english,False,True,0,Two hearts once beat
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,83,French,french,False,False,0,Pour commencer un cl
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,84,Italian,italian,False,False,0,Certo! Ecco alcune c
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,85,German,german,False,False,0,"Guten Morgen, hier i"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,86,French,english,False,True,0,In the heart of the 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,87,French,french,True,True,0,Dans le creux des nu
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,88,Spanish,english,False,True,0,A great place to sta
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,89,French,french,False,False,0,Je pense que ce n'es
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,90,Italian,italian,False,False,0,Certainly! Il volo n
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,91,Spanish,spanish,False,False,0,En el alba de un mun
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,92,Spanish,spanish,True,True,0,Creo que la ayuda ex
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,93,Spanish,spanish,True,True,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,94,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,95,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,97,French,french,False,False,0,Dans les méandres de
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,98,German,german,True,True,0,"Ja, es wird oft gesa"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,99,Spanish,spanish,False,False,0,"Claro que sí, aquí t"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,100,German,german,False,False,0,The erste James-Bond
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,101,Italian,english,True,False,0,"Primavera sussurra,"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,102,French,french,False,False,0,Dans le jardin de la
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,103,Italian,italian,False,False,0,I physical processi 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,104,French,french,True,True,0,"Bien sûr, je vais vo"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,105,French,french,True,True,0,Bien sûr ! Les panne
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,106,Italian,english,False,True,0,The largest dinosaur
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,107,German,german,True,True,0,"Im Spiegel der Zeit"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,108,German,german,True,True,0,Fermentation ist ein
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,109,French,french,True,True,0,Je partage votre poi
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,110,French,english,True,False,0,The author of 'Medit
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,111,Italian,english,True,False,0,Diamonds are formed 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,112,Italian,english,True,False,0,The national bird of
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,113,German,german,False,False,0,Im Licht der blinken
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,114,Spanish,english,True,False,0,Diamonds are formed 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,115,French,french,False,False,0,Bien sûr ! Pour déco
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,116,German,german,True,True,0,"Der Autor von ""Medit"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,117,German,german,False,False,0,Diamonds bilden sich
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,118,Spanish,spanish,True,True,0,Bitcoin funciona uti
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,119,Spanish,spanish,True,True,0,"Primavera en flor,v"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,120,Italian,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,121,French,english,False,True,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,122,Italian,english,False,True,0,The 'Harry Potter' s
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,123,Spanish,spanish,True,True,0,En la ciudad sin des
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,124,French,english,False,True,0,To start learning ho
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,125,Italian,italian,False,False,0,Capisco il tuo punto
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,126,Spanish,spanish,False,False,0,Bajo el velo de la n
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,127,French,french,True,True,0,Dans le jardin de no
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,128,French,french,False,False,0,Le français est l'un
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,129,French,french,True,True,0,Je ne suis pas d'acc
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,130,German,german,False,False,0,Die Rolle der NATO i
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,131,Italian,italian,True,True,0,"Il ciclo idrologico,"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,132,Italian,italian,False,False,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,133,German,german,True,True,0,"Natürlich, hier ist "
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,134,Spanish,english,True,False,0,Certainly! Here are 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,135,Italian,italian,True,True,0,Moby Dick è stato sc
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,136,German,german,True,True,0,Hier ist ein fröhlic
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,137,Italian,italian,True,True,0,Nel silenzio della n
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,138,Spanish,english,False,True,0,Certainly! Getting a
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,139,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,140,Italian,italian,True,True,0,In un campo di sogni
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,141,French,french,True,True,0,Les cycles de réfrig
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,142,Spanish,spanish,True,True,0,En un charco muy tra
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,143,Spanish,spanish,True,True,0,Desde mi perspectiva
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,144,Italian,english,True,False,0,Your concern is vali
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,145,German,english,True,False,0,I understand your co
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,146,Italian,italian,False,False,0,Nel cuore della citt
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,147,French,french,True,True,0,Je crois que l'IA pe
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,148,German,english,True,False,0,I understand your pe
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,149,Italian,english,True,False,0,The capital of Portu
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,150,Italian,italian,True,True,0,La più lunga ossa ne
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,151,Italian,english,False,True,0,"I agree with you, ho"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,152,Italian,italian,False,False,0,Nel cuore del giardi
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,153,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,154,Italian,italian,False,False,0,"Primavera sussurra,
+"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,155,French,french,False,False,0,Dans l'ombre de la m
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,156,Italian,english,True,False,0,The physical process
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,157,Spanish,spanish,True,True,0,En el estadio rugien
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,158,Spanish,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,159,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,160,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,161,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,162,French,french,False,False,0,Je crois que le cann
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,163,French,french,False,False,0,Je ne pense pas non 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,164,Spanish,spanish,True,True,0,En el umbral de la n
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,165,French,french,False,False,0,La télévision foncti
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,166,Italian,english,True,False,0,The most populated c
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,167,Spanish,spanish,False,False,0,En la plaza bullicio
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,168,German,german,False,False,0,The Wasserkreislauf 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,169,French,french,True,True,0,Dans le ciel nocturn
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,170,French,french,True,True,0,La télévision foncti
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,171,Italian,english,False,True,0,"Sure! In boxing, the"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,172,German,english,False,True,0,That is a complex an
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,173,French,english,True,False,0,It's important to co
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,174,German,german,True,True,0,The menschliche Immu
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,175,Italian,english,True,False,0,The Earth's magnetic
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,176,Italian,italian,True,True,0,Capisco le tue preoc
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,177,Italian,english,False,True,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,178,German,german,True,True,0,Natürlich! Wenn Sie 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,179,German,german,False,False,0,Zwei Rivalen standen
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,180,German,german,True,True,0,Es gibt einen Eichhö
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,181,Italian,english,True,False,0,Certainly! Sigmund F
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,182,French,french,False,False,0,Il y avait un crapau
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,183,Spanish,spanish,False,False,0,Durante el proceso d
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,184,French,english,True,False,0,The most spoken lang
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,185,German,english,False,True,0,The Cold War endete 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,186,Italian,english,False,True,0,The process of DNA r
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,187,Spanish,spanish,True,True,0,El símbolo químico p
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,188,French,french,True,True,0,Je pense que de nomb
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,189,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,190,French,french,True,True,0,Pour commencer à app
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,191,Spanish,english,False,True,0,Certainly! Cyberpunk
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,192,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,193,Italian,italian,True,True,0,Il World Wide Web è 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,194,Spanish,spanish,False,False,0,"Bajo el mismo cielo,"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,195,German,german,False,False,0,Die physikalischen P
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,196,Italian,italian,True,True,0,The gas più comune n
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,197,Spanish,spanish,True,True,0,Los artistas de cuer
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,198,Italian,italian,False,False,0,In un angolo di terr
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.25,199,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,1,Spanish,english,True,False,0,The headquarters of 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,2,French,english,False,True,0,The most spoken lang
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,3,Italian,italian,False,False,0,Sono d'accordo con t
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,4,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,5,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,6,Spanish,english,True,False,0,"Sure! For beginners,"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,7,French,english,True,False,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,8,German,german,False,False,0,A Transformer in ein
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,9,German,german,True,True,0,Waterknappheit ist e
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,10,French,french,False,False,0,Je pense que l'intro
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,11,Spanish,spanish,False,False,0,"X-ray imaging, tambi"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,13,Italian,italian,False,False,0,Certainly! Il volo n
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,15,German,german,False,False,0,Quentin Tarantino re
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,17,Italian,italian,True,True,0,Introdurre gli organ
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,18,Italian,italian,True,True,0,Nel silenzio della l
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,19,Spanish,spanish,True,True,0,"Claro, puedes aprend"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,20,German,german,False,False,0,X-ray-Bildgebung fun
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,21,Spanish,english,True,False,0,I understand your pe
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,22,French,french,False,False,0,The gagnant de la pr
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,23,Spanish,english,True,False,0,The Three Sisters mo
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,24,Spanish,english,False,True,0,I understand your pe
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,25,French,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,26,German,german,True,True,0,Electricity wurde ni
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,27,French,french,True,True,0,Dans le jardin de l'
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,28,Italian,italian,False,False,0,Certo! I pannelli so
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,29,Spanish,spanish,True,True,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,30,Spanish,english,False,True,0,Here are a few uplif
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,31,French,french,True,True,0,Dans le jardin de l'
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,32,Spanish,spanish,False,False,0,En un pequeño pueblo
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,33,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,34,German,german,True,True,0,Im ewigen Rhythmus d
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,35,Italian,italian,False,False,0,Bene sotto l'ombrell
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,36,Spanish,spanish,False,False,0,Bajo la luna de invi
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,37,Italian,italian,True,True,0,Nel tessuto del temp
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,38,Italian,italian,False,False,0,Certainly! Here's a 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,39,Italian,english,False,True,0,The current understa
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,40,Spanish,spanish,True,True,0,La ONU fue fundada e
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,41,French,french,False,False,0,Dans les monts ennei
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,42,French,french,False,False,0,En tant que débutant
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,43,Spanish,spanish,False,False,0,La teoría de la rela
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,44,German,german,True,True,0,Die ersten Computer 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,46,Spanish,spanish,True,True,0,El 16º presidente de
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,47,German,german,True,True,0,"Ich kann dir helfen,"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,48,French,french,False,False,0,Les ouragans se form
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,50,German,german,False,False,0,"Ja, es gibt viele fa"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,51,German,german,False,False,0,Vincent van Gogh mal
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,52,German,english,True,False,0,Certainly! The mecha
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,53,Spanish,spanish,False,False,0,Sobre el horizonte s
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,54,Italian,italian,True,True,0,The sistema immunita
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,55,Spanish,spanish,True,True,0,Estoy de acuerdo con
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,56,Italian,english,False,True,0,The largest mammal o
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,57,German,german,False,False,0,Bitcoin funktioniert
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,58,Italian,english,True,False,0,Certainly! The histo
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,59,Italian,english,False,True,0,I agree with you tha
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,60,French,french,False,False,0,Dans la rumeur des t
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,61,Italian,italian,False,False,0,Sotto un cielo di pi
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,62,German,german,True,True,0,Quentin Tarantino re
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,63,Spanish,english,False,True,0,The Titanic sank in 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,64,Spanish,spanish,False,False,0,La comprensión actua
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,65,Italian,italian,False,False,0,Per iniziare una car
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,66,German,german,True,True,0,Zwei Freunde wandert
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,67,French,french,False,False,0,Refrigeration cycles
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,68,German,german,False,False,0,Es ist eine ernste S
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,69,French,french,False,False,0,Les ouragans se form
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,70,German,english,False,True,0,The 2008 Summer Olym
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,71,French,french,True,True,0,Dans la clameur des 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,72,German,german,False,False,0,Die offizielle Sprac
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,73,French,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,74,Spanish,spanish,False,False,0,El yuan chino (tambi
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,75,Spanish,spanish,True,True,0,Creo que la asistenc
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,76,French,french,True,True,0,Dans un monde où le 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,78,Italian,italian,True,True,0,"Sotto la pioggia, so"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,79,Italian,italian,True,True,0,The planet più caldo
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,80,Italian,english,True,False,0,France gifted the St
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,81,Italian,italian,True,True,0,Certainly! L'immagin
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,82,German,english,False,True,0,Two hearts once beat
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,83,French,french,False,False,0,Pour commencer un cl
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,84,Italian,italian,False,False,0,Certo! Ecco alcune c
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,85,German,german,False,False,0,"Guten Morgen, hier i"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,86,French,english,False,True,0,In the heart of the 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,87,French,french,True,True,0,Dans le creux des nu
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,88,Spanish,english,False,True,0,A great place to sta
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,89,French,french,False,False,0,Je comprends votre p
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,90,Italian,italian,False,False,0,Certainly! Il volo n
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,91,Spanish,spanish,False,False,0,En el alba de un mun
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,92,Spanish,spanish,True,True,0,Creo que la ayuda ex
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,93,Spanish,spanish,True,True,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,94,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,95,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,97,French,french,False,False,0,Dans les méandres de
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,98,German,german,True,True,0,"Ja, es wird gesagt, "
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,99,Spanish,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,100,German,german,False,False,0,The erste James-Bond
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,101,Italian,italian,True,True,0,"Primavera sussurra,"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,102,French,french,False,False,0,Dans le jardin de la
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,103,Italian,italian,False,False,0,I climi in diverse p
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,104,French,french,True,True,0,Les Réseaux de Neuro
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,105,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,106,Italian,english,False,True,0,The largest dinosaur
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,107,German,german,True,True,0,"Im Spiegel der Zeit"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,108,German,german,True,True,0,Fermentation ist ein
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,109,French,french,True,True,0,Je partage votre poi
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,110,French,french,True,True,0,L'auteur de 'Meditat
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,111,Italian,english,True,False,0,Diamonds are formed 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,112,Italian,english,True,False,0,The national bird of
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,113,German,german,False,False,0,Im Licht der blinken
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,114,Spanish,english,True,False,0,Diamonds are formed 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,115,French,french,False,False,0,Bien sûr ! Pour déco
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,116,German,german,True,True,0,"Der Autor von ""Medit"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,117,German,german,False,False,0,Diamonds bilden sich
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,118,Spanish,spanish,True,True,0,Bitcoin funciona uti
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,119,Spanish,spanish,True,True,0,"Primavera en flor,
+v"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,120,Italian,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,121,French,english,False,True,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,122,Italian,english,False,True,0,The 'Harry Potter' s
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,123,Spanish,spanish,True,True,0,En la ciudad sin des
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,124,French,english,False,True,0,If you are intereste
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,125,Italian,italian,False,False,0,Capisco il tuo punto
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,126,Spanish,spanish,False,False,0,Bajo el velo de la n
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,127,French,french,True,True,0,Dans le jardin de no
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,128,French,french,False,False,0,Le néerlandais et le
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,129,French,french,True,True,0,Je ne suis pas d'acc
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,130,German,german,False,False,0,Die Rolle der NATO i
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,131,Italian,italian,True,True,0,Il ciclo idrologico 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,132,Italian,italian,False,False,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,133,German,german,True,True,0,"Natürlich, hier ist "
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,134,Spanish,english,True,False,0,Certainly! Here are 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,135,Italian,italian,True,True,0,Moby Dick è stato sc
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,136,German,german,True,True,0,Hier ist ein fröhlic
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,137,Italian,italian,True,True,0,Nel silenzio della n
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,138,Spanish,english,False,True,0,Certainly! Getting a
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,139,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,140,Italian,italian,True,True,0,In un campo di sogni
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,141,French,french,True,True,0,Les cycles de réfrig
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,142,Spanish,spanish,True,True,0,En un charco muy pro
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,143,Spanish,spanish,True,True,0,Desde mi perspectiva
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,144,Italian,english,True,False,0,Your concern is vali
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,145,German,english,True,False,0,I understand your co
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,146,Italian,italian,False,False,0,Nel cuore della citt
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,147,French,french,True,True,0,Je crois que l'IA pe
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,148,German,english,True,False,0,I understand your pe
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,149,Italian,italian,True,True,0,La capitale di Porto
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,150,Italian,italian,True,True,0,La più lunga ossa ne
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,151,Italian,english,False,True,0,"I agree with you, ho"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,152,Italian,italian,False,False,0,In un angolo dimenti
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,153,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,154,Italian,italian,False,False,0,"Primavera sussurra,"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,155,French,french,False,False,0,Dans le silence de l
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,156,Italian,english,True,False,0,The physical process
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,157,Spanish,spanish,True,True,0,En el estadio rugien
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,158,Spanish,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,159,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,160,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,161,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,162,French,french,False,False,0,Je crois que le cann
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,163,French,french,False,False,0,Je ne pense pas non 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,164,Spanish,spanish,True,True,0,En el umbral de la n
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,165,French,french,False,False,0,La télévision foncti
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,166,Italian,english,True,False,0,The most populated c
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,167,Spanish,spanish,False,False,0,En el bullicio del m
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,168,German,german,False,False,0,The Wasserkreislauf 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,169,French,french,True,True,0,Dans le ciel nocturn
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,170,French,french,True,True,0,La télévision foncti
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,171,Italian,english,False,True,0,"Sure! In boxing, the"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,172,German,german,False,False,0,That ist eine sehr p
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,173,French,english,True,False,0,It's important to co
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,174,German,german,True,True,0,The menschliche Immu
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,175,Italian,english,True,False,0,The Earth's magnetic
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,176,Italian,english,True,False,0,It's a valid concern
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,177,Italian,english,False,True,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,178,German,german,True,True,0,"Sicher, ich helfe di"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,179,German,german,False,False,0,Zwei Rivalen standen
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,180,German,german,True,True,0,Es gibt einen Eichhö
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,181,Italian,english,True,False,0,Certainly! Sigmund F
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,182,French,french,False,False,0,Il était une grenoui
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,183,Spanish,spanish,False,False,0,Durante el proceso d
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,184,French,english,True,False,0,The most spoken lang
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,185,German,english,False,True,0,The Cold War endete 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,186,Italian,english,False,True,0,The process of DNA r
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,187,Spanish,spanish,True,True,0,El símbolo químico p
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,188,French,french,True,True,0,Je pense que de nomb
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,189,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,190,French,french,True,True,0,Vous pouvez commence
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,191,Spanish,english,False,True,0,Certainly! Cyberpunk
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,192,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,193,Italian,italian,True,True,0,Il World Wide Web è 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,194,Spanish,spanish,False,False,0,"Bajo el mismo cielo,"
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,195,German,german,False,False,0,Die physikalischen P
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,196,Italian,italian,True,True,0,L'ossigeno è spesso 
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,197,Spanish,spanish,True,True,0,Los artistas de cuer
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,198,Italian,italian,False,False,0,In un angolo di terr
+qwen-2.5-14b-instruct,sp,add,steering_vectors_qwen-2.5-14b-instruct__sp_diff_proj_equiv.npz,0.5,199,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,1,Spanish,english,True,False,0,The headquarters of 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,2,French,english,False,True,0,The most spoken lang
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,3,Italian,italian,False,False,0,Sono d'accordo con t
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,4,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,5,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,6,Spanish,english,True,False,0,"Sure! For beginners,"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,7,French,english,True,False,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,8,German,german,False,False,0,A Transformer in ein
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,9,German,german,True,True,0,Watermangel ist ein 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,10,French,french,False,False,0,Je pense que l'intro
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,11,Spanish,spanish,False,False,0,"X-ray imaging, tambi"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,13,Italian,italian,False,False,0,Certainly! Il volo n
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,15,German,german,False,False,0,Pulp Fiction wurde v
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,17,Italian,italian,True,True,0,Introdurre gli organ
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,18,Italian,italian,True,True,0,Nel silenzio della l
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,19,Spanish,spanish,True,True,0,"Claro, puedes aprend"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,20,German,german,False,False,0,X-ray-Bildgebung fun
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,21,Spanish,english,True,False,0,I understand your pe
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,22,French,french,False,False,0,The gagnant de la pr
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,23,Spanish,english,True,False,0,The Three Sisters mo
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,24,Spanish,english,False,True,0,I understand your pe
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,25,French,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,26,German,german,True,True,0,Electricity as we un
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,27,French,french,True,True,0,Dans le jardin de l'
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,28,Italian,italian,False,False,0,Certo! I pannelli so
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,29,Spanish,spanish,True,True,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,30,Spanish,english,False,True,0,Hello! Here are some
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,31,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,32,Spanish,spanish,False,False,0,En un pequeño pueblo
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,33,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,34,German,german,True,True,0,Im ewigen Lied der W
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,35,Italian,italian,False,False,0,Bene sotto l'ombrell
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,36,Spanish,spanish,False,False,0,Bajo la luna de invi
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,37,Italian,italian,True,True,0,Nel corso degli anni
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,38,Italian,italian,False,False,0,Certainly! Here's a 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,39,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,40,Spanish,spanish,True,True,0,La ONU fue fundada e
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,41,French,french,False,False,0,Dans les monts ennei
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,42,French,french,False,False,0,En tant que débutant
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,43,Spanish,spanish,False,False,0,La teoría de la rela
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,44,German,german,True,True,0,Die ersten Computer 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,46,Spanish,spanish,True,True,0,El 16º presidente de
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,47,German,german,True,True,0,Ich kann dir gerne h
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,48,French,french,False,False,0,Les ouragans se form
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,50,German,german,False,False,0,"Ja, es gibt viele fa"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,51,German,german,False,False,0,Vincent van Gogh mal
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,52,German,english,True,False,0,Birds achieve flight
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,53,Spanish,spanish,False,False,0,Sobre el horizonte s
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,54,Italian,italian,True,True,0,The sistema immunita
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,55,Spanish,spanish,True,True,0,Estoy de acuerdo con
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,56,Italian,english,False,True,0,The largest mammal o
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,57,German,german,False,False,0,Bitcoin funktioniert
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,58,Italian,english,True,False,0,Certainly! The histo
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,59,Italian,english,False,True,0,I agree with you. A 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,60,French,french,False,False,0,Dans la rumeur joyeu
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,61,Italian,italian,False,False,0,In mare vasto e oscu
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,62,German,german,True,True,0,Pulp Fiction wurde v
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,63,Spanish,english,False,True,0,The Titanic sank in 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,64,Spanish,spanish,False,False,0,"Actualmente, la comp"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,65,Italian,italian,False,False,0,Per iniziare una car
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,66,German,german,True,True,0,"Zwei Freunde, eng ve"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,67,French,french,False,False,0,Refrigeration cycles
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,68,German,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,69,French,french,False,False,0,Les ouragans se form
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,70,German,english,False,True,0,The 2008 Summer Olym
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,71,French,french,True,True,0,Dans la clameur des 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,72,German,german,False,False,0,Die offizielle Sprac
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,73,French,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,74,Spanish,spanish,False,False,0,El yuan chino (tambi
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,75,Spanish,spanish,True,True,0,Entiendo tu punto de
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,76,French,french,True,True,0,Dans un monde où le 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,78,Italian,italian,True,True,0,"Sotto la pioggia, so"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,79,Italian,english,True,False,0,The hottest planet i
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,80,Italian,english,True,False,0,France gifted the St
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,81,Italian,italian,True,True,0,"X-ray imaging, o rad"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,82,German,german,False,False,0,"Zwei Freunde, eng ve"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,83,French,french,False,False,0,Pour commencer un cl
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,84,Italian,italian,False,False,0,Certo! Ecco alcune c
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,85,German,german,False,False,0,"Natürlich, hier ist "
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,86,French,french,False,False,0,Dans l'arène vibrant
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,87,French,french,True,True,0,Dans le creux des nu
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,88,Spanish,spanish,False,False,0,To comenzar con el d
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,89,French,french,False,False,0,Je pense que limiter
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,90,Italian,italian,False,False,0,Certainly! Il volo n
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,91,Spanish,spanish,False,False,0,En el umbral de la n
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,92,Spanish,spanish,True,True,0,Creo que la ayuda ex
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,93,Spanish,spanish,True,True,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,94,French,french,False,False,0,Bien sûr ! Pour comm
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,95,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,97,French,french,False,False,0,Dans les méandres de
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,98,German,german,True,True,0,"Ja, es wird oft gesa"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,99,Spanish,spanish,False,False,0,"Claro que sí, aquí t"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,100,German,english,False,True,0,The first James Bond
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,101,Italian,italian,True,True,0,"Primavera sussurra,
+"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,102,French,french,False,False,0,Dans le jardin de la
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,103,Italian,italian,False,False,0,I physical processi 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,104,French,french,True,True,0,"Bien sûr, je vais vo"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,105,French,french,True,True,0,Bien sûr ! Les panne
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,106,Italian,english,False,True,0,The largest dinosaur
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,107,German,german,True,True,0,"Im Spiegel der Zeit
+"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,108,German,german,True,True,0,Fermentation ist ein
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,109,French,french,True,True,0,Je partage votre poi
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,110,French,english,True,False,0,The author of 'Medit
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,111,Italian,english,True,False,0,Diamonds are formed 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,112,Italian,english,True,False,0,The national bird of
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,113,German,german,False,False,0,"Im Licht der Stadt, "
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,114,Spanish,english,True,False,0,Diamonds are formed 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,115,French,french,False,False,0,Bien sûr ! Pour déco
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,116,German,german,True,True,0,"Der Autor von ""Medit"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,117,German,german,False,False,0,Diamonds bilden sich
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,118,Spanish,spanish,True,True,0,Bitcoin funciona a t
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,119,Spanish,spanish,True,True,0,"Primavera en flor,
+v"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,120,Italian,english,False,True,0,Certainly! Wine tast
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,121,French,english,False,True,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,122,Italian,english,False,True,0,The 'Harry Potter' s
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,123,Spanish,spanish,True,True,0,En la ciudad sin des
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,124,French,english,False,True,0,To start learning ho
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,125,Italian,italian,False,False,0,Capisco il tuo punto
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,126,Spanish,spanish,False,False,0,Bajo el velo de la n
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,127,French,french,True,True,0,"Deux amis, sous un c"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,128,French,english,False,True,0,The official languag
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,129,French,french,True,True,0,Je ne suis pas d'acc
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,130,German,german,False,False,0,Die Rolle der NATO i
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,131,Italian,italian,True,True,0,The ciclo idrologico
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,132,Italian,italian,False,False,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,133,German,german,True,True,0,"Natürlich, hier ist "
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,134,Spanish,english,True,False,0,Certainly! Here are 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,135,Italian,italian,True,True,0,Moby Dick è stato sc
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,136,German,german,True,True,0,Hier ist ein fröhlic
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,137,Italian,italian,True,True,0,Nella notte silenzio
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,138,Spanish,english,False,True,0,Certainly! Getting a
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,139,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,140,Italian,italian,True,True,0,In un campo di sogni
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,141,French,french,True,True,0,Refrigeration cycles
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,142,Spanish,spanish,True,True,0,En un charco muy tra
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,143,Spanish,spanish,True,True,0,Desde mi perspectiva
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,144,Italian,english,True,False,0,Your concern is vali
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,145,German,english,True,False,0,I understand your co
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,146,Italian,italian,False,False,0,Nel cuore della citt
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,147,French,french,True,True,0,Je crois que l'IA pe
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,148,German,english,True,False,0,I understand your pe
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,149,Italian,english,True,False,0,The capital of Portu
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,150,Italian,english,True,False,0,The longest bone in 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,151,Italian,english,False,True,0,"I agree with you, ho"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,152,Italian,italian,False,False,0,Nel cuore di un fior
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,153,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,154,Italian,italian,False,False,0,"Primavera sussurra,
+"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,155,French,french,False,False,0,Dans l'ombre de la m
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,156,Italian,english,True,False,0,The physical process
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,157,Spanish,spanish,True,True,0,En el estadio rugien
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,158,Spanish,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,159,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,160,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,161,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,162,French,french,False,False,0,Je crois que le cann
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,163,French,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,164,Spanish,spanish,True,True,0,En el umbral de la n
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,165,French,french,False,False,0,The process de fonct
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,166,Italian,english,True,False,0,The most populated c
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,167,Spanish,spanish,False,False,0,En el bullicio del m
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,168,German,german,False,False,0,The Wasserkreislauf 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,169,French,french,True,True,0,Dans le ciel nocturn
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,170,French,french,True,True,0,La production d'une 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,171,Italian,english,False,True,0,"Sure! In boxing, the"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,172,German,english,False,True,0,That's a complex and
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,173,French,english,True,False,0,It's important to co
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,174,German,german,True,True,0,The menschliche Immu
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,175,Italian,english,True,False,0,The Earth's magnetic
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,176,Italian,english,True,False,0,It's understandable 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,177,Italian,english,False,True,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,178,German,german,True,True,0,Sicher! Wenn Sie ein
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,179,German,german,False,False,0,"Zwei Rivalen, getren"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,180,German,german,True,True,0,Es gibt einen Eichhö
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,181,Italian,english,True,False,0,Certainly! Sigmund F
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,182,French,french,False,False,0,Il y avait un crapau
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,183,Spanish,spanish,False,False,0,Durante el proceso d
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,184,French,english,True,False,0,The most spoken lang
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,185,German,english,False,True,0,The Cold War ended i
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,186,Italian,english,False,True,0,The process of DNA r
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,187,Spanish,spanish,True,True,0,El símbolo químico p
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,188,French,french,True,True,0,Je pense que beaucou
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,189,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,190,French,french,True,True,0,Pour commencer à app
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,191,Spanish,english,False,True,0,Certainly! Cyberpunk
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,192,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,193,Italian,italian,True,True,0,Il World Wide Web è 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,194,Spanish,spanish,False,False,0,"Bajo el mismo cielo,"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,195,German,german,False,False,0,Die physikalischen P
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,196,Italian,italian,True,True,0,The gas più comune n
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,197,Spanish,spanish,True,True,0,Los artistas de cuer
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,198,Italian,italian,False,False,0,In un angolo di terr
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.25,199,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,1,Spanish,english,True,False,0,The headquarters of 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,2,French,english,False,True,0,The most spoken lang
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,3,Italian,italian,False,False,0,Sono d'accordo con t
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,4,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,5,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,6,Spanish,english,True,False,0,"Sure! For beginners,"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,7,French,english,True,False,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,8,German,english,False,True,0,A transformer in an 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,9,German,german,True,True,0,Watermangel ist ein 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,10,French,english,False,True,0,I agree with you. Th
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,11,Spanish,spanish,False,False,0,"X-ray imaging, tambi"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,13,Italian,english,False,True,0,"Certainly! In birds,"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,15,German,german,False,False,0,Pulp Fiction wurde v
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,17,Italian,italian,True,True,0,Introdurre gli organ
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,18,Italian,italian,True,True,0,Nel silenzio della l
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,19,Spanish,spanish,True,True,0,"Claro, puedes aprend"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,20,German,german,False,False,0,X-ray-Bildgebung fun
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,21,Spanish,english,True,False,0,I understand your pe
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,22,French,french,False,False,0,The gagnant de la pr
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,23,Spanish,english,True,False,0,The Three Sisters mo
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,24,Spanish,english,False,True,0,I understand your pe
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,25,French,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,26,German,english,True,False,0,Electricity as we un
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,27,French,french,True,True,0,Dans le jardin de l'
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,28,Italian,italian,False,False,0,Certo! I pannelli so
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,29,Spanish,spanish,True,True,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,30,Spanish,english,False,True,0,Hello! Here are some
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,31,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,32,Spanish,spanish,False,False,0,En un pequeño pueblo
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,33,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,34,German,german,True,True,0,Im ewigen Lied der W
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,35,Italian,italian,False,False,0,Bene sotto l'ombrell
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,36,Spanish,spanish,False,False,0,Bajo la luna de invi
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,37,Italian,italian,True,True,0,Nel corso degli anni
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,38,Italian,italian,False,False,0,Certainly! Here's a 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,39,Italian,english,False,True,0,Dark Matter and Dark
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,40,Spanish,spanish,True,True,0,La ONU fue fundada e
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,41,French,french,False,False,0,Dans les monts ennei
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,42,French,french,False,False,0,En tant que débutant
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,43,Spanish,spanish,False,False,0,La teoría de la rela
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,44,German,german,True,True,0,The erste Computer w
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,46,Spanish,spanish,True,True,0,El 16º presidente de
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,47,German,german,True,True,0,Ich kann dir gerne h
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,48,French,french,False,False,0,Les ouragans se form
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,50,German,german,False,False,0,"Ja, es gibt viele fa"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,51,German,german,False,False,0,Vincent van Gogh mal
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,52,German,german,True,True,0,The Mechanism des Fl
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,53,Spanish,spanish,False,False,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,54,Italian,italian,True,True,0,The sistema immunita
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,55,Spanish,spanish,True,True,0,Estoy de acuerdo con
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,56,Italian,english,False,True,0,The largest mammal o
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,57,German,german,False,False,0,Bitcoin funktioniert
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,58,Italian,english,True,False,0,Certainly! The histo
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,59,Italian,english,False,True,0,I agree with you. A 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,60,French,french,False,False,0,Dans la rumeur des t
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,61,Italian,italian,False,False,0,In tempesta il mare 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,62,German,german,True,True,0,Pulp Fiction wurde v
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,63,Spanish,english,False,True,0,The Titanic sank in 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,64,Spanish,spanish,False,False,0,"Actualmente, la comp"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,65,Italian,italian,False,False,0,Per iniziare una car
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,66,German,german,True,True,0,"Zwei Freunde, eng ve"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,67,French,french,False,False,0,Refrigeration cycles
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,68,German,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,69,French,french,False,False,0,Les ouragans se form
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,70,German,english,False,True,0,The 2008 Summer Olym
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,71,French,french,True,True,0,Dans le monde d'aujo
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,72,German,english,False,True,0,The official languag
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,73,French,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,74,Spanish,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,75,Spanish,spanish,True,True,0,Entiendo tu punto de
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,76,French,french,True,True,0,Dans un monde où l'e
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,78,Italian,italian,True,True,0,"Sotto la pioggia, du"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,79,Italian,english,True,False,0,The hottest planet i
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,80,Italian,english,True,False,0,France gifted the St
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,81,Italian,italian,True,True,0,"X-ray imaging, o rad"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,82,German,german,False,False,0,"Zwei Freunde, eng ve"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,83,French,french,False,False,0,Pour commencer un cl
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,84,Italian,italian,False,False,0,Certo! Ecco alcune c
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,85,German,german,False,False,0,"Natürlich, hier ist "
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,86,French,french,False,False,0,Dans l'arène vibrant
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,87,French,french,True,True,0,Dans le creux des nu
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,88,Spanish,spanish,False,False,0,To comenzar con el d
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,89,French,french,False,False,0,Je pense que limiter
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,90,Italian,english,False,True,0,"Certainly! In birds,"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,91,Spanish,spanish,False,False,0,En el corazón de un 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,92,Spanish,spanish,True,True,0,Creo que la ayuda ex
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,93,Spanish,spanish,True,True,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,94,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,95,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,97,French,french,False,False,0,Dans les méandres de
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,98,German,german,True,True,0,"Ja, es wird oft gesa"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,99,Spanish,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,100,German,english,False,True,0,The first James Bond
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,101,Italian,italian,True,True,0,"Primavera sussurra,
+"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,102,French,french,False,False,0,Dans le jardin de la
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,103,Italian,italian,False,False,0,The clima in diverse
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,104,French,french,True,True,0,"Bien sûr, je vais vo"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,105,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,106,Italian,english,False,True,0,The largest dinosaur
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,107,German,german,True,True,0,"Im Spiegel der Zeit
+"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,108,German,german,True,True,0,Fermentation ist ein
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,109,French,french,True,True,0,Je crois également e
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,110,French,english,True,False,0,The author of 'Medit
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,111,Italian,english,True,False,0,Diamonds are formed 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,112,Italian,english,True,False,0,The national bird of
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,113,German,german,False,False,0,In Zeiten moderner Z
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,114,Spanish,english,True,False,0,Diamonds are formed 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,115,French,french,False,False,0,Bien sûr ! Pour déco
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,116,German,german,True,True,0,"Der Autor von ""Medit"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,117,German,german,False,False,0,Diamonds bilden sich
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,118,Spanish,spanish,True,True,0,Bitcoin funciona a t
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,119,Spanish,spanish,True,True,0,"Primavera en flor,
+v"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,120,Italian,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,121,French,english,False,True,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,122,Italian,english,False,True,0,The 'Harry Potter' s
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,123,Spanish,spanish,True,True,0,En la ciudad bullici
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,124,French,english,False,True,0,To start learning ho
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,125,Italian,italian,False,False,0,Capisco il tuo punto
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,126,Spanish,spanish,False,False,0,Bajo el velo de la n
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,127,French,french,True,True,0,"Deux amis, si proche"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,128,French,english,False,True,0,The official languag
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,129,French,french,True,True,0,Je ne suis pas d'acc
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,130,German,german,False,False,0,Die Rolle der NATO i
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,131,Italian,italian,True,True,0,The ciclo idrologico
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,132,Italian,italian,False,False,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,133,German,german,True,True,0,"Natürlich, hier ist "
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,134,Spanish,english,True,False,0,Certainly! Here are 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,135,Italian,italian,True,True,0,Moby Dick è stato sc
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,136,German,german,True,True,0,Hier ist ein fröhlic
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,137,Italian,italian,True,True,0,Nella notte silenzio
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,138,Spanish,english,False,True,0,Certainly! Getting a
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,139,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,140,Italian,italian,True,True,0,In un campo di batta
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,141,French,french,True,True,0,Refrigeration cycles
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,142,Spanish,spanish,True,True,0,En un charco muy tra
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,143,Spanish,spanish,True,True,0,Desde mi perspectiva
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,144,Italian,english,True,False,0,Your concern is vali
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,145,German,english,True,False,0,I understand your co
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,146,Italian,italian,False,False,0,Nel cuore della citt
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,147,French,french,True,True,0,Je crois que l'IA pe
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,148,German,english,True,False,0,I understand your pe
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,149,Italian,english,True,False,0,The capital of Portu
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,150,Italian,english,True,False,0,The longest bone in 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,151,Italian,english,False,True,0,"I agree with you, ho"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,152,Italian,italian,False,False,0,Nel cuore di un fior
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,153,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,154,Italian,italian,False,False,0,"Primavera sussurra,
+"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,155,French,french,False,False,0,Dans l'ombre de la m
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,156,Italian,english,True,False,0,The physical process
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,157,Spanish,spanish,True,True,0,En el estadio resuen
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,158,Spanish,english,False,True,0,Diamonds are formed 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,159,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,160,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,161,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,162,French,french,False,False,0,Je crois que le cann
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,163,French,english,False,True,0,I understand your co
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,164,Spanish,spanish,True,True,0,En el umbral de la n
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,165,French,english,False,True,0,The process of how t
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,166,Italian,english,True,False,0,The most populated c
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,167,Spanish,spanish,False,False,0,En el bullicio del m
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,168,German,german,False,False,0,The Wasserkreislauf 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,169,French,french,True,True,0,Dans le ciel nocturn
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,170,French,french,True,True,0,La production d'une 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,171,Italian,english,False,True,0,"Sure! In boxing, the"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,172,German,english,False,True,0,That's a complex and
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,173,French,english,True,False,0,It's important to co
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,174,German,english,True,False,0,The human immune sys
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,175,Italian,english,True,False,0,The Earth's magnetic
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,176,Italian,english,True,False,0,It's understandable 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,177,Italian,english,False,True,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,178,German,german,True,True,0,Sicher! Wenn Sie ein
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,179,German,german,False,False,0,"Zwei Rivalen, getren"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,180,German,german,True,True,0,Es gibt einen Eichhö
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,181,Italian,english,True,False,0,Certainly! Sigmund F
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,182,French,french,False,False,0,Voici un limerick su
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,183,Spanish,spanish,False,False,0,Durante el proceso d
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,184,French,english,True,False,0,The most spoken lang
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,185,German,english,False,True,0,The Cold War ended i
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,186,Italian,english,False,True,0,The process of DNA r
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,187,Spanish,spanish,True,True,0,El símbolo químico p
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,188,French,french,True,True,0,Je pense que beaucou
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,189,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,190,French,french,True,True,0,Pour commencer à app
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,191,Spanish,english,False,True,0,Certainly! Cyberpunk
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,192,French,french,True,True,0,Bien sûr ! Voici un 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,193,Italian,italian,True,True,0,Il World Wide Web è 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,194,Spanish,spanish,False,False,0,Bajo el cielo de est
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,195,German,german,False,False,0,Die physikalischen P
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,196,Italian,english,True,False,0,The most common gas 
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,197,Spanish,spanish,True,True,0,Los artistas de cuer
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,198,Italian,italian,False,False,0,In un angolo di terr
+qwen-2.5-14b-instruct,plain,add,steering_vectors_qwen-2.5-14b-instruct__plain_diff_proj_equiv.npz,0.5,199,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,,add,,1.0,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,,add,,1.0,1,Spanish,english,True,False,0,The headquarters of 
+qwen-2.5-14b-instruct,,add,,1.0,2,French,french,False,False,0,Le chinois le plus p
+qwen-2.5-14b-instruct,,add,,1.0,3,Italian,italian,False,False,0,Sono d'accordo con t
+qwen-2.5-14b-instruct,,add,,1.0,4,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,,add,,1.0,5,Spanish,spanish,True,True,0,El Titanic se hundió
+qwen-2.5-14b-instruct,,add,,1.0,6,Spanish,english,True,False,0,"Sure! For beginners,"
+qwen-2.5-14b-instruct,,add,,1.0,7,French,english,True,False,0,Certainly! Albert Ei
+qwen-2.5-14b-instruct,,add,,1.0,8,German,german,False,False,0,A Transformer in ein
+qwen-2.5-14b-instruct,,add,,1.0,9,German,german,True,True,0,Waterknappheit ist e
+qwen-2.5-14b-instruct,,add,,1.0,10,French,french,False,False,0,Je pense que l'intro
+qwen-2.5-14b-instruct,,add,,1.0,11,Spanish,spanish,False,False,0,"X-ray imaging, tambi"
+qwen-2.5-14b-instruct,,add,,1.0,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,,add,,1.0,13,Italian,italian,False,False,0,Certainly! La meccan
+qwen-2.5-14b-instruct,,add,,1.0,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,,add,,1.0,15,German,german,False,False,0,Quentin Tarantino re
+qwen-2.5-14b-instruct,,add,,1.0,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,,add,,1.0,17,Italian,italian,True,True,0,Sono d'accordo con v
+qwen-2.5-14b-instruct,,add,,1.0,18,Italian,italian,True,True,0,Nel silenzio della l
+qwen-2.5-14b-instruct,,add,,1.0,19,Spanish,spanish,True,True,0,"Claro, puedes aprend"
+qwen-2.5-14b-instruct,,add,,1.0,20,German,german,False,False,0,X-ray-Bildgebung fun
+qwen-2.5-14b-instruct,,add,,1.0,21,Spanish,english,True,False,0,I understand your pe
+qwen-2.5-14b-instruct,,add,,1.0,22,French,french,False,False,0,The gagnant de la pr
+qwen-2.5-14b-instruct,,add,,1.0,23,Spanish,english,True,False,0,The Three Sisters mo
+qwen-2.5-14b-instruct,,add,,1.0,24,Spanish,english,False,True,0,I understand your pe
+qwen-2.5-14b-instruct,,add,,1.0,25,French,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,,add,,1.0,26,German,german,True,True,0,Die Entdeckung der E
+qwen-2.5-14b-instruct,,add,,1.0,27,French,french,True,True,0,Dans le jardin de l'
+qwen-2.5-14b-instruct,,add,,1.0,28,Italian,italian,False,False,0,"Certo, posso spiegar"
+qwen-2.5-14b-instruct,,add,,1.0,29,Spanish,spanish,True,True,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,,add,,1.0,30,Spanish,english,False,True,0,Here are a few uplif
+qwen-2.5-14b-instruct,,add,,1.0,31,French,french,True,True,0,Dans le jardin de l'
+qwen-2.5-14b-instruct,,add,,1.0,32,Spanish,spanish,False,False,0,En un pequeño pueblo
+qwen-2.5-14b-instruct,,add,,1.0,33,Italian,english,False,True,0,The current understa
+qwen-2.5-14b-instruct,,add,,1.0,34,German,german,True,True,0,Im ew'gen Arm des Me
+qwen-2.5-14b-instruct,,add,,1.0,35,Italian,italian,False,False,0,Bene sotto l'ombrell
+qwen-2.5-14b-instruct,,add,,1.0,36,Spanish,spanish,False,False,0,Bajo el manto de la 
+qwen-2.5-14b-instruct,,add,,1.0,37,Italian,italian,True,True,0,Nel tessuto del temp
+qwen-2.5-14b-instruct,,add,,1.0,38,Italian,english,False,True,0,"Certainly, here is a"
+qwen-2.5-14b-instruct,,add,,1.0,39,Italian,english,False,True,0,The current understa
+qwen-2.5-14b-instruct,,add,,1.0,40,Spanish,spanish,True,True,0,La ONU fue fundada e
+qwen-2.5-14b-instruct,,add,,1.0,41,French,french,False,False,0,Dans les monts ennei
+qwen-2.5-14b-instruct,,add,,1.0,42,French,french,False,False,0,C'est une excellente
+qwen-2.5-14b-instruct,,add,,1.0,43,Spanish,spanish,False,False,0,La teoría de la rela
+qwen-2.5-14b-instruct,,add,,1.0,44,German,german,True,True,0,Die ersten Computer 
+qwen-2.5-14b-instruct,,add,,1.0,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,,add,,1.0,46,Spanish,spanish,True,True,0,El 16º presidente de
+qwen-2.5-14b-instruct,,add,,1.0,47,German,german,True,True,0,"Ich kann dir helfen,"
+qwen-2.5-14b-instruct,,add,,1.0,48,French,french,False,False,0,Les ouragans se form
+qwen-2.5-14b-instruct,,add,,1.0,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,,add,,1.0,50,German,german,False,False,0,"Ja, es gibt viele fa"
+qwen-2.5-14b-instruct,,add,,1.0,51,German,german,False,False,0,Vincent van Gogh hat
+qwen-2.5-14b-instruct,,add,,1.0,52,German,german,True,True,0,Birds fliegen durch 
+qwen-2.5-14b-instruct,,add,,1.0,53,Spanish,spanish,False,False,0,Sobre el océano anid
+qwen-2.5-14b-instruct,,add,,1.0,54,Italian,italian,True,True,0,Il sistema immunitar
+qwen-2.5-14b-instruct,,add,,1.0,55,Spanish,spanish,True,True,0,Es completamente com
+qwen-2.5-14b-instruct,,add,,1.0,56,Italian,english,False,True,0,The largest mammal o
+qwen-2.5-14b-instruct,,add,,1.0,57,German,german,False,False,0,Bitcoin funktioniert
+qwen-2.5-14b-instruct,,add,,1.0,58,Italian,english,True,False,0,Certainly! The histo
+qwen-2.5-14b-instruct,,add,,1.0,59,Italian,english,False,True,0,I agree with you tha
+qwen-2.5-14b-instruct,,add,,1.0,60,French,french,False,False,0,Dans la rumeur des t
+qwen-2.5-14b-instruct,,add,,1.0,61,Italian,italian,False,False,0,Sotto un cielo di pi
+qwen-2.5-14b-instruct,,add,,1.0,62,German,german,True,True,0,Quentin Tarantino re
+qwen-2.5-14b-instruct,,add,,1.0,63,Spanish,spanish,False,False,0,The Titanic naufragó
+qwen-2.5-14b-instruct,,add,,1.0,64,Spanish,spanish,False,False,0,La comprensión actua
+qwen-2.5-14b-instruct,,add,,1.0,65,Italian,italian,False,False,0,Per iniziare una car
+qwen-2.5-14b-instruct,,add,,1.0,66,German,german,True,True,0,Zwei Freunde wandert
+qwen-2.5-14b-instruct,,add,,1.0,67,French,french,False,False,0,Les cycles de réfrig
+qwen-2.5-14b-instruct,,add,,1.0,68,German,german,False,False,0,Es ist eine ernste S
+qwen-2.5-14b-instruct,,add,,1.0,69,French,french,False,False,0,Les ouragans se form
+qwen-2.5-14b-instruct,,add,,1.0,70,German,english,False,True,0,The 2008 Summer Olym
+qwen-2.5-14b-instruct,,add,,1.0,71,French,french,True,True,0,Dans la clameur des 
+qwen-2.5-14b-instruct,,add,,1.0,72,German,german,False,False,0,Die offizielle Sprac
+qwen-2.5-14b-instruct,,add,,1.0,73,French,french,False,False,0,Diamonds sont formés
+qwen-2.5-14b-instruct,,add,,1.0,74,Spanish,spanish,False,False,0,El yuan chino (tambi
+qwen-2.5-14b-instruct,,add,,1.0,75,Spanish,spanish,True,True,0,Creo que la asistenc
+qwen-2.5-14b-instruct,,add,,1.0,76,French,french,True,True,0,Dans un monde où le 
+qwen-2.5-14b-instruct,,add,,1.0,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,,add,,1.0,78,Italian,italian,True,True,0,"Sotto la pioggia, so"
+qwen-2.5-14b-instruct,,add,,1.0,79,Italian,italian,True,True,0,The planet più caldo
+qwen-2.5-14b-instruct,,add,,1.0,80,Italian,english,True,False,0,France gifted the St
+qwen-2.5-14b-instruct,,add,,1.0,81,Italian,italian,True,True,0,Certainly! L'immagin
+qwen-2.5-14b-instruct,,add,,1.0,82,German,english,False,True,0,Two paths diverged i
+qwen-2.5-14b-instruct,,add,,1.0,83,French,french,False,False,0,Pour commencer un cl
+qwen-2.5-14b-instruct,,add,,1.0,84,Italian,italian,False,False,0,Certo! Ecco alcune c
+qwen-2.5-14b-instruct,,add,,1.0,85,German,german,False,False,0,"Guten Morgen, hier i"
+qwen-2.5-14b-instruct,,add,,1.0,86,French,english,False,True,0,In the heart of the 
+qwen-2.5-14b-instruct,,add,,1.0,87,French,french,True,True,0,Sur les rives endorm
+qwen-2.5-14b-instruct,,add,,1.0,88,Spanish,english,False,True,0,A great place to sta
+qwen-2.5-14b-instruct,,add,,1.0,89,French,french,False,False,0,Je comprends votre p
+qwen-2.5-14b-instruct,,add,,1.0,90,Italian,italian,False,False,0,Certainly! La meccan
+qwen-2.5-14b-instruct,,add,,1.0,91,Spanish,spanish,False,False,0,En el umbral de la n
+qwen-2.5-14b-instruct,,add,,1.0,92,Spanish,english,True,False,0,I agree with you. Fo
+qwen-2.5-14b-instruct,,add,,1.0,93,Spanish,spanish,True,True,0,"Claro, puedo enseñar"
+qwen-2.5-14b-instruct,,add,,1.0,94,French,english,False,True,0,Certainly! You can s
+qwen-2.5-14b-instruct,,add,,1.0,95,French,english,False,True,0,Certainly! Starting 
+qwen-2.5-14b-instruct,,add,,1.0,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,,add,,1.0,97,French,french,False,False,0,Dans les méandres de
+qwen-2.5-14b-instruct,,add,,1.0,98,German,german,True,True,0,"Ja, das ist im Allge"
+qwen-2.5-14b-instruct,,add,,1.0,99,Spanish,english,False,True,0,"Sure, here are some "
+qwen-2.5-14b-instruct,,add,,1.0,100,German,german,False,False,0,The erste James-Bond
+qwen-2.5-14b-instruct,,add,,1.0,101,Italian,italian,True,True,0,"Primavera sussurra,
+"
+qwen-2.5-14b-instruct,,add,,1.0,102,French,french,False,False,0,Dans le jardin de la
+qwen-2.5-14b-instruct,,add,,1.0,103,Italian,italian,False,False,0,I fenomeni meteorolo
+qwen-2.5-14b-instruct,,add,,1.0,104,French,french,True,True,0,Les Réseaux de Neuro
+qwen-2.5-14b-instruct,,add,,1.0,105,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,,add,,1.0,106,Italian,english,False,True,0,The largest dinosaur
+qwen-2.5-14b-instruct,,add,,1.0,107,German,german,True,True,0,"Im Spiegel der Zeit
+"
+qwen-2.5-14b-instruct,,add,,1.0,108,German,german,True,True,0,Fermentation ist ein
+qwen-2.5-14b-instruct,,add,,1.0,109,French,french,True,True,0,Je partage votre poi
+qwen-2.5-14b-instruct,,add,,1.0,110,French,french,True,True,0,L'auteur de 'Meditat
+qwen-2.5-14b-instruct,,add,,1.0,111,Italian,english,True,False,0,Diamonds are formed 
+qwen-2.5-14b-instruct,,add,,1.0,112,Italian,english,True,False,0,The national bird of
+qwen-2.5-14b-instruct,,add,,1.0,113,German,german,False,False,0,Im Licht der blinken
+qwen-2.5-14b-instruct,,add,,1.0,114,Spanish,english,True,False,0,Diamonds are formed 
+qwen-2.5-14b-instruct,,add,,1.0,115,French,french,False,False,0,Bien sûr ! Pour déco
+qwen-2.5-14b-instruct,,add,,1.0,116,German,german,True,True,0,"Der Autor von ""Medit"
+qwen-2.5-14b-instruct,,add,,1.0,117,German,german,False,False,0,Diamonds bilden sich
+qwen-2.5-14b-instruct,,add,,1.0,118,Spanish,spanish,True,True,0,Bitcoin funciona uti
+qwen-2.5-14b-instruct,,add,,1.0,119,Spanish,spanish,True,True,0,"Primavera en flor,
+v"
+qwen-2.5-14b-instruct,,add,,1.0,120,Italian,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,,add,,1.0,121,French,english,False,True,0,Certainly! Albert Ei
+qwen-2.5-14b-instruct,,add,,1.0,122,Italian,italian,False,False,0,J.K. Rowling ha scri
+qwen-2.5-14b-instruct,,add,,1.0,123,Spanish,spanish,True,True,0,En la ciudad sin des
+qwen-2.5-14b-instruct,,add,,1.0,124,French,english,False,True,0,If you are intereste
+qwen-2.5-14b-instruct,,add,,1.0,125,Italian,italian,False,False,0,Capisco il tuo punto
+qwen-2.5-14b-instruct,,add,,1.0,126,Spanish,spanish,False,False,0,Bajo el velo de la n
+qwen-2.5-14b-instruct,,add,,1.0,127,French,french,True,True,0,Dans le jardin de no
+qwen-2.5-14b-instruct,,add,,1.0,128,French,french,False,False,0,Le néerlandais et le
+qwen-2.5-14b-instruct,,add,,1.0,129,French,french,True,True,0,Je ne suis pas d'acc
+qwen-2.5-14b-instruct,,add,,1.0,130,German,german,False,False,0,Die Rolle der NATO i
+qwen-2.5-14b-instruct,,add,,1.0,131,Italian,italian,True,True,0,Il ciclo idrologico 
+qwen-2.5-14b-instruct,,add,,1.0,132,Italian,italian,False,False,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,,add,,1.0,133,German,german,True,True,0,In Zeichen des Licht
+qwen-2.5-14b-instruct,,add,,1.0,134,Spanish,english,True,False,0,Certainly! Here are 
+qwen-2.5-14b-instruct,,add,,1.0,135,Italian,italian,True,True,0,Moby Dick è stato sc
+qwen-2.5-14b-instruct,,add,,1.0,136,German,german,True,True,0,Hier ist ein fröhlic
+qwen-2.5-14b-instruct,,add,,1.0,137,Italian,italian,True,True,0,Nel silenzio della n
+qwen-2.5-14b-instruct,,add,,1.0,138,Spanish,english,False,True,0,Certainly! Having a 
+qwen-2.5-14b-instruct,,add,,1.0,139,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,,add,,1.0,140,Italian,italian,True,True,0,In un campo di gioco
+qwen-2.5-14b-instruct,,add,,1.0,141,French,french,True,True,0,Les cycles de réfrig
+qwen-2.5-14b-instruct,,add,,1.0,142,Spanish,spanish,True,True,0,En un charco muy pro
+qwen-2.5-14b-instruct,,add,,1.0,143,Spanish,spanish,True,True,0,Desde una perspectiv
+qwen-2.5-14b-instruct,,add,,1.0,144,Italian,english,True,False,0,Your concern is vali
+qwen-2.5-14b-instruct,,add,,1.0,145,German,german,True,True,0,"Ich denke nicht, das"
+qwen-2.5-14b-instruct,,add,,1.0,146,Italian,italian,False,False,0,Nel cuore della citt
+qwen-2.5-14b-instruct,,add,,1.0,147,French,french,True,True,0,Je crois que l'IA pe
+qwen-2.5-14b-instruct,,add,,1.0,148,German,german,True,True,0,"Ich denke, dass viel"
+qwen-2.5-14b-instruct,,add,,1.0,149,Italian,italian,True,True,0,Lisbona<|im_end|>
+qwen-2.5-14b-instruct,,add,,1.0,150,Italian,italian,True,True,0,La più lunga ossa de
+qwen-2.5-14b-instruct,,add,,1.0,151,Italian,english,False,True,0,"I agree with you, ho"
+qwen-2.5-14b-instruct,,add,,1.0,152,Italian,italian,False,False,0,In un angolo dimenti
+qwen-2.5-14b-instruct,,add,,1.0,153,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,,add,,1.0,154,Italian,italian,False,False,0,"Primavera sussurra,
+"
+qwen-2.5-14b-instruct,,add,,1.0,155,French,french,False,False,0,Dans le silence de l
+qwen-2.5-14b-instruct,,add,,1.0,156,Italian,english,True,False,0,The physical process
+qwen-2.5-14b-instruct,,add,,1.0,157,Spanish,spanish,True,True,0,En el estadio rugien
+qwen-2.5-14b-instruct,,add,,1.0,158,Spanish,spanish,False,False,0,Diamonds se forman n
+qwen-2.5-14b-instruct,,add,,1.0,159,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,,add,,1.0,160,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,,add,,1.0,161,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,,add,,1.0,162,French,french,False,False,0,Je respecte votre op
+qwen-2.5-14b-instruct,,add,,1.0,163,French,french,False,False,0,Je ne pense pas non 
+qwen-2.5-14b-instruct,,add,,1.0,164,Spanish,spanish,True,True,0,En el umbral de la n
+qwen-2.5-14b-instruct,,add,,1.0,165,French,french,False,False,0,La télévision foncti
+qwen-2.5-14b-instruct,,add,,1.0,166,Italian,english,True,False,0,The most populated c
+qwen-2.5-14b-instruct,,add,,1.0,167,Spanish,spanish,False,False,0,En el bullicio del m
+qwen-2.5-14b-instruct,,add,,1.0,168,German,german,False,False,0,Der Wasserkreislauf 
+qwen-2.5-14b-instruct,,add,,1.0,169,French,french,True,True,0,Dans le ciel nocturn
+qwen-2.5-14b-instruct,,add,,1.0,170,French,french,True,True,0,La télévision foncti
+qwen-2.5-14b-instruct,,add,,1.0,171,Italian,english,False,True,0,"Sure! In boxing, the"
+qwen-2.5-14b-instruct,,add,,1.0,172,German,german,False,False,0,That ist eine sehr p
+qwen-2.5-14b-instruct,,add,,1.0,173,French,english,True,False,0,It's important to co
+qwen-2.5-14b-instruct,,add,,1.0,174,German,german,True,True,0,The menschliche Immu
+qwen-2.5-14b-instruct,,add,,1.0,175,Italian,english,True,False,0,The Earth's magnetic
+qwen-2.5-14b-instruct,,add,,1.0,176,Italian,english,True,False,0,It's a valid concern
+qwen-2.5-14b-instruct,,add,,1.0,177,Italian,english,False,True,0,Certainly! Einstein'
+qwen-2.5-14b-instruct,,add,,1.0,178,German,german,True,True,0,"Sicher, ich helfe di"
+qwen-2.5-14b-instruct,,add,,1.0,179,German,german,False,False,0,Zwei Rivalen standen
+qwen-2.5-14b-instruct,,add,,1.0,180,German,german,True,True,0,Es gibt einen Eichhö
+qwen-2.5-14b-instruct,,add,,1.0,181,Italian,english,True,False,0,Certainly! Sigmund F
+qwen-2.5-14b-instruct,,add,,1.0,182,French,french,False,False,0,Il était une grenoui
+qwen-2.5-14b-instruct,,add,,1.0,183,Spanish,spanish,False,False,0,Durante el proceso d
+qwen-2.5-14b-instruct,,add,,1.0,184,French,english,True,False,0,The most spoken lang
+qwen-2.5-14b-instruct,,add,,1.0,185,German,english,False,True,0,The Cold War endete 
+qwen-2.5-14b-instruct,,add,,1.0,186,Italian,english,False,True,0,The process of DNA r
+qwen-2.5-14b-instruct,,add,,1.0,187,Spanish,spanish,True,True,0,Au<|im_end|>
+qwen-2.5-14b-instruct,,add,,1.0,188,French,french,True,True,0,Je pense que de nomb
+qwen-2.5-14b-instruct,,add,,1.0,189,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,,add,,1.0,190,French,french,True,True,0,Vous pouvez commence
+qwen-2.5-14b-instruct,,add,,1.0,191,Spanish,spanish,False,False,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,,add,,1.0,192,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,,add,,1.0,193,Italian,italian,True,True,0,Il World Wide Web è 
+qwen-2.5-14b-instruct,,add,,1.0,194,Spanish,spanish,False,False,0,"Bajo el mismo cielo,"
+qwen-2.5-14b-instruct,,add,,1.0,195,German,german,False,False,0,Die physikalischen P
+qwen-2.5-14b-instruct,,add,,1.0,196,Italian,italian,True,True,0,L'ossigeno è spesso 
+qwen-2.5-14b-instruct,,add,,1.0,197,Spanish,spanish,True,True,0,Los artistas de cuer
+qwen-2.5-14b-instruct,,add,,1.0,198,Italian,italian,False,False,0,In un angolo di terr
+qwen-2.5-14b-instruct,,add,,1.0,199,French,french,True,True,0,"Bien sûr, la mémoire"
+qwen-2.5-14b-instruct,,add,,2.5,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,,add,,2.5,1,Spanish,spanish,True,True,0,Nueva York<|im_end|>
+qwen-2.5-14b-instruct,,add,,2.5,2,French,french,False,False,0,Le chinois le plus p
+qwen-2.5-14b-instruct,,add,,2.5,3,Italian,italian,False,False,0,Io completamente d'a
+qwen-2.5-14b-instruct,,add,,2.5,4,Spanish,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,,add,,2.5,5,Spanish,spanish,True,True,0,1912<|im_end|>
+qwen-2.5-14b-instruct,,add,,2.5,6,Spanish,english,True,False,0,"Sure! For beginners,"
+qwen-2.5-14b-instruct,,add,,2.5,7,French,english,True,False,0,"Certainly, but pleas"
+qwen-2.5-14b-instruct,,add,,2.5,8,German,english,False,True,0,A transformer in an 
+qwen-2.5-14b-instruct,,add,,2.5,9,German,english,True,False,0,I disagree with your
+qwen-2.5-14b-instruct,,add,,2.5,10,French,french,False,False,0,Je pense que l'intro
+qwen-2.5-14b-instruct,,add,,2.5,11,Spanish,spanish,False,False,0,Sure! La tecnología 
+qwen-2.5-14b-instruct,,add,,2.5,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,,add,,2.5,13,Italian,italian,False,False,0,Certainly! Il meccan
+qwen-2.5-14b-instruct,,add,,2.5,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,,add,,2.5,15,German,german,False,False,0,Quentin Tarantino<|i
+qwen-2.5-14b-instruct,,add,,2.5,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,,add,,2.5,17,Italian,italian,True,True,0,Sono d'accordo con v
+qwen-2.5-14b-instruct,,add,,2.5,18,Italian,italian,True,True,0,In un angolo di pace
+qwen-2.5-14b-instruct,,add,,2.5,19,Spanish,spanish,True,True,0,"Claro, puedes aprend"
+qwen-2.5-14b-instruct,,add,,2.5,20,German,german,False,False,0,"Sure, X-ray imaging "
+qwen-2.5-14b-instruct,,add,,2.5,21,Spanish,english,True,False,0,It is a complex issu
+qwen-2.5-14b-instruct,,add,,2.5,22,French,english,False,True,0,Kristof Stofile won 
+qwen-2.5-14b-instruct,,add,,2.5,23,Spanish,english,True,False,0,The Three Sisters mo
+qwen-2.5-14b-instruct,,add,,2.5,24,Spanish,spanish,False,False,0,Entiendo tu punto de
+qwen-2.5-14b-instruct,,add,,2.5,25,French,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,,add,,2.5,26,German,german,True,True,0,Die Elektrizität wur
+qwen-2.5-14b-instruct,,add,,2.5,27,French,french,True,True,0,Dans le jardin de me
+qwen-2.5-14b-instruct,,add,,2.5,28,Italian,italian,False,False,0,"Certo, posso spiegar"
+qwen-2.5-14b-instruct,,add,,2.5,29,Spanish,spanish,True,True,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,,add,,2.5,30,Spanish,english,False,True,0,Here are some uplift
+qwen-2.5-14b-instruct,,add,,2.5,31,French,french,True,True,0,Dans le jardin de me
+qwen-2.5-14b-instruct,,add,,2.5,32,Spanish,spanish,False,False,0,En un pequeño pueblo
+qwen-2.5-14b-instruct,,add,,2.5,33,Italian,english,False,True,0,Dark matter and dark
+qwen-2.5-14b-instruct,,add,,2.5,34,German,german,True,True,0,Im ew'gen Arm der Se
+qwen-2.5-14b-instruct,,add,,2.5,35,Italian,italian,False,False,0,Sotto la pioggia di 
+qwen-2.5-14b-instruct,,add,,2.5,36,Spanish,spanish,False,False,0,En la noche invernal
+qwen-2.5-14b-instruct,,add,,2.5,37,Italian,italian,True,True,0,"Nel cuore dell'età
+ "
+qwen-2.5-14b-instruct,,add,,2.5,38,Italian,italian,False,False,0,"Certo, ecco un poema"
+qwen-2.5-14b-instruct,,add,,2.5,39,Italian,english,False,True,0,The current understa
+qwen-2.5-14b-instruct,,add,,2.5,40,Spanish,spanish,True,True,0,La ONU fue fundada e
+qwen-2.5-14b-instruct,,add,,2.5,41,French,french,False,False,0,"Dans les monts, où l"
+qwen-2.5-14b-instruct,,add,,2.5,42,French,french,False,False,0,Voici quelques infor
+qwen-2.5-14b-instruct,,add,,2.5,43,Spanish,spanish,False,False,0,Albert Einstein's te
+qwen-2.5-14b-instruct,,add,,2.5,44,German,english,True,False,0,"The first computer, "
+qwen-2.5-14b-instruct,,add,,2.5,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,,add,,2.5,46,Spanish,spanish,True,True,0,Abraham Lincoln fue 
+qwen-2.5-14b-instruct,,add,,2.5,47,German,english,True,False,0,"I'm sorry, but I nee"
+qwen-2.5-14b-instruct,,add,,2.5,48,French,french,False,False,0,Les ouragans sont de
+qwen-2.5-14b-instruct,,add,,2.5,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,,add,,2.5,50,German,german,False,False,0,"Ja, es gibt viele fa"
+qwen-2.5-14b-instruct,,add,,2.5,51,German,german,False,False,0,Vincent van Gogh<|im
+qwen-2.5-14b-instruct,,add,,2.5,52,German,english,True,False,0,"Sure, the mechanics "
+qwen-2.5-14b-instruct,,add,,2.5,53,Spanish,spanish,False,False,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,,add,,2.5,54,Italian,italian,True,True,0,Il sistema immunitar
+qwen-2.5-14b-instruct,,add,,2.5,55,Spanish,spanish,True,True,0,Estoy muy preocupado
+qwen-2.5-14b-instruct,,add,,2.5,56,Italian,italian,False,False,0,Il maior mammifero s
+qwen-2.5-14b-instruct,,add,,2.5,57,German,german,False,False,0,Bitcoin arbeitet mit
+qwen-2.5-14b-instruct,,add,,2.5,58,Italian,english,True,False,0,Certainly! The histo
+qwen-2.5-14b-instruct,,add,,2.5,59,Italian,english,False,True,0,I do not have person
+qwen-2.5-14b-instruct,,add,,2.5,60,French,french,False,False,0,Dans la rumeur des t
+qwen-2.5-14b-instruct,,add,,2.5,61,Italian,italian,False,False,0,Nel buio della notte
+qwen-2.5-14b-instruct,,add,,2.5,62,German,german,True,True,0,Quentin Tarantino<|i
+qwen-2.5-14b-instruct,,add,,2.5,63,Spanish,spanish,False,False,0,1912<|im_end|>
+qwen-2.5-14b-instruct,,add,,2.5,64,Spanish,spanish,False,False,0,La comprensión actua
+qwen-2.5-14b-instruct,,add,,2.5,65,Italian,italian,False,False,0,Iniziare una carrier
+qwen-2.5-14b-instruct,,add,,2.5,66,German,german,True,True,0,Im Schatten der alte
+qwen-2.5-14b-instruct,,add,,2.5,67,French,french,False,False,0,Refrigeration cycles
+qwen-2.5-14b-instruct,,add,,2.5,68,German,english,False,True,0,I think it's importa
+qwen-2.5-14b-instruct,,add,,2.5,69,French,french,False,False,0,Les ouragans sont de
+qwen-2.5-14b-instruct,,add,,2.5,70,German,english,False,True,0,The 2008 Summer Olym
+qwen-2.5-14b-instruct,,add,,2.5,71,French,english,True,False,0,In the glow of the s
+qwen-2.5-14b-instruct,,add,,2.5,72,German,german,False,False,0,Die offizielle Sprac
+qwen-2.5-14b-instruct,,add,,2.5,73,French,french,False,False,0,Les diamants se form
+qwen-2.5-14b-instruct,,add,,2.5,74,Spanish,spanish,False,False,0,El yuan es la moneda
+qwen-2.5-14b-instruct,,add,,2.5,75,Spanish,spanish,True,True,0,No estoy de acuerdo 
+qwen-2.5-14b-instruct,,add,,2.5,76,French,french,True,True,0,Dans un monde de ter
+qwen-2.5-14b-instruct,,add,,2.5,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,,add,,2.5,78,Italian,italian,True,True,0,Era piovigginoso que
+qwen-2.5-14b-instruct,,add,,2.5,79,Italian,italian,True,True,0,Venerdì è il pianeta
+qwen-2.5-14b-instruct,,add,,2.5,80,Italian,english,True,False,0,France gifted the St
+qwen-2.5-14b-instruct,,add,,2.5,81,Italian,italian,True,True,0,"Certo, l'immagine a "
+qwen-2.5-14b-instruct,,add,,2.5,82,German,german,False,False,0,"Sie trennten sich, d"
+qwen-2.5-14b-instruct,,add,,2.5,83,French,french,False,False,0,That sounds like a g
+qwen-2.5-14b-instruct,,add,,2.5,84,Italian,english,False,True,0,Sure! Start with sim
+qwen-2.5-14b-instruct,,add,,2.5,85,German,german,False,False,0,"Guten Morgen, die St"
+qwen-2.5-14b-instruct,,add,,2.5,86,French,french,False,False,0,Dans l'arène du stad
+qwen-2.5-14b-instruct,,add,,2.5,87,French,french,True,True,0,Sur la plage endormi
+qwen-2.5-14b-instruct,,add,,2.5,88,Spanish,spanish,False,False,0,If you are intereste
+qwen-2.5-14b-instruct,,add,,2.5,89,French,french,False,False,0,Je ne suis pas d'acc
+qwen-2.5-14b-instruct,,add,,2.5,90,Italian,italian,False,False,0,Certainly! Il meccan
+qwen-2.5-14b-instruct,,add,,2.5,91,Spanish,spanish,False,False,0,En el corazón de la 
+qwen-2.5-14b-instruct,,add,,2.5,92,Spanish,english,True,False,0,I agree with you. Fo
+qwen-2.5-14b-instruct,,add,,2.5,93,Spanish,spanish,True,True,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,,add,,2.5,94,French,english,False,True,0,"Sure, here are a few"
+qwen-2.5-14b-instruct,,add,,2.5,95,French,english,False,True,0,Here are some tips f
+qwen-2.5-14b-instruct,,add,,2.5,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,,add,,2.5,97,French,french,False,False,0,Dans l'abîme de l'âm
+qwen-2.5-14b-instruct,,add,,2.5,98,German,german,True,True,0,"Ja, das ist wissensc"
+qwen-2.5-14b-instruct,,add,,2.5,99,Spanish,english,False,True,0,"Sure, here are some "
+qwen-2.5-14b-instruct,,add,,2.5,100,German,english,False,True,0,The first James Bond
+qwen-2.5-14b-instruct,,add,,2.5,101,Italian,english,True,False,0,"Primavera in arrivo,"
+qwen-2.5-14b-instruct,,add,,2.5,102,French,french,False,False,0,Dans le jardin de me
+qwen-2.5-14b-instruct,,add,,2.5,103,Italian,italian,False,False,0,I climatici in diver
+qwen-2.5-14b-instruct,,add,,2.5,104,French,french,True,True,0,Les Réseaux de Neuro
+qwen-2.5-14b-instruct,,add,,2.5,105,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,,add,,2.5,106,Italian,english,False,True,0,The largest dinosaur
+qwen-2.5-14b-instruct,,add,,2.5,107,German,german,True,True,0,In den Spiegel blick
+qwen-2.5-14b-instruct,,add,,2.5,108,German,german,True,True,0,Fermentation ist ein
+qwen-2.5-14b-instruct,,add,,2.5,109,French,french,True,True,0,Je partage votre poi
+qwen-2.5-14b-instruct,,add,,2.5,110,French,english,True,False,0,The author of 'Medit
+qwen-2.5-14b-instruct,,add,,2.5,111,Italian,italian,True,True,0,Diamonds sono format
+qwen-2.5-14b-instruct,,add,,2.5,112,Italian,english,True,False,0,The national bird of
+qwen-2.5-14b-instruct,,add,,2.5,113,German,german,False,False,0,Das ist eine Frage d
+qwen-2.5-14b-instruct,,add,,2.5,114,Spanish,english,True,False,0,Diamonds are formed 
+qwen-2.5-14b-instruct,,add,,2.5,115,French,french,False,False,0,Bien sûr ! Pour les 
+qwen-2.5-14b-instruct,,add,,2.5,116,German,german,True,True,0,"Der Autor von ""Medit"
+qwen-2.5-14b-instruct,,add,,2.5,117,German,german,False,False,0,Diamanten bilden sic
+qwen-2.5-14b-instruct,,add,,2.5,118,Spanish,spanish,True,True,0,Bitcoin funciona bás
+qwen-2.5-14b-instruct,,add,,2.5,119,Spanish,spanish,True,True,0,"Primavera en flor,
+v"
+qwen-2.5-14b-instruct,,add,,2.5,120,Italian,english,False,True,0,Sure! Here are some 
+qwen-2.5-14b-instruct,,add,,2.5,121,French,english,False,True,0,"Sure, I can help wit"
+qwen-2.5-14b-instruct,,add,,2.5,122,Italian,italian,False,False,0,J.K. Rowling ha scri
+qwen-2.5-14b-instruct,,add,,2.5,123,Spanish,spanish,True,True,0,En la ciudad nunca d
+qwen-2.5-14b-instruct,,add,,2.5,124,French,english,False,True,0,That's great to hear
+qwen-2.5-14b-instruct,,add,,2.5,125,Italian,italian,False,False,0,Penso che questo sia
+qwen-2.5-14b-instruct,,add,,2.5,126,Spanish,spanish,False,False,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,,add,,2.5,127,French,french,True,True,0,Dans le jardin de l'
+qwen-2.5-14b-instruct,,add,,2.5,128,French,french,False,False,0,Les langues officiel
+qwen-2.5-14b-instruct,,add,,2.5,129,French,french,True,True,0,C'est une opinion tr
+qwen-2.5-14b-instruct,,add,,2.5,130,German,german,False,False,0,"Ich stimme zu, dass "
+qwen-2.5-14b-instruct,,add,,2.5,131,Italian,italian,True,True,0,Il ciclo idrologico 
+qwen-2.5-14b-instruct,,add,,2.5,132,Italian,italian,False,False,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,,add,,2.5,133,German,german,True,True,0,Natürlich kann ich d
+qwen-2.5-14b-instruct,,add,,2.5,134,Spanish,english,True,False,0,"Certainly, here are "
+qwen-2.5-14b-instruct,,add,,2.5,135,Italian,italian,True,True,0,Herman Melville scri
+qwen-2.5-14b-instruct,,add,,2.5,136,German,german,True,True,0,Ein Kind geht in die
+qwen-2.5-14b-instruct,,add,,2.5,137,Italian,italian,True,True,0,"Certo, ecco un poema"
+qwen-2.5-14b-instruct,,add,,2.5,138,Spanish,english,False,True,0,Certainly! If you're
+qwen-2.5-14b-instruct,,add,,2.5,139,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,,add,,2.5,140,Italian,italian,True,True,0,"Incontri imprevisti
+"
+qwen-2.5-14b-instruct,,add,,2.5,141,French,french,True,True,0,Les cycles de réfrig
+qwen-2.5-14b-instruct,,add,,2.5,142,Spanish,spanish,True,True,0,En un charco de agua
+qwen-2.5-14b-instruct,,add,,2.5,143,Spanish,spanish,True,True,0,Eso es un tema muy c
+qwen-2.5-14b-instruct,,add,,2.5,144,Italian,english,True,False,0,It's a complex issue
+qwen-2.5-14b-instruct,,add,,2.5,145,German,german,True,True,0,What solutions do yo
+qwen-2.5-14b-instruct,,add,,2.5,146,Italian,italian,False,False,0,In mezzo al fragore 
+qwen-2.5-14b-instruct,,add,,2.5,147,French,french,True,True,0,je pense que l'IA pe
+qwen-2.5-14b-instruct,,add,,2.5,148,German,german,True,True,0,Es ist eine komplexe
+qwen-2.5-14b-instruct,,add,,2.5,149,Italian,italian,True,True,0,Lisbon<|im_end|>
+qwen-2.5-14b-instruct,,add,,2.5,150,Italian,italian,True,True,0,La più lunga e la pi
+qwen-2.5-14b-instruct,,add,,2.5,151,Italian,italian,False,False,0,Homeschooling è una 
+qwen-2.5-14b-instruct,,add,,2.5,152,Italian,italian,False,False,0,Nel cuore del giardi
+qwen-2.5-14b-instruct,,add,,2.5,153,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,,add,,2.5,154,Italian,english,False,True,0,"Primavera in arrivo,"
+qwen-2.5-14b-instruct,,add,,2.5,155,French,french,False,False,0,Dans le silence de l
+qwen-2.5-14b-instruct,,add,,2.5,156,Italian,italian,True,True,0,I processi fisici ch
+qwen-2.5-14b-instruct,,add,,2.5,157,Spanish,spanish,True,True,0,En el estadio rugien
+qwen-2.5-14b-instruct,,add,,2.5,158,Spanish,spanish,False,False,0,Los diamantes se for
+qwen-2.5-14b-instruct,,add,,2.5,159,French,french,True,True,0,Bien sûr ! Pour comm
+qwen-2.5-14b-instruct,,add,,2.5,160,Spanish,english,False,True,0,Of course! Here are 
+qwen-2.5-14b-instruct,,add,,2.5,161,French,french,True,True,0,"Bien sûr, voici un p"
+qwen-2.5-14b-instruct,,add,,2.5,162,French,french,False,False,0,C'est un sujet très 
+qwen-2.5-14b-instruct,,add,,2.5,163,French,french,False,False,0,Je ne pense pas que 
+qwen-2.5-14b-instruct,,add,,2.5,164,Spanish,spanish,True,True,0,En el umbral de la n
+qwen-2.5-14b-instruct,,add,,2.5,165,French,french,False,False,0,La télévision est un
+qwen-2.5-14b-instruct,,add,,2.5,166,Italian,italian,True,True,0,La città più popolos
+qwen-2.5-14b-instruct,,add,,2.5,167,Spanish,spanish,False,False,0,En el bullicio del m
+qwen-2.5-14b-instruct,,add,,2.5,168,German,german,False,False,0,Das Wasserkreislaufs
+qwen-2.5-14b-instruct,,add,,2.5,169,French,french,True,True,0,Dans le ciel nocturn
+qwen-2.5-14b-instruct,,add,,2.5,170,French,french,True,True,0,La production d'une 
+qwen-2.5-14b-instruct,,add,,2.5,171,Italian,english,False,True,0,"Sure! In boxing, the"
+qwen-2.5-14b-instruct,,add,,2.5,172,German,german,False,False,0,Das ist eine komplex
+qwen-2.5-14b-instruct,,add,,2.5,173,French,english,True,False,0,I understand your co
+qwen-2.5-14b-instruct,,add,,2.5,174,German,german,True,True,0,Die menschliche Immu
+qwen-2.5-14b-instruct,,add,,2.5,175,Italian,english,True,False,0,The Earth's magnetic
+qwen-2.5-14b-instruct,,add,,2.5,176,Italian,english,True,False,0,"In English, as I'm n"
+qwen-2.5-14b-instruct,,add,,2.5,177,Italian,english,False,True,0,"I'm sorry, but I can"
+qwen-2.5-14b-instruct,,add,,2.5,178,German,german,True,True,0,"Sure, here are some "
+qwen-2.5-14b-instruct,,add,,2.5,179,German,german,False,False,0,"In Zeiten, da der Ha"
+qwen-2.5-14b-instruct,,add,,2.5,180,German,german,True,True,0,Es gab ein Eichhörnc
+qwen-2.5-14b-instruct,,add,,2.5,181,Italian,english,True,False,0,"Sure, the basics of "
+qwen-2.5-14b-instruct,,add,,2.5,182,French,french,False,False,0,Un crapaud maladroit
+qwen-2.5-14b-instruct,,add,,2.5,183,Spanish,spanish,False,False,0,Durante el proceso d
+qwen-2.5-14b-instruct,,add,,2.5,184,French,english,True,False,0,"Chinese普通话
+Please tr"
+qwen-2.5-14b-instruct,,add,,2.5,185,German,english,False,True,0,In which year did th
+qwen-2.5-14b-instruct,,add,,2.5,186,Italian,english,False,True,0,The step-by-step pro
+qwen-2.5-14b-instruct,,add,,2.5,187,Spanish,spanish,True,True,0,Au<|im_end|>
+qwen-2.5-14b-instruct,,add,,2.5,188,French,french,True,True,0,Je pense que beaucou
+qwen-2.5-14b-instruct,,add,,2.5,189,French,french,True,True,0,"Bien sûr, l'imagerie"
+qwen-2.5-14b-instruct,,add,,2.5,190,French,french,True,True,0,If you êtes débutant
+qwen-2.5-14b-instruct,,add,,2.5,191,Spanish,spanish,False,False,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,,add,,2.5,192,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,,add,,2.5,193,Italian,italian,True,True,0,Tim Berners-Lee è co
+qwen-2.5-14b-instruct,,add,,2.5,194,Spanish,spanish,False,False,0,En el sendero de la 
+qwen-2.5-14b-instruct,,add,,2.5,195,German,german,False,False,0,Die physikalischen P
+qwen-2.5-14b-instruct,,add,,2.5,196,Italian,italian,True,True,0,Il gas più comune ne
+qwen-2.5-14b-instruct,,add,,2.5,197,Spanish,spanish,True,True,0,Los equilibristas ti
+qwen-2.5-14b-instruct,,add,,2.5,198,Italian,english,False,True,0,In a barren land whe
+qwen-2.5-14b-instruct,,add,,2.5,199,French,french,True,True,0,La mémoire dans le c
+qwen-2.5-14b-instruct,,add,,2.5,0,Spanish,spanish,True,True,0,Los círculos de cult
+qwen-2.5-14b-instruct,,add,,2.5,1,Spanish,english,True,False,0,The headquarters of 
+qwen-2.5-14b-instruct,,add,,2.5,2,French,french,False,False,0,Le chinois le plus p
+qwen-2.5-14b-instruct,,add,,2.5,3,Italian,italian,False,False,0,Io completamente d'a
+qwen-2.5-14b-instruct,,add,,2.5,4,Spanish,spanish,False,False,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,,add,,2.5,5,Spanish,spanish,True,True,0,1912<|im_end|>
+qwen-2.5-14b-instruct,,add,,2.5,6,Spanish,english,True,False,0,"Sure! For beginners,"
+qwen-2.5-14b-instruct,,add,,2.5,7,French,english,True,False,0,"Certainly, but pleas"
+qwen-2.5-14b-instruct,,add,,2.5,8,German,english,False,True,0,A transformer is a d
+qwen-2.5-14b-instruct,,add,,2.5,9,German,english,True,False,0,I disagree with the 
+qwen-2.5-14b-instruct,,add,,2.5,10,French,french,False,False,0,Je pense que l'intro
+qwen-2.5-14b-instruct,,add,,2.5,11,Spanish,spanish,False,False,0,Sure! La tecnología 
+qwen-2.5-14b-instruct,,add,,2.5,12,German,german,False,False,0,Die ägyptischen Pyra
+qwen-2.5-14b-instruct,,add,,2.5,13,Italian,italian,False,False,0,Certainly! Il volo n
+qwen-2.5-14b-instruct,,add,,2.5,14,German,english,True,False,0,The currency of Indi
+qwen-2.5-14b-instruct,,add,,2.5,15,German,german,False,False,0,Quentin Tarantino<|i
+qwen-2.5-14b-instruct,,add,,2.5,16,Spanish,spanish,True,True,0,Pablo<|im_end|>
+qwen-2.5-14b-instruct,,add,,2.5,17,Italian,italian,True,True,0,Sono d'accordo con v
+qwen-2.5-14b-instruct,,add,,2.5,18,Italian,english,True,False,0,In the quiet of a li
+qwen-2.5-14b-instruct,,add,,2.5,19,Spanish,spanish,True,True,0,"Claro, puedes aprend"
+qwen-2.5-14b-instruct,,add,,2.5,20,German,german,False,False,0,"Sure, X-ray imaging "
+qwen-2.5-14b-instruct,,add,,2.5,21,Spanish,english,True,False,0,I understand that th
+qwen-2.5-14b-instruct,,add,,2.5,22,French,english,False,True,0,Kristof Stofile won 
+qwen-2.5-14b-instruct,,add,,2.5,23,Spanish,english,True,False,0,The Three Sisters mo
+qwen-2.5-14b-instruct,,add,,2.5,24,Spanish,spanish,False,False,0,Entiendo tu punto de
+qwen-2.5-14b-instruct,,add,,2.5,25,French,english,False,True,0,The currency used in
+qwen-2.5-14b-instruct,,add,,2.5,26,German,german,True,True,0,Die Elektrizität wur
+qwen-2.5-14b-instruct,,add,,2.5,27,French,french,True,True,0,Dans le jardin de me
+qwen-2.5-14b-instruct,,add,,2.5,28,Italian,italian,False,False,0,"Certo, posso spiegar"
+qwen-2.5-14b-instruct,,add,,2.5,29,Spanish,spanish,True,True,0,"Claro, aquí tienes a"
+qwen-2.5-14b-instruct,,add,,2.5,30,Spanish,english,False,True,0,Here are some uplift
+qwen-2.5-14b-instruct,,add,,2.5,31,French,french,True,True,0,"Bien sûr, voici une "
+qwen-2.5-14b-instruct,,add,,2.5,32,Spanish,spanish,False,False,0,En un pequeño pueblo
+qwen-2.5-14b-instruct,,add,,2.5,33,Italian,english,False,True,0,In the current scien
+qwen-2.5-14b-instruct,,add,,2.5,34,German,german,True,True,0,Im ew'gen Arm der Se
+qwen-2.5-14b-instruct,,add,,2.5,35,Italian,english,False,True,0,In the rain's soft w
+qwen-2.5-14b-instruct,,add,,2.5,36,Spanish,spanish,False,False,0,En la noche invernal
+qwen-2.5-14b-instruct,,add,,2.5,37,Italian,italian,True,True,0,Nel cuore della nott
+qwen-2.5-14b-instruct,,add,,2.5,38,Italian,italian,False,False,0,"Certo, ecco un poema"
+qwen-2.5-14b-instruct,,add,,2.5,39,Italian,english,False,True,0,The current understa
+qwen-2.5-14b-instruct,,add,,2.5,40,Spanish,spanish,True,True,0,La ONU fue fundada e
+qwen-2.5-14b-instruct,,add,,2.5,41,French,french,False,False,0,"Dans les monts, où l"
+qwen-2.5-14b-instruct,,add,,2.5,42,French,french,False,False,0,Voici quelques infor
+qwen-2.5-14b-instruct,,add,,2.5,43,Spanish,spanish,False,False,0,Albert Einstein's te
+qwen-2.5-14b-instruct,,add,,2.5,44,German,english,True,False,0,"The first computer, "
+qwen-2.5-14b-instruct,,add,,2.5,45,French,english,True,False,0,The construction of 
+qwen-2.5-14b-instruct,,add,,2.5,46,Spanish,spanish,True,True,0,El 16º presidente de
+qwen-2.5-14b-instruct,,add,,2.5,47,German,german,True,True,0,"Sure, I can help wit"
+qwen-2.5-14b-instruct,,add,,2.5,48,French,french,False,False,0,Les ouragans sont de
+qwen-2.5-14b-instruct,,add,,2.5,49,Spanish,spanish,True,True,0,Los procesos físicos
+qwen-2.5-14b-instruct,,add,,2.5,50,German,german,False,False,0,"Ja, hier ist eine in"
+qwen-2.5-14b-instruct,,add,,2.5,51,German,german,False,False,0,Vincent van Gogh<|im
+qwen-2.5-14b-instruct,,add,,2.5,52,German,english,True,False,0,"Sure, the mechanics "
+qwen-2.5-14b-instruct,,add,,2.5,53,Spanish,spanish,False,False,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,,add,,2.5,54,Italian,italian,True,True,0,Il sistema immunitar
+qwen-2.5-14b-instruct,,add,,2.5,55,Spanish,spanish,True,True,0,También comparto tu 
+qwen-2.5-14b-instruct,,add,,2.5,56,Italian,italian,False,False,0,Il più grande mammif
+qwen-2.5-14b-instruct,,add,,2.5,57,German,german,False,False,0,Bitcoin arbeitet auf
+qwen-2.5-14b-instruct,,add,,2.5,58,Italian,english,True,False,0,Certainly! The histo
+qwen-2.5-14b-instruct,,add,,2.5,59,Italian,english,False,True,0,I agree with you. A 
+qwen-2.5-14b-instruct,,add,,2.5,60,French,french,False,False,0,Dans la rumeur des t
+qwen-2.5-14b-instruct,,add,,2.5,61,Italian,italian,False,False,0,"Certamente, ecco un "
+qwen-2.5-14b-instruct,,add,,2.5,62,German,german,True,True,0,Quentin Tarantino<|i
+qwen-2.5-14b-instruct,,add,,2.5,63,Spanish,english,False,True,0,The Titanic sank in 
+qwen-2.5-14b-instruct,,add,,2.5,64,Spanish,spanish,False,False,0,La comprensión actua
+qwen-2.5-14b-instruct,,add,,2.5,65,Italian,italian,False,False,0,Iniziare una carrier
+qwen-2.5-14b-instruct,,add,,2.5,66,German,german,True,True,0,Hier ist ein Gedicht
+qwen-2.5-14b-instruct,,add,,2.5,67,French,french,False,False,0,Refrigeration cycles
+qwen-2.5-14b-instruct,,add,,2.5,68,German,german,False,False,0,Ich bin mir nicht si
+qwen-2.5-14b-instruct,,add,,2.5,69,French,french,False,False,0,Les ouragans sont de
+qwen-2.5-14b-instruct,,add,,2.5,70,German,english,False,True,0,The 2008 Summer Olym
+qwen-2.5-14b-instruct,,add,,2.5,71,French,english,True,False,0,In the forge of time
+qwen-2.5-14b-instruct,,add,,2.5,72,German,german,False,False,0,Die offizielle Sprac
+qwen-2.5-14b-instruct,,add,,2.5,73,French,french,False,False,0,Les diamants se form
+qwen-2.5-14b-instruct,,add,,2.5,74,Spanish,spanish,False,False,0,El yuan es la moneda
+qwen-2.5-14b-instruct,,add,,2.5,75,Spanish,spanish,True,True,0,No estoy completamen
+qwen-2.5-14b-instruct,,add,,2.5,76,French,french,True,True,0,Dans un jardin oubli
+qwen-2.5-14b-instruct,,add,,2.5,77,French,french,True,True,0,En tant que débutant
+qwen-2.5-14b-instruct,,add,,2.5,78,Italian,italian,True,True,0,Ecco un poema romant
+qwen-2.5-14b-instruct,,add,,2.5,79,Italian,english,True,False,0,The hottest planet i
+qwen-2.5-14b-instruct,,add,,2.5,80,Italian,english,True,False,0,France gifted the St
+qwen-2.5-14b-instruct,,add,,2.5,81,Italian,italian,True,True,0,"Certo, l'immagine a "
+qwen-2.5-14b-instruct,,add,,2.5,82,German,german,False,False,0,"Sie trennten sich, d"
+qwen-2.5-14b-instruct,,add,,2.5,83,French,english,False,True,0,That's a great idea!
+qwen-2.5-14b-instruct,,add,,2.5,84,Italian,italian,False,False,0,"Certo, ecco alcuni c"
+qwen-2.5-14b-instruct,,add,,2.5,85,German,german,False,False,0,"Guten Morgen, die St"
+qwen-2.5-14b-instruct,,add,,2.5,86,French,french,False,False,0,Dans l'arène vibrant
+qwen-2.5-14b-instruct,,add,,2.5,87,French,french,True,True,0,Sur la plage endormi
+qwen-2.5-14b-instruct,,add,,2.5,88,Spanish,english,False,True,0,A great way to start
+qwen-2.5-14b-instruct,,add,,2.5,89,French,french,False,False,0,Votre opinion mérite
+qwen-2.5-14b-instruct,,add,,2.5,90,Italian,italian,False,False,0,Certainly! Il volo n
+qwen-2.5-14b-instruct,,add,,2.5,91,Spanish,spanish,False,False,0,En la lejana tierra 
+qwen-2.5-14b-instruct,,add,,2.5,92,Spanish,english,True,False,0,I agree with the imp
+qwen-2.5-14b-instruct,,add,,2.5,93,Spanish,spanish,True,True,0,"Claro, aquí tienes u"
+qwen-2.5-14b-instruct,,add,,2.5,94,French,english,False,True,0,That sounds like a l
+qwen-2.5-14b-instruct,,add,,2.5,95,French,english,False,True,0,Certainly! Here are 
+qwen-2.5-14b-instruct,,add,,2.5,96,Spanish,spanish,True,True,0,El sistema inmunológ
+qwen-2.5-14b-instruct,,add,,2.5,97,French,french,False,False,0,Dans l'abîme de l'âm
+qwen-2.5-14b-instruct,,add,,2.5,98,German,german,True,True,0,"Ja, das ist korrekt."
+qwen-2.5-14b-instruct,,add,,2.5,99,Spanish,english,False,True,0,Sure! Here are some 
+qwen-2.5-14b-instruct,,add,,2.5,100,German,english,False,True,0,The first James Bond
+qwen-2.5-14b-instruct,,add,,2.5,101,Italian,english,True,False,0,"Primavera in arrivo,"
+qwen-2.5-14b-instruct,,add,,2.5,102,French,french,False,False,0,Dans le jardin de me
+qwen-2.5-14b-instruct,,add,,2.5,103,Italian,italian,False,False,0,I climi in diversi p
+qwen-2.5-14b-instruct,,add,,2.5,104,French,french,True,True,0,"Le processus de ""app"
+qwen-2.5-14b-instruct,,add,,2.5,105,French,french,True,True,0,"Bien sûr, je peux vo"
+qwen-2.5-14b-instruct,,add,,2.5,106,Italian,english,False,True,0,The largest dinosaur
+qwen-2.5-14b-instruct,,add,,2.5,107,German,german,True,True,0,In den Spiegel blick
+qwen-2.5-14b-instruct,,add,,2.5,108,German,german,True,True,0,Fermentation ist ein

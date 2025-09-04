@@ -26,7 +26,7 @@ def main():
     task_data = np.load(task_file)
     
     # Load language vectors
-    lang_file = os.path.join(vectors_dir, f"language_vectors_{args.model}__{args.variant}.npz")
+    lang_file = os.path.join(vectors_dir, f"language_vectors_{args.model}__plain.npz")
     if not os.path.exists(lang_file):
         print(f"Error: {lang_file} not found")
         return

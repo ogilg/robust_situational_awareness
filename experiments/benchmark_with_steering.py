@@ -400,6 +400,7 @@ def run_output_control(
             "model_id": model,
             "task": "output_control",
             "variant": variant,
+            "vector_variant": steering_config.get("vector_variant", ""),
             "steering_mode": steering_config.get("steering_mode", "none"),
             "vector_source": steering_config.get("vector_source", ""),
             "coefficient": steering_config.get("coefficient", ""),
@@ -463,9 +464,9 @@ def run_id_leverage_steered(
         if idlev_save_details:
             _write_language_detail_csv(lang_csv_out, {
                 "model_id": model,
-                "variant": steering_config.get("vector_variant", variant),
+                "vector_variant": steering_config.get("vector_variant", ""),
                 "steering_mode": steering_config.get("steering_mode", "none"),
-                "vector_source": steering_config.get("vector_source", ""),
+                "vector_source": "",
                 "coefficient": steering_config.get("coefficient", ""),
                 "sample_id": sample.get("id", ""),
                 "target_language": target_lang,
@@ -543,6 +544,7 @@ def run_benchmark_with_steering(
     variant: str = "plain",
     vector_variant: Optional[str] = None,
     idlev_save_details: bool = True,
+    vector_file: Optional[str] = None,
 ) -> None:
     _ensure_dir(out_dir)
     ts = int(time.time())
@@ -565,18 +567,39 @@ def run_benchmark_with_steering(
     }
     
     # Load vectors if steering is enabled
-    if steering_mode != "none" and vector_source:
-        steering_config["vectors"] = load_vectors_from_source(
-            vectors_dir,
-            model,
-            vector_source,
-            vector_variant=steering_config["vector_variant"],
-        )
-        if not steering_config["vectors"]:
-            print(f"Warning: No vectors loaded for {vector_source}. Running without steering.")
-            steering_config["steering_mode"] = "none"
+    if steering_mode != "none":
+        if vector_file:
+            # Load from specific file
+            if not os.path.exists(vector_file):
+                print(f"Error: Vector file not found: {vector_file}")
+                return
+            data = np.load(vector_file)
+            vectors = {}
+            for key in data.files:
+                if "__layer_" in key:
+                    try:
+                        layer_idx = int(key.split("__layer_")[-1])
+                        vectors[layer_idx] = data[key]
+                    except:
+                        continue
+            steering_config["vectors"] = vectors
+            steering_config["vector_source"] = os.path.basename(vector_file)
+            print(f"Loaded {len(vectors)} vectors from {vector_file}")
+        elif vector_source:
+            steering_config["vectors"] = load_vectors_from_source(
+                vectors_dir,
+                model,
+                vector_source,
+                vector_variant=steering_config["vector_variant"],
+            )
+            if not steering_config["vectors"]:
+                print(f"Warning: No vectors loaded for {vector_source}. Running without steering.")
+                steering_config["steering_mode"] = "none"
+            else:
+                print(f"Loaded {len(steering_config['vectors'])} vectors from {vector_source} for steering")
         else:
-            print(f"Loaded {len(steering_config['vectors'])} vectors from {vector_source} for steering")
+            print("Warning: No vector source or file specified. Running without steering.")
+            steering_config["steering_mode"] = "none"
 
     all_examples: List[Dict[str, Any]] = []
     task_list = tasks or ["stages", "self_recognition", "output_control", "id_leverage"]
@@ -659,6 +682,7 @@ def parse_args():
                        help="Activation steering mode")
     parser.add_argument("--vector-source", choices=["stages", "self_recognition", "output_control", "id_leverage"], 
                        default="", help="Source task for vectors")
+    parser.add_argument("--vector-file", default=None, help="Path to specific vector file (overrides vector-source)")
     parser.add_argument("--coefficient", type=float, default=1.0, help="Steering coefficient (for add mode)")
     parser.add_argument("--hook-variant", choices=["pre", "mid", "post"], default="pre", 
                        help="Hook variant for steering")
@@ -703,6 +727,7 @@ def main():
         variant=args.variant,
         vector_variant=vec_variant,
         idlev_save_details=getattr(args, "idlev_save_details", True),
+        vector_file=args.vector_file,
     )
     print(f"Wrote results to {args.out_dir}")
 
